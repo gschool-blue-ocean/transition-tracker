@@ -30,8 +30,10 @@ app.post('/api/create/admin', controller.createNewAdmin)
 
 app.patch('/api/update/user/:id', controller.updateOneUserByID)
 
+app.patch('/api/update/admin/:id', controller.updateAdminByID)
+
 app.delete('/api/delete/user/:id', controller.deleteOneUserByID)
-//? -------------------------------------------
+
 
 //! ------------COHORT Routes-----------------
 app.get('/api/cohorts', controller.getAllCohorts)
@@ -43,10 +45,9 @@ app.post('/api/create/cohort', controller.createNewCohort)
 app.patch('/api/update/cohort/:id', controller.updateOneCohortByID)
 
 app.delete('/api/delete/cohort/:id', controller.deleteOneCohortByID)
-//? --------------------------------------------
 
 
-
+//! ---------Deployment & 404 route-----------
 app.get("*", (_, res) => {
     res.sendFile(path.join(__dirname, "/build/index.html"));
 });

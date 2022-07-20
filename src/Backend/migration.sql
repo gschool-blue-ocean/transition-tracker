@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS  cohorts, users, admins;
+DROP TABLE IF EXISTS  cohorts, users;
 
 CREATE TABLE cohorts(
     cohort_id SERIAL PRIMARY KEY,
