@@ -73,7 +73,7 @@ const updateOneUserByID = async (req, res) => {
     try {
         const { first, last, email, username, password, branch, leave_start_date, ets_date } = req.body
         let client = await pool.connect()
-        let data = await client.query('UPDATE users SET first = $1, last = $2, email = $3, username = $4, password = $5, branch = $6, leave_start_date = $7, ets_date = $8, WHERE user_id = $9 RETURNING *', [first, last, email, username, password, branch, leave_start_date, ets_date, req.params.id])
+        let data = await client.query('UPDATE users SET first = $1, last = $2, email = $3, username = $4, password = $5, branch = $6, leave_start_date = $7, ets_date = $8 WHERE user_id = $9 RETURNING *', [first, last, email, username, password, branch, leave_start_date, ets_date, req.params.id])
         res.json(data.rows)
         client.release()
 
