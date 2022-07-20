@@ -19,8 +19,15 @@ app.listen(PORT, (err) => {
 //! ------------Routes---------
 app.get('/', controller.testRoute)
 
+app.get('/api/students', controller.getAllStudents)
 
+app.get('/api/student/:id', controller.getOneStudentByID)
 
+app.post('/api/create/student', controller.createNewStudent)
+
+app.patch('/api/update/student/:id', controller.updateOneStudentByID)
+
+app.delete('/api/delete/student/:id', controller.deleteOneStudentByID)
 
 //! ----------------------------
 
