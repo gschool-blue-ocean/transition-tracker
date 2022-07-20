@@ -16,20 +16,36 @@ app.listen(PORT, (err) => {
     console.log(`Listening on port: ${PORT}`);
 });
 
-//! ------------Routes---------
+//simple test route sends 'working'
 app.get('/', controller.testRoute)
 
-app.get('/api/students', controller.getAllStudents)
+//! ------------USER/ADMIN Routes---------
+app.get('/api/users', controller.getAllUsers)
 
-app.get('/api/student/:id', controller.getOneStudentByID)
+app.get('/api/user/:id', controller.getOneUserByID)
 
-app.post('/api/create/student', controller.createNewStudent)
+app.post('/api/create/user', controller.createNewUser)
 
-app.patch('/api/update/student/:id', controller.updateOneStudentByID)
+app.post('/api/create/admin', controller.createNewAdmin)
 
-app.delete('/api/delete/student/:id', controller.deleteOneStudentByID)
+app.patch('/api/update/user/:id', controller.updateOneUserByID)
 
-//! ----------------------------
+app.delete('/api/delete/user/:id', controller.deleteOneUserByID)
+//? -------------------------------------------
+
+//! ------------COHORT Routes-----------------
+app.get('/api/cohorts', controller.getAllCohorts)
+
+app.get('/api/cohort/:id', controller.getOneCohortByID)
+
+app.post('/api/create/cohort', controller.createNewCohort)
+
+app.patch('/api/update/cohort/:id', controller.updateOneCohortByID)
+
+app.delete('/api/delete/cohort/:id', controller.deleteOneCohortByID)
+//? --------------------------------------------
+
+
 
 app.get("*", (_, res) => {
     res.sendFile(path.join(__dirname, "/build/index.html"));
