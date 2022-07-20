@@ -22,7 +22,7 @@ app.get('/', controller.testRoute)
 //! ------------USER/ADMIN Routes---------
 app.get('/api/users', controller.getAllUsers)
 
-app.get('/api/user/:id', controller.getOneUserByID)
+app.get('/api/users/:id', controller.getOneUserByID)
 
 app.post('/api/create/user', controller.createNewUser)
 
@@ -38,7 +38,7 @@ app.delete('/api/delete/user/:id', controller.deleteOneUserByID)
 //! ------------COHORT Routes-----------------
 app.get('/api/cohorts', controller.getAllCohorts)
 
-app.get('/api/cohort/:id', controller.getOneCohortByID)
+app.get('/api/cohorts/:id', controller.getOneCohortByID)
 
 app.post('/api/create/cohort', controller.createNewCohort)
 

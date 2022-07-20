@@ -39,9 +39,9 @@ const getOneUserByID = async (req, res) => {
 }
 
 const createNewUser = async (req, res) => {
-    const { first, last, email, username, password, branch, leave_start_date, ets_date, admin, cohort_id } = req.body
 
     try {
+        const { first, last, email, username, password, branch, leave_start_date, ets_date, admin, cohort_id } = req.body
         let client = await pool.connect()
         let data = await client.query('INSERT INTO users (first, last, email, username, password, branch, leave_start_date, ets_date, admin, cohort_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *;', [first, last, email, username, password, branch, leave_start_date, ets_date, admin, cohort_id])
         res.json(data.rows)
@@ -54,11 +54,11 @@ const createNewUser = async (req, res) => {
 }
 
 const createNewAdmin = async (req, res) => {
-    const { first, last, email, username, password, admin } = req.body
 
     try {
+        const { first, last, email, username, password } = req.body
         let client = await pool.connect()
-        let data = await client.query('INSERT INTO users (first, last, email, username, password, admin) VALUES($1, $2, $3, $4, $5, $6) RETURNING *;', [first, last, email, username, password, admin])
+        let data = await client.query('INSERT INTO users (first, last, email, username, password, admin) VALUES($1, $2, $3, $4, $5, $6) RETURNING *;', [first, last, email, username, password, true])
         res.json(data.rows)
         client.release()
 
@@ -69,9 +69,9 @@ const createNewAdmin = async (req, res) => {
 }
 
 const updateOneUserByID = async (req, res) => {
-    const { first, last, email, username, password, branch, leave_start_date, ets_date } = req.body
 
     try {
+        const { first, last, email, username, password, branch, leave_start_date, ets_date } = req.body
         let client = await pool.connect()
         let data = await client.query('UPDATE users SET first = $1, last = $2, email = $3, username = $4, password = $5, branch = $6, leave_start_date = $7, ets_date = $8, WHERE user_id = $9 RETURNING *', [first, last, email, username, password, branch, leave_start_date, ets_date, req.params.id])
         res.json(data.rows)
@@ -83,9 +83,9 @@ const updateOneUserByID = async (req, res) => {
     }
 }
 const updateAdminByID = async (req, res) => {
-    const { first, last, email, username, password } = req.body
 
     try {
+        const { first, last, email, username, password } = req.body
         let client = await pool.connect()
         let data = await client.query('UPDATE users SET first = $1, last = $2, email = $3, username = $4, password = $5 WHERE user_id = $6 RETURNING *', [first, last, email, username, password, req.params.id])
         res.json(data.rows)
@@ -140,8 +140,8 @@ const getOneCohortByID = async (req, res) => {
 }
 
 const createNewCohort = async (req, res) => {
-    const { cohort_name, start_date, end_date } = req.body
     try {
+        const { cohort_name, start_date, end_date } = req.body
         let client = await pool.connect()
         let data = await client.query('INSERT INTO cohorts (cohort_name, start_date, end_date) VALUES($1, $2, $3) RETURNING *', [cohort_name, start_date, end_date])
         res.json(data.rows)
@@ -154,9 +154,9 @@ const createNewCohort = async (req, res) => {
 }
 
 const updateOneCohortByID = async (req, res) => {
-    const { cohort_name, start_date, end_date } = req.body
 
     try {
+        const { cohort_name, start_date, end_date } = req.body
         let client = await pool.connect()
         let data = await client.query('UPDATE cohorts SET cohort_name = $1, start_date = $2, end_date = $3 WHERE cohort_id = $4 RETURNING *', [cohort_name, start_date, end_date, req.params.id])
         res.json(data.rows)
