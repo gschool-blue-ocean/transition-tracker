@@ -41,7 +41,7 @@ function App() {
   return (
 
     <div className="AppContainer">
-          <StudentPage />
+      <StudentPage />
       <Routes>
         <Route path="/" element={<HomePage />} />
       </Routes>
