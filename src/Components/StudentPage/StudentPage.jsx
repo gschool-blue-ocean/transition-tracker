@@ -6,7 +6,7 @@ import SPEducation from "./components/SP-Education";
 import SPTAPs from "./components/SP-TAPs";
 import "../../StyleSheets/StudentLanding.css";
 
-export default function StudentPage({userData}) {
+export default function StudentPage({ userData }) {
    return (
       <div className="StudentDash--Wrapper">
          <div className="SDash--Header">
