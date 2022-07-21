@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import ReactDOM from 'react-dom'
-import auth from '../Firebase'
+import { CgEnter } from 'react-icons/cg'
+import AppContext from '../../Context/AppContext';
+import { useNavigate } from 'react-router-dom'
 
-function LoginModal({ changeSetLogin }) {
+
+function LoginModal({ invokeSetLogin, setShowLoginModal }) {
+    const { allUsersData, allCohortsData } = useContext(AppContext)
 
     const [loginData, setLoginData] = useState({
         username: '',
@@ -11,9 +15,22 @@ function LoginModal({ changeSetLogin }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        changeSetLogin(true)
+        validateUserLoginData()
     }
 
+    let navigate = useNavigate()
+    const validateUserLoginData = () => {
+
+        allUsersData.forEach((elem) => {
+            if (loginData.username === elem.username && loginData.password === elem.password) {
+                elem.new_user ? navigate("/createAccount") : invokeSetLogin(true)
+                return console.log(elem)
+            }
+        });
+
+        return console.warn('failed login attempt')
+        // invokeSetLogin(true)
+    }
     const handleChange = (e) => {
         setLoginData((prevLoginData) => {
             return {
@@ -23,11 +40,10 @@ function LoginModal({ changeSetLogin }) {
         })
     }
 
-    const handleCreateAcc = () => {
-        auth.createUserWithEmailAndPassword(
+    // const handleShowCreateAccModal = () => {
+    //     setShowLoginModal(false)
+    // }
 
-        )
-    }
     return ReactDOM.createPortal(
         <div className='modalContainer'>
             <div className='loginContainer'>
@@ -46,16 +62,14 @@ function LoginModal({ changeSetLogin }) {
                         name='password'
                         value={loginData.password}
                         onChange={handleChange} />
-                    <input
-                        type='submit'
-                        className='loginBtn'
-                        onChange={handleChange}
-                        value='Log in' />
-
                     <button
+                        type='submit'
+                        className='loginBtn'>Log in  <CgEnter /> </button>
+
+                    {/* <button
                         type='button'
-                        className='loginBtn'
-                        onClick={handleCreateAcc}>Create Account</button>
+                        className='loginBtn createAccBtn'
+                        onClick={handleShowCreateAccModal}>Create an Account</button> */}
                 </form>
             </div>
 

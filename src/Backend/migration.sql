@@ -30,13 +30,14 @@ CREATE TABLE users (
     admin BOOLEAN NOT NULL,
     cohort_name VARCHAR(20),
     cohort_id INTEGER,
-    foreign key(cohort_id) references cohorts(cohort_id)
+    foreign key(cohort_id) references cohorts(cohort_id),
+    new_user BOOLEAN
 );
 
 CREATE TABLE dependents (
-    dependents_id SERIAL PRIMARY KEY,
-    student_id INTEGER,
-    foreign key(student_id) references users(user_id),
+    dependent_id SERIAL PRIMARY KEY,
+    sponsor_id INTEGER,
+    foreign key(sponsor_id) references users(user_id),
     age NUMERIC,
     relation VARCHAR(10)
 );
@@ -48,15 +49,17 @@ CREATE TABLE tasks (
     title VARCHAR(100),
     date VARCHAR(20),
     description TEXT,
-    remarks TEXT
+    remarks TEXT,
+    completed BOOLEAN
 );
 
 -- select all comments by owner (student_id)
 CREATE TABLE comments (
-    comments_id SERIAL PRIMARY KEY,
+    comment_id SERIAL PRIMARY KEY,
     student_id INTEGER,
     foreign key (student_id) references users(user_id),
     author_id INTEGER,
     foreign key (author_id) references users(user_id),
-    content TEXT
+    content TEXT, 
+    date_time TEXT
 );
