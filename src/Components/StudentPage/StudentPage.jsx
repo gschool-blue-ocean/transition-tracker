@@ -1,6 +1,10 @@
-import "../../StyleSheets/StudentLanding.css";
-
 import React from "react";
+import SPTasks from "./components/SP-Tasks";
+import SPDependents from "./components/SP-Dependents";
+import SPRelocation from "./components/SP-Relocation";
+import SPEducation from "./components/SP-Education";
+import SPTAPs from "./components/SP-TAPs";
+import "../../StyleSheets/StudentLanding.css";
 
 export default function StudentPage() {
    return (
