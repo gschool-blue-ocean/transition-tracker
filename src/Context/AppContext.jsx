@@ -6,16 +6,18 @@ export const AppContextProvider = ({ children }) => {
     const [allUsersData, setAllUsersData] = useState([])
     const [allCohortsData, setAllCohortsData] = useState([])
 
-    const applySetAllUsersData = () => {
-        setAllUsersData()
+    const invokeSetAllUsersData = (userData) => {
+        setAllUsersData(userData)
     }
-    const applySetAllCohortsData = () => {
-        setAllCohortsData()
+    const invokeSetAllCohortsData = (cohortData) => {
+        setAllCohortsData(cohortData)
     }
 
     return <AppContext.Provider value={{
         allUsersData,
-        allCohortsData
+        allCohortsData,
+        invokeSetAllUsersData,
+        invokeSetAllCohortsData
     }}>
 
         {children}

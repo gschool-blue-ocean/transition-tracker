@@ -1,0 +1,49 @@
+.HeaderContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #d65601;
+    padding: 0px;
+    padding-top: 3px;
+    padding-bottom: 45px;
+    width: 100%;
+}
+
+.HeaderLogo {
+    margin-left: 5px;
+    height: 57px;
+    width: 70px;
+}
+
+.navbarContainer {
+    display: flex;
+    flex-direction: row;
+    flex: grow;
+    align-content: center;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    background-color: #d65601;
+    overflow: hidden;
+    text-align: center;
+    height: 50px;
+}
+
+.navbar div {
+    margin-left: 3px;
+    margin-right: 3px;
+    padding: 4px;
+    padding-top: 2px;
+    height: 16px;
+    border: solid 1px;
+    border-color: #59595948;
+}
+
+/* Change the color of links on hover */
+.navbar div:hover {
+    background-color: #ddd;
+    color: black;
+    cursor: pointer;
+}

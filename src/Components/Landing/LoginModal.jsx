@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
+import auth from '../Firebase'
 
 function LoginModal({ changeSetLogin }) {
 
@@ -11,10 +12,6 @@ function LoginModal({ changeSetLogin }) {
     const handleSubmit = (e) => {
         e.preventDefault()
         changeSetLogin(true)
-        fetch('https://hacking-transition.herokuapp.com/api/users')
-            .then(res => res.json())
-            .then(data => console.log(data))
-            .catch(err => console.log(err))
     }
 
     const handleChange = (e) => {
@@ -27,21 +24,23 @@ function LoginModal({ changeSetLogin }) {
     }
 
     const handleCreateAcc = () => {
+        auth.createUserWithEmailAndPassword(
 
+        )
     }
     return ReactDOM.createPortal(
         <div className='modalContainer'>
             <div className='loginContainer'>
                 <form className='loginForm' onSubmit={handleSubmit}>
                     <input
-                        class='loginInputBox'
+                        className='loginInputBox'
                         type='text'
                         placeholder='User name'
                         name='username'
                         value={loginData.username}
                         onChange={handleChange} />
                     <input
-                        class='loginInputBox'
+                        className='loginInputBox'
                         type='password'
                         placeholder='Password'
                         name='password'

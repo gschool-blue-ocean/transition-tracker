@@ -7,14 +7,14 @@ const Navbar = () => {
     }
     if (loggedIn) {
         <div className="navbar">
-            <div onClick={() => { nav('/home'); }}>Home</div>
+            <div onClick={() => { nav('/'); }}>Home</div>
             <div onClick={() => { signinSignout() }}>Login</div>
         </div>
     }
     //  <div onClick={() => {{nav('/myprofile')}}}>Profile</div>
     return (
         <div className="navbar">
-            <div onClick={() => { nav('/home'); }}>Home</div>
+            <div onClick={() => { nav('/'); }}>Home</div>
 
             <div onClick={() => { signinSignout() }}>Signout</div>
         </div>
