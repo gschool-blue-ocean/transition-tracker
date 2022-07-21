@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form';
+import { auth, createUserWithEmailAndPassword } from '../Firebase'
+
 
 function CreateAccountModal() {
 
     const [createAccData, setCreateAccData] = useState({
+
         username: '',
         password: '',
         verifyPassword: ''
@@ -29,12 +33,19 @@ function CreateAccountModal() {
     }
 
     const handleCreateAcc = async () => {
-        let data = await fetch(`${window.location.origin}/api/create/user`)
+        createUserWithEmailAndPassword(
+            auth,
+            createAccData.username,
+            createAccData.password
+        )
     }
 
     return ReactDOM.createPortal(
         <div className='modalContainer'>
             <div className='loginContainer'>
+
+                <h1>Welcome</h1>
+
                 <form className='loginForm' onSubmit={handleSubmit}>
                     <input
                         className='loginInputBox'
@@ -69,7 +80,7 @@ function CreateAccountModal() {
                 </form>
             </div>
 
-        </div>,
+        </div >,
         document.getElementById('portal')
     )
 }

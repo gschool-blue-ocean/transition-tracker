@@ -21,14 +21,14 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
     let navigate = useNavigate()
     const validateUserLoginData = () => {
 
-        allUsersData.forEach((elem, index) => {
+        allUsersData.forEach((elem) => {
             if (loginData.username === elem.username && loginData.password === elem.password) {
                 elem.new_user ? navigate("/createAccount") : invokeSetLogin(true)
                 return console.log(elem)
             }
         });
 
-        return console.log('failed')
+        return console.warn('failed login attempt')
         // invokeSetLogin(true)
     }
     const handleChange = (e) => {

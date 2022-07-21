@@ -1,8 +1,12 @@
 import React from 'react'
+import Header from "../Header/Header"
 
 function HomePage() {
     return (
-        <h1>Blue Ocean</h1>
+        <>
+            <Header />
+            <h1>Blue Ocean</h1>
+        </>
     )
 }
 

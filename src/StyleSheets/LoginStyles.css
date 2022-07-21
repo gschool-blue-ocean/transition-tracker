@@ -18,9 +18,16 @@
     height: fit-content;
     background: #1115;
     display: grid;
+    justify-items: center;
+    gap: 1rem;
     box-shadow: 10px 10px 10px #111;
     border-radius: 15px;
     animation: animate .3s;
+}
+
+.loginContainer h1 {
+    color: white;
+    text-shadow: 2px 2px 10px #222;
 }
 
 .loginForm {
