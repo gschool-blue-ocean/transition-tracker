@@ -1,3 +1,5 @@
+@import './CustomProps.css';
+
 #cohort-container {
   display: grid;
   grid-template-columns: 20vw 80vw;
@@ -9,17 +11,18 @@
   border-radius: 10px;
   height: 100vh;
   margin: 1rem;
-  font-family: 'Rubik-Regular';
+  font-family: var(--ff-primary);
 }
+
 #all-cohorts-btn {
-  background-color:  #5c6ca8;;
+  background-color:  #5c6ca8;
   color: white;
   width: 3rem;
   border-radius: 8px;
 }
 
 #add-cohort-btn {
-  background-color:  #5c6ca8;;
+  background-color:  #5c6ca8;
   color: white;
   font-size: x-large;
   width: 40px;
@@ -99,9 +102,4 @@ a {
 }
 #cohort-nav a {
   color: #5c6ca8;
-}
-
-@font-face {
-  font-family: Rubik-Regular;
-  src: url('../../public/rubik-font/Rubik-Regular.ttf');
 }
