@@ -10,7 +10,7 @@ import "./StyleSheets/Header.css"
 import StudentPage from './Components/StudentPage/StudentPage';
 
 function App() {
-  const { login, userData, changeSetLogin, loading } = useContext(LoginContext)
+  const { login, userData, invokeSetLogin, loading } = useContext(LoginContext)
   const { allUserData, allCohortsData, invokeSetAllUsersData, invokeSetAllCohortsData } = useContext(AppContext)
 
   useEffect(() => {
@@ -35,7 +35,7 @@ function App() {
     if (loading) {
       return (<Loading />)
     }
-    return <LandingPage changeSetLogin={changeSetLogin} />
+    return <LandingPage invokeSetLogin={invokeSetLogin} />
   }
 
   return (

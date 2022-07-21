@@ -4,12 +4,12 @@ import CreateAccountModal from './CreateAccountModal'
 import '../../StyleSheets/LoginStyles.css'
 import AppContext from '../../Context/AppContext'
 
-function LandingPage({ changeSetLogin }) {
+function LandingPage({ invokeSetLogin }) {
     const [showLoginModal, setShowLoginModal] = useState(true)
 
     return (
         <div className='landingPage'>
-            {showLoginModal ? <LoginModal changeSetLogin={changeSetLogin} /> : <CreateAccountModal />}
+            {showLoginModal ? <LoginModal invokeSetLogin={invokeSetLogin} /> : <CreateAccountModal />}
         </div>
     )
 }
