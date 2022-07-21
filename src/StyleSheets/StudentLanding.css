@@ -7,3 +7,55 @@
   margin: 0;
   padding: 0;
 }
+body{
+  height: 100vh;
+}
+
+.StudentDash--Wrapper{
+
+  width: max-content;
+  display: grid;
+  padding: calc(var(--spacer-container) * 2);
+  line-height: var(--spacer-line);
+
+  text-align: left;
+
+  border: 10px solid pink ;
+}
+
+/* .SDash--Header{
+  border-style: ;
+  
+} */
+
+.SDash--Info-card > ul, li, span{
+list-style: none;
+}
+
+.infoCard--container{
+  width: 100%;
+  background-color: var(--clr-nuetral-brown);
+  color: var(--clr-accent-white);
+
+  padding: var(--spacer-smallItems);
+
+  border-radius: 4px;
+
+
+}
+
+ul > h4, li > h4{
+  margin-top: 1em;
+}
+
+.title{
+  margin-left: 0.8em;
+}
+
+.answer{
+  margin-left: auto;
+}
+
+.text-left{
+  text-align: left;
+}
