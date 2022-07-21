@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.6430fab7.css",
-    "main.js": "/static/js/main.acf6141c.js",
+    "main.css": "/static/css/main.9057e54a.css",
+    "main.js": "/static/js/main.f0a64492.js",
+    "static/media/galvanizeLogo.svg": "/static/media/galvanizeLogo.c55c556778af83c1795e5ba80d1b791f.svg",
     "index.html": "/index.html",
-    "main.6430fab7.css.map": "/static/css/main.6430fab7.css.map",
-    "main.acf6141c.js.map": "/static/js/main.acf6141c.js.map"
+    "main.9057e54a.css.map": "/static/css/main.9057e54a.css.map",
+    "main.f0a64492.js.map": "/static/js/main.f0a64492.js.map"
   },
   "entrypoints": [
-    "static/css/main.6430fab7.css",
-    "static/js/main.acf6141c.js"
+    "static/css/main.9057e54a.css",
+    "static/js/main.f0a64492.js"
   ]
 }
