@@ -1,28 +1,107 @@
 #cohort-container {
   display: grid;
-  grid-template-columns: 30vw 70vw;
+  grid-template-columns: 20vw 80vw;
+  background-color: #414455;
 }
 .something, .test-cohort {
+  background-color: #d9d9d9;
   box-shadow: 0 0 10px black;
   border-radius: 10px;
   height: 100vh;
   margin: 1rem;
+  font-family: 'Rubik-Regular';
 }
+#all-cohorts-btn {
+  background-color:  #5c6ca8;;
+  color: white;
+  width: 3rem;
+  border-radius: 8px;
+}
+
+#add-cohort-btn {
+  background-color:  #5c6ca8;;
+  color: white;
+  font-size: x-large;
+  width: 40px;
+  padding: 2%;
+  border-radius: 830px;
+
+  /* border-radius: 100%; */
+}
+
 .test-cohort {
   height: unset;
-  grid-column: span 2;
+  color: white;
+  background-color: #7c7c7c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
 }
+.test-cohort div {
+  overflow: scroll;
+  max-height: 100%;
+}
+
+.listOfNames {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  /* align-items: center; */
+  padding-top: 2%;
+  width: 90%;
+  height: 100%;
+
+}
+
 #cohort-nav {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: #5c6ca8;
 }
+
+a {
+ color: #5c6ca8;
+ text-decoration: none;
+ padding: 5%;
+ font-size: x-large;
+ 
+}
+
 #cohort-view {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 90% 10%;
 }
-span {
-  margin: auto;
+#legend {
+  grid-column: span 3;
+  margin: auto auto 1rem auto;
+}
+#legend span {
+  padding: 2px;
+  border: 1px solid slategray;
+  border-radius: 4px;
+  margin: 0 10px 0 10px;
+}
+#ETS { background-color: lawngreen; }
+#thirty { background-color: orangered; }
+#sixty { background-color: orange; }
+#ninety { background-color: yellow; }
+#onetwenty { background-color: aqua; }
+
+#cohort-nav {
+  display: flex;
+}
+#cohort-nav h1 {
+  color: black;
+}
+#cohort-nav a {
+  color: #5c6ca8;
+}
+
+@font-face {
+  font-family: Rubik-Regular;
+  src: url('../../public/rubik-font/Rubik-Regular.ttf');
 }
