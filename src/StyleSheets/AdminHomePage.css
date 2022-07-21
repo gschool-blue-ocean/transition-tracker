@@ -1,8 +1,28 @@
+#cohort-container {
+  display: grid;
+  grid-template-columns: 30vw 70vw;
+}
+.something, .test-cohort {
+  box-shadow: 0 0 10px black;
+  border-radius: 10px;
+  height: 100vh;
+  margin: 1rem;
+}
+.test-cohort {
+  height: unset;
+  grid-column: span 2;
+}
 #cohort-nav {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 10px black;
-  border-radius: 10px;
+}
+#cohort-view {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 90% 10%;
+}
+span {
+  margin: auto;
 }
