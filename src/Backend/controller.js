@@ -1,3 +1,4 @@
+import { auth, createUserWithEmailAndPassword } from '../../Firebase'
 const pool = require('./connection.js');
 
 const testRoute = async (_, res) => {
@@ -38,19 +39,34 @@ const getOneUserByID = async (req, res) => {
     }
 }
 
+// const createNewUser = async (req, res) => {
+
+//     const { first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id } = req.body
+
+//     try {
+//         let client = await pool.connect()
+//         let data = await client.query('INSERT INTO users (first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20) RETURNING *;', [first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id])
+//         res.json(data.rows)
+//         client.release()
+
+//     } catch (error) {
+//         console.log(error)
+//         res.send(error)
+//     }
+// }
+
 const createNewUser = async (req, res) => {
-
-    const { first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id } = req.body
-
     try {
-        let client = await pool.connect()
-        let data = await client.query('INSERT INTO users (first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20) RETURNING *;', [first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id])
-        res.json(data.rows)
-        client.release()
-
+        const create = await createUserWithEmailAndPassword(
+            auth,
+            req.body.username,
+            req.body.password
+        )
+        res.send(create)
     } catch (error) {
-        console.log(error)
-        res.send(error)
+        if (error) {
+            res.send(error)
+        }
     }
 }
 

@@ -12,7 +12,7 @@ import StudentPage from './Components/StudentPage/StudentPage';
 
 function App() {
   const { login, userData, invokeSetLogin, loading } = useContext(LoginContext)
-  const { allUserData, allCohortsData, invokeSetAllUsersData, invokeSetAllCohortsData } = useContext(AppContext)
+  const { allUsersData, allCohortsData, invokeSetAllUsersData, invokeSetAllCohortsData } = useContext(AppContext)
 
   useEffect(() => {
     fetchAllUserData()

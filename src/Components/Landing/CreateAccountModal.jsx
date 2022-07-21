@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
-import { auth, createUserWithEmailAndPassword } from '../Firebase'
 import { useNavigate } from 'react-router-dom'
 
 function CreateAccountModal() {
@@ -29,13 +28,8 @@ function CreateAccountModal() {
         })
     }
 
-    const handleCreateAcc = () => {
-        // createUserWithEmailAndPassword(
-        //     auth,
-        //     createAccData.username,
-        //     createAccData.password
-        // ).then((user) => console.log(user))
-        //     .catch((err) => console.error(err))
+    const handleCreateAcc = async () => {
+        let data = await fetch(`${window.location.origin}/api/create/user`)
     }
 
     return ReactDOM.createPortal(

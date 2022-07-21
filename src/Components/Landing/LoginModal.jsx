@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import ReactDOM from 'react-dom'
 import { CgEnter } from 'react-icons/cg'
+import AppContext from '../../Context/AppContext';
+import { useNavigate } from 'react-router-dom'
+
 
 function LoginModal({ invokeSetLogin, setShowLoginModal }) {
+    const { allUsersData, allCohortsData } = useContext(AppContext)
 
     const [loginData, setLoginData] = useState({
         username: '',
@@ -11,10 +15,22 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        invokeSetLogin(true)
-        console.log({ loginData })
+        validateUserLoginData()
     }
 
+    let navigate = useNavigate()
+    const validateUserLoginData = () => {
+
+        allUsersData.forEach((elem, index) => {
+            if (loginData.username === elem.username && loginData.password === elem.password) {
+                elem.new_user ? navigate("/createAccount") : invokeSetLogin(true)
+                return console.log(elem)
+            }
+        });
+
+        return console.log('failed')
+        // invokeSetLogin(true)
+    }
     const handleChange = (e) => {
         setLoginData((prevLoginData) => {
             return {
