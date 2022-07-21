@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS  cohorts, users, dependents, tasks, comments;
 
-CREATE TABLE cohorts(
+CREATE TABLE cohorts (
     cohort_id SERIAL PRIMARY KEY,
     cohort_name VARCHAR(20),
     start_date VARCHAR(20),
@@ -8,7 +8,7 @@ CREATE TABLE cohorts(
     active BOOLEAN
 );
 
-CREATE TABLE users(
+CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     first VARCHAR(50) NOT NULL,
     last VARCHAR(50) NOT NULL,
@@ -29,7 +29,8 @@ CREATE TABLE users(
     seeking_further_education BOOLEAN,
     admin BOOLEAN NOT NULL,
     cohort_name VARCHAR(20),
-    foreign key(cohort_name) references cohorts(cohort_name)
+    cohort_id INTEGER,
+    foreign key(cohort_id) references cohorts(cohort_id)
 );
 
 CREATE TABLE dependents (
