@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import auth from '../Firebase'
 
-function LoginModal({ changeSetLogin }) {
+function LoginModal({ invokeSetLogin }) {
 
     const [loginData, setLoginData] = useState({
         username: '',
@@ -11,7 +11,7 @@ function LoginModal({ changeSetLogin }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        changeSetLogin(true)
+        invokeSetLogin(true)
     }
 
     const handleChange = (e) => {
@@ -25,8 +25,10 @@ function LoginModal({ changeSetLogin }) {
 
     const handleCreateAcc = () => {
         auth.createUserWithEmailAndPassword(
-
-        )
+            loginData.username,
+            loginData.password
+        ).then((user) => console.log(user))
+            .catch((err) => console.error(err))
     }
     return ReactDOM.createPortal(
         <div className='modalContainer'>

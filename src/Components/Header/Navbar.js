@@ -15,7 +15,6 @@ const Navbar = () => {
     return (
         <div className="navbar">
             <div onClick={() => { nav('/'); }}>Home</div>
-
             <div onClick={() => { signinSignout() }}>Signout</div>
         </div>
     )
