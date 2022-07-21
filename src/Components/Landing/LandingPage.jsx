@@ -4,11 +4,11 @@ import CreateAccountModal from './CreateAccountModal'
 import '../../StyleSheets/LoginStyles.css'
 
 function LandingPage({ invokeSetLogin }) {
-    const [showLoginModal, setShowLoginModal] = useState(true)
 
     return (
         <div className='landingPage'>
-            {showLoginModal ? <LoginModal invokeSetLogin={invokeSetLogin} /> : <CreateAccountModal />}
+            <LoginModal invokeSetLogin={invokeSetLogin} />
+            {/* {showLoginModal ? <LoginModal invokeSetLogin={invokeSetLogin} setShowLoginModal={setShowLoginModal} /> : <CreateAccountModal setShowLoginModal={setShowLoginModal} />} */}
         </div>
     )
 }

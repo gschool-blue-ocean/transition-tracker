@@ -13,8 +13,9 @@
 
 .loginContainer {
     z-index: 1;
-    width: 300px;
-    height: 300px;
+    padding: 1.5rem;
+    width: fit-content;
+    height: fit-content;
     background: #1115;
     display: grid;
     box-shadow: 10px 10px 10px #111;
@@ -42,10 +43,16 @@
     font-size: 1rem;
     padding: .25rem;
     opacity: .7;
+    color: white;
+    background-color: rgba(11, 71, 155, 0.943);
 }
 
 .loginBtn:hover {
     font-size: 1.25rem;
     opacity: 1;
     cursor: pointer;
+}
+
+.createAccBtn {
+    background-color: rgb(195, 123, 6);
 }

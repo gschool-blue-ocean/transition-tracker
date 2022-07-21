@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
-import auth from '../Firebase'
+import { CgEnter } from 'react-icons/cg'
 
-function LoginModal({ invokeSetLogin }) {
+function LoginModal({ invokeSetLogin, setShowLoginModal }) {
 
     const [loginData, setLoginData] = useState({
         username: '',
@@ -12,6 +12,7 @@ function LoginModal({ invokeSetLogin }) {
     const handleSubmit = (e) => {
         e.preventDefault()
         invokeSetLogin(true)
+        console.log({ loginData })
     }
 
     const handleChange = (e) => {
@@ -23,13 +24,10 @@ function LoginModal({ invokeSetLogin }) {
         })
     }
 
-    const handleCreateAcc = () => {
-        auth.createUserWithEmailAndPassword(
-            loginData.username,
-            loginData.password
-        ).then((user) => console.log(user))
-            .catch((err) => console.error(err))
-    }
+    // const handleShowCreateAccModal = () => {
+    //     setShowLoginModal(false)
+    // }
+
     return ReactDOM.createPortal(
         <div className='modalContainer'>
             <div className='loginContainer'>
@@ -48,16 +46,14 @@ function LoginModal({ invokeSetLogin }) {
                         name='password'
                         value={loginData.password}
                         onChange={handleChange} />
-                    <input
-                        type='submit'
-                        className='loginBtn'
-                        onChange={handleChange}
-                        value='Log in' />
-
                     <button
+                        type='submit'
+                        className='loginBtn'>Log in  <CgEnter /> </button>
+
+                    {/* <button
                         type='button'
-                        className='loginBtn'
-                        onClick={handleCreateAcc}>Create Account</button>
+                        className='loginBtn createAccBtn'
+                        onClick={handleShowCreateAccModal}>Create an Account</button> */}
                 </form>
             </div>
 

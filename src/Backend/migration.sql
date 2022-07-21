@@ -30,7 +30,8 @@ CREATE TABLE users (
     admin BOOLEAN NOT NULL,
     cohort_name VARCHAR(20),
     cohort_id INTEGER,
-    foreign key(cohort_id) references cohorts(cohort_id)
+    foreign key(cohort_id) references cohorts(cohort_id),
+    new_user BOOLEAN
 );
 
 CREATE TABLE dependents (
