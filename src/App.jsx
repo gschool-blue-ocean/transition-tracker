@@ -7,6 +7,7 @@ import HomePage from './Components/HomePage/HomePage'
 import LoginContext from './Context/LoginContext';
 import AppContext from './Context/AppContext';
 import "./StyleSheets/Header.css"
+import StudentPage from './Components/StudentPage/StudentPage';
 
 function App() {
   const { login, userData, changeSetLogin, loading } = useContext(LoginContext)
@@ -40,10 +41,11 @@ function App() {
   return (
 
     <div className="AppContainer">
-      {/* {login ? <h1> Blue Ocean! </h1> : <LoginPage />} */}
+          <StudentPage />
       <Routes>
         <Route path="/" element={<HomePage />} />
       </Routes>
+
 
     </div>
   );
