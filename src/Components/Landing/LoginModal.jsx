@@ -27,7 +27,7 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
         signInWithEmailAndPassword(loginData.username, loginData.password)
             .then(({ user }) => {
                 return user.getIdToken().then((idToken) => {
-                    return fetch('https://hacking-transition.herokuapp.com/api/login', {
+                    return fetch(`${window.location.origin}/api/login`, {
                         method: "POST",
                         headers: {
                             Accept: "application/json",
@@ -41,6 +41,11 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
             .then((data) => {
                 console.log(data)
                 // return app.auth().signOut();
+            })
+            .catch((err) => {
+                if (err) {
+                    console.error(err)
+                }
             })
         // .then(() => {
         //     alert('Success')
