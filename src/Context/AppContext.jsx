@@ -3,7 +3,7 @@ import { useState, createContext } from 'react';
 const AppContext = createContext()
 
 export const AppContextProvider = ({ children }) => {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [allUsersData, setAllUsersData] = useState([])
     const [allCohortsData, setAllCohortsData] = useState([])
 
