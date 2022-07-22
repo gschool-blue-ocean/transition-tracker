@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom'
 import { CgEnter } from 'react-icons/cg'
 import AppContext from '../../Context/AppContext';
 import { useNavigate } from 'react-router-dom'
-import { auth, signInWithEmailAndPassword } from '../Firebase'
+import { auth, signInWithEmailAndPassword, app } from '../Firebase'
+import { CookiesProvider, withCookies, Cookies } from 'react-cookie';
 
 
 function LoginModal({ invokeSetLogin, setShowLoginModal }) {
@@ -21,22 +22,21 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
 
     let navigate = useNavigate()
     const validateUserLoginData = () => {
-        // signInWithEmailAndPassword(loginData.username, loginData.password)
-        //     .then(({ user }) => {
-        //         return user.getIdToken().then((idToken) => {
-        //             return fetch(`${window.location.origin}/api/create/user`, {
-        //                 method: "POST",
-        //                 headers: {
-        //                     Accept: "application/json",
-        //                     "Content-type": "application/json",
-        //                     "CSRF-Token": Cookies.get("XSRF-TOKEN"),
-        //                 },
-        //                 body: JSON.stringify({ idToken })
-        //             })
-        //         }
-        //         )
-        //     })
-
+        signInWithEmailAndPassword(loginData.username, loginData.password)
+            .then(({ user }) => {
+                return user.getIdToken().then((idToken) => {
+                    return fetch(`${window.location.origin}/api/create/user`, {
+                        method: "POST",
+                        headers: {
+                            Accept: "application/json",
+                            "Content-type": "application/json",
+                            "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+                        },
+                        body: JSON.stringify({ idToken })
+                    })
+                })
+            })
+            .then((app.auth)
 
         // allUsersData.forEach((elem) => {
         //     if (loginData.username === elem.username && loginData.password === elem.password) {

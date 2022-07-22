@@ -450,11 +450,11 @@ const createNewComment = async (req, res) => {
     }
 }
 const updateOneCommentByID = async (req, res) => {
-    const { author_id, content } = req.body
+    const { content } = req.body
 
     try {
         let client = await pool.connect()
-        let data = await client.query('UPDATE comments SET author_id = $1, content = $2 WHERE comment_id = $3 RETURNING *', [author_id, content, req.params.id])
+        let data = await client.query('UPDATE comments SET content = $1 WHERE comment_id = $2 RETURNING *', [content, req.params.id])
         res.json(data.rows)
         client.release()
 
@@ -466,7 +466,7 @@ const updateOneCommentByID = async (req, res) => {
 const deleteOneCommentByID = async (req, res) => {
     try {
         let client = await pool.connect()
-        let data = await client.query('DELETE FROM comments WHERE comment_id = $1', [req.params.id])
+        let data = await client.query('DELETE FROM comments WHERE comment_id = $1 RETURNING *', [req.params.id])
         res.json(data.rows)
         client.release()
 

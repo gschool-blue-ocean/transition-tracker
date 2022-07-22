@@ -76,7 +76,7 @@ app.get('/api/tasks/:id', controller.getOneTaskByID)
 
 app.post('/api/create/task', controller.createNewTask)
 
-app.patch('/api/update/task/:id', controller.updateOneTaskByID) //! error
+app.patch('/api/update/task/:id', controller.updateOneTaskByID)
 
 app.delete('/api/delete/task/:id', controller.deleteOneTaskByID)
 
