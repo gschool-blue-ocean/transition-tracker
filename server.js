@@ -17,7 +17,7 @@ app.listen(PORT, (err) => {
 });
 
 //Middleware to require all routes have a cookie
-// app.all("*", controller.cookiesForAll)
+app.all("*", controller.cookiesForAll)
 
 //simple test route sends 'Hello World!'
 app.get('/test', controller.testRoute)
