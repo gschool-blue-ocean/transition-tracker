@@ -4,9 +4,10 @@ import SPDependents from "./components/SP-Dependents";
 import SPRelocation from "./components/SP-Relocation";
 import SPEducation from "./components/SP-Education";
 import SPTAPs from "./components/SP-TAPs";
-import "../../StyleSheets/StudentLanding.css";
+import "../../StyleSheets/StudentPage.css";
 
-export default function StudentPage() {
+export default function StudentPage(allUsersData) {
+   console.log(allUsersData);
    return (
       <div className="StudentDash--Wrapper">
          <div className="SDash--Header">

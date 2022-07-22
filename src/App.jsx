@@ -41,10 +41,11 @@ function App() {
 
    return (
       <div className="AppContainer">
-         <Routes>
+         {/* <Routes>
             <Route path="/" element={login ? <StudentPage /> : <LandingPage invokeSetLogin={invokeSetLogin} />} />
             <Route path="/createAccount" element={<CreateAccountModal />} />
-         </Routes>
+         </Routes> */}
+         <StudentPage />
       </div>
    );
 }
