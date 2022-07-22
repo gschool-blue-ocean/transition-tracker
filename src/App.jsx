@@ -30,7 +30,7 @@ function App() {
     fetch('https://hacking-transition.herokuapp.com/api/cohorts')
       .then(res => res.json())
       .then(data => invokeSetAllCohortsData(data))
-      // .then(() => setLoading(false))
+      .then(() => setLoading(false))
       .catch(err => console.log(err))
   }
 
