@@ -52,15 +52,8 @@ export default function StudentPage() {
                   </li>
 
                   <li>
-                     <span className="title"> Title: </span>
-                     <span className="answer"> Answer </span>
-                  </li>
-
-                  <li>
-                     <h4 id="depends" className="text-left">
-                        Dependents
-                     </h4>
-                     <span className="title">None</span>
+                     <span className="title"> TAP Status: </span>
+                     <span className="answer"> Completed </span>
                   </li>
 
                   {/* <li> 
