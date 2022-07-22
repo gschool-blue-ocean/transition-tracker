@@ -20,8 +20,6 @@ function AdminHomePage() {
                         </>
                     })
                 }
-                <a href="#">MCSP-13</a><br/>
-
                 <button id="add-cohort-btn">
                   +
                 </button>
