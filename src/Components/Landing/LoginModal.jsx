@@ -21,21 +21,23 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
 
     let navigate = useNavigate()
     const validateUserLoginData = () => {
-        signInWithEmailAndPassword(loginData.username, loginData.password)
-            .then(({ user }) => {
-                return user.getIdToken().then((idToken) => {
-                    return fetch(`${window.location.origin}/api/create/user`, {
-                        method: "POST",
-                        headers: {
-                            Accept: "application/json",
-                            "Content-type": "application/json",
-                            "CSRF-Token": Cookies.get("XSRF-TOKEN"),
-                        },
-                        body: JSON.stringify({ idToken })
-                    })
-                }
-                )
-            })
+        // signInWithEmailAndPassword(loginData.username, loginData.password)
+        //     .then(({ user }) => {
+        //         return user.getIdToken().then((idToken) => {
+        //             return fetch(`${window.location.origin}/api/create/user`, {
+        //                 method: "POST",
+        //                 headers: {
+        //                     Accept: "application/json",
+        //                     "Content-type": "application/json",
+        //                     "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+        //                 },
+        //                 body: JSON.stringify({ idToken })
+        //             })
+        //         }
+        //         )
+        //     })
+
+
         // allUsersData.forEach((elem) => {
         //     if (loginData.username === elem.username && loginData.password === elem.password) {
         //         elem.new_user ? navigate("/createAccount") : invokeSetLogin(true)
