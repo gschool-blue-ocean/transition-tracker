@@ -53,7 +53,6 @@ CREATE TABLE tasks (
     completed BOOLEAN
 );
 
--- select all comments by owner (student_id)
 CREATE TABLE comments (
     comment_id SERIAL PRIMARY KEY,
     student_id INTEGER,
