@@ -4,12 +4,12 @@
   display: grid;
   grid-template-columns: 20vw 80vw;
   background-color: #414455;
+  height: 100%;
 }
 .something, .test-cohort {
   background-color: #d9d9d9;
   box-shadow: 0 0 10px black;
   border-radius: 10px;
-  height: 90vh;
   margin: 1rem;
   font-family: var(--ff-primary);
 }
@@ -27,34 +27,30 @@
   font-size: x-large;
   width: 40px;
   padding: 2%;
-  border-radius: 830px;
-
-  /* border-radius: 100%; */
+  border-radius: 50%;
 }
 
 .test-cohort {
-  height: unset;
   color: white;
   background-color: #7c7c7c;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
+  height: 70vh;
+  min-height: 500px;
 }
 .test-cohort div {
   overflow: scroll;
-  max-height: 100%;
+  display: block;
+  width: 100%;
 }
 
 .listOfNames {
   display: flex;
   justify-content: center;
   text-align: center;
-  /* align-items: center; */
   padding-top: 2%;
-  width: 90%;
-  height: 100%;
-
+  overflow: scroll;
 }
 
 #cohort-nav {
@@ -70,13 +66,14 @@ a {
  text-decoration: none;
  padding: 5%;
  font-size: x-large;
- 
+
 }
 
 #cohort-view {
   display: grid;
   grid-template-columns: repeat(7, 33.333%);
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 #legend {
   grid-column: span 3;
