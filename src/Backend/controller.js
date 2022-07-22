@@ -1,19 +1,19 @@
 const pool = require('./connection.js');
-// const cookieParser = require("cookie-parser");
-// const csrf = require("csurf");
-// const admin = require("firebase-admin")
+const cookieParser = require("cookie-parser");
+const csrf = require("csurf");
+const admin = require("firebase-admin")
 
-// const serviceAccount = require("../../ServiceAccountKey.json");
-// admin.initializeApp({
-//     credential: admin.credential.cert(serviceAccount)
-// });
+const serviceAccount = require("../../ServiceAccountKey.json");
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+});
 
-// const csrfMiddleware = csrf({ cookie: true })
+const csrfMiddleware = csrf({ cookie: true })
 
-// const cookiesForAll = async (req, res, next) => {
-//     res.cookie("XSRF-TOKEN", req.csrfToken())
-//     next();
-// }
+const cookiesForAll = async (req, res, next) => {
+    res.cookie("XSRF-TOKEN", req.csrfToken())
+    next();
+}
 
 const testRoute = async (_, res) => {
     try {
@@ -67,6 +67,24 @@ const createNewUser = async (req, res) => {
         console.log(error)
         res.send(error)
     }
+}
+
+const login = async (req, res) => {
+    const idToken = req.body.idToken.toString();
+
+    const expiresIn = 60 * 60 * 24 * 5 * 1000;
+    admin.auth().createSessionCookie(idToken, { expiresIn })
+        .then(
+            (sessionCookie) => {
+                const options = { maxAge: expiresIn, httpOnly: true };
+                res.cookie("session", sessionCookie, options);
+                res.end(JSON.stringify({ status: 'success' }))
+            },
+            (error) => {
+                res.status(401).send("UNAUTHORIZED REQUEST")
+            }
+        )
+
 }
 
 // const createNewUser = async (req, res) => {
@@ -508,5 +526,7 @@ module.exports = {
     getOneCommentByID,
     createNewComment,
     updateOneCommentByID,
-    deleteOneCommentByID
+    deleteOneCommentByID,
+    cookiesForAll,
+    login
 }

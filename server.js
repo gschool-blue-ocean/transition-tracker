@@ -32,6 +32,8 @@ app.post('/api/create/user', controller.createNewUser)
 
 app.post('/api/create/admin', controller.createNewAdmin)
 
+app.post('/api/login', controller.login)
+
 app.patch('/api/update/user/:id', controller.updateOneUserByID)
 
 app.patch('/api/update/admin/:id', controller.updateAdminByID)
