@@ -1,5 +1,4 @@
 const pool = require('./connection.js');
-const cookieParser = require("cookie-parser");
 const csrf = require("csurf");
 const admin = require("firebase-admin")
 
