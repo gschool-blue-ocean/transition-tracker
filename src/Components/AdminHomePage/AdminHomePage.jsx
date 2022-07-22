@@ -43,8 +43,8 @@ function AdminHomePage() {
                                 }
                             })
                         }
-                        30 students
                         </div>
+                        30 students
                     </div> )
                 })
                 }
