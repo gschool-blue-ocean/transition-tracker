@@ -16,6 +16,9 @@ app.listen(PORT, (err) => {
     console.log(`Listening on port: ${PORT}`);
 });
 
+//Middleware to require all routes have a cookie
+// app.all("*", controller.cookiesForAll)
+
 //simple test route sends 'Hello World!'
 app.get('/test', controller.testRoute)
 
@@ -73,7 +76,7 @@ app.get('/api/tasks/:id', controller.getOneTaskByID)
 
 app.post('/api/create/task', controller.createNewTask)
 
-app.patch('/api/update/task/:id', controller.updateOneTaskByID)
+app.patch('/api/update/task/:id', controller.updateOneTaskByID) //! error
 
 app.delete('/api/delete/task/:id', controller.deleteOneTaskByID)
 

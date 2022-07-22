@@ -1,14 +1,19 @@
 const pool = require('./connection.js');
-const cookieParser = require("cookie-parser");
-const csrf = require("csurf");
-const admin = require("firebase-admin")
+// const cookieParser = require("cookie-parser");
+// const csrf = require("csurf");
+// const admin = require("firebase-admin")
 
-const serviceAccount = require("../../ServiceAccountKey.json");
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
+// const serviceAccount = require("../../ServiceAccountKey.json");
+// admin.initializeApp({
+//     credential: admin.credential.cert(serviceAccount)
+// });
 
-const csrfMiddleware = csrf({ cookie: true })
+// const csrfMiddleware = csrf({ cookie: true })
+
+// const cookiesForAll = async (req, res, next) => {
+//     res.cookie("XSRF-TOKEN", req.csrfToken())
+//     next();
+// }
 
 const testRoute = async (_, res) => {
     try {
@@ -25,7 +30,7 @@ const testRoute = async (_, res) => {
 const getAllUsers = async (_, res) => {
     try {
         let client = await pool.connect()
-        let data = await client.query('SELECT * FROM users;')
+        let data = await client.query('SELECT * FROM users ORDER BY user_id ASC;')
         res.json(data.rows)
         client.release()
 
@@ -144,7 +149,7 @@ const deleteOneUserByID = async (req, res) => {
 const getAllCohorts = async (req, res) => {
     try {
         let client = await pool.connect()
-        let data = await client.query('SELECT * FROM cohorts;')
+        let data = await client.query('SELECT * FROM cohorts ORDER BY cohort_id ASC;')
         res.json(data.rows)
         client.release()
 
@@ -231,7 +236,7 @@ const deleteOneCohortByID = async (req, res) => {
 const getAllDependents = async (req, res) => {
     try {
         let client = await pool.connect()
-        let data = await client.query('SELECT * FROM dependents')
+        let data = await client.query('SELECT * FROM dependents ORDER BY dependent_id ASC')
         res.json(data.rows)
         client.release()
 
@@ -244,7 +249,7 @@ const getAllDependents = async (req, res) => {
 const getAllDependentsBySponsorID = async (req, res) => {
     try {
         let client = await pool.connect()
-        let data = await client.query('SELECT * FROM dependents WHERE sponsor_id = $1', [req.params.id])
+        let data = await client.query('SELECT * FROM dependents WHERE sponsor_id = $1 ORDER BY dependent_id ASC', [req.params.id])
         res.json(data.rows)
         client.release()
 
@@ -314,7 +319,7 @@ const deleteOneDependentByID = async (req, res) => {
 const getAllTasks = async (req, res) => {
     try {
         let client = await pool.connect()
-        let data = await client.query('SELECT * FROM tasks')
+        let data = await client.query('SELECT * FROM tasks ORDER BY task_id ASC')
         res.json(data.rows)
         client.release()
 
@@ -327,7 +332,7 @@ const getAllTasks = async (req, res) => {
 const getAllTasksByStudentID = async (req, res) => {
     try {
         let client = await pool.connect()
-        let data = await client.query('SELECT * FROM tasks WHERE student_id = $1', [req.params.id])
+        let data = await client.query('SELECT * FROM tasks WHERE student_id = $1 ORDER BY task_id ASC', [req.params.id])
         res.json(data.rows)
         client.release()
 
@@ -397,7 +402,7 @@ const deleteOneTaskByID = async (req, res) => {
 const getAllComments = async (req, res) => {
     try {
         let client = await pool.connect()
-        let data = await client.query('SELECT * FROM comments')
+        let data = await client.query('SELECT * FROM comments ORDER BY comment_id ASC')
         res.json(data.rows)
         client.release()
 
@@ -409,7 +414,7 @@ const getAllComments = async (req, res) => {
 const getAllCommentsByStudentID = async (req, res) => {
     try {
         let client = await pool.connect()
-        let data = await client.query('SELECT * FROM comments WHERE student_id = $1', [req.params.id])
+        let data = await client.query('SELECT * FROM comments WHERE student_id = $1 ORDER BY comment_id ASC', [req.params.id])
         res.json(data.rows)
         client.release()
 
