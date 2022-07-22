@@ -38,12 +38,13 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
                     })
                 })
             })
-            .then(() => {
-                return app.auth().signOut();
+            .then((data) => {
+                console.log(data)
+                // return app.auth().signOut();
             })
-            .then(() => {
-                alert('Success')
-            })
+        // .then(() => {
+        //     alert('Success')
+        // })
         // allUsersData.forEach((elem) => {
         //     if (loginData.username === elem.username && loginData.password === elem.password) {
         //         elem.new_user ? navigate("/createAccount") : invokeSetLogin(true)
