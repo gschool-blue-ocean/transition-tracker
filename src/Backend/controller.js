@@ -4,6 +4,11 @@ const csrf = require("csurf");
 const admin = require("firebase-admin")
 
 const serviceAccount = require("../../ServiceAccountKey.json");
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+});
+
+const csrfMiddleware = csrf({ cookie: true })
 
 const testRoute = async (_, res) => {
     try {
