@@ -38,6 +38,9 @@ function CreateAccountModal() {
             createAccData.username,
             createAccData.password
         )
+            .then((data) => {
+                console.log(data)
+            })
     }
 
     return ReactDOM.createPortal(
