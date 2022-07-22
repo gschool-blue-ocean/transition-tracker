@@ -8,6 +8,8 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
 
+const csrfMiddleware = csrf({ cookie: true })
+
 const testRoute = async (_, res) => {
     try {
         console.log('Hello World!')
