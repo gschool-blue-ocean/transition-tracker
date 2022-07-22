@@ -1,9 +1,12 @@
 const pool = require('./connection.js');
-// const cookieParser = require("cookie-parser");
-// const csrf = require("csurf");
-// const admin = require("firebase-admin")
+const cookieParser = require("cookie-parser");
+const csrf = require("csurf");
+const admin = require("firebase-admin")
 
-// const serviceAccount = require("../../ServiceAccountKey.json");
+const serviceAccount = require("../../ServiceAccountKey.json");
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+});
 
 const testRoute = async (_, res) => {
     try {
