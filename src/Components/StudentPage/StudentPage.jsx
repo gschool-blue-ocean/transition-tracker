@@ -1,12 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
+import Modal from "react-modal";
 import SPTasks from "./components/SP-Tasks";
 import SPDependents from "./components/SP-Dependents";
 import SPRelocation from "./components/SP-Relocation";
 import SPEducation from "./components/SP-Education";
 import SPTAPs from "./components/SP-TAPs";
+import SPTaskModal from "./components/SP-TaskModal";
 import "../../StyleSheets/StudentPage.css";
 
+const customStyles = {
+   content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      backgroundColor: "var(--clr-primary-accent)",
+      borderRadius: "10px",
+      width: "65%",
+   },
+};
+
+// Modal.setAppElement(".AppContainer");
+
 export default function StudentPage(allUsersData) {
+   const [modalIsOpen, setIsOpen] = useState(false);
+
+   function openModal() {
+      setIsOpen(true);
+   }
+
+   function afterOpenModal() {
+      // references are now sync'd and can be accessed.
+      // subtitle.style.color = "#f00";
+   }
+
+   function closeModal() {
+      setIsOpen(false);
+   }
+
    console.log(allUsersData);
    return (
       <div className="StudentDash--Wrapper">
@@ -87,7 +120,10 @@ export default function StudentPage(allUsersData) {
                </ul>
             </div>
          </div>
-         <SPTasks />
+         <SPTasks openModal={openModal} />
+         <Modal isOpen={modalIsOpen} onAfterOpen={afterOpenModal} onRequestClose={closeModal} style={customStyles}>
+            <SPTaskModal />
+         </Modal>
          <div className="SDash--Notes">
             <label>Notes</label>
             <textarea id="StuNotes--TextArea"></textarea>
