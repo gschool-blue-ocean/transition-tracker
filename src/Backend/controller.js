@@ -1,19 +1,19 @@
 const pool = require('./connection.js');
-// const cookieParser = require("cookie-parser");
-// const csrf = require("csurf");
-// const admin = require("firebase-admin")
+const cookieParser = require("cookie-parser");
+const csrf = require("csurf");
+const admin = require("firebase-admin")
 
-// const serviceAccount = require("../../ServiceAccountKey.json");
-// admin.initializeApp({
-//     credential: admin.credential.cert(serviceAccount)
-// });
+const serviceAccount = require("../../ServiceAccountKey.json");
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+});
 
-// const csrfMiddleware = csrf({ cookie: true })
+const csrfMiddleware = csrf({ cookie: true })
 
-// const cookiesForAll = async (req, res, next) => {
-//     res.cookie("XSRF-TOKEN", req.csrfToken())
-//     next();
-// }
+const cookiesForAll = async (req, res, next) => {
+    res.cookie("XSRF-TOKEN", req.csrfToken())
+    next();
+}
 
 const testRoute = async (_, res) => {
     try {
@@ -67,6 +67,24 @@ const createNewUser = async (req, res) => {
         console.log(error)
         res.send(error)
     }
+}
+
+const login = async (req, res) => {
+    const idToken = req.body.idToken.toString();
+
+    const expiresIn = 60 * 60 * 24 * 5 * 1000;
+    admin.auth().createSessionCookie(idToken, { expiresIn })
+        .then(
+            (sessionCookie) => {
+                const options = { maxAge: expiresIn, httpOnly: true };
+                res.cookie("session", sessionCookie, options);
+                res.end(JSON.stringify({ status: 'success' }))
+            },
+            (error) => {
+                res.status(401).send("UNAUTHORIZED REQUEST")
+            }
+        )
+
 }
 
 // const createNewUser = async (req, res) => {
@@ -372,9 +390,10 @@ const createNewTask = async (req, res) => {
 const updateOneTaskByID = async (req, res) => {
     const { title, date, description, remarks, completed } = req.body
 
+    //let data = await client.query('UPDATE dependents SET age = $1, relation = $2 WHERE dependent_id = $3 RETURNING *', [age, relation, req.params.id])
     try {
         let client = await pool.connect()
-        let data = await client.query('UPDATE tasks SET title = $1, date = $ 2, description = $ 3, remarks = $ 4, completed = $5 WHERE task_id = $6 RETURNING *', [title, date, description, remarks, completed, req.params.id])
+        let data = await client.query('UPDATE tasks SET title = $1, date = $2, description = $3, remarks = $4, completed = $5 WHERE task_id = $6 RETURNING *', [title, date, description, remarks, completed, req.params.id])
         res.json(data.rows)
         client.release()
 
@@ -449,11 +468,11 @@ const createNewComment = async (req, res) => {
     }
 }
 const updateOneCommentByID = async (req, res) => {
-    const { author_id, content } = req.body
+    const { content } = req.body
 
     try {
         let client = await pool.connect()
-        let data = await client.query('UPDATE comments SET author_id = $1, content = $2 WHERE comment_id = $3 RETURNING *', [author_id, content, req.params.id])
+        let data = await client.query('UPDATE comments SET content = $1 WHERE comment_id = $2 RETURNING *', [content, req.params.id])
         res.json(data.rows)
         client.release()
 
@@ -465,7 +484,7 @@ const updateOneCommentByID = async (req, res) => {
 const deleteOneCommentByID = async (req, res) => {
     try {
         let client = await pool.connect()
-        let data = await client.query('DELETE FROM comments WHERE comment_id = $1', [req.params.id])
+        let data = await client.query('DELETE FROM comments WHERE comment_id = $1 RETURNING *', [req.params.id])
         res.json(data.rows)
         client.release()
 
@@ -507,5 +526,7 @@ module.exports = {
     getOneCommentByID,
     createNewComment,
     updateOneCommentByID,
-    deleteOneCommentByID
+    deleteOneCommentByID,
+    cookiesForAll,
+    login
 }

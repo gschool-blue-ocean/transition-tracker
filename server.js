@@ -32,6 +32,8 @@ app.post('/api/create/user', controller.createNewUser)
 
 app.post('/api/create/admin', controller.createNewAdmin)
 
+app.post('/api/login', controller.login)
+
 app.patch('/api/update/user/:id', controller.updateOneUserByID)
 
 app.patch('/api/update/admin/:id', controller.updateAdminByID)
@@ -76,7 +78,7 @@ app.get('/api/tasks/:id', controller.getOneTaskByID)
 
 app.post('/api/create/task', controller.createNewTask)
 
-app.patch('/api/update/task/:id', controller.updateOneTaskByID) //! error
+app.patch('/api/update/task/:id', controller.updateOneTaskByID)
 
 app.delete('/api/delete/task/:id', controller.deleteOneTaskByID)
 

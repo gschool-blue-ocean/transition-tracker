@@ -1,4 +1,5 @@
 import './StyleSheets/App.css';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { useState, useContext, useEffect } from 'react';
 import { Routes, Route } from "react-router-dom"
 import Loading from './Components/LoadingDisplay/Loading'
@@ -11,8 +12,8 @@ import "./StyleSheets/Header.css"
 import StudentPage from './Components/StudentPage/StudentPage';
 
 function App() {
-  const { login, userData, invokeSetLogin, loading } = useContext(LoginContext)
-  const { allUsersData, allCohortsData, invokeSetAllUsersData, invokeSetAllCohortsData } = useContext(AppContext)
+  const { login, userData, invokeSetLogin } = useContext(LoginContext)
+  const { allUsersData, allCohortsData, invokeSetAllUsersData, invokeSetAllCohortsData, loading, setLoading } = useContext(AppContext)
 
   useEffect(() => {
     fetchAllUserData()
@@ -32,23 +33,18 @@ function App() {
       .catch(err => console.log(err))
   }
 
-  // if (!login) {
-  //   if (loading) {
-  //     return (<Loading />)
-  //   }
-  //   return <LandingPage invokeSetLogin={invokeSetLogin} />
+  // if (loading) {
+  //   return <Loading />
   // }
 
   return (
 
     <div className="AppContainer">
+      {loading ? <Loading /> : null}
       <Routes>
         <Route path="/" element={login ? <StudentPage /> : <LandingPage invokeSetLogin={invokeSetLogin} />} />
         <Route path="/createAccount" element={<CreateAccountModal />} />
       </Routes>
-
-
-
 
     </div>
   );

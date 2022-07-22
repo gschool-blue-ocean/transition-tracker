@@ -3,6 +3,7 @@ import { useState, createContext } from 'react';
 const AppContext = createContext()
 
 export const AppContextProvider = ({ children }) => {
+    const [loading, setLoading] = useState(false)
     const [allUsersData, setAllUsersData] = useState([])
     const [allCohortsData, setAllCohortsData] = useState([])
 
@@ -17,7 +18,9 @@ export const AppContextProvider = ({ children }) => {
         allUsersData,
         allCohortsData,
         invokeSetAllUsersData,
-        invokeSetAllCohortsData
+        invokeSetAllCohortsData,
+        loading,
+        setLoading
     }}>
 
         {children}
