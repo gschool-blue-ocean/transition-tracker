@@ -153,55 +153,149 @@ li > h4 {
    height: 100px;
    border-radius: 10px;
 }
-body{
-  height: 100vh;
+body {
+   height: 100vh;
+   background-color: var(--clr-bgprimary-dark);
 }
 
-.StudentDash--Wrapper{
+/* =========== Student Container ============== */
 
-  width: max-content;
-  display: grid;
-  padding: calc(var(--spacer-container) * 2);
-  line-height: var(--spacer-line);
+.StudentDash--Wrapper {
+   width: max-content;
+   display: grid;
+   padding: calc(var(--spacer-container) * 2);
+   line-height: var(--spacer-line);
+   grid-template-areas:
+      "StuHeader StuHeader StuHeader"
+      "StuInfo StuTasks StuTasks"
+      "StuInfo StuTasks StuTasks"
+      "StuNotes StuNotes StuNotes";
 
-  text-align: left;
+   grid-template-columns: 1fr 1fr 1fr;
 
-  border: 10px solid pink ;
+   border: 10px solid pink;
+
+   background-color: var(--clr-secondary-accent);
+
+   font-family: var(--ff-primary);
 }
 
-/* .SDash--Header{
-  border-style: ;
-  
-} */
-
-.SDash--Info-card > ul, li, span{
-list-style: none;
+/* =============== Student Header ============= */
+.SDash--Header {
+   grid-area: StuHeader;
+   display: grid;
+   grid-template-areas:
+      "StuName . ETStag"
+      "StuCohort . .";
 }
 
-.infoCard--container{
-  width: 100%;
-  background-color: var(--clr-nuetral-brown);
-  color: var(--clr-accent-white);
-
-  padding: var(--spacer-smallItems);
-
-  border-radius: 4px;
-
-
+#StuHeader--Name {
+   grid-area: StuName;
+   color: var(--clr-primary-accent);
+   text-shadow: 0px 3px 3px #dee2e5;
 }
 
-ul > h4, li > h4{
-  margin-top: 1em;
+#StuHeader--Cohort {
+   grid-area: StuCohort;
+   color: var(--clr-bgsecondary-contrast);
 }
 
-.title{
-  margin-left: 0.8em;
+#StuHeader--ETStag {
+   grid-area: ETStag;
+   background-color: rgb(0, 207, 0);
+   text-align: center;
+   color: white;
+   border-radius: 10px;
+   font-weight: bold;
+   width: fit-content;
+   padding: 5px 20px;
+   justify-self: end;
 }
 
-.answer{
-  margin-left: auto;
+/* ============= Student Info =============== */
+
+.SDash--Info-card {
+   grid-area: StuInfo;
 }
 
-.text-left{
-  text-align: left;
+.SDash--Info-card > ul,
+li,
+span {
+   list-style: none;
+}
+
+.infoCard--container {
+   width: 100%;
+   background-color: var(--clr-accent-white);
+   color: var(--clr-bgprimary-dark);
+
+   padding: var(--spacer-smallItems);
+
+   border-radius: 10px;
+}
+
+ul > h4,
+li > h4 {
+   margin-top: 1em;
+}
+
+.title {
+   margin-left: 0.8em;
+}
+
+.answer {
+   margin-left: auto;
+}
+
+/* ============= Student Tasks ============== */
+
+.SDash--Tasks {
+   grid-area: StuTasks;
+   display: flex;
+   flex-direction: column;
+
+   border-radius: 10px;
+   flex-wrap: nowrap;
+   align-items: center;
+   margin-left: 12px;
+   background-color: var(--clr-accent-white);
+}
+
+#StuTasks--Header {
+   margin: 10px;
+   color: var(--clr-bgprimary-dark);
+}
+
+.StuTasks--Card {
+   border: solid var(--clr-nuetral-brown);
+   border-radius: 10px;
+   margin-bottom: 8px;
+   width: 80%;
+   text-align: center;
+   color: var(--clr-accent-white);
+   background-color: var(--clr-bgsecondary-contrast);
+   box-shadow: 0px 4px 8px 0px #9b9b9b;
+   transition: box-shadow ease 0.2s, transform ease 0.1s;
+}
+
+.StuTasks--Card:hover {
+   cursor: pointer;
+   box-shadow: 0px 6px 16px 0px #414141;
+}
+
+.StuTasks--Card:active {
+   box-shadow: none;
+   transform: scale(0.98);
+}
+
+/* ============= Student Notes =============== */
+
+.SDash--Notes {
+   grid-area: StuNotes;
+}
+
+#StuNotes--TextArea {
+   width: fill;
+   height: 100px;
+   border-radius: 10px;
 }
