@@ -1,19 +1,19 @@
 const pool = require('./connection.js');
-const cookieParser = require("cookie-parser");
-const csrf = require("csurf");
-const admin = require("firebase-admin")
+// const cookieParser = require("cookie-parser");
+// const csrf = require("csurf");
+// const admin = require("firebase-admin")
 
-const serviceAccount = require("../../ServiceAccountKey.json");
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
+// const serviceAccount = require("../../ServiceAccountKey.json");
+// admin.initializeApp({
+//     credential: admin.credential.cert(serviceAccount)
+// });
 
-const csrfMiddleware = csrf({ cookie: true })
+// const csrfMiddleware = csrf({ cookie: true })
 
-const cookiesForAll = async (req, res, next) => {
-    res.cookie("XSRF-TOKEN", req.csrfToken())
-    next();
-}
+// const cookiesForAll = async (req, res, next) => {
+//     res.cookie("XSRF-TOKEN", req.csrfToken())
+//     next();
+// }
 
 const testRoute = async (_, res) => {
     try {
