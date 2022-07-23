@@ -24,7 +24,7 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
 
     let navigate = useNavigate()
     const validateUserLoginData = () => {
-        signInWithEmailAndPassword(loginData.username, loginData.password)
+        signInWithEmailAndPassword(auth, loginData.username, loginData.password)
             .then(({ user }) => {
                 return user.getIdToken().then((idToken) => {
                     return fetch(`${window.location.origin}/api/login`, {
