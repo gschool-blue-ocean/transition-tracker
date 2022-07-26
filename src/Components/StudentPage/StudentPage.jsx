@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import SPTasks from "./components/SP-Tasks";
 import SPDependents from "./components/SP-Dependents";
-import SPRelocation from "./components/SP-Relocation";
-import SPEducation from "./components/SP-Education";
-import SPTAPs from "./components/SP-TAPs";
 import SPTaskModal from "./components/SP-TaskModal";
 import "../../StyleSheets/StudentPage.css";
 
@@ -124,6 +121,8 @@ export default function StudentPage() {
                      <span className="answer"> Yes </span>
                   </li>
                </ul>
+               {/* WANT: edit button to turn user info fields into editable field or a form */}
+               <button id="editUserBtn">Edit</button>
             </div>
          </div>
          <SPTasks openModal={openModal} />
