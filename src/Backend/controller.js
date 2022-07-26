@@ -71,11 +71,14 @@ const createNewUser = async (req, res) => {
 const login = async (req, res) => {
     const { username, password } = req.body;
 
+    console.log(req.body)
+
     try {
         let client = await pool.connect()
         let data = await client.query('SELECT * FROM users WHERE username = $1', [username])
         res.json(data.rows)
         await bcrypt.compare(password, data.rows[0].password, (err, res) => {
+            console.log(res)
             if (res) {
                 res.json(data.rows)
             } else {
