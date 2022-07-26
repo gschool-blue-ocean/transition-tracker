@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import AppContext from "../../Context/AppContext";
 import '../../StyleSheets/AdminHomePage.css';
 import {FiSettings} from 'react-icons/fi';
@@ -7,7 +7,7 @@ import EditCohortPage from './EditCohortPage'
 function AdminHomePage() {
 
     const { allUsersData, allCohortsData } = useContext(AppContext) 
-    const [modalIsOpen, setModalIsOpen] = use 
+    const [modalIsOpen, setModalIsOpen] = useState(false) 
     
     const setModalIsOpenToTrue =()=>{
         setModalIsOpen(true)
