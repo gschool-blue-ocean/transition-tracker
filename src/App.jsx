@@ -39,7 +39,7 @@ function App() {
     <div className="AppContainer">
       {loading ? <Loading /> : null}
       <Routes>
-        <Route path="/" element={login ? <StudentPage /> : <LandingPage invokeSetLogin={invokeSetLogin} />} />
+        <Route path="/" element={login ? <StudentPage userData={userData} /> : <LandingPage invokeSetLogin={invokeSetLogin} />} />
         <Route path="/createAccount" element={<CreateAccountModal />} />
       </Routes>
     </div>

@@ -2,14 +2,16 @@ import React, { useState, useContext, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { CgEnter } from 'react-icons/cg'
 import AppContext from '../../Context/AppContext';
+import LoginContext from '../../Context/LoginContext';
 import { useNavigate } from 'react-router-dom'
-import { auth, signInWithEmailAndPassword } from '../Firebase'
-import { app } from '../Firebase'
+// import { auth, signInWithEmailAndPassword } from '../Firebase'
+// import { app } from '../Firebase'
 // import { CookiesProvider, withCookies, Cookies, useCookies } from 'react-cookie';
 // import Cookies from 'js-cookie'
 
 function LoginModal({ invokeSetLogin, setShowLoginModal }) {
     const { allUsersData, allCohortsData } = useContext(AppContext)
+    const { setUserData } = useContext(LoginContext)
 
     const [loginData, setLoginData] = useState({
         username: '',
@@ -19,7 +21,7 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
     useEffect(() => {
         const currentUser = localStorage.getItem("currentUser");
         if (currentUser !== null) {
-            setLoginData(JSON.parse(currentUser));
+            setUserData(JSON.parse(currentUser));
         }
     }, []);
 
@@ -28,6 +30,7 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
         handleLogin()
     }
 
+    let navigate = useNavigate()
     const handleLogin = () => {
 
         let inputData = {
@@ -41,65 +44,20 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
             body: JSON.stringify(inputData)
         })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => {
+                if (typeof data === 'string') {
+                    alert(data)
+                }
+                else if (data.newUser) {
+                    navigate('/createAccount')
+                }
+                else {
+                    setUserData(data)
+                    invokeSetLogin(true)
+                    localStorage.setItem("currentUser", JSON.stringify(data))
+                }
+            })
     }
-    // let navigate = useNavigate()
-    // const validateUserLoginData = () => {
-    //     signInWithEmailAndPassword(auth, loginData.username, loginData.password)
-    //         .then(({ user }) => {
-    //             // user.getIdToken().then(token => console.log(token))
-    //             user.getIdToken().then((idToken) => {
-    //                 fetch('https://hacking-transition.herokuapp.com/api/login', {
-    //                     method: "POST",
-    //                     headers: {
-    //                         Accept: "application/json",
-    //                         "Content-type": "application/json",
-    //                         "CSRF-Token": Cookies.get('_csrf')
-    //                     },
-    //                     body: JSON.stringify({ idToken })
-    //                 })
-
-    //             })
-    //                 // .then(() => app.auth().signOut())
-    //                 .then(() => invokeSetLogin(true))
-
-    //                 .catch(err => console.error(err))
-    //         })
-    //     //         return fetch('https://hacking-transition.herokuapp.com/api/login', {
-    //     //             method: "POST",
-    //     //             headers: {
-    //     //                 Accept: "application/json",
-    //     //                 "Content-type": "application/json",
-    //     //                 "CSRF-Token": Cookies.get(user),
-    //     //             },
-    //     //             body: JSON.stringify({ idToken })
-    //     //         })
-    //     //     })
-    //     // })
-    //     // .then((data) => {
-    //     //     console.log(data)
-    //     //     // return app.auth().signOut();
-    //     // })
-    //     // .catch((err) => {
-    //     //     if (err) {
-    //     //         console.error(err)
-    //     //     }
-    //     // })
-    //     // .then(() => {
-    //     //     alert('Success')
-    //     // })
-    //     // allUsersData.forEach((elem) => {
-    //     //     if (loginData.username === elem.username && loginData.password === elem.password) {
-    //     //         elem.new_user ? navigate("/createAccount") : invokeSetLogin(true)
-    //     //         return console.log(elem)
-    //     //     }
-    //     // });
-
-
-    //     // return console.warn('failed login attempt')
-    //     // invokeSetLogin(true)
-    // }
-
     const handleChange = (e) => {
         setLoginData((prevLoginData) => {
             return {
@@ -108,10 +66,6 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
             }
         })
     }
-
-    // const handleShowCreateAccModal = () => {
-    //     setShowLoginModal(false)
-    // }
 
     return ReactDOM.createPortal(
         <div className='modalContainer'>
@@ -145,6 +99,6 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
         </div>,
         document.getElementById('portal')
     )
-}
 
+}
 export default LoginModal
