@@ -6,7 +6,7 @@ export const LoginContextProvider = ({ children }) => {
     const [login, setLogin] = useState(false)
     const [userData, setUserData] = useState({})
 
-    const changeSetLogin = (value) => {
+    const invokeSetLogin = (value) => {
         setLogin(value)
     }
 
@@ -14,7 +14,7 @@ export const LoginContextProvider = ({ children }) => {
         login,
         userData,
         setUserData,
-        changeSetLogin
+        invokeSetLogin
     }}>
 
         {children}

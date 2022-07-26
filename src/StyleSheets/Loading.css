@@ -1,0 +1,12 @@
+.modalContainer.loadingContainer {
+    /* position: relative; */
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
+
+}
+
+.loadingDiv {
+    /* background-color: #3335;
+    border-radius: 50%;
+    padding: 2rem; */
+}
