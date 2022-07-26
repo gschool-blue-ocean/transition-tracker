@@ -7,10 +7,10 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
 
-const cookiesForAll = async (req, res, next) => {
-    res.cookie("XSRF-TOKEN", req.csrfToken())
-    next();
-}
+// const cookiesForAll = async (req, res, next) => {
+//     res.cookie("XSRF-TOKEN", req.csrfToken())
+//     next();
+// }
 
 const testRoute = async (_, res) => {
     try {
@@ -76,14 +76,14 @@ const login = async (req, res) => {
     try {
         let client = await pool.connect()
         let data = await client.query('SELECT * FROM users WHERE username = $1', [username])
-        res.json(data.rows)
         await bcrypt.compare(password, data.rows[0].password, (err, res) => {
             console.log(res)
-            if (res) {
-                res.json(data.rows)
-            } else {
-                res.status(401).json('Username or password is incorrect.')
-            }
+            res.json(data.rows)
+            // if (res) {
+            //     res.json(data.rows)
+            // } else {
+            //     res.status(401).json('Username or password is incorrect.')
+            // }
         })
         client.release()
     } catch (error) {
@@ -532,6 +532,5 @@ module.exports = {
     createNewComment,
     updateOneCommentByID,
     deleteOneCommentByID,
-    cookiesForAll,
     login
 }
