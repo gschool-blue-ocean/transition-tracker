@@ -11,7 +11,7 @@ import "./StyleSheets/Header.css"
 import StudentPage from './Components/StudentPage/StudentPage';
 
 function App() {
-  const { login, userData, invokeSetLogin } = useContext(LoginContext)
+  const { login, userData, setUserData, invokeSetLogin } = useContext(LoginContext)
   const { allUsersData, allCohortsData, invokeSetAllUsersData, invokeSetAllCohortsData, loading, setLoading } = useContext(AppContext)
 
   useEffect(() => {
@@ -39,7 +39,7 @@ function App() {
     <div className="AppContainer">
       {loading ? <Loading /> : null}
       <Routes>
-        <Route path="/" element={login ? <StudentPage userData={userData} /> : <LandingPage invokeSetLogin={invokeSetLogin} />} />
+        <Route path="/" element={login ? <StudentPage userData={userData} setUserData={setUserData} invokeSetLogin={invokeSetLogin} /> : <LandingPage invokeSetLogin={invokeSetLogin} />} />
         <Route path="/createAccount" element={<CreateAccountModal />} />
       </Routes>
     </div>
