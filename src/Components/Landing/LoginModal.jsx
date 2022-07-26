@@ -22,8 +22,10 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
         const currentUser = localStorage.getItem("currentUser");
         if (currentUser !== null) {
             setUserData(JSON.parse(currentUser));
+            invokeSetLogin(true)
         }
     }, []);
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
