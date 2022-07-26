@@ -32,7 +32,7 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
                         headers: {
                             Accept: "application/json",
                             "Content-type": "application/json",
-                            "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+                            "CSRF-Token": Cookies.get(user),
                         },
                         body: JSON.stringify({ idToken })
                     })
