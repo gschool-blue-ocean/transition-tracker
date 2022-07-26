@@ -65,7 +65,7 @@ const createNewUser = async (req, res) => {
     }
 }
 
-const login = async (req, res) => {
+const login = (req, res) => {
     const idToken = req.body.idToken.toString();
 
     const expiresIn = 60 * 60 * 24 * 5 * 1000;

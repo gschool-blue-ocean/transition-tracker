@@ -22,31 +22,44 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
         validateUserLoginData()
     }
 
-    // let navigate = useNavigate()
+    let navigate = useNavigate()
     const validateUserLoginData = () => {
         signInWithEmailAndPassword(auth, loginData.username, loginData.password)
             .then(({ user }) => {
-                return user.getIdToken().then((idToken) => {
-                    return fetch('https://hacking-transition.herokuapp.com/api/login', {
+                user.getIdToken().then((idToken) => {
+                    fetch('https://hacking-transition.herokuapp.com/api/login', {
                         method: "POST",
                         headers: {
                             Accept: "application/json",
                             "Content-type": "application/json",
-                            "CSRF-Token": Cookies.get(user),
                         },
                         body: JSON.stringify({ idToken })
                     })
+
                 })
+                    .then(res => console.log(res))
+                    .catch(err => console.error(err))
             })
-            .then((data) => {
-                console.log(data)
-                // return app.auth().signOut();
-            })
-            .catch((err) => {
-                if (err) {
-                    console.error(err)
-                }
-            })
+        //         return fetch('https://hacking-transition.herokuapp.com/api/login', {
+        //             method: "POST",
+        //             headers: {
+        //                 Accept: "application/json",
+        //                 "Content-type": "application/json",
+        //                 "CSRF-Token": Cookies.get(user),
+        //             },
+        //             body: JSON.stringify({ idToken })
+        //         })
+        //     })
+        // })
+        // .then((data) => {
+        //     console.log(data)
+        //     // return app.auth().signOut();
+        // })
+        // .catch((err) => {
+        //     if (err) {
+        //         console.error(err)
+        //     }
+        // })
         // .then(() => {
         //     alert('Success')
         // })
@@ -61,6 +74,7 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
         // return console.warn('failed login attempt')
         // invokeSetLogin(true)
     }
+
     const handleChange = (e) => {
         setLoginData((prevLoginData) => {
             return {
