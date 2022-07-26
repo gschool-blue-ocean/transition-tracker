@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { CgEnter } from 'react-icons/cg'
 import AppContext from '../../Context/AppContext';
@@ -16,11 +16,23 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
         password: '',
     })
 
+    useEffect(() => {
+
+    })
+
     const handleSubmit = (e) => {
         e.preventDefault()
+        handleLogin()
     }
 
-
+    const handleLogin = () => {
+        fetch('https://hacking-transition.herokuapp.com/api/login', {
+            method: 'POST',
+            body: JSON.stringify(loginData)
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+    }
     // let navigate = useNavigate()
     // const validateUserLoginData = () => {
     //     signInWithEmailAndPassword(auth, loginData.username, loginData.password)
