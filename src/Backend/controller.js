@@ -74,6 +74,7 @@ const login = async (req, res) => {
     try {
         let client = await pool.connect()
         let data = await client.query('SELECT * FROM users WHERE username = $1', [username])
+        res.json(data.rows)
         await bcrypt.compare(password, data.rows[0].password, (err, res) => {
             if (res) {
                 res.json(data.rows)
