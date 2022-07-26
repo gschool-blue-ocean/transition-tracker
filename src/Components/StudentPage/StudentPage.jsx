@@ -99,7 +99,7 @@ export default function StudentPage(allUsersData) {
                      <h4 id="depends" className="text-left">
                         Dependents
                      </h4>
-                     <span className="title"> None </span>
+                     <SPDependents />
                   </li>
 
                   <li>
