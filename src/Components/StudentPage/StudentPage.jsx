@@ -116,6 +116,8 @@ export default function StudentPage() {
                      <span className="answer"> Yes </span>
                   </li>
                </ul>
+               {/* WANT: edit button to turn user info fields into editable field or a form */}
+               <button id="editUserBtn">Edit</button>
             </div>
          </div>
          <SPTasks openModal={openModal} />
