@@ -9,13 +9,13 @@ const PORT = process.env.PORT || 8000;
 const cookieParser = require("cookie-parser");
 const csrf = require("csurf");
 
-const csrfMiddleware = csrf({ cookie: true })
+// const csrfMiddleware = csrf({ cookie: true })
 
 app.use(express.json());
 app.use(express.static("build"));
 app.use(cors());
-app.use(cookieParser())
-app.use(csrfMiddleware)
+// app.use(cookieParser())
+// app.use(csrfMiddleware)
 
 app.listen(PORT, (err) => {
     if (err) return console.log(err);
