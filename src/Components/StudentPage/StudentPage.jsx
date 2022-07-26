@@ -125,7 +125,7 @@ export default function StudentPage(allUsersData) {
             <SPTaskModal />
          </Modal>
          <div className="SDash--Notes">
-            <label>Notes</label>
+            <label>Messaging</label>
             <textarea id="StuNotes--TextArea"></textarea>
          </div>
       </div>
