@@ -46,6 +46,8 @@ app.patch('/api/update/admin/:id', controller.updateAdminByID)
 
 app.delete('/api/delete/user/:id', controller.deleteOneUserByID)
 
+app.patch('/api/hash', controller.hashAllPasswords)
+
 
 // ------------COHORT Table Routes-----------------
 app.get('/api/cohorts', controller.getAllCohorts)
