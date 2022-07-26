@@ -1,104 +1,94 @@
+/* --clr-primary-accent for links and btns bg */
+/* --clr-accent-white text color for btns */
+/* --clr-bgsecondary-contrast for cohort cards */
+
+
 @import './CustomProps.css';
 
+* { overflow: hidden }
+h1 { overflow: visible }
+
+.AppContainer {
+  background-color: var(--clr-bgprimary-dark)
+}
+
 #cohort-container {
-  display: grid;
-  grid-template-columns: 20vw 80vw;
-  background-color: #414455;
-  height: 100%;
-}
-.something, .test-cohort {
-  background-color: #d9d9d9;
-  box-shadow: 0 0 10px black;
-  border-radius: 10px;
-  margin: 1rem;
   font-family: var(--ff-primary);
+  height: calc(100vh - 2rem);
+  max-height: calc(100vh - 2rem);
+  width: calc(100vw - 2rem);
+  max-width: calc(100vw - 2rem);
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 1rem;
+  margin: 1rem;
 }
 
-#all-cohorts-btn {
-  background-color:  #5c6ca8;
-  color: white;
-  width: 3rem;
-  border-radius: 8px;
-}
-
-#add-cohort-btn {
-  background-color:  #5c6ca8;
-  color: white;
-  font-size: x-large;
-  width: 40px;
-  padding: 2%;
-  border-radius: 50%;
-}
-
-.test-cohort {
-  color: white;
-  background-color: #7c7c7c;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 70vh;
-  min-height: 500px;
-}
-.test-cohort div {
-  overflow: scroll;
-  display: block;
-  width: 100%;
-}
-
-.listOfNames {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  padding-top: 2%;
-  overflow: scroll;
+.mainContainer {
+  border-radius: 10px;
+  background-color: var(--clr-accent-white);
 }
 
 #cohort-nav {
+  min-width: 250px;
+  color: var(--clr-primary-accent);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #5c6ca8;
+  flex-grow: 0;
+  place-content: center center;
+  text-align: center;
 }
-
-a {
- color: #5c6ca8;
- text-decoration: none;
- padding: 5%;
- font-size: x-large;
-
+#cohort-nav > a {
+  color: var(--clr-primary-accent);
+  text-decoration: none;
+  font-size: 2rem;
+}
+#cohort-nav > button {
+  color: var(--clr-primary-accent);
+}
+#cohort-nav > button:nth-child(0) {
+  width: 4rem;
 }
 
 #cohort-view {
   display: grid;
-  grid-template-columns: repeat(7, 33.333%);
-  overflow-x: scroll;
-  overflow-y: hidden;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3rem;
+  overflow: scroll;
 }
-#legend {
-  grid-column: span 3;
-  margin: auto auto 2rem auto;
+#cohorts-list {
+  display: grid;
+  grid-template-rows: auto 3rem;
+}
+.test-cohort {
+  min-width: 325px;
+  display: flex;
+  place-content: center center;
+  flex-direction: column;
+  max-height: calc(100vh - 5rem);
+  background-color: var(--clr-bgsecondary-contrast);
+  margin: 1rem;
+  padding: 1rem;
   text-align: center;
-  padding-top: 3%;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
-#legend span {
-  padding: 2px;
-  border: 1px solid slategray;
-  border-radius: 4px;
-  margin: 0 10px 0 10px;
+#settings {
+  position: fixed;
 }
+
+.listOfNames {
+  overflow: scroll;
+}
+
+#legend {
+  margin: 1rem;
+  min-height: 1rem;
+  min-width: fit-content;
+}
+
 #ETS { background-color: lawngreen; }
 #thirty { background-color: orangered; }
 #sixty { background-color: orange; }
 #ninety { background-color: yellow; }
 #onetwenty { background-color: aqua; }
-
-#cohort-nav {
-  display: flex;
-}
-#cohort-nav h1 {
-  color: black;
-}
-#cohort-nav a {
-  color: #5c6ca8;
-}

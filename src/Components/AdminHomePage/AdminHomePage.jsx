@@ -1,6 +1,7 @@
 import React, {useContext } from 'react';
 import AppContext from "../../Context/AppContext";
 import '../../StyleSheets/AdminHomePage.css';
+import {AiOutlinePlus, FiSettings} from 'react-icons/fi'
 
 function AdminHomePage() {
 
@@ -8,7 +9,7 @@ function AdminHomePage() {
 
     return (
         <div id="cohort-container">
-            <div id="cohort-nav" className="something">
+            <div id="cohort-nav" className="mainContainer">
                 <h1>Cohorts</h1>
                 <button id="all-cohorts-btn">
                     All
@@ -24,11 +25,12 @@ function AdminHomePage() {
                   +
                 </button>
             </div>
-            <div className="something">
+            <div id="cohorts-list" className="mainContainer">
                 <div id='cohort-view'>
                 {
                 allCohortsData.map((cohort) => {
                     return ( <div className='test-cohort'>
+                        <FiSettings id="settings"/>
                         <h1>{cohort.cohort_name}</h1>
                         {cohort.start_date} - {cohort.end_date}
                         <div className="listOfNames">
