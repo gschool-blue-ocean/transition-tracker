@@ -1,11 +1,17 @@
-import React, {useContext } from 'react';
+import React, { useContext } from 'react';
 import AppContext from "../../Context/AppContext";
 import '../../StyleSheets/AdminHomePage.css';
-import {AiOutlinePlus, FiSettings} from 'react-icons/fi'
+import {FiSettings} from 'react-icons/fi';
+import EditCohortPage from './EditCohortPage'
 
 function AdminHomePage() {
 
-    const { allUsersData, allCohortsData } = useContext(AppContext)
+    const { allUsersData, allCohortsData } = useContext(AppContext) 
+    const [modalIsOpen, setModalIsOpen] = use 
+    
+    const setModalIsOpenToTrue =()=>{
+        setModalIsOpen(true)
+    }
 
     return (
         <div id="cohort-container">
@@ -28,25 +34,30 @@ function AdminHomePage() {
             <div id="cohorts-list" className="mainContainer">
                 <div id='cohort-view'>
                 {
-                allCohortsData.map((cohort) => {
-                    return ( <div className='test-cohort'>
-                        <FiSettings id="settings"/>
-                        <h1>{cohort.cohort_name}</h1>
-                        {cohort.start_date} - {cohort.end_date}
-                        <div className="listOfNames">
-                        {
-                            allUsersData.map(user => {
-                                if (user.cohort_id == cohort.cohort_id) {
-                                    return <>
-                                        {user.first} {user.last}<br></br>
-                                    </>
-                                }
-                            })
-                        }
-                        </div>
-                        30 students
-                    </div> )
-                })
+                    allCohortsData.map((cohort) => {
+                        return (
+                            <div className='test-cohort'>
+                                <div className='cardHeader'>
+                                <div className='cardName'>{cohort.cohort_name}</div> 
+                                <div className='cardSettingsIcon'> <button onClick={setModalIsOpenToTrue}>{EditCohortPage}<FiSettings/></button> </div>
+                                
+                                </div>
+                                {cohort.start_date} - {cohort.end_date}
+                                <div className="listOfNames">
+                                    {
+                                        allUsersData.map(user => {
+                                            if (user.cohort_id == cohort.cohort_id) {
+                                                return <>
+                                                    {user.first} {user.last}<br></br>
+                                                </>
+                                            }
+                                        })
+                                    }
+                                    30 students
+                                </div>
+                            </div>
+                        )
+                    })
                 }
                 </div>
                 <div id="legend">
