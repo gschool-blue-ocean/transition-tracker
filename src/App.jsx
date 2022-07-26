@@ -1,5 +1,4 @@
 import './StyleSheets/App.css';
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { useState, useContext, useEffect } from 'react';
 import { Routes, Route } from "react-router-dom"
 import Loading from './Components/LoadingDisplay/Loading'
