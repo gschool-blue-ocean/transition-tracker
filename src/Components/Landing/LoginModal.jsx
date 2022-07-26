@@ -50,7 +50,7 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
                 if (typeof data === 'string') {
                     alert(data)
                 }
-                else if (data.newUser) {
+                else if (data.new_user) {
                     navigate('/createAccount')
                 }
                 else {
