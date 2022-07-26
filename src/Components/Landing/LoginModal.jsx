@@ -22,7 +22,7 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
         validateUserLoginData()
     }
 
-    let navigate = useNavigate()
+    // let navigate = useNavigate()
     const validateUserLoginData = () => {
         signInWithEmailAndPassword(auth, loginData.username, loginData.password)
             .then(({ user }) => {
