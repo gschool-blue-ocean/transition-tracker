@@ -26,9 +26,15 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
     }
 
     const handleLogin = () => {
+
+        let inputData = {
+            username: loginData.username,
+            password: loginData.password
+        }
+
         fetch('https://hacking-transition.herokuapp.com/api/login', {
             method: 'POST',
-            body: JSON.stringify(loginData)
+            body: JSON.stringify(inputData)
         })
             .then(res => res.json())
             .then(data => console.log(data))
