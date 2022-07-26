@@ -14,7 +14,7 @@ CREATE TABLE users (
     last VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
     username VARCHAR(50) NOT NULL,
-    password VARCHAR(30) NOT NULL,
+    password VARCHAR(70) NOT NULL,
     rank VARCHAR(20),
     branch VARCHAR(20),
     duty_station VARCHAR(50),

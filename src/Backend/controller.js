@@ -68,22 +68,23 @@ const createNewUser = async (req, res) => {
     }
 }
 
-const login = (req, res) => {
-    const idToken = req.body.idToken.toString();
-
-    const expiresIn = 60 * 60 * 24 * 5 * 1000;
-    admin.auth().createSessionCookie(idToken, { expiresIn })
-        .then(
-            (sessionCookie) => {
-                const options = { maxAge: expiresIn, httpOnly: true };
-                res.cookie("session", sessionCookie, options);
-                res.end(JSON.stringify({ status: 'success' }))
-            },
-            (error) => {
-                res.status(401).send("UNAUTHORIZED REQUEST")
+const login = async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        let client = await pool.connect()
+        let data = client.query('SELECT * FROM users WHERE username = $1', [username])
+        await bcrypt.compare(password, data.rows[0].password, (err, res) => {
+            if (res) {
+                res.json(data.rows)
+            } else {
+                res.status(401).json('Username or password is incorrect.')
             }
-        )
-
+        })
+        client.release()
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
 }
 
 // const createNewUser = async (req, res) => {
