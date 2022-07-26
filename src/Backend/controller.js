@@ -1,11 +1,11 @@
 const pool = require('./connection.js');
-const admin = require("firebase-admin")
+// const admin = require("firebase-admin")
 const bcrypt = require('bcrypt')
 
-const serviceAccount = require("../../ServiceAccountKey.json");
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
+// const serviceAccount = require("../../ServiceAccountKey.json");
+// admin.initializeApp({
+//     credential: admin.credential.cert(serviceAccount)
+// });
 
 // const cookiesForAll = async (req, res, next) => {
 //     res.cookie("XSRF-TOKEN", req.csrfToken())
@@ -71,14 +71,15 @@ const createNewUser = async (req, res) => {
 const login = async (req, res) => {
     const { username, password } = req.body;
 
-    console.log(req.body)
+    console.log(username, password)
 
     try {
         let client = await pool.connect()
         let data = await client.query('SELECT * FROM users WHERE username = $1', [username])
-        await bcrypt.compare(password, data.rows[0].password, (err, res) => {
+        console.log(data)
+        res.json(data)
+        await bcrypt.compare(password, data.rows.password, (err, res) => {
             console.log(res)
-            res.json(data.rows)
             // if (res) {
             //     res.json(data.rows)
             // } else {
