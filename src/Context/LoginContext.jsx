@@ -9,11 +9,14 @@ export const LoginContextProvider = ({ children }) => {
     const invokeSetLogin = (value) => {
         setLogin(value)
     }
+    const invokeSetUserData = (value) => {
+        setUserData(value)
+    }
 
     return <LoginContext.Provider value={{
         login,
         userData,
-        setUserData,
+        invokeSetUserData,
         invokeSetLogin
     }}>
 

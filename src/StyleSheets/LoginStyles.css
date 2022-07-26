@@ -75,3 +75,37 @@
 .createAccBtn {
     background-color: rgb(195, 123, 6);
 }
+/*Create modal styling==================================================================================*/
+#portal {
+    height: 100%;
+}
+.createModalContainer {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+}
+.createContainer {
+    background-color: darkgray;
+    margin-top: 35px;
+    padding: 25px;
+    border-radius: 35px;
+}
+.createContainer h1, h3 {
+    text-align: center;
+}
+.createContainer p {
+    margin-top: 8px;
+}
+.createContainer input {
+    border-radius: 6px;
+    padding: 2px;
+}
+.createInnerCredintials div {
+    margin: 5px;
+}
+.createInnerCredintials {
+    display: flex;
+    flex-direction: row;
+}
