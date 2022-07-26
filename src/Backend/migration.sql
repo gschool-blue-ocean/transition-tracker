@@ -16,6 +16,8 @@ CREATE TABLE users (
     username VARCHAR(50) NOT NULL,
     password VARCHAR(70) NOT NULL,
     rank VARCHAR(20),
+    mos TEXT,
+    intrests TEXT,
     branch VARCHAR(20),
     duty_station VARCHAR(50),
     taps_complete BOOLEAN,
