@@ -88,9 +88,10 @@
 }
 .createContainer {
     background-color: darkgray;
-    margin-top: 35px;
-    padding: 25px;
-    border-radius: 35px;
+    margin-top: 25px;
+    padding: 5px;
+    padding-bottom: 25px;
+    border-radius: 25px;
 }
 .createContainer h1, h3 {
     text-align: center;
