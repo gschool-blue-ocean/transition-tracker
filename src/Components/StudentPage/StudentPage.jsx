@@ -18,7 +18,7 @@ const customStyles = {
       transform: "translate(-50%, -50%)",
       backgroundColor: "var(--clr-primary-accent)",
       borderRadius: "10px",
-      width: "65%",
+      width: "30%",
    },
 };
 
