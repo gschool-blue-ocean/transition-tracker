@@ -5,7 +5,7 @@ import AppContext from '../../Context/AppContext';
 import { useNavigate } from 'react-router-dom'
 import { auth, signInWithEmailAndPassword } from '../Firebase'
 import { app } from '../Firebase'
-import { CookiesProvider, withCookies, Cookies } from 'react-cookie';
+import { CookiesProvider, withCookies, Cookies, useCookies } from 'react-cookie';
 
 
 function LoginModal({ invokeSetLogin, setShowLoginModal }) {
@@ -18,7 +18,7 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        invokeSetLogin(true)
+
         validateUserLoginData()
     }
 
@@ -32,12 +32,15 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
                         headers: {
                             Accept: "application/json",
                             "Content-type": "application/json",
+                            "CSRF-Token": Cookies.get('XSRF-Token')
                         },
                         body: JSON.stringify({ idToken })
                     })
 
                 })
-                    .then(res => console.log(res))
+                    .then(() => app.auth().signOut())
+                    .then(() => invokeSetLogin(true))
+
                     .catch(err => console.error(err))
             })
         //         return fetch('https://hacking-transition.herokuapp.com/api/login', {
