@@ -17,8 +17,11 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
     })
 
     useEffect(() => {
-
-    })
+        const currentUser = localStorage.getItem("currentUser");
+        if (currentUser !== null) {
+            setLoginData(JSON.parse(currentUser));
+        }
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -34,6 +37,7 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
 
         fetch('https://hacking-transition.herokuapp.com/api/login', {
             method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(inputData)
         })
             .then(res => res.json())
