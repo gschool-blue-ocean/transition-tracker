@@ -1,5 +1,6 @@
 .HeaderContainer {
     display: flex;
+    gap: 1rem;
     flex-direction: column;
     justify-content: space-between;
     background-color: #012361;
@@ -28,43 +29,32 @@
 }
 
 .navbarContainer {
-    /* display: flex;
-    flex-direction: row;
-    align-content: center; */
+    display: grid;
+    justify-content: center;
 }
 
 .navbarUL {
     display: flex;
     list-style: none;
+    gap: 3rem;
+    font-size: 1.5rem;
 }
 
 .navLink {
     text-decoration: none;
     color: inherit;
+    opacity: .5;
+    padding: .6rem;
 }
 
-.navbar {
-    /* display: flex;
-    flex-direction: row;
-    overflow: hidden;
-    text-align: center;
-    color: white; */
+.navLink:hover {
+    cursor: pointer;
+    opacity: 1;
 }
 
-.navbar div {
-    /* margin-left: 3px;
-    margin-right: 3px;
-    padding: 4px;
-    padding-top: 2px;
-    height: 16px;
-    border: solid 1px;
-    border-color: gray;
-    font-size: 75%; */
-}
-
-/* Change the color of links on hover */
-.navbar div:hover {
-    /* background-color: #ddd;
-    color: rgb(122, 122, 122);
-    cursor: pointer; */
+.activeTab {
+    opacity: 1;
+    background-color: #7775;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
 }
