@@ -32,19 +32,19 @@ function App() {
          .catch((err) => console.log(err));
    };
 
-   // if (!login) {
-   //   if (loading) {
-   //     return (<Loading />)
-   //   }
-   //   return <LandingPage invokeSetLogin={invokeSetLogin} />
-   // }
+   if (!login) {
+      if (loading) {
+         return <Loading />;
+      }
+      return <LandingPage invokeSetLogin={invokeSetLogin} />;
+   }
 
    return (
       <div className="AppContainer">
-         {/* <Routes>
+         <Routes>
             <Route path="/" element={login ? <StudentPage /> : <LandingPage invokeSetLogin={invokeSetLogin} />} />
             <Route path="/createAccount" element={<CreateAccountModal />} />
-         </Routes> */}
+         </Routes>
          <StudentPage />
       </div>
    );
