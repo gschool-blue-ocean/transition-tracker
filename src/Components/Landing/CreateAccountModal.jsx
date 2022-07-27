@@ -4,36 +4,57 @@ import { useNavigate } from 'react-router-dom'
 import { auth, createUserWithEmailAndPassword } from '../Firebase'
 import LoginContext from "../../Context/LoginContext"
 
+//not verifying password
 function CreateAccountModal() {
     const { userData, invokeSetUserData, loading } = useContext(LoginContext)
     const [createAccData, setCreateAccData] = useState({
-
-        username: '',
-        password: '',
-        verifyPassword: '',
+        first: userData.first,
+        last: userData.last,
         email: userData.email,
-        etsDate: '',
+        username: userData.username,
+        password: '',
+        rank: '',   
         branch: '',
-        dutyStation: '',
+        duty_station: '',
+        taps_complete: '',
+        leave_start_date: '',
+        ets_date: '',
+        planning_to_relocate: '',
         city: '',
         state: '',
+        has_dependents: false,
+        highest_education: false,
+        seeking_further_education: '',
+        admin: userData.admin,
+        cohort_name: userData.cohort_name,
+        cohort_id: userData.cohort_id,
+        new_user: true,
         mos: '',
-        rank: '',
-        terminalLeaveDate: '',
-        dependents: '',
-        relocation: '',
-        degree: '',
-        schooling: '',
         interests: ''
     })
 
+    let verifyPassword = '';
+    let dependents = '';
+    //if statement for redirecting when not logged in
+    const updateUser = (data) => {
+        fetch(`http://hacking-transition.herokuapp.com/api/update/user/${userData.user_id}`, {
+            method: "PATCH",
+            mode: 'cors',
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        }) 
+        .catch(console.error())        
+    }
     
-
     let navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault()
-        navigate('/')
+        invokeSetUserData({}); 
         console.log(createAccData)
+        updateUser(userData)
+        navigate('/')
         alert('Account successfuly created! Please log in')
         handleCreateAcc()
     }
@@ -101,7 +122,7 @@ function CreateAccountModal() {
                                 type='password'
                                 placeholder='Verify Password'
                                 name='verifyPassword'
-                                value={createAccData.verifyPassword}
+                                value={verifyPassword}
                                 onChange={handleChange} />
                         </div>
                     </div>
@@ -113,8 +134,8 @@ function CreateAccountModal() {
                                 className='createInputBox'
                                 type='text'
                                 placeholder='PaceHolderText'
-                                name='etsDate'
-                                value={createAccData.etsDate}
+                                name='ets_date'
+                                value={createAccData.ets_date}
                                 onChange={handleChange} />
                             <p>Branch of service:</p>
                             <input
@@ -147,8 +168,8 @@ function CreateAccountModal() {
                                 className='createInputBox'
                                 type='text'
                                 placeholder='PaceHolderText'
-                                name='dutyStation'
-                                value={createAccData.dutyStation}
+                                name='duty_station'
+                                value={createAccData.duty_station}
                                 onChange={handleChange} />
                             <p>City:</p>
                             <input
@@ -173,41 +194,41 @@ function CreateAccountModal() {
                         className='createDependentNumberInputBox'
                         type='text'
                         placeholder='PaceHolderText'
-                        name='terminalLeaveDate'
-                        value={createAccData.terminalLeaveDate}
+                        name='leave_start_date'
+                        value={createAccData.leave_start_date}
                         onChange={handleChange} />
-                    <h3>Dependents:</h3>
+                    <h3>dependents:</h3>
                     {/* here based on the input amount of dependents dinamicly render inputs for dependtes relationship to user */}
                     <p>Number of dependents:  <input
                         className='createDependentNumberInputBox'
                         type='text'
                         placeholder='PaceHolderText'
-                        name='dependents'
-                        value={createAccData.dependents}
+                        name='has_dependents'
+                        value={dependents}
                         onChange={handleChange} /></p>
                     <p>Relocating:</p>
                     <input
                         className='createInputBox'
                         type='text'
                         placeholder='PaceHolderText'
-                        name='relocation'
-                        value={createAccData.relocation}
+                        name='planning_to_relocate'
+                        value={createAccData.planning_to_relocate}
                         onChange={handleChange} />
-                    <p>Degree:</p>
+                    <p>Education:</p>
                     <input
                         className='createInputBox'
                         type='text'
                         placeholder='PaceHolderText'
-                        name='degree'
-                        value={createAccData.degree}
+                        name='highest_education'
+                        value={createAccData.highest_education}
                         onChange={handleChange} />
                     <p>Desired Schooling:</p>
                     <input
                         className='createInputBox'
                         type='text'
                         placeholder='PaceHolderText'
-                        name='schooling'
-                        value={createAccData.schooling}
+                        name='seeking_further_education'
+                        value={createAccData.seeking_further_education}
                         onChange={handleChange} />
                     <p>Interests:</p>
                     <input
