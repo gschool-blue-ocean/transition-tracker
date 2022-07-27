@@ -73,6 +73,7 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
                 }
 
                 else if (data.new_user) {
+                    console.log(data)
                     setUserData(data)
                     navigate('/createAccount')
                 }

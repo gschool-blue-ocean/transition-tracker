@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react'
 import ReactDOM from 'react-dom'
 import { useNavigate } from 'react-router-dom'
-import { auth, createUserWithEmailAndPassword } from '../Firebase'
 import LoginContext from "../../Context/LoginContext"
 
 //not verifying password
@@ -13,50 +12,50 @@ function CreateAccountModal() {
         email: userData.email,
         username: userData.username,
         password: '',
-        rank: '',   
+        rank: '',
+        mos: '',
+        interests: '',   
         branch: '',
         duty_station: '',
-        taps_complete: '',
+        taps_complete: true,
         leave_start_date: '',
         ets_date: '',
-        planning_to_relocate: '',
+        planning_to_relocate: false,
         city: '',
         state: '',
         has_dependents: false,
-        highest_education: false,
-        seeking_further_education: '',
+        highest_education: '',
+        seeking_further_education: false,
         admin: userData.admin,
         cohort_name: userData.cohort_name,
         cohort_id: userData.cohort_id,
-        new_user: true,
-        mos: '',
-        interests: ''
+        new_user: false, 
+        
     })
 
     let verifyPassword = '';
     let dependents = '';
     //if statement for redirecting when not logged in
-    const updateUser = (data) => {
+    const updateUser = () => {
         fetch(`http://hacking-transition.herokuapp.com/api/update/user/${userData.user_id}`, {
             method: "PATCH",
-            mode: 'cors',
             headers: {
             "Content-Type": "application/json",
             },
-            body: JSON.stringify(data)
-        }) 
+            body: JSON.stringify(createAccData)
+        })
         .catch(console.error())        
     }
-    
+    console.log(userData)
     let navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault()
+        updateUser()
         invokeSetUserData({}); 
-        console.log(createAccData)
-        updateUser(userData)
+        localStorage.clear();
+        console.log(createAccData) 
         navigate('/')
         alert('Account successfuly created! Please log in')
-        handleCreateAcc()
     }
 
     const handleChange = (e) => {
@@ -67,17 +66,7 @@ function CreateAccountModal() {
             }
         })
     }
-
-    const handleCreateAcc = async () => {
-        createUserWithEmailAndPassword(
-            auth,
-            createAccData.username,
-            createAccData.password
-        )
-            .then((data) => {
-                console.log(data)
-            })
-    }
+        
 
     return ReactDOM.createPortal(
         <div className='createModalContainer'>
