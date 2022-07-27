@@ -136,11 +136,13 @@ const createNewAdmin = async (req, res) => {
 
 const updateOneUserByID = async (req, res) => {
 
-    const { first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user, mos } = req.body
+    const { first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user, mos, interests } = req.body
+
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     try {
         let client = await pool.connect()
-        let data = await client.query('UPDATE users SET first = $1, last = $2, email = $3, username = $4, password = $5, rank = $6, branch = $7, duty_station = $8, taps_complete = $9, leave_start_date = $10, ets_date = $11, planning_to_relocate = $12, city = $13, state = $14, has_dependents = $15, highest_education = $16, seeking_further_education = $17, admin = $18, cohort_name = $19, cohort_id = $20, new_user = $21, mos=$22 WHERE user_id = $23 RETURNING *', [first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user, mos, req.params.id])
+        let data = await client.query('UPDATE users SET first = $1, last = $2, email = $3, username = $4, password = $5, rank = $6, branch = $7, duty_station = $8, taps_complete = $9, leave_start_date = $10, ets_date = $11, planning_to_relocate = $12, city = $13, state = $14, has_dependents = $15, highest_education = $16, seeking_further_education = $17, admin = $18, cohort_name = $19, cohort_id = $20, new_user = $21, mos=$22, interests = $23 WHERE user_id = $24 RETURNING *', [first, last, email, username, hashedPassword, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user, mos, interests, req.params.id])
         res.json(data.rows)
         client.release()
 
