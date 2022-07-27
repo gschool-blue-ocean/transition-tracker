@@ -93,11 +93,6 @@ export default function StudentPage() {
                      <span className="title">None</span>
                   </li>
 
-                  {/* <li> 
-                     <span className="title"> Title: </span>
-                     <span className="answer"> Answer </span>
-                  </li> */}
-
                   <li>
                      <h4 id="depends" className="text-left">
                         Dependents
@@ -121,8 +116,6 @@ export default function StudentPage() {
                      <span className="answer"> Yes </span>
                   </li>
                </ul>
-               {/* WANT: edit button to turn user info fields into editable field or a form */}
-               <button id="editUserBtn">Edit</button>
             </div>
          </div>
          <SPTasks openModal={openModal} />

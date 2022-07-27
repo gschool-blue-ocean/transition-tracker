@@ -17,7 +17,7 @@ body {
 .StudentDash--Wrapper {
    width: max-content;
    display: grid;
-   padding: calc(var(--spacer-container) * 2);
+   padding: calc(var(--spacer-container) * 1);
    line-height: var(--spacer-line);
    grid-template-areas:
       "StuHeader StuHeader StuHeader"
@@ -26,9 +26,7 @@ body {
       "StuNotes StuNotes StuNotes";
 
    grid-template-columns: 1fr 1fr 1fr;
-
-   border: 10px solid pink;
-
+   border-radius: 10px;
    background-color: var(--clr-secondary-accent);
 
    font-family: var(--ff-primary);
