@@ -104,27 +104,27 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
         })
     }
 
-    const handleHash = () => {
-        allUsersData.forEach(elem => {
-            let data = {
-                username: elem.username,
-                password: elem.password
-            }
+    // const handleHash = () => {
+    //     allUsersData.forEach(elem => {
+    //         let data = {
+    //             username: elem.username,
+    //             password: elem.password
+    //         }
 
-            fetch('https://hacking-transition.herokuapp.com/api/hash', {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            })
-                .then(res => res.json())
-                .then(data => console.log(data))
-                .catch(err => console.warn(err))
-        })
-    }
+    //         fetch('https://hacking-transition.herokuapp.com/api/hash', {
+    //             method: 'PATCH',
+    //             headers: { 'Content-Type': 'application/json' },
+    //             body: JSON.stringify(data)
+    //         })
+    //             .then(res => res.json())
+    //             .then(data => console.log(data))
+    //             .catch(err => console.warn(err))
+    //     })
+    // }
 
     return ReactDOM.createPortal(
         <div className='modalContainer'>
-            <button onClick={handleHash}>CLICK TO HASH</button>
+            {/* <button onClick={handleHash}>CLICK TO HASH</button> */}
 
             <div className='loginContainer'>
 
