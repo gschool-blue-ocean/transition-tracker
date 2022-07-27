@@ -13,6 +13,9 @@ import NotFound from './Components/LoadingDisplay/NotFound'
 import Archive from './Components/Archive/Archive'
 import Settings from './Components/Settings/Settings'
 import Header from './Components/Header/Header';
+import io from 'socket.io-client'
+
+const socket = io.connect("https://hacking-transition.herokuapp.com")
 
 function App() {
   const { login, userData, setUserData, invokeSetLogin } = useContext(LoginContext)
