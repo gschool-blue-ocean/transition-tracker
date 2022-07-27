@@ -43,7 +43,7 @@ function AdminHomePage() {
                 {
                     allCohortsData.map((cohort) => {
                         return (
-                            <div className='test-cohort'>
+                            <div className='test-cohort' key={cohort.cohort_id}>
                                 <div className='cardHeader'>
                                 <div className='cardName'>{cohort.cohort_name}</div>
                                 <div className='cardSettingsIcon'>
