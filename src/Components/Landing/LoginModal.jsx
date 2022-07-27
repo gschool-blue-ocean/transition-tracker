@@ -70,11 +70,13 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
 
                 if (!data.username) {
                     return document.getElementById('passwordLoginErrMsg').classList.add('show')
-
                 }
+
                 else if (data.new_user) {
+                    setUserData(data)
                     navigate('/createAccount')
                 }
+
                 else {
                     setUserData(data)
                     invokeSetLogin(true)
