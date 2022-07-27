@@ -7,10 +7,13 @@ import Modal from 'react-modal';
 
 function AdminHomePage() {
 
-    const { allUsersData, allCohortsData } = useContext(AppContext) 
-    const [modalIsOpen, setModalIsOpen] = useState(false) 
-    
-    const setModalIsOpenToTrue =()=>{
+    const { allUsersData, allCohortsData } = useContext(AppContext)
+    const [modalIsOpen, setModalIsOpen] = useState(false)
+    const [ currentCohort, setCurrentCohort ] = useState(null)
+
+    const setModalIsOpenToTrue =(e)=>{
+        console.log(e.currentTarget.id)
+        setCurrentCohort(e.currentTarget.id)
         setModalIsOpen(true)
     }
     const setModalIsOpenToFalse =()=>{
@@ -42,16 +45,13 @@ function AdminHomePage() {
                         return (
                             <div className='test-cohort'>
                                 <div className='cardHeader'>
-                                <div className='cardName'>{cohort.cohort_name}</div> 
-                                <div className='cardSettingsIcon'> 
+                                <div className='cardName'>{cohort.cohort_name}</div>
+                                <div className='cardSettingsIcon'>
                                 {/* <button onClick={setModalIsOpenToTrue}>{EditCohortPage}<FiSettings/></button>  */}
                                 <>
-                                    <button onClick={setModalIsOpenToTrue}>{EditCohortPage}<FiSettings/></button>
+                                    <button onClick={setModalIsOpenToTrue} id={cohort.cohort_id}>{EditCohortPage}<FiSettings/></button>
 
-                                    <Modal isOpen={modalIsOpen}>
-                                        <button onClick={setModalIsOpenToFalse}>x</button>
-                                        <EditCohortPage/>
-                                    </Modal>
+
                                 </>
                                 </div>
                                 </div>
@@ -81,6 +81,10 @@ function AdminHomePage() {
                     <span id='onetwenty'>120 days</span>
                 </div>
             </div>
+            <Modal isOpen={modalIsOpen}>
+                <button onClick={setModalIsOpenToFalse}>x</button>
+                <EditCohortPage currentCohort={currentCohort}/>
+            </Modal>
         </div>
     )
 }
