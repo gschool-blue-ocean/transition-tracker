@@ -9,6 +9,7 @@ import LoginContext from './Context/LoginContext';
 import AppContext from './Context/AppContext';
 import "./StyleSheets/Header.css"
 import StudentPage from './Components/StudentPage/StudentPage';
+import NotFound from './Components/LoadingDisplay/NotFound'
 
 function App() {
   const { login, userData, setUserData, invokeSetLogin } = useContext(LoginContext)
@@ -41,6 +42,7 @@ function App() {
       <Routes>
         <Route path="/" element={login ? <StudentPage userData={userData} setUserData={setUserData} invokeSetLogin={invokeSetLogin} /> : <LandingPage invokeSetLogin={invokeSetLogin} />} />
         <Route path="/createAccount" element={<CreateAccountModal />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
