@@ -5,12 +5,13 @@ const Header = () => {
 
     return (
         <header className="HeaderContainer">
-            <div className="headerTitleLogoContainer">
-                <img src={Logo} alt="galvanizeLogo" className="HeaderLogo"></img>
+            <img src={Logo} alt="galvanizeLogo" className="HeaderLogo"></img>
+
+            <div className="headerTitleNavContainer">
                 <h1 className="headerTitle">Hacking Transition</h1>
+                <Navbar />
             </div>
 
-            <Navbar />
 
         </header>
     )

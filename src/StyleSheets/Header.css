@@ -1,37 +1,29 @@
 .HeaderContainer {
-    display: flex;
-    gap: 1rem;
-    flex-direction: column;
-    justify-content: space-between;
     background-color: #012361;
     color: white;
-    padding: 0px;
-    padding-top: 3px;
-    padding-bottom: 7px;
-    width: 100%;
-}
+    width: 100vw;
+    min-width: 890px;
 
-.headerTitleLogoContainer {
-    display: flex;
-    flex-direction: row;
 }
 
 .HeaderLogo {
-    margin-left: 10px;
-    height: 25px;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    height: 2.5rem;
 }
 
-.headerTitle {
-    text-align: center;
-    padding-right: 103px;
-    flex-grow: 3;
-    font-size: 28px;
-}
-
-.navbarContainer {
+.headerTitleNavContainer {
     display: grid;
     justify-content: center;
+    justify-items: center;
+    padding-bottom: .5rem;
+    gap: .5rem;
 }
+
+.headerTitle {}
+
+.navbarContainer {}
 
 .navbarUL {
     display: flex;
@@ -50,6 +42,11 @@
 .navLink:hover {
     cursor: pointer;
     opacity: 1;
+}
+
+
+#logoutBtn:hover {
+    color: red;
 }
 
 .activeTab {

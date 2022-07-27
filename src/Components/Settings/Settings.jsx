@@ -2,7 +2,7 @@ import React from 'react'
 
 function Settings() {
     return (
-        <div>Settings page</div>
+        <h1>Settings page</h1>
     )
 }
 
