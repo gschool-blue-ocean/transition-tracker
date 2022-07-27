@@ -6,8 +6,19 @@ const cors = require("cors");
 const controller = require("./src/Backend/controller");
 const path = require("path");
 const PORT = process.env.PORT || 8000;
-const cookieParser = require("cookie-parser");
-const csrf = require("csurf");
+// const cookieParser = require("cookie-parser");
+// const csrf = require("csurf");
+// const http = require('http')
+// const { Server } = require('socket.io');
+
+// const server = http.createServer(app)
+
+// const io = new Server(server, {
+//     cors: {
+//         origin: "*",
+//         methods: ['GET', 'POST'],
+//     }
+// })
 
 // const csrfMiddleware = csrf({ cookie: true })
 
@@ -27,7 +38,6 @@ app.listen(PORT, (err) => {
 
 //simple test route sends 'Hello World!'
 app.get('/test', controller.testRoute)
-
 
 // ------------USER/ADMIN Table Routes---------
 app.get('/api/users', controller.getAllUsers)
