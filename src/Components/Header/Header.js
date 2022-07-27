@@ -9,9 +9,9 @@ const Header = () => {
                 <img src={Logo} alt="galvanizeLogo" className="HeaderLogo"></img>
                 <div className="headerTitle">hackingTransition</div>
             </div>
-            <div className="navbarContainer">
-                <Navbar />
-            </div>
+
+            <Navbar />
+
         </header>
     )
 }

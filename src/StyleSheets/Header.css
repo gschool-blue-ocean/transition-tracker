@@ -28,33 +28,43 @@
 }
 
 .navbarContainer {
-    display: flex;
+    /* display: flex;
     flex-direction: row;
-    align-content: center;
+    align-content: center; */
+}
+
+.navbarUL {
+    display: flex;
+    list-style: none;
+}
+
+.navLink {
+    text-decoration: none;
+    color: inherit;
 }
 
 .navbar {
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     overflow: hidden;
     text-align: center;
-    color: white;
+    color: white; */
 }
 
 .navbar div {
-    margin-left: 3px;
+    /* margin-left: 3px;
     margin-right: 3px;
     padding: 4px;
     padding-top: 2px;
     height: 16px;
     border: solid 1px;
     border-color: gray;
-    font-size: 75%;
+    font-size: 75%; */
 }
 
 /* Change the color of links on hover */
 .navbar div:hover {
-    background-color: #ddd;
+    /* background-color: #ddd;
     color: rgb(122, 122, 122);
-    cursor: pointer;
+    cursor: pointer; */
 }
