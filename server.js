@@ -23,18 +23,27 @@ const io = new Server(server, {
 server.listen(PORT, () => {
     console.log('web Socket running', PORT)
 })
-// const csrfMiddleware = csrf({ cookie: true })
+
+io.on("connection", (socket) => {
+    console.log(socket.id)
+
+    socket.on("disconnect", () => {
+        console.log("User Disconnected", socket.id)
+    })
+})
 
 app.use(express.json());
 app.use(express.static("build"));
 app.use(cors());
-// app.use(cookieParser())
-// app.use(csrfMiddleware)
-
 // app.listen(PORT, (err) => {
 //     if (err) return console.log(err);
 //     console.log(`Listening on port: ${PORT}`);
 // });
+
+// const csrfMiddleware = csrf({ cookie: true })
+// app.use(cookieParser())
+// app.use(csrfMiddleware)
+
 
 //Middleware to require all routes have a cookie
 // app.all("*", controller.cookiesForAll)
