@@ -8,18 +8,21 @@ const path = require("path");
 const PORT = process.env.PORT || 8000;
 // const cookieParser = require("cookie-parser");
 // const csrf = require("csurf");
-// const http = require('http')
-// const { Server } = require('socket.io');
+const http = require('http')
+const { Server } = require('socket.io');
 
-// const server = http.createServer(app)
+const server = http.createServer(app)
 
-// const io = new Server(server, {
-//     cors: {
-//         origin: "*",
-//         methods: ['GET', 'POST'],
-//     }
-// })
+const io = new Server(server, {
+    cors: {
+        origin: "*",
+        methods: ['GET', 'POST'],
+    }
+})
 
+server.listen(PORT, () => {
+    console.log('web Socket running', PORT)
+})
 // const csrfMiddleware = csrf({ cookie: true })
 
 app.use(express.json());
@@ -28,10 +31,10 @@ app.use(cors());
 // app.use(cookieParser())
 // app.use(csrfMiddleware)
 
-app.listen(PORT, (err) => {
-    if (err) return console.log(err);
-    console.log(`Listening on port: ${PORT}`);
-});
+// app.listen(PORT, (err) => {
+//     if (err) return console.log(err);
+//     console.log(`Listening on port: ${PORT}`);
+// });
 
 //Middleware to require all routes have a cookie
 // app.all("*", controller.cookiesForAll)
