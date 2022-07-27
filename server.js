@@ -28,7 +28,6 @@ app.listen(PORT, (err) => {
 //simple test route sends 'Hello World!'
 app.get('/test', controller.testRoute)
 
-
 // ------------USER/ADMIN Table Routes---------
 app.get('/api/users', controller.getAllUsers)
 
