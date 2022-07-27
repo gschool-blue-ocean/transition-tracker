@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 8001;
+const PORT = process.env.PORT + 1 || 8001;
 const cors = require("cors");
 const controller = require("./src/Backend/controller");
 
