@@ -27,12 +27,12 @@
 
 .loginContainer h1 {
     color: white;
-    text-shadow: 2px 2px 10px #222;
+    text-shadow: 2px 2px 5px #222;
 }
 
 .loginForm {
     display: grid;
-    gap: 1.5rem;
+    gap: .5rem;
     align-content: center;
     justify-content: center;
 }
@@ -44,6 +44,17 @@
     border-radius: 9999px;
     border: none;
     box-shadow: 5px 5px 5px #111;
+    margin-top: .5rem;
+}
+
+.errorMsg {
+    color: red;
+    justify-self: center;
+    display: none;
+}
+
+.show {
+    display: inline-block;
 }
 
 .loginBtn {
@@ -59,6 +70,7 @@
     opacity: 1;
     cursor: pointer;
 }
+
 
 .createAccBtn {
     background-color: rgb(195, 123, 6);

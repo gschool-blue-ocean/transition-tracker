@@ -10,7 +10,8 @@ import { useNavigate } from 'react-router-dom'
 // import Cookies from 'js-cookie'
 
 function LoginModal({ invokeSetLogin, setShowLoginModal }) {
-    const { allUsersData, allCohortsData } = useContext(AppContext)
+
+    const { allUsersData, allCohortsData, loading, setLoading } = useContext(AppContext)
     const { setUserData } = useContext(LoginContext)
 
     const [loginData, setLoginData] = useState({
@@ -29,15 +30,30 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        removeErrorMsgs()
+
         handleLogin()
     }
 
     let navigate = useNavigate()
     const handleLogin = () => {
+        setLoading(true)
 
         let inputData = {
             username: loginData.username,
             password: loginData.password
+        }
+
+        if (inputData.username.length === 0 || inputData.password.length === 0) {
+            setLoading(false)
+            return document.getElementById('blankLoginErrMsg').classList.add('show')
+        }
+
+        let foundUsername = checkUsernames(inputData.username)
+
+        if (!foundUsername) {
+            setLoading(false)
+            return document.getElementById('usernameLoginErrMsg').classList.add('show')
         }
 
         fetch('https://hacking-transition.herokuapp.com/api/login', {
@@ -47,8 +63,11 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
         })
             .then(res => res.json())
             .then(data => {
-                if (typeof data === 'string') {
-                    alert(data)
+                setLoading(false)
+
+                if (!data.username) {
+                    return document.getElementById('passwordLoginErrMsg').classList.add('show')
+
                 }
                 else if (data.new_user) {
                     navigate('/createAccount')
@@ -59,6 +78,20 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
                     localStorage.setItem("currentUser", JSON.stringify(data))
                 }
             })
+    }
+
+    const removeErrorMsgs = () => {
+        document.querySelectorAll('.errorMsg').forEach(elem => elem.classList.remove('show'))
+    }
+
+    const checkUsernames = (username) => {
+        let result = false
+        allUsersData.forEach(elem => {
+            if (elem.username === username) {
+                result = true
+            }
+        })
+        return result
     }
     const handleChange = (e) => {
         setLoginData((prevLoginData) => {
@@ -91,14 +124,20 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
         <div className='modalContainer'>
             {/* <button onClick={handleHash}>CLICK TO HASH</button> */}
             <div className='loginContainer'>
+
+                <h1 className='loginTitle'>Hacking Transition</h1>
+                <span id="blankLoginErrMsg" className='errorMsg'>Fields can not be blank!</span>
+
                 <form className='loginForm' onSubmit={handleSubmit}>
                     <input
-                        className='loginInputBox'
+                        className='loginInputBox username'
                         type='text'
-                        placeholder='User name'
+                        placeholder='Username'
                         name='username'
                         value={loginData.username}
                         onChange={handleChange} />
+                    <span id="usernameLoginErrMsg" className='errorMsg'>Username Not Found!</span>
+
                     <input
                         className='loginInputBox'
                         type='password'
@@ -106,9 +145,12 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
                         name='password'
                         value={loginData.password}
                         onChange={handleChange} />
+                    <span id="passwordLoginErrMsg" className='errorMsg'>Incorrect Password!</span>
+
+
                     <button
                         type='submit'
-                        className='loginBtn'>Log in  <CgEnter /> </button>
+                        className='loginBtn'>Please Log In <CgEnter /> </button>
 
                     {/* <button
                         type='button'

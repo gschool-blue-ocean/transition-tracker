@@ -2,7 +2,7 @@ import { useState, createContext } from 'react';
 
 const LoadingContext = createContext()
 
-export const LoginContextProvider = ({ children }) => {
+export const LoadingContextProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
 
     const changeSetLoading = (value) => {
@@ -11,6 +11,7 @@ export const LoginContextProvider = ({ children }) => {
 
     return <LoadingContext.Provider value={{
         loading,
+        setLoading,
         changeSetLoading
     }}>
 
