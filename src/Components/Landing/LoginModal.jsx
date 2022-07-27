@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 // import Cookies from 'js-cookie'
 
 function LoginModal({ invokeSetLogin, setShowLoginModal }) {
+    let navigate = useNavigate()
 
     const { allUsersData, allCohortsData, loading, setLoading } = useContext(AppContext)
     const { setUserData } = useContext(LoginContext)
@@ -31,11 +32,13 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
     const handleSubmit = (e) => {
         e.preventDefault()
         removeErrorMsgs()
-
         handleLogin()
     }
 
-    let navigate = useNavigate()
+    const removeErrorMsgs = () => {
+        document.querySelectorAll('.errorMsg').forEach(elem => elem.classList.remove('show'))
+    }
+
     const handleLogin = () => {
         setLoading(true)
 
@@ -80,10 +83,6 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
             })
     }
 
-    const removeErrorMsgs = () => {
-        document.querySelectorAll('.errorMsg').forEach(elem => elem.classList.remove('show'))
-    }
-
     const checkUsernames = (username) => {
         let result = false
         allUsersData.forEach(elem => {
@@ -93,6 +92,7 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
         })
         return result
     }
+
     const handleChange = (e) => {
         setLoginData((prevLoginData) => {
             return {
