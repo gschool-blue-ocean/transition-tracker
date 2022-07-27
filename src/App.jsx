@@ -9,9 +9,11 @@ import LoginContext from './Context/LoginContext';
 import AppContext from './Context/AppContext';
 import StudentPage from './Components/StudentPage/StudentPage'
 import "./StyleSheets/Header.css"
+import StudentPage from './Components/StudentPage/StudentPage';
+import NotFound from './Components/LoadingDisplay/NotFound'
 
 function App() {
-  const { login, userData, invokeSetLogin } = useContext(LoginContext)
+  const { login, userData, setUserData, invokeSetLogin } = useContext(LoginContext)
   const { allUsersData, allCohortsData, invokeSetAllUsersData, invokeSetAllCohortsData, loading, setLoading } = useContext(AppContext)
 
   useEffect(() => {
@@ -39,8 +41,9 @@ function App() {
     <div className="AppContainer">
       {loading ? <Loading /> : null}
       <Routes>
-        <Route path="/" element={login ? <AdminHomePage /> : <LandingPage invokeSetLogin={invokeSetLogin} />} />
+        <Route path="/" element={login ? <StudentPage userData={userData} setUserData={setUserData} invokeSetLogin={invokeSetLogin} /> : <LandingPage invokeSetLogin={invokeSetLogin} />} />
         <Route path="/createAccount" element={<CreateAccountModal />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

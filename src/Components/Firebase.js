@@ -39,3 +39,61 @@ export { createUserWithEmailAndPassword, signInWithEmailAndPassword };
 //     const errorMessage = error.message;
 //     // ..
 //   });
+
+
+//!!! ====== from login modal...
+    // const validateUserLoginData = () => {
+        //     signInWithEmailAndPassword(auth, loginData.username, loginData.password)
+        //         .then(({ user }) => {
+        //             // user.getIdToken().then(token => console.log(token))
+        //             user.getIdToken().then((idToken) => {
+        //                 fetch('https://hacking-transition.herokuapp.com/api/login', {
+        //                     method: "POST",
+        //                     headers: {
+        //                         Accept: "application/json",
+        //                         "Content-type": "application/json",
+        //                         "CSRF-Token": Cookies.get('_csrf')
+        //                     },
+        //                     body: JSON.stringify({ idToken })
+        //                 })
+
+        //             })
+        //                 // .then(() => app.auth().signOut())
+        //                 .then(() => invokeSetLogin(true))
+
+        //                 .catch(err => console.error(err))
+        //         })
+        //     //         return fetch('https://hacking-transition.herokuapp.com/api/login', {
+        //     //             method: "POST",
+        //     //             headers: {
+        //     //                 Accept: "application/json",
+        //     //                 "Content-type": "application/json",
+        //     //                 "CSRF-Token": Cookies.get(user),
+        //     //             },
+        //     //             body: JSON.stringify({ idToken })
+        //     //         })
+        //     //     })
+        //     // })
+        //     // .then((data) => {
+        //     //     console.log(data)
+        //     //     // return app.auth().signOut();
+        //     // })
+        //     // .catch((err) => {
+        //     //     if (err) {
+        //     //         console.error(err)
+        //     //     }
+        //     // })
+        //     // .then(() => {
+        //     //     alert('Success')
+        //     // })
+        //     // allUsersData.forEach((elem) => {
+        //     //     if (loginData.username === elem.username && loginData.password === elem.password) {
+        //     //         elem.new_user ? navigate("/createAccount") : invokeSetLogin(true)
+        //     //         return console.log(elem)
+        //     //     }
+        //     // });
+
+
+        //     // return console.warn('failed login attempt')
+        //     // invokeSetLogin(true)
+        // }

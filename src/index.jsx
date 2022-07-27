@@ -12,7 +12,9 @@ root.render(
     <BrowserRouter>
       <AppContextProvider>
         <LoginContextProvider>
+
           <App />
+
         </LoginContextProvider>
       </AppContextProvider>
     </BrowserRouter>
