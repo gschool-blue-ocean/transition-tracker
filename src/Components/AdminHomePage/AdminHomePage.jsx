@@ -3,6 +3,7 @@ import AppContext from "../../Context/AppContext";
 import '../../StyleSheets/AdminHomePage.css';
 import {FiSettings} from 'react-icons/fi';
 import EditCohortPage from './EditCohortPage'
+import Modal from 'react-modal';
 
 function AdminHomePage() {
 
@@ -11,6 +12,9 @@ function AdminHomePage() {
     
     const setModalIsOpenToTrue =()=>{
         setModalIsOpen(true)
+    }
+    const setModalIsOpenToFalse =()=>{
+        setModalIsOpen(false)
     }
 
     return (
@@ -39,8 +43,17 @@ function AdminHomePage() {
                             <div className='test-cohort'>
                                 <div className='cardHeader'>
                                 <div className='cardName'>{cohort.cohort_name}</div> 
-                                <div className='cardSettingsIcon'> <button onClick={setModalIsOpenToTrue}>{EditCohortPage}<FiSettings/></button> </div>
-                                
+                                <div className='cardSettingsIcon'> 
+                                {/* <button onClick={setModalIsOpenToTrue}>{EditCohortPage}<FiSettings/></button>  */}
+                                <>
+                                    <button onClick={setModalIsOpenToTrue}>{EditCohortPage}<FiSettings/></button>
+
+                                    <Modal isOpen={modalIsOpen}>
+                                        <button onClick={setModalIsOpenToFalse}>x</button>
+                                        <EditCohortPage/>
+                                    </Modal>
+                                </>
+                                </div>
                                 </div>
                                 {cohort.start_date} - {cohort.end_date}
                                 <div className="listOfNames">

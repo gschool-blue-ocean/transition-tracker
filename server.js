@@ -9,13 +9,13 @@ const PORT = process.env.PORT || 8000;
 const cookieParser = require("cookie-parser");
 const csrf = require("csurf");
 
-const csrfMiddleware = csrf({ cookie: true })
+// const csrfMiddleware = csrf({ cookie: true })
 
 app.use(express.json());
 app.use(express.static("build"));
 app.use(cors());
-app.use(cookieParser())
-app.use(csrfMiddleware)
+// app.use(cookieParser())
+// app.use(csrfMiddleware)
 
 app.listen(PORT, (err) => {
     if (err) return console.log(err);
@@ -23,7 +23,7 @@ app.listen(PORT, (err) => {
 });
 
 //Middleware to require all routes have a cookie
-app.all("*", controller.cookiesForAll)
+// app.all("*", controller.cookiesForAll)
 
 //simple test route sends 'Hello World!'
 app.get('/test', controller.testRoute)
@@ -45,6 +45,8 @@ app.patch('/api/update/user/:id', controller.updateOneUserByID)
 app.patch('/api/update/admin/:id', controller.updateAdminByID)
 
 app.delete('/api/delete/user/:id', controller.deleteOneUserByID)
+
+// app.patch('/api/hash', controller.hashAllPasswords)
 
 
 // ------------COHORT Table Routes-----------------

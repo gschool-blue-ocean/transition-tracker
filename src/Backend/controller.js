@@ -1,15 +1,16 @@
 const pool = require('./connection.js');
-const admin = require("firebase-admin")
+// const admin = require("firebase-admin")
+const bcrypt = require('bcrypt')
 
-const serviceAccount = require("../../ServiceAccountKey.json");
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
+// const serviceAccount = require("../../ServiceAccountKey.json");
+// admin.initializeApp({
+//     credential: admin.credential.cert(serviceAccount)
+// });
 
-const cookiesForAll = async (req, res, next) => {
-    res.cookie("XSRF-TOKEN", req.csrfToken())
-    next();
-}
+// const cookiesForAll = async (req, res, next) => {
+//     res.cookie("XSRF-TOKEN", req.csrfToken())
+//     next();
+// }
 
 const testRoute = async (_, res) => {
     try {
@@ -23,6 +24,22 @@ const testRoute = async (_, res) => {
 }
 
 //! ------------USER/ADMIN Table Logic------------
+// const hashAllPasswords = async (req, res) => {
+//     const { username, password } = req.body
+//     const hashedPassword = await bcrypt.hash(password, 10);
+
+//     try {
+//         let client = await pool.connect()
+//         let data = await client.query('UPDATE users SET password = $1 WHERE username = $2 RETURNING *', [hashedPassword, username])
+//         res.json(data.rows)
+//         client.release()
+
+//     } catch (error) {
+//         console.log(error)
+//         res.send(error)
+//     }
+// }
+
 const getAllUsers = async (_, res) => {
     try {
         let client = await pool.connect()
@@ -51,11 +68,12 @@ const getOneUserByID = async (req, res) => {
 
 const createNewUser = async (req, res) => {
 
-    const { first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user } = req.body
+    const { first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user, mos, interests } = req.body
 
     try {
         let client = await pool.connect()
-        let data = await client.query('INSERT INTO users (first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21) RETURNING *;', [first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user])
+        const hashedPassword = await bcrypt.hash(password, 10);
+        let data = await client.query('INSERT INTO users (first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user, mos, interests) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23) RETURNING *;', [first, last, email, username, hashedPassword, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user, mos, interests])
         res.json(data.rows)
         client.release()
 
@@ -66,21 +84,24 @@ const createNewUser = async (req, res) => {
 }
 
 const login = async (req, res) => {
-    const idToken = req.body.idToken.toString();
+    const { username, password } = req.body;
 
-    const expiresIn = 60 * 60 * 24 * 5 * 1000;
-    admin.auth().createSessionCookie(idToken, { expiresIn })
-        .then(
-            (sessionCookie) => {
-                const options = { maxAge: expiresIn, httpOnly: true };
-                res.cookie("session", sessionCookie, options);
-                res.end(JSON.stringify({ status: 'success' }))
-            },
-            (error) => {
-                res.status(401).send("UNAUTHORIZED REQUEST")
+    try {
+        let client = await pool.connect()
+        let data = await client.query('SELECT * FROM users WHERE username = $1', [username])
+        await bcrypt.compare(password, data.rows[0].password, (err, result) => {
+
+            if (result) {
+                res.json(data.rows[0])
+            } else {
+                res.status(401).json('Username or password is incorrect.')
             }
-        )
-
+        })
+        client.release()
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
 }
 
 // const createNewUser = async (req, res) => {
@@ -115,11 +136,11 @@ const createNewAdmin = async (req, res) => {
 
 const updateOneUserByID = async (req, res) => {
 
-    const { first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user } = req.body
+    const { first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user, mos } = req.body
 
     try {
         let client = await pool.connect()
-        let data = await client.query('UPDATE users SET first = $1, last = $2, email = $3, username = $4, password = $5, rank = $6, branch = $7, duty_station = $8, taps_complete = $9, leave_start_date = $10, ets_date = $11, planning_to_relocate = $12, city = $13, state = $14, has_dependents = $15, highest_education = $16, seeking_further_education = $17, admin = $18, cohort_name = $19, cohort_id = $20, new_user = $21 WHERE user_id = $22 RETURNING *', [first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user, req.params.id])
+        let data = await client.query('UPDATE users SET first = $1, last = $2, email = $3, username = $4, password = $5, rank = $6, branch = $7, duty_station = $8, taps_complete = $9, leave_start_date = $10, ets_date = $11, planning_to_relocate = $12, city = $13, state = $14, has_dependents = $15, highest_education = $16, seeking_further_education = $17, admin = $18, cohort_name = $19, cohort_id = $20, new_user = $21, mos=$22 WHERE user_id = $23 RETURNING *', [first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user, mos, req.params.id])
         res.json(data.rows)
         client.release()
 
@@ -523,6 +544,5 @@ module.exports = {
     createNewComment,
     updateOneCommentByID,
     deleteOneCommentByID,
-    cookiesForAll,
-    login
+    login,
 }
