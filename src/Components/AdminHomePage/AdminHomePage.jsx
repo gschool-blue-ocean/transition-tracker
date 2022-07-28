@@ -62,9 +62,9 @@ function AdminHomePage() {
                                     {
                                         allUsersData.map(user => {
                                             if (user.cohort_id == cohort.cohort_id) {
-                                                return <>
-                                                    {user.first} {user.last}<br></br>
-                                                </>
+                                                return <div className='nameInRow'>
+                                                   <div className='name-div'> {user.first} {user.last}</div> <div className='color-code'></div>
+                                                </div>
                                             }
                                         })
                                     }

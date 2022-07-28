@@ -21,9 +21,36 @@ h1 { overflow: visible }
 }
 
 .cohort-list-title{
-  font-size: 5ch;
-  align-self:center;
+  font-size: 7.5ch;
+  align-self:flex-end;
+  font-weight: bolder;
   
+}
+.nameInRow{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  grid-template-rows: 1;
+  border: 3ch;
+  /* background-color: white; */
+  margin-bottom: 2px;
+}
+
+.name-div{
+  grid-column: 2/6;
+  grid-row: 1/2;
+  align-self: center;
+  justify-self: start;
+}
+.color-code{
+  grid-column: 1/2;
+  grid-row: 1/2;
+  background-color: green;
+  border-radius: 10px;
+  width: 15px;
+  height: 15px;
+  align-self: center;
+  justify-self: center;
 }
 
 #all-cohorts-btn{
@@ -31,9 +58,10 @@ h1 { overflow: visible }
   border: none;
   font-family: var(--ff-primary);
   color: black;
-  font-size: x-large;
+  font-size: 1.7ch;
   grid-row: 2 / 5;
   padding-bottom: 2rem;
+  margin-top: 10%;
 }
 
 #add-cohort-btn{
@@ -41,8 +69,10 @@ h1 { overflow: visible }
   margin-bottom: 10%;
   border-radius: 50px;
   width: 40px;
+  border: none;
   background-color: black;
   color: white;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.432)
 }
 
 .list{
@@ -109,10 +139,11 @@ h1 { overflow: visible }
 }
 
 .test-cohort {
-  min-width: 400px;
+  min-width: 500px;
   display: flex;
   flex-direction: column;
-  height: 95%;
+  /* height: 95%; */
+  height: fit-content;
   background-color: var(--clr-bgsecondary-contrast);
   margin: 1rem;
   padding: 1rem;
@@ -127,20 +158,27 @@ h1 { overflow: visible }
   grid-template-columns: repeat(5, 1fr);
   gap: 5px;
   grid-auto-rows: minmax(50px, auto);
-  font-size: xx-large;
+  /* font-size: xx-large; */
   min-height: 60px;
 }
 
 .cardName{
   grid-column: 2 / 5;
   grid-row: 1 / 2;
-
+  font-size: 4.8ch;
+  font-weight: 900;
+  /* text-shadow: 1px 1px 6px #080808; */
 }
 
 .cardSettingsIcon{
   grid-column: 5 / 6;
   grid-row: 1 / 2;
-
+  font-size: 4ch;
+  text-shadow: 2px 2px 2px #000000;
+  /* align-self:center; */
+  padding-top: 8%;
+  padding-left: 40%;
+  
 }
 
 #settings {
@@ -171,12 +209,12 @@ h1 { overflow: visible }
 #legend {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  margin: 1rem;
+  /* margin: 1rem; */
   min-height: 2rem;
   min-width: 100px;
   text-align:center ;
   align-content: center;
-  font-size: large;
+  font-size: 2.8ch;
   margin-bottom: 10px;
 }
 

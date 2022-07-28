@@ -1,8 +1,5 @@
 @import './CustomProps.css';
 
-.modal{
-    background-color: red;
-}
 
 .modal-page {
     text-align: center;
@@ -38,6 +35,7 @@ ul{
 }
 
 .student-div{
+    /* display: grid; */
     background-color: var(--clr-bgsecondary-contrast);
     border-radius: 10px;
     margin:10px;
