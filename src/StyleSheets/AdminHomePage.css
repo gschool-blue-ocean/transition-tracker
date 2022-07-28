@@ -123,16 +123,49 @@ h1 { overflow: visible }
 #numberOfStudents{
   padding-top: 3%;
   font-size: x-large;
+  min-height: 50px;
 }
 
 #legend {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
   margin: 1rem;
-  min-height: 1rem;
-  min-width: fit-content;
+  min-height: 2rem;
+  min-width: 100px;
+  text-align:center ;
+  align-content: center;
+  font-size: large;
+  margin-bottom: 10px;
 }
 
-#ETS { background-color: lawngreen; }
-#thirty { background-color: orangered; }
-#sixty { background-color: orange; }
-#ninety { background-color: yellow; }
-#onetwenty { background-color: aqua; }
+#ETS { 
+  background-color: lawngreen; 
+  grid-column: 2 / 3;
+  border-radius: 10px;
+  min-width: 100px;
+
+}
+#thirty { 
+  background-color: orangered; 
+  grid-column: 3 / 4;
+  border-radius: 10px;
+  min-width: 100px;
+}
+#sixty { 
+  background-color: orange; 
+  grid-column: 4 / 5;
+  border-radius: 10px;
+  min-width: 100px;
+}
+#ninety { 
+  background-color: yellow;
+  grid-column: 5 / 6;
+  border-radius: 10px;
+  min-width: 100px;
+ }
+#onetwenty { 
+  background-color: aqua; 
+  grid-column: 6 / 7;
+  border-radius: 10px;
+  min-width: 100px;
+}
