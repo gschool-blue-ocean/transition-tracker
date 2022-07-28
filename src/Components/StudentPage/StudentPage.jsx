@@ -10,7 +10,11 @@ export default function StudentPage({ userData }) {
             <ChatModal />
          </>
          :
-         <h1>Student view</h1>
+         <>
+            <h1>Student view</h1>
+            <ChatModal />
+
+         </>
       }
    </>
 }
