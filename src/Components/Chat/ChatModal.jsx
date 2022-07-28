@@ -1,5 +1,6 @@
 import '../../StyleSheets/ChatModal.css'
 import React, { useState, useContext, useEffect } from 'react'
+import ScrollToBottom from 'react-scroll-to-bottom'
 import io from 'socket.io-client'
 import LoginContext from '../../Context/LoginContext'
 
@@ -26,9 +27,6 @@ function ChatModal() {
     useEffect(() => {
         socket.on("receive_message", msgData => {
             console.log(msgData.content)
-            setAllMsgs(() => {
-                return [...allMsgs, msgData]
-            })
         })
     }, [socket])
 
@@ -45,7 +43,7 @@ function ChatModal() {
     const handleClick = async () => {
 
         let msgData = {
-            student_id: '',
+            student_id: 10,
             author_id: userData.user_id,
             author_name: `${userData.first} ${userData.last}`,
             content: inputValue.content,
@@ -53,7 +51,8 @@ function ChatModal() {
         }
 
         console.log(msgData)
-
+        setAllMsgs((msgs) => [...msgs, msgData]
+        )
         // postMsgToDatabase(msgData)
 
         await socket.emit("send_message", msgData)
@@ -82,17 +81,22 @@ function ChatModal() {
 
             <div className='chatContainer'>
 
-                <div className='chatBody'>
+                <ScrollToBottom className='scroll'>
+                    <div className='chatBody'>
 
-                    {allMsgs.map((elem, index) => {
-                        return (
-                            <div className={elem.author_id === userData.user_id ? 'rightMsg' : ' leftMsg'} key={index}>
-                                <p>{elem.content}</p>
-                                <p className='msgFooter'>{elem.author_id}, {elem.date_time}</p>
-                            </div>
-                        )
-                    })}
-                </div>
+                        {allMsgs.map((elem, index) => {
+                            return (<>
+                                <div className={elem.author_id === userData.user_id ? 'rightMsg' : ' leftMsg'} key={index}>
+                                    <p>{elem.content}</p>
+                                    <p className='msgFooter'>{elem.date_time}</p>
+                                </div>
+                                <p className={elem.author_id === userData.user_id ? 'rightAuthor msgFooter' : ' leftAuthor msgFooter'}>{elem.author_id}</p>
+                            </>
+
+                            )
+                        })}
+                    </div>
+                </ScrollToBottom>
 
                 <div className='chatFooter'>
                     <input
