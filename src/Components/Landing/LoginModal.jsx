@@ -73,7 +73,6 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
                 }
 
                 else if (data.new_user) {
-                    console.log(data)
                     setUserData(data)
                     navigate('/createAccount')
                 }
@@ -126,6 +125,7 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
     return ReactDOM.createPortal(
         <div className='modalContainer'>
             {/* <button onClick={handleHash}>CLICK TO HASH</button> */}
+
             <div className='loginContainer'>
 
                 <h1 className='loginTitle'>Hacking Transition</h1>
