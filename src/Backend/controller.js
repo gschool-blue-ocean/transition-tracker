@@ -592,4 +592,3 @@ module.exports = {
     deleteAllTasksByStudentID,
     deleteAllDependentsBySponsorID
 }
-
