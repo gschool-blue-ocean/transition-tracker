@@ -2,6 +2,8 @@ import '../../StyleSheets/ChatModal.css'
 import React, { useState, useContext, useEffect } from 'react'
 import ScrollToBottom from 'react-scroll-to-bottom'
 import LoginContext from '../../Context/LoginContext'
+import Picker from 'emoji-picker-react'
+import IoAddCircleOutline from 'react-icons/io'
 
 function ChatModal({ socket }) {
     const { userData } = useContext(LoginContext)
@@ -81,7 +83,7 @@ function ChatModal({ socket }) {
                             allMsgs.map((elem, index) => {
                                 return (<>
                                     <div className={elem.author_id === userData.user_id ? 'rightMsg' : ' leftMsg'} key={index}>
-                                        <p>{elem.content}</p>
+                                        <p className="msgContent">{elem.content}</p>
                                         <p className='msgFooter'>{elem.date_time}</p>
                                     </div>
                                     <p className={elem.author_id === userData.user_id ? 'rightAuthor msgFooter' : ' leftAuthor msgFooter'}>{elem.author_name}</p>
@@ -102,7 +104,8 @@ function ChatModal({ socket }) {
                         onChange={handleChange}
                         onKeyPress={(e) => { e.key === 'Enter' && handleClick() }}
                     />
-                    <button onClick={handleClick}>Send</button>
+                    <button onClick={handleClick}>Send</button> <span></span>
+                    {/* <Picker /> */}
                 </div>
 
             </div>

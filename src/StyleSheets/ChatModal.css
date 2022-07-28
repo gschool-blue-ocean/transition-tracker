@@ -54,6 +54,8 @@
     border-top-right-radius: 25px;
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
+    /* max-width: 70%; */
+    /* overflow: auto; */
 }
 
 .leftMsg {
@@ -65,6 +67,8 @@
     border-top-right-radius: 25px;
     border-top-left-radius: 25px;
     border-bottom-right-radius: 25px;
+    /* max-width: 70%; */
+    /* overflow: auto; */
 }
 
 .msgFooter {
@@ -79,4 +83,9 @@
 .leftAuthor {
     justify-self: left;
     margin-bottom: 10px;
+}
+
+.msgContent {
+    width: 150px;
+    overflow-wrap: break-word;
 }
