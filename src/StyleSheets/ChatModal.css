@@ -27,19 +27,37 @@
 
 .chatFooter {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .25rem;
 }
 
 .chatFooter input {
     width: 82%;
     margin-right: 5px;
+
 }
 
-.chatFooter button {
+.sendMsgBtn {
+    opacity: .5;
+}
+
+.sendMsgBtn:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.emojiBtn:hover {
+    cursor: pointer;
+}
+
+/* .chatFooter button {
     border: none;
     background-color: #5555;
     padding: .15rem;
     border-radius: 999px;
-}
+} */
 
 .chatFooter button:hover {
     cursor: pointer;
@@ -86,6 +104,6 @@
 }
 
 .msgContent {
-    width: 150px;
+    width: 200px;
     overflow-wrap: break-word;
 }

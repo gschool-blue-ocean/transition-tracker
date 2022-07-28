@@ -4,16 +4,25 @@ import ScrollToBottom from 'react-scroll-to-bottom'
 import LoginContext from '../../Context/LoginContext'
 import Picker from 'emoji-picker-react'
 import IoAddCircleOutline from 'react-icons/io'
+import { BsFillArrowRightCircleFill } from "react-icons/bs";
+import { AiFillPlusCircle } from "react-icons/ai"
 
 function ChatModal({ socket }) {
     const { userData } = useContext(LoginContext)
 
+
     const [inputValue, setInputValue] = useState({
         content: ''
     })
+    const [chosenEmoji, setChosenEmoji] = useState(null);
+
+    const onEmojiClick = (event, emojiObject) => {
+        setChosenEmoji(emojiObject);
+        setInputValue({ content: inputValue.content + emojiObject.emoji })
+    };
 
     const [allMsgs, setAllMsgs] = useState([])
-
+    const [showEmojiPicker, setShowEmojiPicker] = useState(false)
     useEffect(() => {
 
         joinRoom()
@@ -104,10 +113,11 @@ function ChatModal({ socket }) {
                         onChange={handleChange}
                         onKeyPress={(e) => { e.key === 'Enter' && handleClick() }}
                     />
-                    <button onClick={handleClick}>Send</button> <span></span>
-                    {/* <Picker /> */}
+                    <BsFillArrowRightCircleFill className="sendMsgBtn" onClick={handleClick} />
+                    <AiFillPlusCircle className="emojiBtn" onClick={() => setShowEmojiPicker(!showEmojiPicker)} />
                 </div>
 
+                {showEmojiPicker && <Picker onEmojiClick={onEmojiClick} />}
             </div>
 
 
