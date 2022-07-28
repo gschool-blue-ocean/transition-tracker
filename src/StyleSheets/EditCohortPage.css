@@ -1,0 +1,27 @@
+@import './CustomProps.css';
+
+.modal-page{
+    text-align: center;
+}
+
+ul{
+    /* align-self: center; */
+    text-align: left;
+    font-size:5ch;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    min-width:fit-content;
+}
+
+.student-div{
+    padding: 1%;
+    border: 5ch;
+    border: black;
+    grid-column: 2 / 3;
+}
+
+
+button{
+ font-size: 1.25ch;
+
+}
