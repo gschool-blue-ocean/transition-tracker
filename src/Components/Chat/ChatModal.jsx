@@ -17,21 +17,23 @@ function ChatModal() {
 
     useEffect(() => {
 
+        joinRoom()
+
         fetch('https://hacking-transition.herokuapp.com/api/comments/student/10')
             .then(res => res.json())
             .then((data) => setAllMsgs(data))
             .catch(err => console.log(err))
     }, [])
 
-
     useEffect(() => {
-        socket.on("receive_message", msgData => {
-            console.log(msgData.content)
-            setAllMsgs((msgs) => [...msgs, msgData]
-            )
+        socket.on("receive_message", (data) => {
+            console.log(data)
         })
     }, [socket])
 
+    const joinRoom = () => {
+        socket.emit("join_room", 10)
+    }
 
     const handleChange = (e) => {
         setInputValue((prevData) => {
@@ -52,7 +54,7 @@ function ChatModal() {
             date_time: new Date().toLocaleString()
         }
 
-        console.log(msgData)
+        // console.log(msgData)
         setAllMsgs((msgs) => [...msgs, msgData]
         )
         // postMsgToDatabase(msgData)
@@ -86,17 +88,19 @@ function ChatModal() {
                 <ScrollToBottom className='scroll'>
                     <div className='chatBody'>
 
-                        {allMsgs.map((elem, index) => {
-                            return (<>
-                                <div className={elem.author_id === userData.user_id ? 'rightMsg' : ' leftMsg'} key={index}>
-                                    <p>{elem.content}</p>
-                                    <p className='msgFooter'>{elem.date_time}</p>
-                                </div>
-                                <p className={elem.author_id === userData.user_id ? 'rightAuthor msgFooter' : ' leftAuthor msgFooter'}>{elem.author_id}</p>
-                            </>
+                        { /*useEffect(() => {*/
+                            allMsgs.map((elem, index) => {
+                                return (<>
+                                    <div className={elem.author_id === userData.user_id ? 'rightMsg' : ' leftMsg'} key={index}>
+                                        <p>{elem.content}</p>
+                                        <p className='msgFooter'>{elem.date_time}</p>
+                                    </div>
+                                    <p className={elem.author_id === userData.user_id ? 'rightAuthor msgFooter' : ' leftAuthor msgFooter'}>{elem.author_id} {elem.author_name}</p>
+                                </>
 
-                            )
-                        })}
+                                )
+                            })
+                        }
                     </div>
                 </ScrollToBottom>
 
