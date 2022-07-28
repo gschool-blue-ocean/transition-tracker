@@ -25,7 +25,6 @@ function ChatModal({ socket }) {
     useEffect(() => {
         socket.on("receive_message", (data) => {
             console.log(data)
-            console.log(socket)
             setAllMsgs((msgs) => { return [...msgs, data] })
         }, [socket])
     })

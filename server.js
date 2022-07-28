@@ -30,6 +30,7 @@ io.on("connection", (socket) => {
 
     socket.on("join_room", id => {
         socket.join(id)
+        console.log('joined Room#', id)
     })
 
     socket.on("send_message", (msgData) => {
