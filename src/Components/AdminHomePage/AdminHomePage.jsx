@@ -12,7 +12,6 @@ function AdminHomePage() {
     const [ currentCohort, setCurrentCohort ] = useState(null)
 
     const setModalIsOpenToTrue =(e)=>{
-        console.log(e.currentTarget.cohort_id)
         setCurrentCohort(e.currentTarget.id)
         setModalIsOpen(true)
     }
@@ -82,7 +81,7 @@ function AdminHomePage() {
             </div>
             <Modal isOpen={modalIsOpen}>
                 <button onClick={setModalIsOpenToFalse}>x</button>
-                <EditCohortPage currentCohort={currentCohort}/>
+                <EditCohortPage selectedID={currentCohort}/>
             </Modal>
         </div>
     )
