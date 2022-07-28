@@ -12,6 +12,17 @@ h1 { overflow: visible }
   background-color: var(--clr-bgprimary-dark)
 }
 
+#all-cohorts-btn{
+  width: fit-content;
+  align-self: center;
+  background: none;
+  border: none;
+  font-family: var(--ff-primary);
+  color: inherit;
+  font-size: x-large;
+  padding-top: 25%;
+}
+
 #cohort-container {
   font-family: var(--ff-primary);
   height: calc(100vh - 2rem);
@@ -38,11 +49,7 @@ h1 { overflow: visible }
   place-content: center center;
   text-align: center;
 }
-#cohort-nav > a {
-  color: var(--clr-primary-accent);
-  text-decoration: none;
-  font-size: 2rem;
-}
+
 #cohort-nav > button {
   color: var(--clr-primary-accent);
 }
@@ -60,12 +67,18 @@ h1 { overflow: visible }
   display: grid;
   grid-template-rows: auto 3rem;
 }
+
+.listOfCohorts{
+  min-height: 25px;
+  color: var(--clr-primary-accent);
+  text-decoration: none;
+  font-size: 2rem;
+}
 .test-cohort {
-  min-width: 325px;
+  min-width: 400px;
   display: flex;
-  place-content: center center;
   flex-direction: column;
-  max-height: calc(100vh - 5rem);
+  height: 95%;
   background-color: var(--clr-bgsecondary-contrast);
   margin: 1rem;
   padding: 1rem;
@@ -73,12 +86,43 @@ h1 { overflow: visible }
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
+
+.cardHeader{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(50px, auto);
+  font-size: xx-large;
+  min-height: 75px;
+}
+
+.cardName{
+  grid-column: 2 / 5;
+  grid-row: 1 / 2;
+
+}
+
+.cardSettingsIcon{
+  grid-column: 5 / 6;
+  grid-row: 1 / 2;
+
+}
+
 #settings {
   position: fixed;
 }
 
 .listOfNames {
   overflow: scroll;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  margin-top: 5%;
+  font-size: xx-large;
+}
+
+#numberOfStudents{
+  padding-top: 3%;
+  font-size: x-large;
 }
 
 #legend {

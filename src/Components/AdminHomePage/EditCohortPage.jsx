@@ -1,20 +1,33 @@
-import React from 'react'
+import {React, useContext} from 'react'
+import AppContext from "../../Context/AppContext"
 
 function EditCohortPage ({ currentCohort }) {
-        return (
-            <>
+  const { allUsersData, allCohortsData } = useContext(AppContext)
+  return (
+    <>
+    {
+      allCohortsData.map(x => {
+        if (x.cohort_id == currentCohort) {
+          return <>
+            <h1>{x.cohort_name}</h1>
+            
             <ul>
-                 <h1>{currentCohort}</h1>
-                 <h1>Fullmetal Alchemist: Brotherhood</h1>
-                 <h1>Naruto</h1>
-                 <h1>Bleach</h1>
-                 <h1>Haikyu!!</h1>
-                 <h1>Kuroko no Basketball</h1>
-                 <h1>My hero academia</h1>
-                 <h1>One punch man</h1>
+              {
+                allUsersData.map(user => {
+                  if (user.cohort_id == currentCohort)
+                  return <>
+                    {user.first} {user.last}<br></br>
+                  </>
+                })
+              }
             </ul>
-            </>
-        )
+            <button>save changes</button>
+          </>
+        }
+      })
+    }
+    </>
+  )
 
 }
 

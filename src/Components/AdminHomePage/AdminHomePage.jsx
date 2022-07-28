@@ -12,7 +12,7 @@ function AdminHomePage() {
     const [ currentCohort, setCurrentCohort ] = useState(null)
 
     const setModalIsOpenToTrue =(e)=>{
-        console.log(e.currentTarget.id)
+        console.log(e.currentTarget.cohort_id)
         setCurrentCohort(e.currentTarget.id)
         setModalIsOpen(true)
     }
@@ -30,7 +30,7 @@ function AdminHomePage() {
                 {
                     allCohortsData.map(cohort => {
                         return <>
-                            <a href="#">{cohort.cohort_name}</a><br/>
+                            <div className='listOfCohorts'><a href="#">{cohort.cohort_name}</a></div><br/>
                         </>
                     })
                 }
@@ -47,9 +47,8 @@ function AdminHomePage() {
                                 <div className='cardHeader'>
                                 <div className='cardName'>{cohort.cohort_name}</div>
                                 <div className='cardSettingsIcon'>
-                                {/* <button onClick={setModalIsOpenToTrue}>{EditCohortPage}<FiSettings/></button>  */}
                                 <>
-                                    <button onClick={setModalIsOpenToTrue} id={cohort.cohort_id}>{EditCohortPage}<FiSettings/></button>
+                                    <FiSettings onClick={setModalIsOpenToTrue} id={cohort.cohort_id}>{EditCohortPage} </FiSettings>
 
 
                                 </>
@@ -66,8 +65,8 @@ function AdminHomePage() {
                                             }
                                         })
                                     }
-                                    30 students
                                 </div>
+                                <div id="numberOfStudents">30 students</div>
                             </div>
                         )
                     })
