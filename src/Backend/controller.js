@@ -66,6 +66,19 @@ const getOneUserByID = async (req, res) => {
     }
 }
 
+const getAllUsersByCohortID = async (req, res) => {
+
+    try {
+        let client = await pool.connect()
+        let data = await client.query('SELECT * FROM users WHERE cohort_id = $1', [req.params.id])
+        res.json(data.rows)
+        client.release()
+
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
+}
 const createNewUser = async (req, res) => {
 
     const { first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user, mos, interests } = req.body
@@ -104,20 +117,6 @@ const login = async (req, res) => {
     }
 }
 
-// const createNewUser = async (req, res) => {
-//     try {
-//         const create = await createUserWithEmailAndPassword(
-//             auth,
-//             req.body.username,
-//             req.body.password
-//         )
-//         res.send(create)
-//     } catch (error) {
-//         if (error) {
-//             res.send(error)
-//         }
-//     }
-// }
 
 const createNewAdmin = async (req, res) => {
 
@@ -590,5 +589,6 @@ module.exports = {
     login,
     deleteAllCommentsByStudentID,
     deleteAllTasksByStudentID,
-    deleteAllDependentsBySponsorID
+    deleteAllDependentsBySponsorID,
+    getAllUsersByCohortID
 }

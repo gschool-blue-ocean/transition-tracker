@@ -56,6 +56,8 @@ app.get('/api/users', controller.getAllUsers)
 
 app.get('/api/users/:id', controller.getOneUserByID)
 
+app.get('/api/users/cohort/:id', controller.getAllUsersByCohortID)
+
 app.post('/api/create/user', controller.createNewUser)
 
 app.post('/api/create/admin', controller.createNewAdmin)
