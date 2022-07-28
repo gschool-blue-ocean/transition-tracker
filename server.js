@@ -98,6 +98,8 @@ app.patch('/api/update/dependent/:id', controller.updateOneDependentByID)
 
 app.delete('/api/delete/dependent/:id', controller.deleteOneDependentByID)
 
+app.delete('/api/delete/alldependents/:id', controller.deleteAllDependentsBySponsorID)
+
 
 // --------- TASKS Table Routes -------------
 app.get('/api/tasks', controller.getAllTasks)
@@ -112,6 +114,9 @@ app.patch('/api/update/task/:id', controller.updateOneTaskByID)
 
 app.delete('/api/delete/task/:id', controller.deleteOneTaskByID)
 
+app.delete('/api/delete/alltasks/:id', controller.deleteAllTasksByStudentID)
+
+
 
 // ------------ COMMENTS Table Routes ------------
 app.get('/api/comments', controller.getAllComments)
@@ -125,6 +130,8 @@ app.post('/api/create/comment', controller.createNewComment)
 app.patch('/api/update/comment/:id', controller.updateOneCommentByID)
 
 app.delete('/api/delete/comment/:id', controller.deleteOneCommentByID)
+
+app.delete('/api/delete/allcomments/:id', controller.deleteAllCommentsByStudentID)
 
 
 // ---------Deployment & 404 route-----------

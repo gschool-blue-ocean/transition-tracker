@@ -351,6 +351,19 @@ const deleteOneDependentByID = async (req, res) => {
     }
 }
 
+const deleteAllDependentsBySponsorID = async (req, res) => {
+
+    try {
+        let client = await pool.connect()
+        let data = await client.query('DELETE FROM dependents WHERE sponsor_id = $1 RETURNING *', [req.params.id])
+        res.json(data.rows)
+        client.release()
+
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
+}
 
 //! --------- TASKS Table logic -------------
 const getAllTasks = async (req, res) => {
@@ -435,6 +448,19 @@ const deleteOneTaskByID = async (req, res) => {
     }
 }
 
+const deleteAllTasksByStudentID = async (req, res) => {
+
+    try {
+        let client = await pool.connect()
+        let data = await client.query('DELETE FROM tasks WHERE student_id = $1 RETURNING *', [req.params.id])
+        res.json(data.rows)
+        client.release()
+
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
+}
 
 //! -----------COMMENTS Table logic -------------
 const getAllComments = async (req, res) => {
@@ -513,8 +539,23 @@ const deleteOneCommentByID = async (req, res) => {
     }
 }
 
+const deleteAllCommentsByStudentID = async (req, res) => {
+
+    try {
+        let client = await pool.connect()
+        let data = await client.query('DELETE FROM comments WHERE student_id = $1 RETURNING *', [req.params.id])
+        res.json(data.rows)
+        client.release()
+
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
+}
+
 module.exports = {
     testRoute,
+    hashAllPasswords,
     getAllUsers,
     getOneUserByID,
     createNewUser,
@@ -547,5 +588,7 @@ module.exports = {
     updateOneCommentByID,
     deleteOneCommentByID,
     login,
-    hashAllPasswords
+    deleteAllCommentsByStudentID,
+    deleteAllTasksByStudentID,
+    deleteAllDependentsBySponsorID
 }
