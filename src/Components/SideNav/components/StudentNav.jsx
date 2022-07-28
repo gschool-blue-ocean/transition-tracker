@@ -2,7 +2,7 @@ import React from "react";
 
 export default function StudentNav({ userData }) {
    return (
-      <div className="SideNav">
+      <div className="sideNav">
          <div className="SideNav--Header">
             <h3>{userData.name}</h3>
             <div>{userData.cohort}</div>

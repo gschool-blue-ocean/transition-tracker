@@ -2,10 +2,15 @@
 
 .sideNav--Wrapper {
    display: grid;
-   background-color: var(--clr-accent-white);
+   background-color: var(--clr-secondary-accent);
    border-radius: 10px;
    font-family: var(--ff-primary);
    padding: calc(var(--spacer-container) * 1);
    line-height: var(--spacer-line);
-   justify-content: center;
+}
+
+.sideNav {
+   background-color: var(--clr-accent-white);
+   border-radius: 10px;
+   width: 100%;
 }
