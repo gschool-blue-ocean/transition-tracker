@@ -26,8 +26,8 @@ function ChatModal({ socket }) {
         socket.on("receive_message", (data) => {
             console.log(data)
             setAllMsgs((msgs) => { return [...msgs, data] })
-        }, [socket])
-    })
+        })
+    }, [socket])
 
     const joinRoom = () => {
         socket.emit("join_room", 10)
