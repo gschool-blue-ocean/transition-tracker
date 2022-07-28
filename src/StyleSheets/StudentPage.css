@@ -12,10 +12,27 @@ body {
    background-color: var(--clr-bgprimary-dark);
 }
 
+/* ================== TEST ==================== */
+.test--grid {
+   display: grid;
+   grid-template-areas: "sideNav content";
+   grid-template-columns: [first] 20% [second] auto;
+   margin: 3%;
+   gap: 3%;
+}
+
+.sideNav--Wrapper {
+   grid-area: sideNav;
+}
+
+.StudentDash--Wrapper {
+   grid-area: content;
+}
+
 /* =========== Student Container ============== */
 
 .StudentDash--Wrapper {
-   width: max-content;
+   /* margin: 3%; */
    display: grid;
    padding: calc(var(--spacer-container) * 1);
    line-height: var(--spacer-line);
