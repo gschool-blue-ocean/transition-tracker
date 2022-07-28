@@ -18,7 +18,7 @@ export default function EditableStudent({ firstName, lastName, id, cohort }) {
         userData.last = last
         console.log(JSON.stringify(userData))
         toggleEditing()
-        fetch(`https://hacking-transition.herokuapp.com/api/update/user/${id}`, {
+        fetch(`http://hacking-transition.herokuapp.com/api/update/user/${id}`, {
           method: 'PATCH',
           headers: { "content-type": "application/json" },
           body: JSON.stringify(userData),

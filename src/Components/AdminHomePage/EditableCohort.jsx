@@ -20,8 +20,9 @@ export default function EditableCohort({ name, start, end, id }) {
       cohortData.end_date = currentEndDate
       console.log(JSON.stringify(cohortData))
       toggleEditing()
-      fetch('http://localhost:8000', {
+      fetch(`http://hacking-transition.herokuapp.com/api/update/cohort/${id}`, {
         method: 'PATCH',
+        headers: { "content-type": "application/json" },
         body: JSON.stringify(cohortData)
       })
       console.log("ran the thing")
