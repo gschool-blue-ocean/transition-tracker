@@ -1,12 +1,9 @@
 import '../../StyleSheets/ChatModal.css'
 import React, { useState, useContext, useEffect } from 'react'
 import ScrollToBottom from 'react-scroll-to-bottom'
-import io from 'socket.io-client'
 import LoginContext from '../../Context/LoginContext'
 
-const socket = io.connect("https://hacking-transition.herokuapp.com")
-
-function ChatModal() {
+function ChatModal({ socket }) {
     const { userData } = useContext(LoginContext)
 
     const [inputValue, setInputValue] = useState({
@@ -28,10 +25,11 @@ function ChatModal() {
     useEffect(() => {
         socket.on("receive_message", (data) => {
             console.log(data)
-
+            console.log(socket)
             setAllMsgs((msgs) => { return [...msgs, data] })
         }, [socket])
     })
+
     const joinRoom = () => {
         socket.emit("join_room", 10)
     }
@@ -46,6 +44,7 @@ function ChatModal() {
     }
 
     const handleClick = async () => {
+        if (inputValue.content.length === 0) { return console.log('no empty msgs') }
 
         let msgData = {
             student_id: 10,
