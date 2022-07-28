@@ -22,10 +22,11 @@ function AdminHomePage() {
     return (
         <div id="cohort-container">
             <div id="cohort-nav" className="mainContainer">
-                <h1>Cohorts</h1>
+                <div className='cohort-list-title'>Cohorts</div>
+                <div className='list'>
                 <button id="all-cohorts-btn">
                     All
-                </button><br/>
+                </button>
                 {
                     allCohortsData.map(cohort => {
                         return <>
@@ -36,6 +37,7 @@ function AdminHomePage() {
                 <button id="add-cohort-btn">
                   +
                 </button>
+                </div>
             </div>
             <div id="cohorts-list" className="mainContainer">
                 <div id='cohort-view'>

@@ -12,20 +12,40 @@ h1 { overflow: visible }
   background-color: var(--clr-bgprimary-dark)
 }
 
-#all-cohorts-btn{
-  width: fit-content;
+.cohort-list-title{
+  font-size: 4ch;
   align-self: center;
+}
+
+#all-cohorts-btn{
   background: none;
   border: none;
   font-family: var(--ff-primary);
   color: inherit;
   font-size: x-large;
-  padding-top: 25%;
+  grid-row: 2 / 5;
+  padding-bottom: 2rem;
+}
+
+#add-cohort-btn{
+  grid-row: 5/6;
+}
+
+.list{
+  grid-row: 2 / 6;
+  font-size:4ch;
+  align-self: center;
+ 
+}
+
+.listOfCohorts > a {
+  color: var(--clr-primary-accent);
+  text-decoration: none;
 }
 
 #cohort-container {
   font-family: var(--ff-primary);
-  height: calc(100vh - 2rem);
+  height: calc(90vh - 2rem);
   max-height: calc(90vh - 2rem);
   width: calc(100vw - 2rem);
   max-width: calc(100vw - 2rem);
@@ -41,11 +61,11 @@ h1 { overflow: visible }
 }
 
 #cohort-nav {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: 200px repeat(5, 1fr);
   min-width: 250px;
   color: var(--clr-primary-accent);
-  display: flex;
-  flex-direction: column;
-  flex-grow: 0;
   place-content: center center;
   text-align: center;
 }
@@ -68,17 +88,11 @@ h1 { overflow: visible }
   grid-template-rows: auto 3rem;
 }
 
-.listOfCohorts{
-  min-height: 25px;
-  color: var(--clr-primary-accent);
-  text-decoration: none;
-  font-size: 2rem;
-}
 .test-cohort {
   min-width: 400px;
   display: flex;
   flex-direction: column;
-  height: fit-content;
+  height: 95%;
   background-color: var(--clr-bgsecondary-contrast);
   margin: 1rem;
   padding: 1rem;
