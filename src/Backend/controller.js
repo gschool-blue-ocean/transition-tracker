@@ -499,11 +499,11 @@ const getOneCommentByID = async (req, res) => {
     }
 }
 const createNewComment = async (msgData) => {
-    const { student_id, author_id, content, date_time } = msgData
+    const { student_id, author_id, author_name, content, date_time } = msgData
 
     try {
         let client = await pool.connect()
-        await client.query('INSERT INTO comments (student_id, author_id, content, date_time) VALUES ($1, $2, $3, $4) RETURNING *', [student_id, author_id, content, date_time])
+        await client.query('INSERT INTO comments (student_id, author_id, author_name, content, date_time) VALUES ($1, $2, $3, $4, $5) RETURNING *', [student_id, author_id, author_name, content, date_time])
 
     } catch (error) {
         console.log(error)

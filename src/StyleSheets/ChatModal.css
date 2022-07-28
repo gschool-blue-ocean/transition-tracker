@@ -11,18 +11,24 @@
     gap: 1rem;
     width: 25rem;
     justify-items: center;
+    background-color: #012361;
+    border-radius: 25px;
+    box-shadow: 5px 5px 5px #333;
 }
 
 .chatBody {
     display: grid;
     padding: .5rem;
+    background-color: #888;
 }
 
 .scroll {
     border: 1px solid #333;
-    height: 10rem;
+    height: 15rem;
     width: 100%;
     overflow: auto;
+    border-radius: 15px;
+
 }
 
 .chatFooter {
@@ -31,12 +37,23 @@
     flex-direction: row;
     align-items: center;
     gap: .25rem;
+    justify-content: space-between;
 }
 
 .chatFooter input {
     width: 82%;
     margin-right: 5px;
 
+}
+
+.inputBox {
+    border: none;
+    padding: .25rem;
+    border-radius: 25px;
+}
+
+.inputBox:focus {
+    outline: none;
 }
 
 .sendMsgBtn {
@@ -48,20 +65,16 @@
     opacity: 1;
 }
 
+.emojiBtn {
+    opacity: .5;
+    margin-left: 5px;
+}
+
 .emojiBtn:hover {
     cursor: pointer;
+    opacity: 1;
 }
 
-/* .chatFooter button {
-    border: none;
-    background-color: #5555;
-    padding: .15rem;
-    border-radius: 999px;
-} */
-
-.chatFooter button:hover {
-    cursor: pointer;
-}
 
 .rightMsg {
     justify-self: right;
@@ -72,21 +85,19 @@
     border-top-right-radius: 25px;
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
-    /* max-width: 70%; */
-    /* overflow: auto; */
+
 }
 
 .leftMsg {
     justify-self: left;
-    background-color: hsl(22, 58%, 48%);
+    background-color: hsl(44, 92%, 48%);
     width: fit-content;
     height: fit-content;
     padding: .5rem;
     border-top-right-radius: 25px;
     border-top-left-radius: 25px;
     border-bottom-right-radius: 25px;
-    /* max-width: 70%; */
-    /* overflow: auto; */
+
 }
 
 .msgFooter {
@@ -106,4 +117,29 @@
 .msgContent {
     width: 200px;
     overflow-wrap: break-word;
+}
+
+.msgErr {
+    color: hsl(0, 60%, 56%);
+    font-size: .7rem;
+}
+
+.sendMsgBtn {
+    color: hsl(98, 58%, 48%);
+    opacity: 100%;
+}
+
+.sendMsgBtn:hover {
+    cursor: pointer;
+    transform: scale(1.5);
+}
+
+.emojiBtn {
+    color: hsl(47, 95%, 60%);
+    opacity: 100%;
+}
+
+.emojiBtn:hover {
+    cursor: pointer;
+    transform: scale(1.5);
 }

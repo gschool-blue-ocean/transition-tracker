@@ -60,7 +60,8 @@ CREATE TABLE comments (
     student_id INTEGER,
     foreign key (student_id) references users(user_id),
     author_id INTEGER,
+    author_name VARCHAR(100),
     foreign key (author_id) references users(user_id),
     content TEXT, 
-    date_time TEXT
+    date_time TEXT,
 );

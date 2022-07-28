@@ -7,9 +7,11 @@ import IoAddCircleOutline from 'react-icons/io'
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { AiFillPlusCircle } from "react-icons/ai"
 
+
 function ChatModal({ socket }) {
     const { userData } = useContext(LoginContext)
 
+    const [errorMessage, setErrorMessage] = useState(false);
 
     const [inputValue, setInputValue] = useState({
         content: ''
@@ -54,8 +56,10 @@ function ChatModal({ socket }) {
     }
 
     const handleClick = async () => {
-        if (inputValue.content.length === 0) { return console.log('no empty msgs') }
 
+        if (inputValue.content.length === 0) { return setErrorMessage(true) }
+        setErrorMessage(false)
+        setShowEmojiPicker(false)
         let msgData = {
             student_id: 10,
             author_id: userData.user_id,
@@ -79,6 +83,12 @@ function ChatModal({ socket }) {
 
     }
 
+    const hideMsg = {
+        "display": 'none'
+    }
+    const showMsg = {
+        "display": 'flex'
+    }
 
     return (
         <div className='chatModalContainer'>
@@ -103,9 +113,10 @@ function ChatModal({ socket }) {
                         }
                     </div>
                 </ScrollToBottom>
-
+                <span className="msgErr" style={errorMessage ? showMsg : hideMsg}>Can't send an empty message. Please enter a message below.</span>
                 <div className='chatFooter'>
                     <input
+                        className='inputBox'
                         type='text'
                         placeholder='Type your msg here...'
                         name="content"
@@ -118,10 +129,11 @@ function ChatModal({ socket }) {
                 </div>
 
                 {showEmojiPicker && <Picker onEmojiClick={onEmojiClick} />}
+
             </div>
 
 
-        </div>
+        </div >
     )
 }
 
