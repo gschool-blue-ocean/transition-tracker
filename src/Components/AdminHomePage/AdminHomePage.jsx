@@ -55,7 +55,9 @@ function AdminHomePage() {
                                 </>
                                 </div>
                                 </div>
+                                <div className='cohort-dates'>
                                 {cohort.start_date} - {cohort.end_date}
+                                </div>
                                 <div className="listOfNames">
                                     {
                                         allUsersData.map(user => {
@@ -66,8 +68,9 @@ function AdminHomePage() {
                                             }
                                         })
                                     }
+                                    <div id="numberOfStudents">{ allUsersData.filter(user => user.cohort_id == cohort.cohort_id).length }</div>
                                 </div>
-                                <div id="numberOfStudents">30 students</div>
+                                {/* <div id="numberOfStudents">{ allUsersData.filter(user => user.cohort_id == id).length }</div> */}
                             </div>
                         )
                     })
