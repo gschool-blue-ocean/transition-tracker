@@ -27,6 +27,8 @@ function ChatModal() {
     useEffect(() => {
         socket.on("receive_message", msgData => {
             console.log(msgData.content)
+            setAllMsgs((msgs) => [...msgs, msgData]
+            )
         })
     }, [socket])
 
