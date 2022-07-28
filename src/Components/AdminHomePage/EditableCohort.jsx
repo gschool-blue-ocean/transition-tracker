@@ -20,11 +20,11 @@ export default function EditableCohort({ name, start, end, id }) {
       cohortData.end_date = currentEndDate
       console.log(JSON.stringify(cohortData))
       toggleEditing()
-      {/* fetch('http://localhost:8000', {
-        method: 'POST',
-        mode: 'cors',
+      fetch('http://localhost:8000', {
+        method: 'PATCH',
         body: JSON.stringify(cohortData)
-      }) */}
+      })
+      console.log("ran the thing")
     }
   }
 

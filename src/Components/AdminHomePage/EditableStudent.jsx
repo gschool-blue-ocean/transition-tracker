@@ -18,22 +18,33 @@ export default function EditableStudent({ firstName, lastName, id, cohort }) {
         userData.last = last
         console.log(JSON.stringify(userData))
         toggleEditing()
-        {/* fetch('http://localhost:8000/', {
-          method: 'POST',
-          mode: 'cors',
-          body: JSON.stringify(userData)
-        }) */}
+        fetch(`https://hacking-transition.herokuapp.com/api/update/user/${id}`, {
+          method: 'PATCH',
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(userData),
+        })
       }
     }
   }
 
   const deleteStudent = () => {
     setDeleted(true)
-    // fetch to delete comments
-    fetch('')
-    // fetch to delete tasks
-    // fetch to delete dependents
-    // fetch to delete user LASTLY
+    fetch(`http://hacking-transition.herokuapp.com/api/delete/allcomments/${id}`, {
+      method: 'DELETE',
+      mode: 'cors'
+    })
+    fetch(`http://hacking-transition.herokuapp.com/api/delete/alltasks/${id}`, {
+      method: 'DELETE',
+      mode: 'cors'
+    })
+    fetch(`http://hacking-transition.herokuapp.com/api/delete/alldependents/${id}`, {
+      method: 'DELETE',
+      mode: 'cors'
+    })
+    fetch(`http://hacking-transition.herokuapp.com/api/delete/user/${id}`, {
+      method: 'DELETE',
+      mode: 'cors'
+    })
   }
   const restore = () => setDeleted(false)
 
