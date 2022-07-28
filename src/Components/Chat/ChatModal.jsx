@@ -68,16 +68,6 @@ function ChatModal({ socket }) {
 
     }
 
-    // const postMsgToDatabase = (msgData) => {
-    //     fetch('https://hacking-transition.herokuapp.com/api/update/', {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify(msgData)
-    //     })
-    //         .then(res => res.json())
-    //         .then((data) => console.log(data))
-    //         .catch(err => console.log(err))
-    // }
 
     return (
         <div className='chatModalContainer'>
@@ -87,7 +77,7 @@ function ChatModal({ socket }) {
                 <ScrollToBottom className='scroll'>
                     <div className='chatBody'>
 
-                        { /*useEffect(() => {*/
+                        {
                             allMsgs.map((elem, index) => {
                                 return (<>
                                     <div className={elem.author_id === userData.user_id ? 'rightMsg' : ' leftMsg'} key={index}>
