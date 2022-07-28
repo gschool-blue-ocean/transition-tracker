@@ -498,17 +498,15 @@ const getOneCommentByID = async (req, res) => {
         res.send(error)
     }
 }
-const createNewComment = async (req, res) => {
-    const { student_id, author_id, content, date_time } = req.body
+const createNewComment = async (msgData) => {
+    const { student_id, author_id, content, date_time } = msgData
+
     try {
         let client = await pool.connect()
-        let data = await client.query('INSERT INTO comments (student_id, author_id, content, date_time) VALUES ($1, $2, $3, $4) RETURNING *', [student_id, author_id, content, date_time])
-        res.json(data.rows)
-        client.release()
+        await client.query('INSERT INTO comments (student_id, author_id, content, date_time) VALUES ($1, $2, $3, $4) RETURNING *', [student_id, author_id, content, date_time])
 
     } catch (error) {
         console.log(error)
-        res.send(error)
     }
 }
 const updateOneCommentByID = async (req, res) => {

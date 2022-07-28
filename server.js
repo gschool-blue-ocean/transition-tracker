@@ -32,7 +32,10 @@ io.on("connection", (socket) => {
     })
 
     socket.on("send_message", (msgData) => {
-        socket.broadcast.emit("receive_message", msgData)
+
+        controller.createNewComment(msgData)
+        socket.to(msgData.student_id).emit("receive_message", msgData)
+
     })
 })
 

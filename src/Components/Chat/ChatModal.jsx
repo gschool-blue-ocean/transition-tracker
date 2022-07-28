@@ -6,16 +6,27 @@ import LoginContext from '../../Context/LoginContext'
 const socket = io.connect("https://hacking-transition.herokuapp.com")
 
 function ChatModal() {
-
-    useEffect(() => {
-        socket.on("receive_message", msgData => { alert(msgData.content) })
-    }, [socket])
-
     const { userData } = useContext(LoginContext)
 
     const [inputValue, setInputValue] = useState({
         content: ''
     })
+
+    const [allMsgs, setAllMsgs] = useState([])
+
+    useEffect(() => {
+
+        fetch('https://hacking-transition.herokuapp.com/api/comments/student/10')
+            .then(res => res.json())
+            .then((data) => setAllMsgs(data))
+            .catch(err => console.log(err))
+    }, [])
+
+
+    socket.on("receive_message", msgData => {
+        console.log(msgData.content)
+    })
+
 
     const handleChange = (e) => {
         setInputValue((prevData) => {
@@ -25,18 +36,22 @@ function ChatModal() {
             }
         })
     }
-    const handleClick = () => {
+
+    const handleClick = async () => {
 
         let msgData = {
             student_id: '',
-            author_id: '',
+            author_id: userData.user_id,
+            author_name: `${userData.first} ${userData.last}`,
             content: inputValue.content,
             date_time: new Date().toLocaleString()
         }
 
         console.log(msgData)
 
-        postMsgToDatabase(msgData)
+        // postMsgToDatabase(msgData)
+
+        await socket.emit("send_message", msgData)
 
         setInputValue(() => {
             return {
@@ -44,26 +59,35 @@ function ChatModal() {
             }
         })
 
-        socket.emit("send_message", msgData)
     }
 
-    const postMsgToDatabase = (msgData) => {
-        fetch('https://hacking-transition.herokuapp.com/api/update/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(msgData)
-        })
-            .then(res => res.json())
-            .then((data) => console.log(data))
-            .catch(err => console.log(err))
+    // const postMsgToDatabase = (msgData) => {
+    //     fetch('https://hacking-transition.herokuapp.com/api/update/', {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify(msgData)
+    //     })
+    //         .then(res => res.json())
+    //         .then((data) => console.log(data))
+    //         .catch(err => console.log(err))
+    // }
 
-    }
     return (
         <div className='chatModalContainer'>
 
             <div className='chatContainer'>
 
-                <div className='chatBody'></div>
+                <div className='chatBody'>
+
+                    {allMsgs.map((elem, index) => {
+                        return (
+                            <div className={elem.author_id === userData.user_id ? 'rightMsg' : ' leftMsg'} key={index}>
+                                <p>{elem.content}</p>
+                                <p className='msgFooter'>{elem.author_id}, {elem.date_time}</p>
+                            </div>
+                        )
+                    })}
+                </div>
 
                 <div className='chatFooter'>
                     <input
