@@ -110,6 +110,7 @@ function ChatModal({ socket }) {
                         name="content"
                         value={inputValue.content}
                         onChange={handleChange}
+                        onKeyPress={(e) => { e.key === 'Enter' && handleClick() }}
                     />
                     <button onClick={handleClick}>Send</button>
                 </div>
