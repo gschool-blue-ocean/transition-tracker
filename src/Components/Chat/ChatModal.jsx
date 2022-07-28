@@ -94,7 +94,7 @@ function ChatModal({ socket }) {
                                         <p>{elem.content}</p>
                                         <p className='msgFooter'>{elem.date_time}</p>
                                     </div>
-                                    <p className={elem.author_id === userData.user_id ? 'rightAuthor msgFooter' : ' leftAuthor msgFooter'}>{elem.author_id} {elem.author_name}</p>
+                                    <p className={elem.author_id === userData.user_id ? 'rightAuthor msgFooter' : ' leftAuthor msgFooter'}>{elem.author_name}</p>
                                 </>
 
                                 )
