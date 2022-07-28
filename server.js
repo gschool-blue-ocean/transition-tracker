@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
     })
 
     socket.on("send_message", (msgData) => {
-        controller.createNewComment(msgData)
+        // controller.createNewComment(msgData)
         socket.to(msgData.student_id).emit("receive_message", msgData)
     })
 

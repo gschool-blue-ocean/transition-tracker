@@ -28,9 +28,10 @@ function ChatModal() {
     useEffect(() => {
         socket.on("receive_message", (data) => {
             console.log(data)
-        })
-    }, [socket])
 
+            setAllMsgs((msgs) => { return [...msgs, data] })
+        }, [socket])
+    })
     const joinRoom = () => {
         socket.emit("join_room", 10)
     }
