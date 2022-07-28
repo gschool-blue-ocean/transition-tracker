@@ -26,7 +26,7 @@ h1 { overflow: visible }
 #cohort-container {
   font-family: var(--ff-primary);
   height: calc(100vh - 2rem);
-  max-height: calc(100vh - 2rem);
+  max-height: calc(90vh - 2rem);
   width: calc(100vw - 2rem);
   max-width: calc(100vw - 2rem);
   display: grid;
@@ -78,7 +78,7 @@ h1 { overflow: visible }
   min-width: 400px;
   display: flex;
   flex-direction: column;
-  height: 95%;
+  height: fit-content;
   background-color: var(--clr-bgsecondary-contrast);
   margin: 1rem;
   padding: 1rem;
