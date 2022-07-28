@@ -43,6 +43,7 @@ function App() {
     <div className="AppContainer">
       {loading ? <Loading /> : null}
       {login || userData || localStorage.currentUser ? <Header /> : null}
+
       <Routes>
         <Route path="/" element={login ? <StudentPage userData={userData} setUserData={setUserData} invokeSetLogin={invokeSetLogin} /> : <LandingPage invokeSetLogin={invokeSetLogin} />} />
         <Route path="/createAccount" element={<CreateAccountModal />} />
@@ -50,6 +51,7 @@ function App() {
         <Route path="/settings" element={<Settings />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+
     </div>
   );
 }
