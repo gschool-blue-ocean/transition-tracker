@@ -15,12 +15,14 @@ function EditCohortPage ({ selectedID }) {
       allCohortsData.map(x => {
         if (x.cohort_id == selectedID) {
           return <>
+            <div className='cohort-info'>
             <EditableCohort
               name={x.cohort_name}
               start={x.start_date}
               end={x.end_date}
               id={selectedID}
               />
+              </div>
             <ul>
               {
                 allUsersData.map(user => {
@@ -36,7 +38,9 @@ function EditCohortPage ({ selectedID }) {
                 })
               }
             </ul>
+            <div className='num-of-stu'>
             { allUsersData.filter(user => user.cohort_id == selectedID).length } students
+            </div>
           </>
         }
       })

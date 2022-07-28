@@ -81,8 +81,8 @@ function AdminHomePage() {
                     <span id='onetwenty'>120 days</span>
                 </div>
             </div>
-            <Modal isOpen={modalIsOpen}>
-                <button onClick={setModalIsOpenToFalse}>x</button>
+            <Modal isOpen={modalIsOpen} portalClassName="modal">
+                <button className="x" onClick={setModalIsOpenToFalse}>X</button>
                 <EditCohortPage selectedID={currentCohort}/>
             </Modal>
         </div>

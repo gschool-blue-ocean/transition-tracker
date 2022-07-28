@@ -61,10 +61,10 @@ export default function EditableStudent({ firstName, lastName, id, cohort }) {
   </>
   else if (!deleted) return <>
     {value}
-    <button onClick={toggleEditing}>
+    <button className="student-btn" onClick={toggleEditing}>
       <FiEdit/>
     </button>
-    <button onClick={deleteStudent}>
+    <button className="student-btn" onClick={deleteStudent}>
       <FiDelete/>
     </button>
   </>

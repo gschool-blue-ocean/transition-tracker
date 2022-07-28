@@ -8,6 +8,14 @@
 * { overflow: hidden }
 h1 { overflow: visible }
 
+.x{
+  background: none;
+  border-color:black;
+  border-radius: 12px;
+  width: 60px;
+ 
+  font-size: 4ch;
+}
 .AppContainer {
   background-color: var(--clr-bgprimary-dark)
 }

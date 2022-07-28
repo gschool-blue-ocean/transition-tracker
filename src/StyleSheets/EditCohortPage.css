@@ -1,23 +1,50 @@
 @import './CustomProps.css';
 
-.modal-page{
+.modal{
+    background-color: red;
+}
+
+.modal-page {
     text-align: center;
 }
 
+.cohort-info{
+    font-size:5ch;
+    padding-bottom: 1%;
+   
+}
+
+svg{
+    background: none;
+}
+
+.num-of-stu{
+    font-size:6ch;
+}
+
 ul{
-    /* align-self: center; */
-    text-align: left;
     font-size:5ch;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    min-width:fit-content;
+    grid-template-columns: auto auto;
+    justify-items: center;
+}
+
+.student-btn{
+    padding: 1ch;
+    border: none;
+    background-color:none;
+    background: none;
+    font-size: 1.5ch;
 }
 
 .student-div{
-    padding: 1%;
-    border: 5ch;
-    border: black;
-    grid-column: 2 / 3;
+    background-color: var(--clr-bgsecondary-contrast);
+    border-radius: 10px;
+    margin:10px;
+    text-align: center;
+    width: 70%;
+    height: auto;
+    
 }
 
 
