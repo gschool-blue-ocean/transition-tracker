@@ -19,7 +19,7 @@
 .chatBody {
     display: grid;
     padding: .5rem;
-    background-color: #888;
+    background-color: whitesmoke;
 }
 
 .scroll {
@@ -42,8 +42,6 @@
 
 .chatFooter input {
     width: 82%;
-    margin-right: 5px;
-
 }
 
 .inputBox {
@@ -56,52 +54,30 @@
     outline: none;
 }
 
-.sendMsgBtn {
-    opacity: .5;
-}
-
-.sendMsgBtn:hover {
-    cursor: pointer;
-    opacity: 1;
-}
-
-.emojiBtn {
-    opacity: .5;
-    margin-left: 5px;
-}
-
-.emojiBtn:hover {
-    cursor: pointer;
-    opacity: 1;
-}
-
-
 .rightMsg {
     justify-self: right;
     background: lightblue;
     width: fit-content;
     height: fit-content;
-    padding: .5rem;
+    padding: .7rem;
     border-top-right-radius: 25px;
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
-
 }
 
 .leftMsg {
     justify-self: left;
-    background-color: hsl(44, 92%, 48%);
+    background-color: lightgray;
     width: fit-content;
     height: fit-content;
-    padding: .5rem;
+    padding: .7rem;
     border-top-right-radius: 25px;
     border-top-left-radius: 25px;
     border-bottom-right-radius: 25px;
-
 }
 
 .msgFooter {
-    font-size: .7rem;
+    font-size: .8rem;
 }
 
 .rightAuthor {
@@ -115,18 +91,19 @@
 }
 
 .msgContent {
-    width: 200px;
+    width: fit-content;
+    max-width: 200px;
     overflow-wrap: break-word;
 }
 
 .msgErr {
     color: hsl(0, 60%, 56%);
-    font-size: .7rem;
+    font-size: .8rem;
 }
 
 .sendMsgBtn {
     color: hsl(98, 58%, 48%);
-    opacity: 100%;
+    font-size: 1.5rem;
 }
 
 .sendMsgBtn:hover {
@@ -136,7 +113,7 @@
 
 .emojiBtn {
     color: hsl(47, 95%, 60%);
-    opacity: 100%;
+    font-size: 1.5rem;
 }
 
 .emojiBtn:hover {

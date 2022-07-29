@@ -63,5 +63,5 @@ CREATE TABLE comments (
     author_name VARCHAR(100),
     foreign key (author_id) references users(user_id),
     content TEXT, 
-    date_time TEXT,
+    date_time TEXT
 );

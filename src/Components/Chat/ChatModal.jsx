@@ -3,9 +3,9 @@ import React, { useState, useContext, useEffect } from 'react'
 import ScrollToBottom from 'react-scroll-to-bottom'
 import LoginContext from '../../Context/LoginContext'
 import Picker from 'emoji-picker-react'
-import IoAddCircleOutline from 'react-icons/io'
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { AiFillPlusCircle } from "react-icons/ai"
+import { MdOutlineAddReaction, MdAddReaction } from 'react-icons/md'
 
 
 function ChatModal({ socket }) {
@@ -25,6 +25,7 @@ function ChatModal({ socket }) {
 
     const [allMsgs, setAllMsgs] = useState([])
     const [showEmojiPicker, setShowEmojiPicker] = useState(false)
+
     useEffect(() => {
 
         joinRoom()
@@ -33,6 +34,7 @@ function ChatModal({ socket }) {
             .then(res => res.json())
             .then((data) => setAllMsgs(data))
             .catch(err => console.log(err))
+
     }, [])
 
     useEffect(() => {
@@ -65,7 +67,8 @@ function ChatModal({ socket }) {
             author_id: userData.user_id,
             author_name: `${userData.first} ${userData.last}`,
             content: inputValue.content,
-            date_time: new Date().toLocaleString()
+            // date_time: new Date().toLocaleString()
+            date_time: new Date().toUTCString()
         }
 
         // console.log(msgData)
@@ -103,7 +106,7 @@ function ChatModal({ socket }) {
                                 return (<>
                                     <div className={elem.author_id === userData.user_id ? 'rightMsg' : ' leftMsg'} key={index}>
                                         <p className="msgContent">{elem.content}</p>
-                                        <p className='msgFooter'>{elem.date_time}</p>
+                                        <p className='msgFooter'>{new Date(elem.date_time).toLocaleString()}</p>
                                     </div>
                                     <p className={elem.author_id === userData.user_id ? 'rightAuthor msgFooter' : ' leftAuthor msgFooter'}>{elem.author_name}</p>
                                 </>
@@ -125,7 +128,7 @@ function ChatModal({ socket }) {
                         onKeyPress={(e) => { e.key === 'Enter' && handleClick() }}
                     />
                     <BsFillArrowRightCircleFill className="sendMsgBtn" onClick={handleClick} />
-                    <AiFillPlusCircle className="emojiBtn" onClick={() => setShowEmojiPicker(!showEmojiPicker)} />
+                    <MdAddReaction className="emojiBtn" onClick={() => setShowEmojiPicker(!showEmojiPicker)} />
                 </div>
 
                 {showEmojiPicker && <Picker onEmojiClick={onEmojiClick} />}

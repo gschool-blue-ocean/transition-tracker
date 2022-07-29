@@ -421,7 +421,6 @@ const createNewTask = async (req, res) => {
 const updateOneTaskByID = async (req, res) => {
     const { title, date, description, remarks, completed } = req.body
 
-    //let data = await client.query('UPDATE dependents SET age = $1, relation = $2 WHERE dependent_id = $3 RETURNING *', [age, relation, req.params.id])
     try {
         let client = await pool.connect()
         let data = await client.query('UPDATE tasks SET title = $1, date = $2, description = $3, remarks = $4, completed = $5 WHERE task_id = $6 RETURNING *', [title, date, description, remarks, completed, req.params.id])

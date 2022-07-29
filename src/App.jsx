@@ -45,9 +45,10 @@ function App() {
   return (
     <div className="AppContainer">
       {loading ? <Loading /> : null}
-      {login || userData || localStorage.currentUser ? <Header /> : null}
+      {login && (userData || localStorage.currentUser) ? <Header /> : null}
 
       <Routes>
+
         <Route path="/" element={login ? <StudentPage socket={socket} userData={userData} setUserData={setUserData} invokeSetLogin={invokeSetLogin} /> : <LandingPage invokeSetLogin={invokeSetLogin} />} />
         <Route path="/createAccount" element={<CreateAccountModal />} />
         <Route path="/archive" element={<Archive />} />
