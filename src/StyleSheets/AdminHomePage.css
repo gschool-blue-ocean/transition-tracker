@@ -57,7 +57,8 @@ h1 { overflow: visible }
   background: none;
   border: none;
   font-family: var(--ff-primary);
-  color: black;
+  color: white;
+  text-shadow: 2px 2px 6px #000000;
   font-size: 1.7ch;
   grid-row: 2 / 5;
   padding-bottom: 2rem;
@@ -81,15 +82,16 @@ h1 { overflow: visible }
   align-self: center;
   background-color: var(--clr-bgsecondary-contrast);
   border-radius: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
   box-shadow: 5px 5px 10px #888888;
  
 }
 
 .listOfCohorts > a {
   /* color: var(--clr-primary-accent); */
-  color: black;
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
   text-decoration: none;
 }
 
@@ -118,6 +120,7 @@ h1 { overflow: visible }
   color: var(--clr-primary-accent);
   place-content: center center;
   text-align: center;
+  
 }
 
 #cohort-nav > button {
@@ -130,7 +133,7 @@ h1 { overflow: visible }
 #cohort-view {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 3rem;
+  gap: 2.5rem;
   overflow: scroll;
 }
 #cohorts-list {
@@ -167,7 +170,8 @@ h1 { overflow: visible }
   grid-row: 1 / 2;
   font-size: 4.8ch;
   font-weight: 900;
-  /* text-shadow: 1px 1px 6px #080808; */
+  color: white;
+  text-shadow: 2px 2px 6px #000000;
 }
 
 .cardSettingsIcon{
