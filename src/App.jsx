@@ -1,9 +1,10 @@
+
 import "./StyleSheets/App.css";
 import { useState, useContext, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Loading from "./Components/LoadingDisplay/Loading";
 import LandingPage from "./Components/Landing/LandingPage";
-import HomePage from "./Components/HomePage/HomePage";
+import AdminHomePage from './Components/AdminHomePage/AdminHomePage'
 import CreateAccountModal from "./Components/Landing/CreateAccountModal";
 import LoginContext from "./Context/LoginContext";
 import AppContext from "./Context/AppContext";
@@ -50,7 +51,8 @@ function App() {
       {(login && userData) || (localStorage.currentUser) ? <Header /> : null}
 
       <Routes>
-        <Route path="/" element={login ? <StudentPage socket={socket} userData={userData} setUserData={setUserData} invokeSetLogin={invokeSetLogin} /> : <LandingPage invokeSetLogin={invokeSetLogin} />} />
+        <Route path="/" element={login ? <AdminHomePage userData={userData} setUserData={setUserData} invokeSetLogin={invokeSetLogin} /> : <LandingPage invokeSetLogin={invokeSetLogin} />} />
+        //<Route path="/" element={login ? <StudentPage socket={socket} userData={userData} setUserData={setUserData} invokeSetLogin={invokeSetLogin} /> : <LandingPage invokeSetLogin={invokeSetLogin} />} />
         <Route path="/createAccount" element={<CreateAccountModal />} />
         <Route path="/archive" element={<Archive />} />
         <Route path="/settings" element={<Settings />} />
