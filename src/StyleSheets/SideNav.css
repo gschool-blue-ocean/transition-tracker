@@ -7,10 +7,29 @@
    font-family: var(--ff-primary);
    padding: calc(var(--spacer-container) * 1);
    line-height: var(--spacer-line);
+   color: var(--clr-primary-accent);
 }
 
 .sideNav {
-   background-color: var(--clr-accent-white);
+   /* background-color: var(--clr-accent-white); */
    border-radius: 10px;
    width: 100%;
+   text-align: center;
+}
+
+.sideNav--StudentBtn {
+   background: none;
+   border: none;
+   font-family: var(--ff-primary);
+}
+
+.sideNav--StudentBtn:hover:not(.activeStudent) {
+   color: white;
+}
+
+.activeStudent {
+   background-color: var(--clr-bgprimary-dark);
+   color: white;
+   border-radius: 5px;
+   padding: 5px;
 }
