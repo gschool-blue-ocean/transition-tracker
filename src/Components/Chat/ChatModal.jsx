@@ -94,49 +94,49 @@ function ChatModal({ socket }) {
     }
 
     return (
-        <div className='chatModalContainer'>
+        // <div className='chatModalContainer'>
 
-            <div className='chatContainer'>
+        <div className='chatContainer'>
 
-                <ScrollToBottom className='scroll'>
-                    <div className='chatBody'>
+            <ScrollToBottom className='scroll'>
+                <div className='chatBody'>
 
-                        {
-                            allMsgs.map((elem, index) => {
-                                return (<>
-                                    <div className={elem.author_id === userData.user_id ? 'rightMsg' : ' leftMsg'} key={index}>
-                                        <p className="msgContent">{elem.content}</p>
-                                        <p className='msgFooter'>{new Date(elem.date_time).toLocaleString()}</p>
-                                    </div>
-                                    <p className={elem.author_id === userData.user_id ? 'rightAuthor msgFooter' : ' leftAuthor msgFooter'}>{elem.author_name}</p>
-                                </>
+                    {
+                        allMsgs.map((elem, index) => {
+                            return (<>
+                                <div className={elem.author_id === userData.user_id ? 'rightMsg' : ' leftMsg'} key={index}>
+                                    <p className="msgContent">{elem.content}</p>
+                                    <p className='msgFooter'>{new Date(elem.date_time).toLocaleString()}</p>
+                                </div>
+                                <p className={elem.author_id === userData.user_id ? 'rightAuthor msgFooter' : ' leftAuthor msgFooter'}>{elem.author_name}</p>
+                            </>
 
-                                )
-                            })
-                        }
-                    </div>
-                </ScrollToBottom>
-                <span className="msgErr" style={errorMessage ? showMsg : hideMsg}>Can't send an empty message. Please enter a message below.</span>
-                <div className='chatFooter'>
-                    <input
-                        className='inputBox'
-                        type='text'
-                        placeholder='Type your msg here...'
-                        name="content"
-                        value={inputValue.content}
-                        onChange={handleChange}
-                        onKeyPress={(e) => { e.key === 'Enter' && handleClick() }}
-                    />
-                    <BsFillArrowRightCircleFill className="sendMsgBtn" onClick={handleClick} />
-                    <MdAddReaction className="emojiBtn" onClick={() => setShowEmojiPicker(!showEmojiPicker)} />
+                            )
+                        })
+                    }
                 </div>
-
-                {showEmojiPicker && <Picker onEmojiClick={onEmojiClick} />}
-
+            </ScrollToBottom>
+            <span className="msgErr" style={errorMessage ? showMsg : hideMsg}>Can't send an empty message. Please enter a message below.</span>
+            <div className='chatFooter'>
+                <input
+                    className='inputBox'
+                    type='text'
+                    placeholder='Type your msg here...'
+                    name="content"
+                    value={inputValue.content}
+                    onChange={handleChange}
+                    onKeyPress={(e) => { e.key === 'Enter' && handleClick() }}
+                />
+                <BsFillArrowRightCircleFill className="sendMsgBtn" onClick={handleClick} />
+                <MdAddReaction className="emojiBtn" onClick={() => setShowEmojiPicker(!showEmojiPicker)} />
             </div>
 
+            {showEmojiPicker && <Picker onEmojiClick={onEmojiClick} />}
 
-        </div >
+        </div>
+
+
+        // </div >
     )
 }
 

@@ -1,21 +1,14 @@
-.chatModalContainer {
-    display: grid;
-    justify-content: center;
-    box-sizing: border-box;
-    margin-top: .5rem;
-    width: 100%;
-}
-
 .chatContainer {
-    border: 1px solid #333;
+    margin-top: .5rem;
     padding: 1rem;
     display: grid;
     gap: 1rem;
-    width: 45rem;
+    width: 100%;
     justify-items: center;
     background-color: hsl(203, 97%, 13%);
     border-radius: 25px;
-    box-shadow: 5px 5px 5px #333;
+    box-shadow: 10px 10px 10px #333;
+    grid-area: ChatModal;
 }
 
 .chatBody {

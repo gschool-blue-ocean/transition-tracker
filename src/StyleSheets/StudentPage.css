@@ -7,6 +7,7 @@
    margin: 0;
    padding: 0;
 }
+
 body {
    height: 100vh;
    background-color: var(--clr-bgprimary-dark);
@@ -40,7 +41,7 @@ body {
       "StuHeader StuHeader StuHeader"
       "StuInfo StuTasks StuTasks"
       "StuInfo StuTasks StuTasks"
-      "StuNotes StuNotes StuNotes";
+      "ChatModal ChatModal ChatModal";
 
    grid-template-columns: 1fr 1fr 1fr;
    border-radius: 10px;
@@ -86,7 +87,7 @@ body {
    grid-area: StuInfo;
 }
 
-.SDash--Info-card > ul,
+.SDash--Info-card>ul,
 li,
 span {
    list-style: none;
@@ -102,8 +103,8 @@ span {
    border-radius: 10px;
 }
 
-ul > h4,
-li > h4 {
+ul>h4,
+li>h4 {
    margin-top: 1em;
 }
 

@@ -129,23 +129,13 @@ export default function StudentPage({ allUsersData, socket }) {
             <Modal isOpen={modalIsOpen} onAfterOpen={afterOpenModal} onRequestClose={closeModal} style={customStyles}>
                <SPTaskModal />
             </Modal>
-            <div className="SDash--Notes">
-               {/* <label>Messaging</label> */}
-               {/* <textarea id="StuNotes--TextArea"> */}
-               <div>
-                  {userData.admin ?
-
-                     <ChatModal socket={socket} />
-
-                     :
-
-                     <ChatModal socket={socket} />
-
-                  }
-               </div>
-
-               {/* </textarea> */}
-            </div>
+            {/* <div className="SDash--Notes"> */}
+            {/* <label>Messaging</label> */}
+            {/* <textarea id="StuNotes--TextArea"> */}
+            <ChatModal socket={socket} />
+            {/* </div> */}
+            {/* </textarea> */}
+            {/* </div> */}
          </div>
       </div>
    );
