@@ -6,6 +6,8 @@ import SPTaskModal from "./components/SP-TaskModal";
 import "../../StyleSheets/StudentPage.css";
 import SideNav from "../SideNav/SideNav";
 import LoginContext from "../../Context/LoginContext";
+import ChatModal from '../Chat/ChatModal';
+
 
 const customStyles = {
    content: {
@@ -23,7 +25,7 @@ const customStyles = {
 
 // Modal.setAppElement(".AppContainer");
 
-export default function StudentPage(allUsersData) {
+export default function StudentPage(allUsersData, userData, socket) {
    const [modalIsOpen, setIsOpen] = useState(false);
    const { userData } = useContext(LoginContext);
 
@@ -129,9 +131,23 @@ export default function StudentPage(allUsersData) {
             </Modal>
             <div className="SDash--Notes">
                <label>Messaging</label>
-               <textarea id="StuNotes--TextArea"></textarea>
+               <textarea id="StuNotes--TextArea">
+                {userData.admin ?
+         <>
+            <h1>Admin view</h1>
+            <ChatModal socket={socket} />
+         </>
+         :
+         <>
+            <h1>Student view</h1>
+            <ChatModal socket={socket} />
+
+         </>
+      }
+               </textarea>
             </div>
          </div>
       </div>
    );
+
 }

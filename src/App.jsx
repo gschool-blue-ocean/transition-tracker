@@ -42,28 +42,23 @@ function App() {
          .catch((err) => console.log(err));
    };
 
-   return (
-      <div className="AppContainer">
-         {loading ? <Loading /> : null}
-         {login || userData || localStorage.currentUser ? <Header /> : null}
-         <Routes>
-            <Route
-               path="/"
-               element={
-                  login ? (
-                     <StudentPage userData={userData} setUserData={setUserData} invokeSetLogin={invokeSetLogin} />
-                  ) : (
-                     <LandingPage invokeSetLogin={invokeSetLogin} />
-                  )
-               }
-            />
-            <Route path="/createAccount" element={<CreateAccountModal />} />
-            <Route path="/archive" element={<Archive />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="*" element={<NotFound />} />
-         </Routes>
-      </div>
-   );
+
+
+  return (
+    <div className="AppContainer">
+      {loading ? <Loading /> : null}
+      {(login && userData) || (localStorage.currentUser) ? <Header /> : null}
+
+      <Routes>
+        <Route path="/" element={login ? <StudentPage socket={socket} userData={userData} setUserData={setUserData} invokeSetLogin={invokeSetLogin} /> : <LandingPage invokeSetLogin={invokeSetLogin} />} />
+        <Route path="/createAccount" element={<CreateAccountModal />} />
+        <Route path="/archive" element={<Archive />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+
+    </div>
+  );
 }
 
 export default App;

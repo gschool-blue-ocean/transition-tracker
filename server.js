@@ -27,9 +27,22 @@ server.listen(PORT, () => {
 io.on("connection", (socket) => {
     console.log("User Connected", socket.id)
 
+
+    socket.on("join_room", id => {
+        socket.join(id)
+        console.log('joined Room#', id)
+    })
+
+    socket.on("send_message", (msgData) => {
+        controller.createNewComment(msgData)
+        socket.to(msgData.student_id).emit("receive_message", msgData)
+    })
+
     socket.on("disconnect", () => {
         console.log("User Disconnected", socket.id)
     })
+
+
 })
 
 app.use(express.json());
