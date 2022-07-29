@@ -66,6 +66,19 @@ const getOneUserByID = async (req, res) => {
     }
 }
 
+const getAllUsersByCohortID = async (req, res) => {
+
+    try {
+        let client = await pool.connect()
+        let data = await client.query('SELECT * FROM users WHERE cohort_id = $1', [req.params.id])
+        res.json(data.rows)
+        client.release()
+
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
+}
 const createNewUser = async (req, res) => {
 
     const { first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user, mos, interests } = req.body
@@ -104,20 +117,6 @@ const login = async (req, res) => {
     }
 }
 
-// const createNewUser = async (req, res) => {
-//     try {
-//         const create = await createUserWithEmailAndPassword(
-//             auth,
-//             req.body.username,
-//             req.body.password
-//         )
-//         res.send(create)
-//     } catch (error) {
-//         if (error) {
-//             res.send(error)
-//         }
-//     }
-// }
 
 const createNewAdmin = async (req, res) => {
 
@@ -351,6 +350,19 @@ const deleteOneDependentByID = async (req, res) => {
     }
 }
 
+const deleteAllDependentsBySponsorID = async (req, res) => {
+
+    try {
+        let client = await pool.connect()
+        let data = await client.query('DELETE FROM dependents WHERE sponsor_id = $1 RETURNING *', [req.params.id])
+        res.json(data.rows)
+        client.release()
+
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
+}
 
 //! --------- TASKS Table logic -------------
 const getAllTasks = async (req, res) => {
@@ -435,6 +447,19 @@ const deleteOneTaskByID = async (req, res) => {
     }
 }
 
+const deleteAllTasksByStudentID = async (req, res) => {
+
+    try {
+        let client = await pool.connect()
+        let data = await client.query('DELETE FROM tasks WHERE student_id = $1 RETURNING *', [req.params.id])
+        res.json(data.rows)
+        client.release()
+
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
+}
 
 //! -----------COMMENTS Table logic -------------
 const getAllComments = async (req, res) => {
@@ -513,8 +538,23 @@ const deleteOneCommentByID = async (req, res) => {
     }
 }
 
+const deleteAllCommentsByStudentID = async (req, res) => {
+
+    try {
+        let client = await pool.connect()
+        let data = await client.query('DELETE FROM comments WHERE student_id = $1 RETURNING *', [req.params.id])
+        res.json(data.rows)
+        client.release()
+
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
+}
+
 module.exports = {
     testRoute,
+    hashAllPasswords,
     getAllUsers,
     getOneUserByID,
     createNewUser,
@@ -547,5 +587,8 @@ module.exports = {
     updateOneCommentByID,
     deleteOneCommentByID,
     login,
-    hashAllPasswords
+    deleteAllCommentsByStudentID,
+    deleteAllTasksByStudentID,
+    deleteAllDependentsBySponsorID,
+    getAllUsersByCohortID
 }

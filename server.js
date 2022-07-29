@@ -6,21 +6,44 @@ const cors = require("cors");
 const controller = require("./src/Backend/controller");
 const path = require("path");
 const PORT = process.env.PORT || 8000;
-const cookieParser = require("cookie-parser");
-const csrf = require("csurf");
+// const cookieParser = require("cookie-parser");
+// const csrf = require("csurf");
+const http = require('http')
+const { Server } = require('socket.io');
 
-// const csrfMiddleware = csrf({ cookie: true })
+const server = http.createServer(app)
+
+const io = new Server(server, {
+    cors: {
+        origin: "*",
+        methods: ['GET', 'POST'],
+    }
+})
+
+server.listen(PORT, () => {
+    console.log('web Socket running', PORT)
+})
+
+io.on("connection", (socket) => {
+    console.log("User Connected", socket.id)
+
+    socket.on("disconnect", () => {
+        console.log("User Disconnected", socket.id)
+    })
+})
 
 app.use(express.json());
 app.use(express.static("build"));
 app.use(cors());
+// app.listen(PORT, (err) => {
+//     if (err) return console.log(err);
+//     console.log(`Listening on port: ${PORT}`);
+// });
+
+// const csrfMiddleware = csrf({ cookie: true })
 // app.use(cookieParser())
 // app.use(csrfMiddleware)
 
-app.listen(PORT, (err) => {
-    if (err) return console.log(err);
-    console.log(`Listening on port: ${PORT}`);
-});
 
 //Middleware to require all routes have a cookie
 // app.all("*", controller.cookiesForAll)
@@ -28,11 +51,12 @@ app.listen(PORT, (err) => {
 //simple test route sends 'Hello World!'
 app.get('/test', controller.testRoute)
 
-
 // ------------USER/ADMIN Table Routes---------
 app.get('/api/users', controller.getAllUsers)
 
 app.get('/api/users/:id', controller.getOneUserByID)
+
+app.get('/api/users/cohort/:id', controller.getAllUsersByCohortID)
 
 app.post('/api/create/user', controller.createNewUser)
 
@@ -76,6 +100,8 @@ app.patch('/api/update/dependent/:id', controller.updateOneDependentByID)
 
 app.delete('/api/delete/dependent/:id', controller.deleteOneDependentByID)
 
+app.delete('/api/delete/alldependents/:id', controller.deleteAllDependentsBySponsorID)
+
 
 // --------- TASKS Table Routes -------------
 app.get('/api/tasks', controller.getAllTasks)
@@ -90,6 +116,9 @@ app.patch('/api/update/task/:id', controller.updateOneTaskByID)
 
 app.delete('/api/delete/task/:id', controller.deleteOneTaskByID)
 
+app.delete('/api/delete/alltasks/:id', controller.deleteAllTasksByStudentID)
+
+
 
 // ------------ COMMENTS Table Routes ------------
 app.get('/api/comments', controller.getAllComments)
@@ -103,6 +132,8 @@ app.post('/api/create/comment', controller.createNewComment)
 app.patch('/api/update/comment/:id', controller.updateOneCommentByID)
 
 app.delete('/api/delete/comment/:id', controller.deleteOneCommentByID)
+
+app.delete('/api/delete/allcomments/:id', controller.deleteAllCommentsByStudentID)
 
 
 // ---------Deployment & 404 route-----------
