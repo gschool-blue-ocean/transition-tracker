@@ -6,7 +6,7 @@ import SPTaskModal from "./components/SP-TaskModal";
 import "../../StyleSheets/StudentPage.css";
 import SideNav from "../SideNav/SideNav";
 import LoginContext from "../../Context/LoginContext";
-import ChatModal from '../Chat/ChatModal';
+import ChatModal from '../../Components/Chat/ChatModal';
 
 
 const customStyles = {
@@ -25,7 +25,7 @@ const customStyles = {
 
 // Modal.setAppElement(".AppContainer");
 
-export default function StudentPage(allUsersData, userData, socket) {
+export default function StudentPage({ allUsersData, socket }) {
    const [modalIsOpen, setIsOpen] = useState(false);
    const { userData } = useContext(LoginContext);
 
@@ -120,7 +120,7 @@ export default function StudentPage(allUsersData, userData, socket) {
                      <li>
                         <h4 className="text-left"> Relocation </h4>
                         <span className="title"> Planning to Rellocate?: </span>
-                        <span className="answer"> {userData.planning_to_rellocate}</span>
+                        <span className="answer"> {userData.planning_to_relocate}</span>
                      </li>
                   </ul>
                </div>
@@ -130,21 +130,21 @@ export default function StudentPage(allUsersData, userData, socket) {
                <SPTaskModal />
             </Modal>
             <div className="SDash--Notes">
-               <label>Messaging</label>
-               <textarea id="StuNotes--TextArea">
-                {userData.admin ?
-         <>
-            <h1>Admin view</h1>
-            <ChatModal socket={socket} />
-         </>
-         :
-         <>
-            <h1>Student view</h1>
-            <ChatModal socket={socket} />
+               {/* <label>Messaging</label> */}
+               {/* <textarea id="StuNotes--TextArea"> */}
+               <div>
+                  {userData.admin ?
 
-         </>
-      }
-               </textarea>
+                     <ChatModal socket={socket} />
+
+                     :
+
+                     <ChatModal socket={socket} />
+
+                  }
+               </div>
+
+               {/* </textarea> */}
             </div>
          </div>
       </div>

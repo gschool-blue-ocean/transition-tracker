@@ -14,6 +14,8 @@ export default function AdminNav() {
    }, []);
 
    const handleClick = (e) => {
+      document.querySelectorAll('.sideNav--StudentBtn').forEach(elem => elem.classList.remove('activeStudent'))
+
       setActiveStudent(e.target.id);
       e.target.classList.toggle("activeStudent");
    };
