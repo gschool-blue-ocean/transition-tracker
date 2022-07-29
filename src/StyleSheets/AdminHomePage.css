@@ -82,9 +82,11 @@ h1 { overflow: visible }
   align-self: center;
   background-color: var(--clr-bgsecondary-contrast);
   border-radius: 10px;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 90px;
+  margin-right: 90px;
   box-shadow: 5px 5px 10px #888888;
+  min-width:300px;
+  overflow: scroll;
  
 }
 
@@ -101,6 +103,7 @@ h1 { overflow: visible }
   max-height: calc(90vh - 2rem);
   width: calc(100vw - 2rem);
   max-width: calc(100vw - 2rem);
+  min-width: 300px;
   display: grid;
   grid-template-columns: 1fr 4fr;
   gap: 1rem;
@@ -116,7 +119,7 @@ h1 { overflow: visible }
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-template-rows: 200px repeat(5, 1fr);
-  min-width: 250px;
+  min-width: 300px;
   color: var(--clr-primary-accent);
   place-content: center center;
   text-align: center;
@@ -252,4 +255,6 @@ h1 { overflow: visible }
   grid-column: 6 / 7;
   border-radius: 10px;
   min-width: 100px;
+  border-color: black;
+  border: 3ch;
 }
