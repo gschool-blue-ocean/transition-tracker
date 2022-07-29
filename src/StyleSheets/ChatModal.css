@@ -3,6 +3,7 @@
     justify-content: center;
     box-sizing: border-box;
     margin-top: .5rem;
+    width: 100%;
 }
 
 .chatContainer {
