@@ -9,32 +9,114 @@
     padding: 1rem;
     display: grid;
     gap: 1rem;
-    width: 20rem;
+    width: 25rem;
     justify-items: center;
+    background-color: #012361;
+    border-radius: 25px;
+    box-shadow: 5px 5px 5px #333;
 }
 
 .chatBody {
+    display: grid;
+    padding: .5rem;
+    background-color: whitesmoke;
+}
+
+.scroll {
     border: 1px solid #333;
-    height: 10rem;
+    height: 15rem;
     width: 100%;
+    overflow: auto;
+    border-radius: 15px;
+
 }
 
 .chatFooter {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .25rem;
+    justify-content: space-between;
 }
 
 .chatFooter input {
     width: 82%;
-    margin-right: 5px;
 }
 
-.chatFooter button {
+.inputBox {
     border: none;
-    background-color: #5555;
-    padding: .15rem;
-    border-radius: 999px;
+    padding: .25rem;
+    border-radius: 25px;
 }
 
-.chatFooter button:hover {
+.inputBox:focus {
+    outline: none;
+}
+
+.rightMsg {
+    justify-self: right;
+    background: lightblue;
+    width: fit-content;
+    height: fit-content;
+    padding: .7rem;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.leftMsg {
+    justify-self: left;
+    background-color: lightgray;
+    width: fit-content;
+    height: fit-content;
+    padding: .7rem;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.msgFooter {
+    font-size: .8rem;
+}
+
+.rightAuthor {
+    justify-self: right;
+    margin-bottom: 10px;
+}
+
+.leftAuthor {
+    justify-self: left;
+    margin-bottom: 10px;
+}
+
+.msgContent {
+    width: fit-content;
+    max-width: 200px;
+    overflow-wrap: break-word;
+}
+
+.msgErr {
+    color: hsl(0, 60%, 56%);
+    font-size: .8rem;
+}
+
+.sendMsgBtn {
+    color: hsl(98, 58%, 48%);
+    font-size: 1.5rem;
+}
+
+.sendMsgBtn:hover {
     cursor: pointer;
+    transform: scale(1.5);
+}
+
+.emojiBtn {
+    color: hsl(47, 95%, 60%);
+    font-size: 1.5rem;
+}
+
+.emojiBtn:hover {
+    cursor: pointer;
+    transform: scale(1.5);
 }
