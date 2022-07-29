@@ -66,6 +66,19 @@ const getOneUserByID = async (req, res) => {
     }
 }
 
+const getAllUsersByCohortID = async (req, res) => {
+
+    try {
+        let client = await pool.connect()
+        let data = await client.query('SELECT * FROM users WHERE cohort_id = $1', [req.params.id])
+        res.json(data.rows)
+        client.release()
+
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
+}
 const createNewUser = async (req, res) => {
 
     const { first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user, mos, interests } = req.body
@@ -104,20 +117,6 @@ const login = async (req, res) => {
     }
 }
 
-// const createNewUser = async (req, res) => {
-//     try {
-//         const create = await createUserWithEmailAndPassword(
-//             auth,
-//             req.body.username,
-//             req.body.password
-//         )
-//         res.send(create)
-//     } catch (error) {
-//         if (error) {
-//             res.send(error)
-//         }
-//     }
-// }
 
 const createNewAdmin = async (req, res) => {
 
@@ -422,7 +421,6 @@ const createNewTask = async (req, res) => {
 const updateOneTaskByID = async (req, res) => {
     const { title, date, description, remarks, completed } = req.body
 
-    //let data = await client.query('UPDATE dependents SET age = $1, relation = $2 WHERE dependent_id = $3 RETURNING *', [age, relation, req.params.id])
     try {
         let client = await pool.connect()
         let data = await client.query('UPDATE tasks SET title = $1, date = $2, description = $3, remarks = $4, completed = $5 WHERE task_id = $6 RETURNING *', [title, date, description, remarks, completed, req.params.id])
@@ -499,17 +497,15 @@ const getOneCommentByID = async (req, res) => {
         res.send(error)
     }
 }
-const createNewComment = async (req, res) => {
-    const { student_id, author_id, content, date_time } = req.body
+const createNewComment = async (msgData) => {
+    const { student_id, author_id, author_name, content, date_time } = msgData
+
     try {
         let client = await pool.connect()
-        let data = await client.query('INSERT INTO comments (student_id, author_id, content, date_time) VALUES ($1, $2, $3, $4) RETURNING *', [student_id, author_id, content, date_time])
-        res.json(data.rows)
-        client.release()
+        await client.query('INSERT INTO comments (student_id, author_id, author_name, content, date_time) VALUES ($1, $2, $3, $4, $5) RETURNING *', [student_id, author_id, author_name, content, date_time])
 
     } catch (error) {
         console.log(error)
-        res.send(error)
     }
 }
 const updateOneCommentByID = async (req, res) => {
@@ -590,5 +586,7 @@ module.exports = {
     login,
     deleteAllCommentsByStudentID,
     deleteAllTasksByStudentID,
-    deleteAllDependentsBySponsorID
+    deleteAllDependentsBySponsorID,
+    getAllUsersByCohortID
 }
+

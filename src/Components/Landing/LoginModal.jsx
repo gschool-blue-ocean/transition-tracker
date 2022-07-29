@@ -153,7 +153,7 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
 
                     <button
                         type='submit'
-                        className='loginBtn'>Please Log In <CgEnter /> </button>
+                        className='loginBtn'>LOG IN <CgEnter /> </button>
 
                     {/* <button
                         type='button'
