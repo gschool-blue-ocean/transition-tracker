@@ -5,6 +5,7 @@ import SPDependents from "./components/SP-Dependents";
 import SPTaskModal from "./components/SP-TaskModal";
 import "../../StyleSheets/StudentPage.css";
 import SideNav from "../SideNav/SideNav";
+import LoginContext from "../../Context/LoginContext";
 
 const customStyles = {
    content: {
