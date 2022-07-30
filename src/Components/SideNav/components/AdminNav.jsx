@@ -1,18 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
 import AppContext from "../../../Context/AppContext";
+import LoginContext from "../../../Context/LoginContext";
 import Loading from "../../LoadingDisplay/Loading";
 
 export default function AdminNav({ viewClickedCohort }) {
    const { allUsersData, setLoading } = useContext(AppContext);
+   const { userData } = useContext(LoginContext)
    const [cohortStudents, setCohortStudents] = useState(null);
    const [activeStudent, setActiveStudent] = useState(null);
 
 
    useEffect(() => {
       if (viewClickedCohort) {
-         console.log(viewClickedCohort)
          getStudentList(viewClickedCohort.cohort_id);
+      }
 
+      if (userData.admin === false) {
+         getStudentList(userData.cohort_id)
       }
    }, [viewClickedCohort]);
 
@@ -38,7 +42,7 @@ export default function AdminNav({ viewClickedCohort }) {
       setLoading(false);
       return (
          <div className="sideNav">
-            <h3>{viewClickedCohort.cohort_name}</h3>
+            <h3>{viewClickedCohort ? viewClickedCohort.cohort_name : userData.cohort_name}</h3>
             <div>
                {cohortStudents.map((student) => {
                   return (
