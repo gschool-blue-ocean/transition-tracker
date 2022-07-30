@@ -1,42 +1,35 @@
 @import "./CustomProps.css";
 
-*,
-*::before,
-*::after {
-   box-sizing: border-box;
-   margin: 0;
-   padding: 0;
-}
-
-body {
-   height: 100vh;
-   background-color: var(--clr-bgprimary-dark);
-}
 
 /* ================== TEST ==================== */
 .test--grid {
    display: grid;
    grid-template-areas: "sideNav content";
    grid-template-columns: [first] 20% [second] auto;
-   margin: 3%;
+   /* margin: 3%; */
    gap: 3%;
+   height: 100%;
 }
 
 .sideNav--Wrapper {
    grid-area: sideNav;
+   height: 100%;
 }
 
 .StudentDash--Wrapper {
    grid-area: content;
+   height: 100%;
+
 }
 
 /* =========== Student Container ============== */
 
 .StudentDash--Wrapper {
+   padding: .5rem;
    /* margin: 3%; */
    display: grid;
-   padding: calc(var(--spacer-container) * 1);
-   line-height: var(--spacer-line);
+   /* padding: calc(var(--spacer-container) * 1); */
+   /* line-height: var(--spacer-line); */
    grid-template-areas:
       "StuHeader StuHeader StuHeader"
       "StuInfo StuTasks StuTasks"
@@ -46,7 +39,6 @@ body {
    grid-template-columns: 1fr 1fr 1fr;
    border-radius: 10px;
    background-color: var(--clr-secondary-accent);
-
    font-family: var(--ff-primary);
 }
 

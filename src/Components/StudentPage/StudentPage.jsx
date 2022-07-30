@@ -25,7 +25,7 @@ const customStyles = {
 
 // Modal.setAppElement(".AppContainer");
 
-export default function StudentPage({ allUsersData, socket }) {
+export default function StudentPage({ allUsersData, socket, viewClickedCohort }) {
    const [modalIsOpen, setIsOpen] = useState(false);
    const { userData } = useContext(LoginContext);
 
@@ -46,11 +46,9 @@ export default function StudentPage({ allUsersData, socket }) {
       let currentData = new Date();
    };
 
-   /**{userData.admin ? true : <Whatever /> } */
-   console.log();
    return (
       <div className="test--grid">
-         <SideNav />
+         <SideNav viewClickedCohort={viewClickedCohort} />
          <div className="StudentDash--Wrapper">
             <div className="SDash--Header">
                <h3 id="StuHeader--Name">{userData.name}</h3>

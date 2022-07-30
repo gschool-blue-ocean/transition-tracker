@@ -14,6 +14,7 @@ import NotFound from "./Components/LoadingDisplay/NotFound";
 import Archive from "./Components/Archive/Archive";
 import Settings from "./Components/Settings/Settings";
 import Header from "./Components/Header/Header";
+import Welcome from "./Components/Landing/Welcome";
 import io from "socket.io-client";
 
 const socket = io.connect("https://hacking-transition.herokuapp.com");
@@ -45,22 +46,22 @@ function App() {
 
 
 
-  return (
-    <div className="AppContainer">
-      {loading ? <Loading /> : null}
-      {(login && userData) || (localStorage.currentUser) ? <Header /> : null}
+   return (
+      <div className="AppContainer">
+         {loading ? <Loading /> : null}
+         {(login && userData) || (localStorage.currentUser) ? <Header /> : null}
 
-      <Routes>
-        <Route path="/" element={login ? <AdminHomePage userData={userData} setUserData={setUserData} invokeSetLogin={invokeSetLogin} /> : <LandingPage invokeSetLogin={invokeSetLogin} />} />
-        //<Route path="/" element={login ? <StudentPage socket={socket} userData={userData} setUserData={setUserData} invokeSetLogin={invokeSetLogin} /> : <LandingPage invokeSetLogin={invokeSetLogin} />} />
-        <Route path="/createAccount" element={<CreateAccountModal />} />
-        <Route path="/archive" element={<Archive />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+         <Routes>
 
-    </div>
-  );
+            <Route path='/' element={!login ? <LandingPage invokeSetLogin={invokeSetLogin} /> : <Welcome socket={socket} />} />
+            <Route path="/createAccount" element={<CreateAccountModal />} />
+            <Route path="/archive" element={<Archive />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="*" element={<NotFound />} />
+         </Routes>
+
+      </div>
+   );
 }
 
 export default App;

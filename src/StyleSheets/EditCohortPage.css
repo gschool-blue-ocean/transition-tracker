@@ -5,48 +5,47 @@
     text-align: center;
 }
 
-.cohort-info{
-    font-size:5ch;
+.cohort-info {
+    font-size: 5ch;
     padding-bottom: 1%;
-   
+
 }
 
-svg{
+svg {
     background: none;
 }
 
-.num-of-stu{
-    font-size:6ch;
+.num-of-stu {
+    font-size: 6ch;
 }
 
-ul{
-    font-size:5ch;
+.modal-page ul {
+    font-size: 5ch;
     display: grid;
     grid-template-columns: auto auto;
     justify-items: center;
 }
 
-.student-btn{
+.student-btn {
     padding: 1ch;
     border: none;
-    background-color:none;
+    background-color: none;
     background: none;
     font-size: 1.5ch;
 }
 
-.student-div{
+.student-div {
     /* display: grid; */
     background-color: var(--clr-bgsecondary-contrast);
     border-radius: 10px;
-    margin:10px;
+    margin: 10px;
     text-align: center;
     width: 70%;
     height: auto;
-    
+
 }
 
 
-button{
- font-size: 1.25ch;
-
+.cohort-info button {
+    font-size: 1.25ch;
 }

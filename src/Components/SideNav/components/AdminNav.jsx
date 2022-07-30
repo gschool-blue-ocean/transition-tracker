@@ -2,16 +2,19 @@ import React, { useContext, useEffect, useState } from "react";
 import AppContext from "../../../Context/AppContext";
 import Loading from "../../LoadingDisplay/Loading";
 
-export default function AdminNav() {
+export default function AdminNav({ viewClickedCohort }) {
    const { allUsersData, setLoading } = useContext(AppContext);
    const [cohortStudents, setCohortStudents] = useState(null);
    const [activeStudent, setActiveStudent] = useState(null);
 
-   let id = 1;
 
    useEffect(() => {
-      getStudentList(id);
-   }, []);
+      if (viewClickedCohort) {
+         console.log(viewClickedCohort)
+         getStudentList(viewClickedCohort.cohort_id);
+
+      }
+   }, [viewClickedCohort]);
 
    const handleClick = (e) => {
       document.querySelectorAll('.sideNav--StudentBtn').forEach(elem => elem.classList.remove('activeStudent'))
@@ -26,7 +29,7 @@ export default function AdminNav() {
          .then((list) => setCohortStudents(list));
    };
 
-   console.log(cohortStudents);
+   // console.log(cohortStudents);
 
    if (!cohortStudents) {
       setLoading(true);
@@ -35,7 +38,7 @@ export default function AdminNav() {
       setLoading(false);
       return (
          <div className="sideNav">
-            <h3>MSCP-12</h3>
+            <h3>{viewClickedCohort.cohort_name}</h3>
             <div>
                {cohortStudents.map((student) => {
                   return (

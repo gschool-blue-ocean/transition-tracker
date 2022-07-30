@@ -8,6 +8,8 @@
    padding: calc(var(--spacer-container) * 1);
    line-height: var(--spacer-line);
    color: var(--clr-primary-accent);
+   max-height: 85vh;
+   overflow: auto;
 }
 
 .sideNav {

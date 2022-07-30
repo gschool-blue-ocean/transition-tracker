@@ -1,13 +1,15 @@
 *,
 *::before,
-*::after{
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.AppContainer {
-    height: 100vh;
-}
+@import "./CustomProps.css";
 
+body {
+    /* height: 100vh; */
+    background-color: var(--clr-bgprimary-dark);
+}
