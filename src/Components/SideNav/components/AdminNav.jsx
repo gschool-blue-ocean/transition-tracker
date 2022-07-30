@@ -40,7 +40,11 @@ export default function AdminNav({ viewClickedCohort }) {
       return <Loading />;
    } else {
       setLoading(false);
+
+      //-Neo: We can move the logic from the H3 on line 49 to render the sideNav
+      //  only if an Admin is logged in 
       return (
+
          <div className="sideNav">
             <h3>{viewClickedCohort ? viewClickedCohort.cohort_name : userData.cohort_name}</h3>
             <div>
