@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Modal from "react-modal";
 import SPTasks from "./components/SP-Tasks";
 import SPDependents from "./components/SP-Dependents";
@@ -30,6 +30,13 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
    const { userData } = useContext(LoginContext);
    const [activeStudent, setActiveStudent] = useState({});
 
+   useEffect(() => {
+      if (!userData.admin) {
+         console.log(userData)
+         document.querySelector('.test--grid').classList.add('studentView')
+         setActiveStudent(userData)
+      }
+   }, [])
 
    function openModal() {
       setIsOpen(true);

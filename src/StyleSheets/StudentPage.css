@@ -10,7 +10,12 @@
    gap: 3%;
    height: 100%;
    /* overflow: auto; */
+}
 
+.studentView {
+   grid-template-areas: "content content";
+   padding: 0 2% 0 2%
+      /* grid-template-columns: 100%; */
 }
 
 .sideNav--Wrapper {
