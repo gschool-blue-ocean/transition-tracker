@@ -9,12 +9,14 @@
     border-radius: 25px;
     box-shadow: 10px 10px 10px #333;
     grid-area: ChatModal;
+    height: fit-content;
 }
 
 .chatBody {
     display: grid;
     padding: .5rem;
     background-color: whitesmoke;
+    min-height: 100%;
 }
 
 .scroll {
@@ -114,4 +116,8 @@
 .emojiBtn:hover {
     cursor: pointer;
     transform: scale(1.5);
+}
+
+aside.emoji-picker-react {
+    min-width: 100%;
 }

@@ -32,29 +32,32 @@
     font-size: 1.5rem;
 }
 
-.navbarUL li:nth-of-type(4) {
+.logoutBtn {
     position: fixed;
     right: 0;
 }
 
-.navLink {
+.navLink,
+.logoutBtn {
     text-decoration: none;
     color: inherit;
     opacity: .5;
     padding: .6rem;
 }
 
-.navLink:hover {
-    cursor: pointer;
+.navLink:hover,
+.logoutBtn:hover {
     opacity: 1;
 }
 
 
 #logoutBtn:hover {
     color: red;
+    cursor: pointer;
+
 }
 
-.activeTab {
+.navLink.active {
     opacity: 1;
     background-color: #7775;
     border-top-left-radius: 50%;

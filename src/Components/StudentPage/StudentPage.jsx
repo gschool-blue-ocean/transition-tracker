@@ -28,6 +28,8 @@ const customStyles = {
 export default function StudentPage({ allUsersData, socket, viewClickedCohort }) {
    const [modalIsOpen, setIsOpen] = useState(false);
    const { userData } = useContext(LoginContext);
+   const [activeStudent, setActiveStudent] = useState({});
+
 
    function openModal() {
       setIsOpen(true);
@@ -48,7 +50,7 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
 
    return (
       <div className="test--grid">
-         <SideNav viewClickedCohort={viewClickedCohort} />
+         {userData.admin && <SideNav viewClickedCohort={viewClickedCohort} activeStudent={activeStudent} setActiveStudent={setActiveStudent} />}
          <div className="StudentDash--Wrapper">
             <div className="SDash--Header">
                <h3 id="StuHeader--Name">{userData.name}</h3>
@@ -127,13 +129,9 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
             <Modal isOpen={modalIsOpen} onAfterOpen={afterOpenModal} onRequestClose={closeModal} style={customStyles}>
                <SPTaskModal />
             </Modal>
-            {/* <div className="SDash--Notes"> */}
-            {/* <label>Messaging</label> */}
-            {/* <textarea id="StuNotes--TextArea"> */}
-            <ChatModal socket={socket} />
-            {/* </div> */}
-            {/* </textarea> */}
-            {/* </div> */}
+
+            <ChatModal socket={socket} activeStudent={activeStudent} />
+
          </div>
       </div>
    );

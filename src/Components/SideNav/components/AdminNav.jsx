@@ -3,12 +3,10 @@ import AppContext from "../../../Context/AppContext";
 import LoginContext from "../../../Context/LoginContext";
 import Loading from "../../LoadingDisplay/Loading";
 
-export default function AdminNav({ viewClickedCohort }) {
+export default function AdminNav({ viewClickedCohort, setActiveStudent, activeStudent }) {
    const { allUsersData, setLoading } = useContext(AppContext);
    const { userData } = useContext(LoginContext)
    const [cohortStudents, setCohortStudents] = useState(null);
-   const [activeStudent, setActiveStudent] = useState(null);
-
 
    useEffect(() => {
       if (viewClickedCohort) {
@@ -20,17 +18,29 @@ export default function AdminNav({ viewClickedCohort }) {
       }
    }, [viewClickedCohort]);
 
+
+   useEffect(() => {
+
+      if (cohortStudents) {
+         setActiveStudent(cohortStudents[0])
+         document.getElementById(cohortStudents[0].user_id).classList.add('activeStudent')
+
+      }
+   }, [cohortStudents])
+
+
    const handleClick = (e) => {
+
       document.querySelectorAll('.sideNav--StudentBtn').forEach(elem => elem.classList.remove('activeStudent'))
 
-      setActiveStudent(e.target.id);
+      setActiveStudent(cohortStudents[e.currentTarget.getAttribute('data-index')]);
       e.target.classList.toggle("activeStudent");
    };
 
    const getStudentList = (id) => {
       fetch(`https://hacking-transition.herokuapp.com/api/users/cohort/${id}`)
          .then((res) => res.json())
-         .then((list) => setCohortStudents(list));
+         .then((list) => setCohortStudents(list))
    };
 
    // console.log(cohortStudents);
@@ -48,12 +58,13 @@ export default function AdminNav({ viewClickedCohort }) {
          <div className="sideNav">
             <h3>{viewClickedCohort ? viewClickedCohort.cohort_name : userData.cohort_name}</h3>
             <div>
-               {cohortStudents.map((student) => {
+               {cohortStudents.map((student, index) => {
                   return (
                      <div>
                         <button
                            className={"sideNav--StudentBtn"}
                            id={student.user_id}
+                           data-index={index}
                            key={student.user_id}
                            onClick={handleClick}
                         >
