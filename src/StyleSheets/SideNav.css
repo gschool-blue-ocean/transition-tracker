@@ -23,6 +23,7 @@
    background: none;
    border: none;
    font-family: var(--ff-primary);
+   border-bottom: 1px solid #2225;
 }
 
 .sideNav--StudentBtn:hover:not(.activeStudent) {

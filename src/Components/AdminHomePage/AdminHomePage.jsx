@@ -25,8 +25,7 @@ function AdminHomePage({ socket }) {
     }
 
     const handleCohortClicked = (e) => {
-
-        // setViewClickedCohort(e.currentTarget.id)
+        handleActiveCohortTab(e.currentTarget)
 
         allCohortsData.forEach(element => {
             if (element.cohort_id === +e.currentTarget.id) {
@@ -36,20 +35,33 @@ function AdminHomePage({ socket }) {
 
         setShowClickedCohort(true)
     }
+
+    const handleActiveCohortTab = (element) => {
+        document.querySelectorAll('.listOfCohorts').forEach(elem => elem.classList.remove('activeCohortTab'))
+        element.classList.add('activeCohortTab')
+    }
+
+    const handleClickedAllBtn = (e) => {
+        handleActiveCohortTab(e.currentTarget)
+        setShowClickedCohort(false)
+    }
     return (
         <div id="cohort-container">
             <div id="cohort-nav" className="mainContainer">
 
                 <div className='list'>
                     <div className='cohort-list-title'>Cohorts</div>
-                    <button onClick={() => setShowClickedCohort(false)} id="all-cohorts-btn">
-                        All
-                    </button>
+
+                    <div onClick={handleClickedAllBtn} className='listOfCohorts activeCohortTab'>
+                        <button id="all-cohorts-btn" >
+                            All
+                        </button>
+                    </div>
 
                     {
                         allCohortsData.map(cohort => {
                             return (
-                                <div id={cohort.cohort_id} onClick={handleCohortClicked} className='listOfCohorts'><p>{cohort.cohort_name}</p></div>
+                                <div id={cohort.cohort_id} onClick={handleCohortClicked} className='listOfCohorts '><p>{cohort.cohort_name}</p></div>
                             )
                         })
                     }
@@ -78,7 +90,6 @@ function AdminHomePage({ socket }) {
                                                 <div className='cardSettingsIcon'>
                                                     <>
                                                         <FiSettings onClick={setModalIsOpenToTrue} id={cohort.cohort_id}>{EditCohortPage} </FiSettings>
-
 
                                                     </>
                                                 </div>

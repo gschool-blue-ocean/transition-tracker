@@ -66,37 +66,37 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
 
                      <li>
                         <span className="title"> Email: </span>
-                        <span className="answer">{userData.email}</span>
+                        <span className="answer">{activeStudent.email}</span>
                      </li>
 
                      <li>
                         <span className="title"> Branch: </span>
-                        <span className="answer"> {userData.branch}</span>
+                        <span className="answer"> {activeStudent.branch}</span>
                      </li>
 
                      <li>
                         <span className="title under-line"> MOS: </span>
-                        <span className="answer"> {userData.mos} </span>
+                        <span className="answer"> {activeStudent.mos} </span>
                      </li>
 
                      <li>
                         <span className="title"> Duty Station: </span>
-                        <span className="answer"> {userData.duty_station}</span>
+                        <span className="answer"> {activeStudent.duty_station}</span>
                      </li>
 
                      <li>
                         <span className="title"> Terminal Leave: </span>
-                        <span className="answer"> {userData.leave_start_date}</span>
+                        <span className="answer"> {activeStudent.leave_start_date}</span>
                      </li>
 
                      <li>
                         <span className="title"> ETS: </span>
-                        <span className="answer"> {userData.ets_date} </span>
+                        <span className="answer"> {activeStudent.ets_date} </span>
                      </li>
 
                      <li>
                         <span className="title"> TAP Status: </span>
-                        <span className="answer"> {userData.taps_complete} </span>
+                        <span className="answer"> {activeStudent.taps_complete ? 'Yes' : 'No'} </span>
                      </li>
 
                      <li>
@@ -109,18 +109,18 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
                      <li>
                         <h4 className="text-left"> Education </h4>
                         <span className="title"> Degree: </span>
-                        <span className="answer"> {userData.highest_education}</span>
+                        <span className="answer"> {activeStudent.highest_education}</span>
                      </li>
 
                      <li>
-                        <span className="title"> Interest in pursing a degree </span>
-                        <span className="answer">{userData.interests}</span>
+                        <h4 className="text-left"> Interests </h4>
+                        <span className="answer">{activeStudent.interests}</span>
                      </li>
 
                      <li>
                         <h4 className="text-left"> Relocation </h4>
-                        <span className="title"> Planning to Rellocate?: </span>
-                        <span className="answer"> {userData.planning_to_relocate}</span>
+                        <span className="title"> Planning to Relocate?: </span>
+                        <span className="answer"> {activeStudent.planning_to_relocate ? 'Yes' : 'No'}</span>
                      </li>
                   </ul>
                </div>

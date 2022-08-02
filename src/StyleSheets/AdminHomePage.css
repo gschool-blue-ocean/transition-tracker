@@ -113,6 +113,11 @@
 
 }
 
+.listOfCohorts {
+  width: 70%;
+  text-align: center;
+}
+
 .listOfCohorts>p {
   /* color: var(--clr-primary-accent); */
   color: white;
@@ -120,6 +125,10 @@
   text-decoration: none;
 }
 
+.activeCohortTab {
+  background-color: #5555;
+  border-radius: 9999px;
+}
 
 .listOfCohorts:hover,
 #all-cohorts-btn:hover,

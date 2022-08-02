@@ -33,7 +33,7 @@
 }
 
 .logoutBtn {
-    position: fixed;
+    position: absolute;
     right: 0;
 }
 

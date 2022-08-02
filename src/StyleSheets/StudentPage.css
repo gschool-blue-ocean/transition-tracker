@@ -9,6 +9,8 @@
    /* margin: 3%; */
    gap: 3%;
    height: 100%;
+   /* overflow: auto; */
+
 }
 
 .sideNav--Wrapper {
@@ -19,7 +21,6 @@
 .StudentDash--Wrapper {
    grid-area: content;
    height: 100%;
-   overflow: auto;
 }
 
 /* =========== Student Container ============== */
@@ -40,6 +41,9 @@
    border-radius: 10px;
    background-color: var(--clr-secondary-accent);
    font-family: var(--ff-primary);
+   max-height: 85vh;
+
+   overflow: auto !important;
 }
 
 /* =============== Student Header ============= */
