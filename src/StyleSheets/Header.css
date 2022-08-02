@@ -32,6 +32,11 @@
     font-size: 1.5rem;
 }
 
+.navbarUL li:nth-of-type(4) {
+    position: fixed;
+    right: 0;
+}
+
 .navLink {
     text-decoration: none;
     color: inherit;
