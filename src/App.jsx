@@ -52,9 +52,10 @@ function App() {
 
          <Routes>
 
-            <Route path='/' element={!login ? <LandingPage invokeSetLogin={invokeSetLogin} /> : <Welcome socket={socket} />} />
+            <Route path='/' element={!login ? <LandingPage invokeSetLogin={invokeSetLogin} /> : <Welcome socket={socket} isOnArchivePage={false} />} />
             <Route path="/createAccount" element={<CreateAccountModal />} />
-            <Route path="/archive" element={<Archive />} />
+            {/* <Route path="/archive" element={<Archive />} /> */}
+            <Route path="/archive" element={<Welcome isOnArchivePage={true} socket={socket} />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="*" element={<NotFound />} />
          </Routes>

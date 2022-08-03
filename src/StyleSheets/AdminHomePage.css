@@ -26,6 +26,7 @@
   align-self: center;
   justify-self: center;
   height: 100%;
+  height: fit-content;
   text-align: center;
   vertical-align: center;
   width: 100%;
@@ -96,6 +97,7 @@
   /* justify-content: center; */
   justify-items: center;
   align-items: center;
+  align-content: flex-start;
   height: 100%;
   width: 100%;
   /* grid-row: 2 / 6; */
@@ -124,6 +126,7 @@
   text-shadow: 2px 2px 4px #000000;
   text-decoration: none;
 }
+
 
 .activeCohortTab {
   background-color: #5555;

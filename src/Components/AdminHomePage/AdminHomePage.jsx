@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import AppContext from "../../Context/AppContext";
 import '../../StyleSheets/AdminHomePage.css';
 import { FiSettings } from 'react-icons/fi';
@@ -6,7 +6,7 @@ import EditCohortPage from './EditCohortPage'
 import Modal from 'react-modal';
 import StudentPage from '../StudentPage/StudentPage';
 
-function AdminHomePage({ socket }) {
+function AdminHomePage({ socket, isOnArchivePage }) {
 
     const { allUsersData, allCohortsData } = useContext(AppContext)
     const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -15,6 +15,24 @@ function AdminHomePage({ socket }) {
     const [viewClickedCohort, setViewClickedCohort] = useState(null)
 
     const [showClickedCohort, setShowClickedCohort] = useState(false)
+
+    const [cohortsToMap, setCohortsToMap] = useState([])
+
+    useEffect(() => {
+        if (isOnArchivePage) {
+            let filteredCohort = allCohortsData.filter(cohort => { return cohort.active === false })
+            setCohortsToMap(filteredCohort)
+        }
+        else {
+            let filteredCohort = allCohortsData.filter(cohort => { return cohort.active === true })
+            setCohortsToMap(filteredCohort)
+        }
+    }, [allUsersData, window.location.pathname])
+
+    useEffect(() => {
+        handleActiveCohortTab(document.getElementById('all-cohort-btn-div'))
+        setShowClickedCohort(false)
+    }, [window.location.pathname])
 
     const setModalIsOpenToTrue = (e) => {
         setCurrentCohort(e.currentTarget.id)
@@ -52,17 +70,19 @@ function AdminHomePage({ socket }) {
                 <div className='list'>
                     <div className='cohort-list-title'>Cohorts</div>
 
-                    <div onClick={handleClickedAllBtn} className='listOfCohorts activeCohortTab'>
+                    <div onClick={handleClickedAllBtn} id="all-cohort-btn-div" className='listOfCohorts activeCohortTab'>
                         <button id="all-cohorts-btn" >
                             All
                         </button>
                     </div>
 
                     {
-                        allCohortsData.map(cohort => {
+                        cohortsToMap.map(cohort => {
+
                             return (
                                 <div id={cohort.cohort_id} onClick={handleCohortClicked} className='listOfCohorts '><p>{cohort.cohort_name}</p></div>
                             )
+
                         })
                     }
                     <button id="add-cohort-btn">
@@ -82,7 +102,7 @@ function AdminHomePage({ socket }) {
                     <>
                         <div id='cohort-view'>
                             {
-                                allCohortsData.map((cohort) => {
+                                cohortsToMap.map((cohort) => {
                                     return (
                                         <div className='test-cohort' key={cohort.cohort_id}>
                                             <div className='cardHeader'>
