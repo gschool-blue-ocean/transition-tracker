@@ -1,0 +1,295 @@
+.createModalContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-family: Rubik, sans-serif !important;
+}
+
+.createContainer{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: rgb(0, 0, 0);
+    background-color: #C16733;
+    min-width: 65%;
+    max-width: 100%;
+    border-radius: 25px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.sub-headers{
+    display: flex;
+    justify-content: space-around;
+}
+
+.wholeUserCredential{
+    background-color:white;
+    margin-bottom: 20px;
+    white-space: nowrap;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.609)
+}
+
+.wholeServiceInfo{
+    background-color: white;
+    margin-bottom: 20px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.609)
+}
+
+.wholeLeaveDiv{
+    background-color:white;
+    margin-bottom: 20px;
+    white-space: nowrap;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.609)
+}
+
+.wholeDependentDiv{
+    background-color:white;
+    margin-bottom: 20px;
+    white-space: nowrap;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.609);
+}
+
+.wholeRelocationDiv{
+    background-color:white;
+    margin-bottom: 20px;
+    white-space: nowrap;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.609);
+}
+
+.wholeEducationDiv{
+    background-color:white;
+    margin-bottom: 20px;
+    white-space: nowrap;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.609);
+}
+
+.account-info{
+    margin-top: 10px;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 5px;
+    justify-content: space-around;
+    white-space: nowrap;
+    overflow-x:scroll;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+}
+
+.header-div{
+    display: flex;
+    justify-content: center;
+    color:white;
+    text-shadow:3px 3px 10px rgba(0, 0, 0, 0.609) ;
+    font-size: 2.5ch;
+    padding-top: 2%;
+}
+
+.createInnerCredentials{
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+}
+
+.service-info-1{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    padding: 5px;
+    margin-top: 10px;
+    width: 100%;
+    justify-content: space-around;
+   
+}
+
+.service-info-2{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    margin-top: 10px;
+    width: 100%;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    
+}
+
+.leave-div{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.leave-question{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.leave-calender{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.dependent-div{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+    overflow-x: scroll;
+}
+
+.dependent-question{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    gap: 10px;
+}
+
+.add-dependent:hover {
+    color: rgb(24, 121, 0);
+    transform: scale(1.5) perspective(1px);
+    cursor: pointer;
+}
+
+.show-password:hover{
+    transform: scale(1.5) perspective(1px);
+    cursor: pointer;
+}
+
+.password-div{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.relation-div{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.remove-dependent:hover{
+    color: rgb(149, 1, 1);
+    transform: scale(1.5) perspective(1px);
+    cursor: pointer;
+}
+
+.dependent-remove-div{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-direction: row;
+}
+
+.relocate-div{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.education-div{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.interests-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+    background-color:white;
+    margin-bottom: 20px;
+    white-space: nowrap;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.609);
+    padding-bottom: 15px;
+}
+
+.welcome-header{
+    margin-bottom: 5px;
+}
+
+.interests-sub-header{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.email-div{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.username-div{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.ets-div{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.branch-div{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.mos-div{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.rank-div{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.duty-station-div{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.city-div{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.state-div{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.leave-p{
+    margin-left: 10px;
+}
+
+.taps-div{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}

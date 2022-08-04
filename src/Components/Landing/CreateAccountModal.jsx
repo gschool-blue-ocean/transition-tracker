@@ -2,19 +2,35 @@ import React, { useState, useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
 import LoginContext from "../../Context/LoginContext";
-import DatePicker from "react-datepicker";
+import { BsEyeFill } from "react-icons/bs";
+import { MdOutlineAddCircle } from "react-icons/md";
+import { AiFillMinusCircle } from "react-icons/ai";
+import '../../StyleSheets/CreateAccount.css'
+
+//=============================imports================================
 
 //not verifying password
 function CreateAccountModal() {
+  //===============================states========================
+
   const { userData, invokeSetUserData, loading } = useContext(LoginContext);
   const [takingLeave, setTakingLeave] = useState(false);
   const [dependents, setDependents] = useState([]);
   const [haveDependents, setHaveDependents] = useState(false);
+  const [verifyPassword, setVerifyPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [allFormsFilled, setAllFormsFilled] = useState(true);
+
+  //=================== loop for age in dependents drop down ==========================
+
   let numbers = [];
   for (let i = 0; i < 121; i++) {
     numbers.push(i);
   }
   console.log(userData);
+
+  //======================= main create account state =====================
+
   const [createAccData, setCreateAccData] = useState({
     first: userData.first,
     last: userData.last,
@@ -26,7 +42,7 @@ function CreateAccountModal() {
     interests: "",
     branch: "",
     duty_station: "",
-    taps_complete: true,
+    taps_complete: false,
     leave_start_date: "",
     ets_date: "",
     planning_to_relocate: false,
@@ -41,8 +57,8 @@ function CreateAccountModal() {
     new_user: true,
   });
 
-  let verifyPassword = "";
   //if statement for redirecting when not logged in
+
   const updateUser = () => {
     fetch(
       `http://hacking-transition.herokuapp.com/api/update/user/${userData.user_id}`,
@@ -55,26 +71,39 @@ function CreateAccountModal() {
       }
     ).catch(console.error());
   };
+  const updateDependentInfo = () => {
+
+      if(dependents[0] != null){
+        console.log(`dependents check passed`);
+        dependents.forEach((dependent) => {
+        dependent.sponsor_id = userData.user_id;
+      
+        fetch(
+          `http://hacking-transition.herokuapp.com/api/create/dependent`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dependent),
+          }
+        ).catch(console.error());
+      })}
+  };
   console.log(userData);
   let navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     updateUser();
+    updateDependentInfo();
     invokeSetUserData({});
     localStorage.clear();
     console.log(createAccData);
     navigate("/");
-    alert("Account successfuly created! Please log in");
+    alert("Account successfully created! Please log in");
   };
 
-  const handleChange = (e) => {
-    setCreateAccData((prevData) => {
-      return {
-        ...prevData,
-        [e.target.name]: e.target.value,
-      };
-    });
-  };
+  //======================= handle dependents functions ===============================
 
   const handleDepClick = () => {
     setDependents([...dependents, { age: 0, relation: "" }]);
@@ -87,7 +116,7 @@ function CreateAccountModal() {
     setDependents(newFormValues);
   };
   const handleDepAgeChange = (index, event) => {
-    let data = dependents;
+    let data = [...dependents];
     data[index].age = parseInt(event.target.value);
     setDependents(data);
   };
@@ -96,6 +125,8 @@ function CreateAccountModal() {
     data[index].relation = event.target.value;
     setDependents(data);
   };
+
+  //===================taking leave func and useEffect ================================
 
   const clearLeave = () => {
     if (!takingLeave) {
@@ -106,6 +137,8 @@ function CreateAccountModal() {
   useEffect(() => {
     clearLeave();
   }, [takingLeave]);
+
+//=============================Dependents func and useEffect===========================
 
   const handleDependents = () => {
     if (!haveDependents) {
@@ -120,59 +153,61 @@ function CreateAccountModal() {
     handleDependents();
   }, [haveDependents]);
 
+  //========================== what's being rendered ================================
+
   return ReactDOM.createPortal(
     <div className="createModalContainer">
       <div className="createContainer">
-        <h1>Welcome</h1>
-        <h3>Please fill in your information below.</h3>
+        <div className="header-div">
+        <h1 className='welcome-header'>Welcome</h1>
+        </div>
+        <h3 className="sub-headers">Please fill in your information below.</h3>
         <br></br>
-        <h3>User credintials</h3>
-        <form className="createForm" onSubmit={handleSubmit}>
-          <div className="createInnerCredintials">
-            <div>
-              <p>User name:</p>
-              <input
-                className="createInputBox"
-                type="text"
-                placeholder="Desired Username"
-                name="username"
-                value={createAccData.username}
-                onChange={handleChange}
-              />
+          <form className="createForm" onSubmit={handleSubmit}>
+        <div className="wholeUserCredential">
+          <h3 className="sub-headers">User Credentials</h3>
+              <div className="account-info">
+                <div className="username-div">
+                <p>User name:</p>
+                <input
+                  className="createInputBox"
+                  type="text"
+                  placeholder="Desired Username"
+                  name="username"
+                  value={createAccData.username}
+                  onChange={(e)=>{setCreateAccData({...createAccData, username: e.target.value})}}
+                />
+              </div>
+              <div className="email-div">
               <p>Email:</p>
               <input
                 className="createInputBox"
                 type="text"
-                placeholder="PaceHolderText"
+                placeholder="Email"
                 name="email"
                 value={createAccData.email}
-                onChange={handleChange}
+                onChange={(e)=>{setCreateAccData({...createAccData, email: e.target.value})}}
               />
-            </div>
-            <div>
+              </div>
+              <div className="password-div">
               <p>New password:</p>
               <input
-                className="createInputBox"
-                type="password"
+                className="password"
+                type={!showPassword ? 'password' : 'text'}
                 placeholder="Desired Password"
                 name="password"
                 value={createAccData.password}
-                onChange={handleChange}
+                onChange={(e)=>{setCreateAccData({...createAccData, password: e.target.value})}}
               />
-              <p>Verify New Password:</p>
-              <input
-                className="createInputBox"
-                type="password"
-                placeholder="Verify Password"
-                name="verifyPassword"
-                value={verifyPassword}
-                onChange={handleChange}
-              />
+              <BsEyeFill className="show-password" onClick={()=>{showPassword ? setShowPassword(false) : setShowPassword(true)}}/>
+              </div>
             </div>
-          </div>
-          <h3>Service info</h3>
-          <div className="createInnerCredintials">
-            <div>
+            </div>
+         <div className="wholeServiceInfo">
+          <h3 className="sub-headers">Service Info</h3>
+          <div className="createInnerCredentials">
+            <div className="service-info-1">
+              <div className="ets-div">
               <p>ETS Date:</p>
               <input
                 className="createInputBox"
@@ -186,65 +221,92 @@ function CreateAccountModal() {
                   });
                 }}
               />
+              </div>
+              <div className="branch-div">
               <p>Branch of service:</p>
               <input
                 className="createInputBox"
                 type="text"
-                placeholder="PaceHolderText"
+                placeholder="Branch"
                 name="branch"
                 value={createAccData.branch}
-                onChange={handleChange}
+                onChange={(e)=>{setCreateAccData({...createAccData, branch: e.target.value})}}
               />
+              </div>
+              <div className='mos-div'>
               <p>MOS/Rate:</p>
               <input
                 className="createInputBox"
                 type="text"
-                placeholder="PaceHolderText"
+                placeholder="MOS"
                 name="mos"
                 value={createAccData.mos}
-                onChange={handleChange}
+                onChange={(e)=>{setCreateAccData({...createAccData, mos: e.target.value})}}
               />
+              </div>
+              <div className="rank-div">
               <p>Rank:</p>
               <input
                 className="createInputBox"
                 type="text"
-                placeholder="PaceHolderText"
+                placeholder="Rank"
                 name="rank"
                 value={createAccData.rank}
-                onChange={handleChange}
+                onChange={(e)=>{setCreateAccData({...createAccData, rank: e.target.value})}}
               />
+              </div>
             </div>
-            <div>
+            <div className="service-info-2">
+              <div className="taps-div">
+              <p>TAPS complete:</p><input
+              type="checkbox"
+              value={createAccData.taps_complete}
+              onChange={()=>{!createAccData.taps_complete ? setCreateAccData({...createAccData, taps_complete: true}) : setCreateAccData({...createAccData, taps_complete: false})}}
+              />
+              </div>
+              <div className="duty-station-div">
               <p>Duty Station:</p>
               <input
                 className="createInputBox"
                 type="text"
-                placeholder="PaceHolderText"
+                placeholder="Duty Station"
                 name="duty_station"
                 value={createAccData.duty_station}
-                onChange={handleChange}
+                onChange={(e)=>{setCreateAccData({...createAccData, duty_station: e.target.value})}}
               />
+              </div>
+              <div className='city-div'>
               <p>City:</p>
               <input
                 className="createInputBox"
                 type="text"
-                placeholder="PaceHolderText"
+                placeholder="City"
                 name="city"
                 value={createAccData.city}
-                onChange={handleChange}
+                onChange={(e)=>{setCreateAccData({...createAccData, city: e.target.value})}}
               />
+              </div>
+              <div className="state-div">
               <p>State:</p>
               <input
                 className="createInputBox"
                 type="text"
-                placeholder="PaceHolderText"
+                placeholder="State"
                 name="state"
                 value={createAccData.state}
-                onChange={handleChange}
+                onChange={(e)=>{setCreateAccData({...createAccData, state: e.target.value})}}
               />
+              </div>
             </div>
           </div>
+          </div>
+          <div className="wholeLeaveDiv">
+          <h3 className="sub-headers">Leave</h3>
+          <div className="leave-p">
           <p>Terminal Leave:</p>
+          </div>
+          <div className="leave-div">
+            <div className="leave-question">
           <div>Will you be taking terminal leave?</div>
           <input
             className="terminal-leave-checkbox"
@@ -256,8 +318,9 @@ function CreateAccountModal() {
               !takingLeave ? setTakingLeave(true) : setTakingLeave(false);
             }}
           />
+          </div>
           {takingLeave && (
-            <div>
+            <div className="leave-calender">
               <div>When will your terminal leave start?</div>
               <input
                 className="terminal-leave-selector"
@@ -271,11 +334,16 @@ function CreateAccountModal() {
                 }}
               />
             </div>
+            
           )}
-          <h3>Dependents:</h3>
+          </div>
+          </div>
+          <div className="wholeDependentDiv">
+          <h3 className="sub-headers">Dependents</h3>
           {/* here based on the input amount of dependents dinamicly render inputs for dependtes relationship to user */}
-          <p>
-            Do you have any dependents?{" "}
+          <div className="dependent-question">
+            <div>Do you have any dependents?</div>
+
             <input
               className="dependent-checkbox"
               type="checkbox"
@@ -286,13 +354,16 @@ function CreateAccountModal() {
                   : setHaveDependents(false);
               }}
             />
-          </p>
+            </div>
           {haveDependents && (
-            <>
-              <div className="depBtn" onClick={handleDepClick}></div>
+            <div className="dependent-div">
+              <div className="dependent-remove-div">
+              <div>Click the plus button to add as many dependents as needed:</div>
+              <MdOutlineAddCircle className="add-dependent" onClick={handleDepClick}/>
+              </div>
               {dependents.map((input, index) => {
                 return (
-                  <div key={index}>
+                  <div className="relation-div" key={index}>
                     <div>{console.log(dependents)}</div>
                     <div>{console.log(input)}</div>
                     <label htmlFor="age">Age of dependent: </label>
@@ -314,60 +385,68 @@ function CreateAccountModal() {
                       }
                     />
                     {
-                      <div
-                        className="button remove"
+                      <AiFillMinusCircle
+                        className="remove-dependent"
                         onClick={() => removeFormFields(index)}
-                      >
-                        Remove
-                      </div>
+                      />
                     }
                   </div>
                 );
               })}
-            </>
+            </div>
           )}
-          <p>Relocating:</p>
+          </div>
+          <div className="wholeRelocationDiv">
+          <h3 className="sub-headers">Relocation</h3>
+          <div className="relocate-div">
+          <p>Planning to relocate?</p>
           <input
             className="createInputBox"
-            type="text"
-            placeholder="PaceHolderText"
+            type="checkbox"
             name="planning_to_relocate"
             value={createAccData.planning_to_relocate}
-            onChange={handleChange}
+            onChange={()=>{!createAccData.planning_to_relocate ? setCreateAccData({...createAccData, planning_to_relocate: true}) : setCreateAccData({...createAccData, planning_to_relocate: false})}}
           />
-          <p>Education:</p>
+          </div>
+          </div>
+          <div className="wholeEducationDiv">
+          <h3 className="sub-headers">Education</h3>
+          <div className="education-div">
+          <p>What's your highest level of education?</p>
           <input
-            className="createInputBox"
+            className="education-input"
             type="text"
-            placeholder="PaceHolderText"
+            placeholder="Education"
             name="highest_education"
             value={createAccData.highest_education}
-            onChange={handleChange}
+            onChange={(e)=>{setCreateAccData({...createAccData, highest_education: e.target.value})}}
           />
-          <p>Desired Schooling:</p>
+          <p>Are you planning to seek further education?</p>
           <input
             className="createInputBox"
-            type="text"
-            placeholder="PaceHolderText"
+            type="checkbox"
             name="seeking_further_education"
             value={createAccData.seeking_further_education}
-            onChange={handleChange}
+            onChange={()=>{createAccData.seeking_further_education ? setCreateAccData({...createAccData, seeking_further_education: false}) : setCreateAccData({...createAccData, seeking_further_education: true})}}
           />
-          <p>Interests:</p>
-          <input
-            className="createInputBox"
-            type="text"
-            placeholder="PaceHolderText"
-            name="interests"
-            value={createAccData.interests}
-            onChange={handleChange}
+          </div>
+          </div>
+          <div className="interests-div">
+            <h3 className="sub-headers">Interests</h3>
+          <p className="interests-sub-header">Tell us about some of your interests:</p>
+          <textarea 
+          onChange={(e)=>{setCreateAccData({...createAccData, interests: e.target.value})}}
+          placeholder="Tell us about yourself..." 
+          cols="40" 
+          rows="8"
           />
-
+          </div>
+          {allFormsFilled &&
           <input
             type="submit"
             className="createBtn createAccBtn"
             value="Submit"
-          />
+          />}
 
           {/* <button
                         type='button'
