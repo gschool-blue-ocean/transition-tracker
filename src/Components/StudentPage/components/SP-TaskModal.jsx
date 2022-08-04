@@ -1,5 +1,6 @@
 import React from "react";
 
+// Pull  Selected Task Info from DB
 export default function SPTaskModal() {
    return (
       <div className="SPTask--Modal">
