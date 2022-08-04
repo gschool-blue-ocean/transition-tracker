@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import AppContext from "../../Context/AppContext";
 import '../../StyleSheets/AdminHomePage.css';
 import { FiSettings } from 'react-icons/fi';
-import EditCohortPage from './EditCohortPage'
+import EditCohortPage from './EditCohortPage';
+import NewCohortModal from './NewCohortModal';
 import Modal from 'react-modal';
 import StudentPage from '../StudentPage/StudentPage';
 
@@ -10,6 +11,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
 
     const { allUsersData, allCohortsData } = useContext(AppContext)
     const [modalIsOpen, setModalIsOpen] = useState(false)
+    const [newCohortModalIsOpen, setNewCohortModalIsOpen] = useState(false)
     const [currentCohort, setCurrentCohort] = useState(null)
 
     const [viewClickedCohort, setViewClickedCohort] = useState(null)
@@ -17,6 +19,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     const [showClickedCohort, setShowClickedCohort] = useState(false)
 
     const [cohortsToMap, setCohortsToMap] = useState([])
+    
 
     useEffect(() => {
         if (isOnArchivePage) {
@@ -40,6 +43,14 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     }
     const setModalIsOpenToFalse = () => {
         setModalIsOpen(false)
+    }
+
+    const setNewCohortModalIsOpenToTrue = (e) => {
+        setCurrentCohort(e.currentTarget.id)
+        setNewCohortModalIsOpen(true)
+    }
+    const setNewCohortModalIsOpenToFalse = () => {
+        setNewCohortModalIsOpen(false)
     }
 
     const handleCohortClicked = (e) => {
@@ -85,7 +96,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
 
                         })
                     }
-                    <button id="add-cohort-btn">
+                    <button onClick={setNewCohortModalIsOpenToTrue} id="add-cohort-btn">
                         +
                     </button>
                 </div>
@@ -147,6 +158,10 @@ function AdminHomePage({ socket, isOnArchivePage }) {
             <Modal isOpen={modalIsOpen} portalClassName="modal">
                 <button className="x" onClick={setModalIsOpenToFalse}>X</button>
                 <EditCohortPage selectedID={currentCohort} />
+            </Modal>
+            <Modal isOpen={newCohortModalIsOpen} portalClassName="newCohortModal">
+                <button className="x" onClick={setNewCohortModalIsOpenToFalse}>X</button>
+                <NewCohortModal/>
             </Modal>
         </div>
     )
