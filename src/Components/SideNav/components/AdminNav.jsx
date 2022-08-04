@@ -56,6 +56,9 @@ export default function AdminNav({ viewClickedCohort, setActiveStudent, activeSt
       return (
 
          <div className="sideNav">
+            <button id="add-cohort-btn">
+               +
+            </button>
             <h3>{viewClickedCohort ? viewClickedCohort.cohort_name : userData.cohort_name}</h3>
             <div>
                {cohortStudents.map((student, index) => {

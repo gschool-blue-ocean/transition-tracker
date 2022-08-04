@@ -57,7 +57,7 @@
   min-width: 300px;
   color: var(--clr-bgsecondary-contrast);
   text-shadow: 2px 2px 2px #0000004c;
-  background-color: ;
+  /* background-color: ; */
   height: 85vh;
   /* overflow: auto; */
 
@@ -67,11 +67,12 @@
   /* margin-top: 40%; */
   margin-left: 3%;
   margin-right: 3%;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   /* grid-template-columns: 100%; */
   gap: 1rem;
   justify-items: center;
-  align-items: flex-start;
+  align-items: center;
   /* width: 100%; */
   font-size: 2.5ch;
   background-color: var(--clr-bgsecondary-contrast);
@@ -83,6 +84,7 @@
   /* overflow: scroll; */
 
 }
+
 
 .cohort-list-title {
   /* align-self: center; */
