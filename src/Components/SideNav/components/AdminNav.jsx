@@ -2,11 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import AppContext from "../../../Context/AppContext";
 import LoginContext from "../../../Context/LoginContext";
 import Loading from "../../LoadingDisplay/Loading";
+import { MdOutlineAddCircleOutline, MdOutlineAddCircle } from 'react-icons/md'
+import AddStudentModal from "./AddStudentModal";
 
 export default function AdminNav({ viewClickedCohort, setActiveStudent, activeStudent }) {
    const { allUsersData, setLoading } = useContext(AppContext);
    const { userData } = useContext(LoginContext)
    const [cohortStudents, setCohortStudents] = useState(null);
+   const [showAddStudentModal, setShowAddStudentModal] = useState(false)
 
    useEffect(() => {
       if (viewClickedCohort) {
@@ -21,7 +24,7 @@ export default function AdminNav({ viewClickedCohort, setActiveStudent, activeSt
 
    useEffect(() => {
 
-      if (cohortStudents) {
+      if (cohortStudents && cohortStudents.length > 0) {
          setActiveStudent(cohortStudents[0])
          document.getElementById(cohortStudents[0].user_id).classList.add('activeStudent')
 
@@ -51,14 +54,16 @@ export default function AdminNav({ viewClickedCohort, setActiveStudent, activeSt
    } else {
       setLoading(false);
 
-      //-Neo: We can move the logic from the H3 on line 49 to render the sideNav
-      //  only if an Admin is logged in 
+      const handleClickedAddStudentBtn = () => {
+         setShowAddStudentModal(!showAddStudentModal)
+      }
       return (
 
          <div className="sideNav">
-            <button id="add-cohort-btn">
-               +
-            </button>
+
+            <button onClick={handleClickedAddStudentBtn} id="add-cohort-btn">+</button>
+            {showAddStudentModal && <AddStudentModal setShowAddStudentModal={setShowAddStudentModal} cohortID={viewClickedCohort.cohort_id} />}
+
             <h3>{viewClickedCohort ? viewClickedCohort.cohort_name : userData.cohort_name}</h3>
             <div>
                {cohortStudents.map((student, index) => {

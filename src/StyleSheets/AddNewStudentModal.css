@@ -1,0 +1,52 @@
+.portalContainer {
+    height: 100vh;
+    background-color: #1115;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addStudentModal {
+    padding: 2vw;
+    background-color: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(5px);
+    border-radius: 5%;
+}
+
+.addStudentForm {
+    display: grid;
+    gap: 1vw;
+}
+
+.addStudentFormButton,
+.addStudentFormInput {
+    outline: none;
+    padding: .5vw;
+    border-radius: 9999px;
+    border: none;
+    box-shadow: 5px 5px 5px #333;
+}
+
+.addStudentFormButton {
+    opacity: .8;
+}
+
+.addStudentFormButton:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.addStudentFormButton.createStudent {
+    background-color: lightskyblue;
+}
+
+.addStudentFormButton.cancel {
+    background-color: #333;
+    color: lightskyblue
+}
