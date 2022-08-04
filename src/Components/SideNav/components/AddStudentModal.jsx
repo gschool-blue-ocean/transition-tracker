@@ -3,12 +3,12 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import '../../../StyleSheets/AddNewStudentModal.css'
 
-const AddStudentModal = ({ setShowAddStudentModal, cohortID }) => {
+const AddStudentModal = ({ setShowAddStudentModal, viewClickedCohort }) => {
 
     const [formData, setFormData] = useState({
-        first: '',
-        last: '',
-        email: ''
+        first: null,
+        last: null,
+        email: null
     })
 
     const handleChange = (e) => {
@@ -21,18 +21,28 @@ const AddStudentModal = ({ setShowAddStudentModal, cohortID }) => {
     }
 
     const handleSubmit = (e) => {
+        e.preventDefault()
+        if (!formData.first) {
+            return alert('First Name can not be blank!')
+        }
+        if (!formData.last) {
+            return alert('Last Name can not be blank!')
+        }
+        if (!formData.email) {
+            return alert('Email can not be blank!')
+        }
 
         let data = {
             first: formData.first,
             last: formData.last,
             email: formData.email,
-            username: '',
-            password: '',
-            cohort_id: cohortID,
+            username: formData.first + formData.last,
+            password: viewClickedCohort.cohort_name,
+            cohort_id: viewClickedCohort.cohort_id,
             admin: false,
             new_user: true
         }
-        e.preventDefault()
+        console.log(viewClickedCohort)
         console.log(data)
     }
     const handleCancel = () => {
@@ -43,7 +53,10 @@ const AddStudentModal = ({ setShowAddStudentModal, cohortID }) => {
         <div className='portalContainer'>
             <div className='addStudentModal'>
                 <form className="addStudentForm" onSubmit={handleSubmit}>
+                    <div style={!formData.first ? { 'display': 'block' } : { 'display': 'none' }}>Name Cant be blank</div>
                     <input
+                        id="firstname"
+                        data-error='Please Enter FirstName'
                         className='addStudentFormInput'
                         type='text'
                         placeholder="Student's First name"
