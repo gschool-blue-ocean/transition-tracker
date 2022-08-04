@@ -4,11 +4,10 @@ import ScrollToBottom from 'react-scroll-to-bottom'
 import LoginContext from '../../Context/LoginContext'
 import Picker from 'emoji-picker-react'
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
-import { AiFillPlusCircle } from "react-icons/ai"
-import { MdOutlineAddReaction, MdAddReaction } from 'react-icons/md'
+import { MdAddReaction } from 'react-icons/md'
 
 
-function ChatModal({ socket }) {
+function ChatModal({ socket, activeStudent }) {
     const { userData } = useContext(LoginContext)
 
     const [errorMessage, setErrorMessage] = useState(false);
@@ -25,17 +24,22 @@ function ChatModal({ socket }) {
 
     const [allMsgs, setAllMsgs] = useState([])
     const [showEmojiPicker, setShowEmojiPicker] = useState(false)
+    const [studentId, setStudentId] = useState(null)
 
     useEffect(() => {
-
         joinRoom()
+        userData.admin ? setStudentId(activeStudent.user_id) : setStudentId(userData.user_id)
 
-        fetch('https://hacking-transition.herokuapp.com/api/comments/student/10')
-            .then(res => res.json())
-            .then((data) => setAllMsgs(data))
-            .catch(err => console.log(err))
+    }, [activeStudent])
 
-    }, [])
+    useEffect(() => {
+        if (studentId) {
+            fetch(`https://hacking-transition.herokuapp.com/api/comments/student/${studentId}`)
+                .then(res => res.json())
+                .then((data) => setAllMsgs(data))
+                .catch(err => console.log(err))
+        }
+    }, [studentId])
 
     useEffect(() => {
         socket.on("receive_message", (data) => {
@@ -44,8 +48,9 @@ function ChatModal({ socket }) {
         })
     }, [socket])
 
+
     const joinRoom = () => {
-        socket.emit("join_room", 10)
+        userData.admin ? socket.emit("join_room", activeStudent.user_id) : socket.emit("join_room", userData.user_id)
     }
 
     const handleChange = (e) => {
@@ -55,6 +60,7 @@ function ChatModal({ socket }) {
                 [e.target.name]: e.target.value
             }
         })
+
     }
 
     const handleClick = async () => {
@@ -62,19 +68,18 @@ function ChatModal({ socket }) {
         if (inputValue.content.length === 0) { return setErrorMessage(true) }
         setErrorMessage(false)
         setShowEmojiPicker(false)
+
         let msgData = {
-            student_id: 10,
+            student_id: studentId,
             author_id: userData.user_id,
             author_name: `${userData.first} ${userData.last}`,
             content: inputValue.content,
-            // date_time: new Date().toLocaleString()
             date_time: new Date().toUTCString()
         }
 
         // console.log(msgData)
         setAllMsgs((msgs) => [...msgs, msgData]
         )
-        // postMsgToDatabase(msgData)
 
         await socket.emit("send_message", msgData)
 
@@ -94,49 +99,48 @@ function ChatModal({ socket }) {
     }
 
     return (
-        <div className='chatModalContainer'>
+        // <div className='chatModalContainer'>
 
-            <div className='chatContainer'>
+        <div className='chatContainer'>
 
-                <ScrollToBottom className='scroll'>
-                    <div className='chatBody'>
+            <ScrollToBottom className='scroll'>
+                <div className='chatBody'>
 
-                        {
-                            allMsgs.map((elem, index) => {
-                                return (<>
-                                    <div className={elem.author_id === userData.user_id ? 'rightMsg' : ' leftMsg'} key={index}>
-                                        <p className="msgContent">{elem.content}</p>
-                                        <p className='msgFooter'>{new Date(elem.date_time).toLocaleString()}</p>
-                                    </div>
-                                    <p className={elem.author_id === userData.user_id ? 'rightAuthor msgFooter' : ' leftAuthor msgFooter'}>{elem.author_name}</p>
-                                </>
+                    {
+                        allMsgs.map((elem, index) => {
+                            return (<>
+                                <div className={elem.author_id === userData.user_id ? 'rightMsg' : ' leftMsg'} key={index}>
+                                    <p className="msgContent">{elem.content}</p>
+                                    <p className='msgFooter'>{new Date(elem.date_time).toLocaleString()}</p>
+                                </div>
+                                <p className={elem.author_id === userData.user_id ? 'rightAuthor msgFooter' : ' leftAuthor msgFooter'}>{elem.author_name}</p>
+                            </>
 
-                                )
-                            })
-                        }
-                    </div>
-                </ScrollToBottom>
-                <span className="msgErr" style={errorMessage ? showMsg : hideMsg}>Can't send an empty message. Please enter a message below.</span>
-                <div className='chatFooter'>
-                    <input
-                        className='inputBox'
-                        type='text'
-                        placeholder='Type your msg here...'
-                        name="content"
-                        value={inputValue.content}
-                        onChange={handleChange}
-                        onKeyPress={(e) => { e.key === 'Enter' && handleClick() }}
-                    />
-                    <BsFillArrowRightCircleFill className="sendMsgBtn" onClick={handleClick} />
-                    <MdAddReaction className="emojiBtn" onClick={() => setShowEmojiPicker(!showEmojiPicker)} />
+                            )
+                        })
+                    }
                 </div>
+            </ScrollToBottom>
+            <span className="msgErr" style={errorMessage ? showMsg : hideMsg}>Can't send an empty message. Please enter a message below.</span>
+            <div className='chatFooter'>
+                <input
+                    className='inputBox'
+                    type='text'
+                    placeholder='Type your msg here...'
+                    name="content"
+                    value={inputValue.content}
+                    onChange={handleChange}
+                    onKeyPress={(e) => { e.key === 'Enter' && handleClick() }}
+                />
+                <BsFillArrowRightCircleFill className="sendMsgBtn" onClick={handleClick} />
 
-                {showEmojiPicker && <Picker onEmojiClick={onEmojiClick} />}
-
+                <MdAddReaction className="emojiBtn" onClick={() => setShowEmojiPicker(!showEmojiPicker)} />
             </div>
+            {showEmojiPicker && <Picker onEmojiClick={onEmojiClick} className='emojiPicker' />}
+        </div>
 
 
-        </div >
+        // </div >
     )
 }
 

@@ -13,7 +13,7 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
     let navigate = useNavigate()
 
     const { allUsersData, allCohortsData, loading, setLoading } = useContext(AppContext)
-    const { setUserData } = useContext(LoginContext)
+    const { userData, setUserData } = useContext(LoginContext)
 
     const [loginData, setLoginData] = useState({
         username: '',
@@ -24,10 +24,15 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
         const currentUser = localStorage.getItem("currentUser");
         if (currentUser !== null) {
             setUserData(JSON.parse(currentUser));
-            invokeSetLogin(true)
         }
     }, []);
 
+
+    useEffect(() => {
+        if (userData) {
+            invokeSetLogin(true)
+        }
+    }, [userData])
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -125,6 +130,7 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
     return ReactDOM.createPortal(
         <div className='modalContainer'>
             {/* <button onClick={handleHash}>CLICK TO HASH</button> */}
+
             <div className='loginContainer'>
 
                 <h1 className='loginTitle'>Hacking Transition</h1>

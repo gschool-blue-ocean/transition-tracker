@@ -589,3 +589,4 @@ module.exports = {
     deleteAllDependentsBySponsorID,
     getAllUsersByCohortID
 }
+

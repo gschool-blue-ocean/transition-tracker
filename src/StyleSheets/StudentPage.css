@@ -1,0 +1,214 @@
+@import "./CustomProps.css";
+
+
+/* ================== TEST ==================== */
+.test--grid {
+   display: grid;
+   grid-template-areas: "sideNav content";
+   grid-template-columns: [first] 20% [second] auto;
+   /* margin: 3%; */
+   gap: 3%;
+   height: 100%;
+   /* overflow: auto; */
+}
+
+.studentView {
+   grid-template-areas: "content content";
+   padding: 0 2% 0 2%
+      /* grid-template-columns: 100%; */
+}
+
+.sideNav--Wrapper {
+   grid-area: sideNav;
+   height: 100%;
+}
+
+.StudentDash--Wrapper {
+   grid-area: content;
+   height: 100%;
+}
+
+/* =========== Student Container ============== */
+
+.StudentDash--Wrapper {
+   padding: .5rem;
+   /* margin: 3%; */
+   display: grid;
+   /* padding: calc(var(--spacer-container) * 1); */
+   /* line-height: var(--spacer-line); */
+   grid-template-areas:
+      "StuHeader StuHeader StuHeader"
+      "StuInfo StuTasks StuTasks"
+      "StuInfo StuTasks StuTasks"
+      "ChatModal ChatModal ChatModal";
+
+   grid-template-columns: 1fr 1fr 1fr;
+   border-radius: 10px;
+   background-color: var(--clr-secondary-accent);
+   font-family: var(--ff-primary);
+   max-height: 85vh;
+
+   overflow: auto !important;
+}
+
+/* =============== Student Header ============= */
+.SDash--Header {
+   grid-area: StuHeader;
+   display: grid;
+   grid-template-areas:
+      "StuName . ETStag"
+      "StuCohort . .";
+}
+
+#StuHeader--Name {
+   grid-area: StuName;
+   color: var(--clr-primary-accent);
+}
+
+#StuHeader--Cohort {
+   grid-area: StuCohort;
+   color: var(--clr-bgsecondary-contrast);
+}
+
+#StuHeader--ETStag {
+   grid-area: ETStag;
+   background-color: rgb(0, 207, 0);
+   text-align: center;
+   color: white;
+   border-radius: 10px;
+   font-weight: bold;
+   width: fit-content;
+   padding: 5px 20px;
+   justify-self: end;
+}
+
+/* ============= Student Info =============== */
+
+.SDash--Info-card {
+   grid-area: StuInfo;
+}
+
+.SDash--Info-card>ul,
+li,
+span {
+   list-style: none;
+}
+
+.infoCard--container {
+   width: 100%;
+   background-color: var(--clr-accent-white);
+   color: var(--clr-bgprimary-dark);
+
+   padding: var(--spacer-smallItems);
+
+   border-radius: 10px;
+}
+
+ul>h4,
+li>h4 {
+   margin-top: 1em;
+}
+
+.title {
+   margin-left: 0.8em;
+}
+
+.answer {
+   margin-left: auto;
+}
+
+/* ============= Student Tasks ============== */
+
+.SDash--Tasks {
+   grid-area: StuTasks;
+   display: flex;
+   flex-direction: column;
+
+   border-radius: 10px;
+   flex-wrap: nowrap;
+   align-items: center;
+   margin-left: 12px;
+   background-color: var(--clr-accent-white);
+}
+
+#StuTasks--Header {
+   margin: 10px;
+   color: var(--clr-bgprimary-dark);
+}
+
+.StuTasks--Card {
+   border: solid var(--clr-nuetral-brown);
+   border-radius: 10px;
+   margin-bottom: 8px;
+   width: 80%;
+   text-align: center;
+   color: var(--clr-accent-white);
+   background-color: var(--clr-bgsecondary-contrast);
+   box-shadow: 0px 4px 8px 0px #9b9b9b;
+   transition: box-shadow ease 0.2s, transform ease 0.1s;
+}
+
+.StuTasks--Card:hover {
+   cursor: pointer;
+   box-shadow: 0px 6px 16px 0px #414141;
+   background-blend-mode: lighten;
+}
+
+.StuTasks--Card:active {
+   box-shadow: none;
+   transform: scale(0.98);
+}
+
+/* ============= Student Notes =============== */
+
+.SDash--Notes {
+   grid-area: StuNotes;
+}
+
+#StuNotes--TextArea {
+   width: fill;
+   height: 100px;
+   border-radius: 10px;
+}
+
+.SPTask--Modal {
+   display: grid;
+   grid-template-columns: 1fr;
+   grid-template-areas:
+      "TaskHeader"
+      "TaskDesc"
+      "TaskSubTask"
+      "TaskRemarks"
+      "AddRemark";
+   font-family: var(--ff-primary);
+   gap: 12px;
+}
+
+#Modal--Header {
+   border-radius: 5px;
+   padding: 10px;
+   grid-area: TaskHeader;
+   text-align: center;
+   background-color: var(--clr-accent-white);
+}
+
+.Modal--TaskDesc {
+   border-radius: 5px;
+   padding: 10px;
+   grid-area: TaskDesc;
+   background-color: var(--clr-accent-white);
+}
+
+.Modal--SubTasks {
+   border-radius: 5px;
+   padding: 10px;
+   grid-area: TaskSubTask;
+   background-color: var(--clr-accent-white);
+}
+
+.Modal--Remarks {
+   border-radius: 5px;
+   padding: 10px;
+   grid-area: TaskRemarks;
+   background-color: var(--clr-accent-white);
+}
