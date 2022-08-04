@@ -1,38 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
 :root {
-  /* Fonts */
-  --ff-primary: 'Rubik', sans-serif;
-  --ff-header: 'Bebas Neue', cursive;
+   /* Fonts */
+   --ff-primary: "Rubik", sans-serif;
+   --ff-header: "Bebas Neue", cursive;
 
-  /* Color Pallet */
+   /* Color Pallet */
 
-  /* Dark Blue */
-  --clr-bgprimary-dark: hsl(203, 97%, 13%);
+   /* Dark Blue */
+   --clr-bgprimary-dark: hsl(203, 97%, 13%);
 
-  /* Orange */
-  --clr-bgsecondary-contrast: hsl(22, 58%, 48%);
+   /* Orange */
+   --clr-bgsecondary-contrast: hsl(22, 58%, 48%);
 
-  /* Sapphire Blue */
-  --clr-primary-accent: hsl(191, 100%, 24%);
+   /* Sapphire Blue */
+   --clr-primary-accent: hsl(191, 100%, 24%);
 
-  /* Sky Blue  */
-  --clr-secondary-accent: hsl(198, 67%, 71%);
+   /* Sky Blue  */
+   --clr-secondary-accent: hsl(198, 67%, 71%);
 
-  /* Coyote Brown */
-  --clr-nuetral-brown: hsl(24, 31%, 40%);
+   /* Coyote Brown */
+   --clr-nuetral-brown: hsl(24, 31%, 40%);
 
-  /* Moss Green  */
-  --clr-neutral-green: hsl(70, 19%, 48%);
+   /* Moss Green  */
+   --clr-neutral-green: hsl(70, 19%, 48%);
 
-  /* Mint Cream */
-  --clr-accent-white: hsl(171, 100%, 99%);
+   /* Mint Cream */
+   --clr-accent-white: hsl(171, 100%, 99%);
 
-  /* Uniformed Padding  */
-  --spacer-container: 1.5em;
-  --spacer-smallItems: 0.5em;
+   /* ETS Tag Colors */
+   /* 120 Days */
+   --clr-ets-blue: hsl(174, 100%, 40%);
 
-  /* Line Height */
-  --spacer-line: 1.5;
+   /* 90 Days */
+   --clr-ets-yellow: hsl(45, 100%, 47%);
+
+   /* 60 Days */
+   --clr-ets-orange: hsl(28, 80%, 45%);
+
+   /* 30 Days */
+   --clr-ets-red: hsl(0, 100%, 40%);
+
+   /* ETS'd */
+   --clr-ets-green: hsl(105, 100%, 32%);
+
+   /* Uniformed Padding  */
+   --spacer-container: 1.5em;
+   --spacer-smallItems: 0.5em;
+
+   /* Line Height */
+   --spacer-line: 1.5;
 }
