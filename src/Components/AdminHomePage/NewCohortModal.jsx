@@ -3,9 +3,13 @@ import AppContext from "../../Context/AppContext"
  
 
 function NewCohortModal() {
-    const { allCohortsData } = useContext(AppContext)
-//   const [cohortData] = useState(allCohortsData.find(x => x.cohort_id == id))
-const [cohortData] = useState(allCohortsData)
+  const { allCohortsData } = useContext(AppContext)
+  const [cohortData] = useState({
+    cohort_name: "", 
+    start_date: "", 
+    end_date: "", 
+    active: true
+  })
   const [newName, updateName] = useState('')
   const [newStartDate, updateStartDate] = useState('')
   const [newEndDate, updateEndDate] = useState('')
