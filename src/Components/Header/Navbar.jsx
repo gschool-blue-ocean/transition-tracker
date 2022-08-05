@@ -12,6 +12,7 @@ const Navbar = () => {
         localStorage.clear()
         setUserData(null)
         invokeSetLogin(false)
+        window.location.reload()
     }
 
     return (

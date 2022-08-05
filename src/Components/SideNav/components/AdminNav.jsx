@@ -62,7 +62,7 @@ export default function AdminNav({ viewClickedCohort, setActiveStudent, activeSt
          <div className="sideNav">
 
             <button onClick={handleClickedAddStudentBtn} id="add-cohort-btn">+</button>
-            {showAddStudentModal && <AddStudentModal setShowAddStudentModal={setShowAddStudentModal} viewClickedCohort={viewClickedCohort} />}
+            {showAddStudentModal && <AddStudentModal setShowAddStudentModal={setShowAddStudentModal} viewClickedCohort={viewClickedCohort} getStudentList={getStudentList} />}
 
             <h3>{viewClickedCohort ? viewClickedCohort.cohort_name : userData.cohort_name}</h3>
             <div>
