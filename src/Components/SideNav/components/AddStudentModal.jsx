@@ -74,6 +74,7 @@ const AddStudentModal = ({ setShowAddStudentModal, viewClickedCohort, getStudent
             <div className='addStudentModal'>
                 <form className="addStudentForm" onSubmit={handleSubmit}>
                     <h4 className='newStudentFormTitle'>Add new student information</h4>
+
                     <input
                         required
                         data-error='Please Enter FirstName'
@@ -110,9 +111,7 @@ const AddStudentModal = ({ setShowAddStudentModal, viewClickedCohort, getStudent
                             type='checkbox'
                             name='generateEmail'
                             onChange={handleChange}
-                            value={formData.generateEmail}
                             checked={formData.generateEmail}
-
                         /> Auto generate email</label>
 
 

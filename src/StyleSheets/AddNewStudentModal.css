@@ -23,8 +23,14 @@
     gap: 1.5vw;
 }
 
-.newStudentFormTitle {
+.newStudentFormTitle,
+.labelGenerateEmailCheckBox {
     justify-self: center;
+}
+
+.labelGenerateEmailCheckBox {
+    display: flex;
+    gap: 1vw;
 }
 
 .addStudentFormButton,
