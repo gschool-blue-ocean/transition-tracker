@@ -62,7 +62,7 @@ return  (
     /> mm/dd/yyyy
     </div>
     <div>
-    Enter start date of Cohort:
+    Enter end date of Cohort:
     <input
       type="text"
       placeholder="End date can't be blank"
