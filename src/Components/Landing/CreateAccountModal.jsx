@@ -1,20 +1,22 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { useNavigate } from 'react-router-dom'
 import LoginContext from "../../Context/LoginContext"
 
 //not verifying password
 function CreateAccountModal() {
+    let navigate = useNavigate()
+
     const { userData, invokeSetUserData, loading } = useContext(LoginContext)
     const [createAccData, setCreateAccData] = useState({
-        first: userData.first,
-        last: userData.last,
-        email: userData.email,
-        username: userData.username,
+        first: userData ? userData.first : '',
+        last: userData ? userData.last : '',
+        email: userData ? userData.email : '',
+        username: userData ? userData.username : '',
         password: '',
         rank: '',
         mos: '',
-        interests: '',   
+        interests: '',
         branch: '',
         duty_station: '',
         taps_complete: true,
@@ -26,12 +28,19 @@ function CreateAccountModal() {
         has_dependents: false,
         highest_education: '',
         seeking_further_education: false,
-        admin: userData.admin,
-        cohort_name: userData.cohort_name,
-        cohort_id: userData.cohort_id,
-        new_user: false, 
-        
+        admin: userData ? userData.admin : '',
+        cohort_name: userData ? userData.cohort_name : '',
+        cohort_id: userData ? userData.cohort_id : '',
+        new_user: false,
+
     })
+
+    useEffect(() => {
+        if (createAccData.first.length === 0) {
+            return navigate('/')
+        }
+
+    }, [])
 
     let verifyPassword = '';
     let dependents = '';
@@ -40,20 +49,19 @@ function CreateAccountModal() {
         fetch(`http://hacking-transition.herokuapp.com/api/update/user/${userData.user_id}`, {
             method: "PATCH",
             headers: {
-            "Content-Type": "application/json",
+                "Content-Type": "application/json",
             },
             body: JSON.stringify(createAccData)
         })
-        .catch(console.error())        
+            .catch(console.error())
     }
     console.log(userData)
-    let navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault()
         updateUser()
-        invokeSetUserData({}); 
+        invokeSetUserData({});
         localStorage.clear();
-        console.log(createAccData) 
+        console.log(createAccData)
         navigate('/')
         alert('Account successfuly created! Please log in')
     }
@@ -66,7 +74,7 @@ function CreateAccountModal() {
             }
         })
     }
-        
+
 
     return ReactDOM.createPortal(
         <div className='createModalContainer'>
@@ -232,7 +240,7 @@ function CreateAccountModal() {
                         type='submit'
                         className='createBtn createAccBtn'
                         value='Submit' />
-                    
+
                     {/* <button
                         type='button'
                         className='loginBtn'

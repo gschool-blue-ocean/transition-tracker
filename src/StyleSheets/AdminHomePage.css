@@ -57,17 +57,18 @@
   min-width: 300px;
   color: var(--clr-bgsecondary-contrast);
   text-shadow: 2px 2px 2px #0000004c;
-  background-color: ;
+  /* background-color: ; */
   height: 85vh;
   /* overflow: auto; */
-  
+
 }
 
 .list {
-  margin-top: 40%;
+  /* margin-top: 40%; */
   margin-left: 3%;
   margin-right: 3%;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   /* grid-template-columns: 100%; */
   gap: 1rem;
   justify-items: center;
@@ -76,20 +77,22 @@
   font-size: 2.5ch;
   background-color: var(--clr-bgsecondary-contrast);
   box-shadow: 5px 5px 10px #888888;
-  min-width:100px;
+  min-width: 100px;
   border-radius: 10px;
+  min-height: 100%;
 
   /* overflow: scroll; */
 
 }
 
+
 .cohort-list-title {
-  align-self: center;
-  justify-self: center;
-  height: 100%;
-  height: fit-content;
+  /* align-self: center; */
+  /* justify-self: center; */
+  /* height: 100%; */
+  /* height: fit-content; */
   text-align: center;
-  vertical-align: center;
+  /* vertical-align: center; */
   width: 100%;
   background-color: white;
   border-top-right-radius: 10px;
@@ -248,7 +251,7 @@
   border-radius: 10px;
   margin-top: 3%;
   padding-top: 5px;
-  font-size:1.25ch;
+  font-size: 1.25ch;
 }
 
 #numberOfStudents {
