@@ -47,7 +47,6 @@ function AdminHomePage({ socket, isOnArchivePage }) {
         setModalIsOpen(false)
     }
     const handleStudentNameClick = (e) => {///////////////////////////////////////////////////////////////////////////////////////////
-        console.log("Show me the money")
         let workingStringArr = JSON.parse(e.target.id);
         console.log(workingStringArr.cohort_id);
         handleCohortSet(workingStringArr.cohort_id);
@@ -87,7 +86,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     }
     const handleActiveCohortTabOverView = (element) => {//======================================================
         document.querySelectorAll('.listOfCohorts').forEach(elem => elem.classList.remove('activeCohortTab'))
-        //let active = document.getElementById(`#${parseInt(element.cohort_id)}`);
+        let active = document.getElementById(`#${parseInt(element)}`);
         console.log(element);
         //active.classList.add('activeCohortTab');
     }
