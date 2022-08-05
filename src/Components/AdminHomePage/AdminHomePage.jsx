@@ -41,7 +41,9 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     const setModalIsOpenToFalse = () => {
         setModalIsOpen(false)
     }
-
+    const handleStudentNameClick = () => {
+        console.log("Show me the money")
+    }
     const handleCohortClicked = (e) => {
         handleActiveCohortTab(e.currentTarget)
 
@@ -122,7 +124,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                                                     allUsersData.map(user => {
                                                         if (user.cohort_id == cohort.cohort_id) {
                                                             return <div className='nameInRow'>
-                                                                <div className='name-div'> {user.first} {user.last}</div> <div className='color-code'></div>
+                                                                <div className='name-div' onClick={handleStudentNameClick} > {user.first} {user.last} </div> <div className='color-code'></div>
                                                             </div>
                                                         }
                                                     })
