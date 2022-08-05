@@ -1,6 +1,6 @@
 import { useContext, useState, React } from 'react'
 import AppContext from "../../Context/AppContext"
- 
+import '../../StyleSheets/NewCohortModal.css';
 
 function NewCohortModal() {
   const { allCohortsData } = useContext(AppContext)
@@ -36,6 +36,13 @@ function NewCohortModal() {
 
 return  (
 <div className='modal-page'>
+    <div className='cohort-card'>
+    <div className='createCohortHeader'>
+        Create a New Cohort
+    </div>
+    <div className='new-cohort-input'>
+    <div id="cohort-name-field">
+        Enter Cohort Name:
     <input
       type="text"
       placeholder="Cohort name can't be blank"
@@ -43,25 +50,30 @@ return  (
       onKeyDown={checkKey}
       value={newName}
     />
-    <br />
+    </div>
+    <div>
+    Enter start date of Cohort:
     <input
       type="text"
       placeholder="Start date can't be blank"
       onChange={checkStartDate}
       onKeyDown={checkKey}
       value={newStartDate}
-    />
-    <br />
+    /> mm/dd/yyyy
+    </div>
+    <div>
+    Enter end date of Cohort:
     <input
       type="text"
       placeholder="End date can't be blank"
       onChange={checkEndDate}
       onKeyDown={checkKey}
       value={newEndDate}
-    />
-    <br />
-   
-    <button onClick={submitFxn}>Submit</button>
+    /> mm/dd/yyyy
+    </div>
+    </div>
+    <button className='create-new-cohort-btn' onClick={submitFxn}>Create cohort</button>
+    </div>
     </div>)
  }
 
