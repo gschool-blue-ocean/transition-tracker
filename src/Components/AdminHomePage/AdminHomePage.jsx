@@ -64,6 +64,14 @@ function AdminHomePage({ socket, isOnArchivePage }) {
 
         setShowClickedCohort(true)
     }
+    const horizontalScroll = () => {
+        const scrollContainer = document.getElementById('#cohort-view')
+
+        scrollContainer.addEventListener(("wheel"), (e) => {
+            e.preventDefault();
+            scrollContainer.scrollLeft += e.deltaY
+        });
+    }
 
     const handleActiveCohortTab = (element) => {
         document.querySelectorAll('.listOfCohorts').forEach(elem => elem.classList.remove('activeCohortTab'))
@@ -111,7 +119,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
 
                     :
                     <>
-                        <div id='cohort-view'>
+                        <div id='cohort-view' onFocus={horizontalScroll}>
                             {
                                 cohortsToMap.map((cohort) => {
                                     return (
