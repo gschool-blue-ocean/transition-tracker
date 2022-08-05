@@ -15,6 +15,8 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
     const { allUsersData, allCohortsData, loading, setLoading } = useContext(AppContext)
     const { userData, setUserData } = useContext(LoginContext)
 
+    console.log(userData)
+
     const [loginData, setLoginData] = useState({
         username: '',
         password: '',

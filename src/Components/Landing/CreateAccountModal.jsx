@@ -4,22 +4,25 @@ import { useNavigate } from "react-router-dom";
 import LoginContext from "../../Context/LoginContext";
 import { BsEyeFill } from "react-icons/bs";
 import { MdOutlineAddCircle } from "react-icons/md";
-import { AiFillMinusCircle } from "react-icons/ai";
+import { AiFillMinusCircle, AiOutlineCheck } from "react-icons/ai";
+import { FaAsterisk } from 'react-icons/fa'
 import '../../StyleSheets/CreateAccount.css'
 
 //=============================imports================================
 
-//not verifying password
 function CreateAccountModal() {
   //===============================states========================
-
+  
   const { userData, invokeSetUserData, loading } = useContext(LoginContext);
   const [takingLeave, setTakingLeave] = useState(false);
   const [dependents, setDependents] = useState([]);
   const [haveDependents, setHaveDependents] = useState(false);
   const [verifyPassword, setVerifyPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [allFormsFilled, setAllFormsFilled] = useState(true);
+  const [allFormsFilled, setAllFormsFilled] = useState(null);
+  const [submitClick, setSubmit] = useState(false);
+
+  let navigate = useNavigate();
 
   //=================== loop for age in dependents drop down ==========================
 
@@ -27,15 +30,20 @@ function CreateAccountModal() {
   for (let i = 0; i < 121; i++) {
     numbers.push(i);
   }
-  console.log(userData);
+
+  useEffect(() => {
+    if(!userData){
+      navigate('/')
+    }
+  }, [])
 
   //======================= main create account state =====================
 
   const [createAccData, setCreateAccData] = useState({
-    first: userData.first,
-    last: userData.last,
-    email: userData.email,
-    username: userData.username,
+    first: userData ? userData.first : '',
+    last: userData ? userData.last : '',
+    email: userData ? userData.email : '',
+    username: userData ? userData.username : '',
     password: "",
     rank: "",
     mos: "",
@@ -51,13 +59,31 @@ function CreateAccountModal() {
     has_dependents: false,
     highest_education: "",
     seeking_further_education: false,
-    admin: userData.admin,
-    cohort_name: userData.cohort_name,
-    cohort_id: userData.cohort_id,
+    admin: userData ? userData.admin : '',
+    cohort_name: userData ? userData.cohort_name : '',
+    cohort_id: userData ? userData.cohort_id : '',
     new_user: true,
   });
 
-  //if statement for redirecting when not logged in
+  useEffect(()=>{
+     if(createAccData.email.length < 3 ||
+      createAccData.username.length < 8 ||
+      createAccData.password.length < 8 ||
+      createAccData.rank.length < 2 ||
+      createAccData.mos.length < 1 ||
+      createAccData.interests.length < 10 ||
+      createAccData.branch.length < 2 ||
+      createAccData.duty_station.length < 2 ||
+      createAccData.ets_date.length < 4 ||
+      createAccData.city.length < 1 ||
+      createAccData.state.length < 1 ||
+      (createAccData.has_dependents === true && dependents.length === 0) ||
+      (takingLeave === true && createAccData.leave_start_date.length === 0)){
+        setAllFormsFilled(false)
+      }else{
+        setAllFormsFilled(true)
+      }
+  })
 
   const updateUser = () => {
     fetch(
@@ -74,7 +100,6 @@ function CreateAccountModal() {
   const updateDependentInfo = () => {
 
       if(dependents[0] != null){
-        console.log(`dependents check passed`);
         dependents.forEach((dependent) => {
         dependent.sponsor_id = userData.user_id;
       
@@ -90,17 +115,16 @@ function CreateAccountModal() {
         ).catch(console.error());
       })}
   };
-  console.log(userData);
-  let navigate = useNavigate();
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     updateUser();
     updateDependentInfo();
     invokeSetUserData({});
     localStorage.clear();
-    console.log(createAccData);
-    navigate("/");
     alert("Account successfully created! Please log in");
+    navigate("/");
   };
 
   //======================= handle dependents functions ===============================
@@ -110,9 +134,7 @@ function CreateAccountModal() {
   };
   const removeFormFields = (index) => {
     let newFormValues = [...dependents];
-    console.log(dependents);
     newFormValues.splice(index, 1);
-    console.log(dependents);
     setDependents(newFormValues);
   };
   const handleDepAgeChange = (index, event) => {
@@ -167,8 +189,10 @@ function CreateAccountModal() {
         <div className="wholeUserCredential">
           <h3 className="sub-headers">User Credentials</h3>
               <div className="account-info">
+                <div className="username-with-required">
                 <div className="username-div">
-                <p>User name:</p>
+                <FaAsterisk className="required-fields"/>
+                <p>Username:</p>
                 <input
                   className="createInputBox"
                   type="text"
@@ -177,8 +201,15 @@ function CreateAccountModal() {
                   value={createAccData.username}
                   onChange={(e)=>{setCreateAccData({...createAccData, username: e.target.value})}}
                 />
+                
               </div>
+              <div className="credentials-require">
+              <span className="required-fields">Minimum of 8 characters</span>
+              </div>
+              </div>
+              <div className="email-with-require">
               <div className="email-div">
+              <FaAsterisk className="required-fields"/>
               <p>Email:</p>
               <input
                 className="createInputBox"
@@ -189,7 +220,13 @@ function CreateAccountModal() {
                 onChange={(e)=>{setCreateAccData({...createAccData, email: e.target.value})}}
               />
               </div>
+              <div className="credentials-require">
+              <span className="required-fields">Minimum of 3 characters</span>
+              </div>
+              </div>
+              <div className="password-require">
               <div className="password-div">
+              <FaAsterisk className="required-fields"/>
               <p>New password:</p>
               <input
                 className="password"
@@ -201,6 +238,10 @@ function CreateAccountModal() {
               />
               <BsEyeFill className="show-password" onClick={()=>{showPassword ? setShowPassword(false) : setShowPassword(true)}}/>
               </div>
+              <div className="credentials-require">
+              <span className="required-fields">Minimum of 8 characters</span>
+              </div>
+              </div>
             </div>
             </div>
          <div className="wholeServiceInfo">
@@ -208,6 +249,7 @@ function CreateAccountModal() {
           <div className="createInnerCredentials">
             <div className="service-info-1">
               <div className="ets-div">
+              <FaAsterisk className="required-fields"/>
               <p>ETS Date:</p>
               <input
                 className="createInputBox"
@@ -223,6 +265,7 @@ function CreateAccountModal() {
               />
               </div>
               <div className="branch-div">
+              <FaAsterisk className="required-fields"/>
               <p>Branch of service:</p>
               <input
                 className="createInputBox"
@@ -234,6 +277,7 @@ function CreateAccountModal() {
               />
               </div>
               <div className='mos-div'>
+              <FaAsterisk className="required-fields"/>
               <p>MOS/Rate:</p>
               <input
                 className="createInputBox"
@@ -245,6 +289,7 @@ function CreateAccountModal() {
               />
               </div>
               <div className="rank-div">
+              <FaAsterisk className="required-fields"/>
               <p>Rank:</p>
               <input
                 className="createInputBox"
@@ -265,6 +310,7 @@ function CreateAccountModal() {
               />
               </div>
               <div className="duty-station-div">
+              <FaAsterisk className="required-fields"/>
               <p>Duty Station:</p>
               <input
                 className="createInputBox"
@@ -276,6 +322,7 @@ function CreateAccountModal() {
               />
               </div>
               <div className='city-div'>
+              <FaAsterisk className="required-fields"/>
               <p>City:</p>
               <input
                 className="createInputBox"
@@ -287,6 +334,7 @@ function CreateAccountModal() {
               />
               </div>
               <div className="state-div">
+              <FaAsterisk className="required-fields"/>
               <p>State:</p>
               <input
                 className="createInputBox"
@@ -321,6 +369,7 @@ function CreateAccountModal() {
           </div>
           {takingLeave && (
             <div className="leave-calender">
+              <FaAsterisk className="required-fields"/>
               <div>When will your terminal leave start?</div>
               <input
                 className="terminal-leave-selector"
@@ -358,14 +407,12 @@ function CreateAccountModal() {
           {haveDependents && (
             <div className="dependent-div">
               <div className="dependent-remove-div">
-              <div>Click the plus button to add as many dependents as needed:</div>
+              <div><FaAsterisk className="required-fields"/> Click the plus button to add as many dependents as needed:</div>
               <MdOutlineAddCircle className="add-dependent" onClick={handleDepClick}/>
               </div>
               {dependents.map((input, index) => {
                 return (
                   <div className="relation-div" key={index}>
-                    <div>{console.log(dependents)}</div>
-                    <div>{console.log(input)}</div>
                     <label htmlFor="age">Age of dependent: </label>
 
                     <select onChange={(e)=>{handleDepAgeChange(index, e)}} name="age" id="age">
@@ -412,6 +459,8 @@ function CreateAccountModal() {
           <div className="wholeEducationDiv">
           <h3 className="sub-headers">Education</h3>
           <div className="education-div">
+            <div className="highest-edu-question">
+          <FaAsterisk className="required-fields"/>
           <p>What's your highest level of education?</p>
           <input
             className="education-input"
@@ -421,6 +470,8 @@ function CreateAccountModal() {
             value={createAccData.highest_education}
             onChange={(e)=>{setCreateAccData({...createAccData, highest_education: e.target.value})}}
           />
+          </div>
+          <div className="seeking-higher-edu">
           <p>Are you planning to seek further education?</p>
           <input
             className="createInputBox"
@@ -431,9 +482,13 @@ function CreateAccountModal() {
           />
           </div>
           </div>
+          </div>
           <div className="interests-div">
-            <h3 className="sub-headers">Interests</h3>
+            <div className="interests-with-as"><FaAsterisk className="required-fields"/><h3 className="sub-headers">Interests</h3></div>
+            <div className="interests-with-require">
           <p className="interests-sub-header">Tell us about some of your interests:</p>
+          <span className="required-fields">Minimum of 10 characters</span>
+          </div>
           <textarea 
           onChange={(e)=>{setCreateAccData({...createAccData, interests: e.target.value})}}
           placeholder="Tell us about yourself..." 
@@ -442,11 +497,17 @@ function CreateAccountModal() {
           />
           </div>
           {allFormsFilled &&
-          <input
-            type="submit"
-            className="createBtn createAccBtn"
-            value="Submit"
-          />}
+          <div 
+          className="submit-create-account"
+          type="submit"
+          value="Submit"
+          onClick={handleSubmit}
+          >
+          <AiOutlineCheck
+          className="checkmark-submit-btn"
+          />
+          </div>
+          }
 
           {/* <button
                         type='button'

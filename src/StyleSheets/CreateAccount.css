@@ -1,21 +1,21 @@
 .createModalContainer{
+    padding-top: 20px;
     width: 100%;
-    display: flex;
-    justify-content: center;
+    display: block;
+    margin: auto;
     font-family: Rubik, sans-serif !important;
+    padding-bottom: 20px;
 }
 
 .createContainer{
-    margin-top: 20px;
-    margin-bottom: 20px;
     color: rgb(0, 0, 0);
     background-color: #C16733;
-    min-width: 65%;
-    max-width: 100%;
+    width: fit-content;
     border-radius: 25px;
-    display: flex;
-    justify-content: space-around;
+    display: block;
     flex-direction: column;
+    margin: auto;
+    padding-bottom: 15px;
 }
 
 .sub-headers{
@@ -27,7 +27,7 @@
     background-color:white;
     margin-bottom: 20px;
     white-space: nowrap;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.609)
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.609);
 }
 
 .wholeServiceInfo{
@@ -136,6 +136,7 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
+    align-items: center;
 }
 
 .dependent-div{
@@ -227,61 +228,70 @@
 
 .interests-sub-header{
     margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 .email-div{
     display: flex;
     flex-direction: row;
     gap: 5px;
+    align-items: center;
+    margin-bottom: 5px;
 }
 
 .username-div{
     display: flex;
     flex-direction: row;
     gap: 5px;
+    align-items: center;
 }
 
 .ets-div{
     display: flex;
     flex-direction: row;
     gap: 5px;
+    align-items: center;
 }
 
 .branch-div{
     display: flex;
     flex-direction: row;
     gap: 5px;
+    align-items: center;
 }
 
 .mos-div{
     display: flex;
     flex-direction: row;
     gap: 5px;
+    align-items: center;
 }
 
 .rank-div{
     display: flex;
     flex-direction: row;
     gap: 5px;
+    align-items: center;
 }
 
 .duty-station-div{
     display: flex;
     flex-direction: row;
     gap: 5px;
+    align-items: center;
 }
 
 .city-div{
     display: flex;
     flex-direction: row;
     gap: 5px;
+    align-items: center;
 }
 
 .state-div{
     display: flex;
     flex-direction: row;
     gap: 5px;
+    align-items: center;
 }
 
 .leave-p{
@@ -292,4 +302,74 @@
     display: flex;
     flex-direction: row;
     gap: 5px;
+
+}
+
+.submit-create-account{
+    width: 50%;
+    display: block;
+    margin: auto;
+    background-color:rgb(24, 121, 0);
+    border-radius: 25px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.609);
+}
+
+.checkmark-submit-btn{
+    display: block;
+    margin: auto;
+}
+
+.submit-create-account:hover{
+    cursor: pointer;
+    transform: scale(1.5) perspective(1px);
+}
+
+.required-fields{
+    color: rgb(201, 0, 0);
+    font-size: 11px;
+}
+
+.highest-edu-question{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}
+
+.seeking-higher-edu{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.username-with-required{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.password-require{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.interests-with-as{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}
+
+.interests-with-require{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.credentials-require{
+    display: flex;
+    justify-content: space-around;
 }
