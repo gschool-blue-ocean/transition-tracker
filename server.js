@@ -47,7 +47,7 @@ io.on("connection", (socket) => {
 
 app.use(express.json());
 app.use(express.static("build"));
-app.use(cors());
+app.use(cors({ origin: "*" }));
 // app.listen(PORT, (err) => {
 //     if (err) return console.log(err);
 //     console.log(`Listening on port: ${PORT}`);
