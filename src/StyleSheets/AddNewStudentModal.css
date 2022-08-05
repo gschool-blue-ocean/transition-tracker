@@ -12,15 +12,16 @@
 }
 
 .addStudentModal {
-    padding: 2vw;
+    padding: 1vw 2vw;
     background-color: rgba(255, 255, 255, .15);
     backdrop-filter: blur(5px);
     border-radius: 5%;
+
 }
 
 .addStudentForm {
     display: grid;
-    gap: 1vw;
+    gap: 1.5vw;
 }
 
 .addStudentFormButton,
@@ -43,6 +44,7 @@
 }
 
 .addStudentFormButton.createStudent {
+    margin-top: 2vw;
     background-color: lightskyblue;
 }
 

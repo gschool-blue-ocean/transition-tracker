@@ -1,4 +1,3 @@
-import e from 'cors'
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import '../../../StyleSheets/AddNewStudentModal.css'
@@ -22,16 +21,6 @@ const AddStudentModal = ({ setShowAddStudentModal, viewClickedCohort }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (!formData.first) {
-            return alert('First Name can not be blank!')
-        }
-        if (!formData.last) {
-            return alert('Last Name can not be blank!')
-        }
-        if (!formData.email) {
-            return alert('Email can not be blank!')
-        }
-
         let data = {
             first: formData.first,
             last: formData.last,
@@ -42,6 +31,10 @@ const AddStudentModal = ({ setShowAddStudentModal, viewClickedCohort }) => {
             admin: false,
             new_user: true
         }
+        let emailSubject = `Welcome to Galvanize ${data.first}!`
+        let emailBody = `this is a test body\ntest ne line`
+        window.open(`mailto:${formData.email}?subject=${emailSubject}&body=${emailBody}`)
+
         console.log(viewClickedCohort)
         console.log(data)
     }
@@ -53,27 +46,29 @@ const AddStudentModal = ({ setShowAddStudentModal, viewClickedCohort }) => {
         <div className='portalContainer'>
             <div className='addStudentModal'>
                 <form className="addStudentForm" onSubmit={handleSubmit}>
-                    <div style={!formData.first ? { 'display': 'block' } : { 'display': 'none' }}>Name Cant be blank</div>
+
                     <input
-                        id="firstname"
+                        required
                         data-error='Please Enter FirstName'
                         className='addStudentFormInput'
                         type='text'
-                        placeholder="Student's First name"
+                        placeholder="Student First name"
                         onChange={handleChange}
                         name='first'
                         value={formData.first} />
                     <input
+                        required
                         className='addStudentFormInput'
                         type='text'
-                        placeholder="Student's Last name"
+                        placeholder="Student Last name"
                         onChange={handleChange}
                         name='last'
                         value={formData.last} />
                     <input
+                        required
                         className='addStudentFormInput'
                         type='email'
-                        placeholder="Student's Email Address"
+                        placeholder="Student Email Address"
                         onChange={handleChange}
                         name='email'
                         value={formData.email} />
