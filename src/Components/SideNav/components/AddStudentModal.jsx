@@ -32,7 +32,7 @@ const AddStudentModal = ({ setShowAddStudentModal, viewClickedCohort }) => {
             new_user: true
         }
         let emailSubject = `Welcome to Galvanize ${data.first}!`
-        let emailBody = `this is a test body\ntest ne line`
+        let emailBody = `this is a test body\ntest ne line` + "\n"
         window.open(`mailto:${formData.email}?subject=${emailSubject}&body=${emailBody}`)
 
         console.log(viewClickedCohort)
