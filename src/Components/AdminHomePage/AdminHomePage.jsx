@@ -19,7 +19,9 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     const [showClickedCohort, setShowClickedCohort] = useState(false)
 
     const [cohortsToMap, setCohortsToMap] = useState([])
+    const [activeStudent, setActiveStudent] = useState({});
     
+
 
     useEffect(() => {
         if (isOnArchivePage) {
@@ -44,8 +46,24 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     const setModalIsOpenToFalse = () => {
         setModalIsOpen(false)
     }
-    const handleStudentNameClick = () => {
+    const handleStudentNameClick = (e) => {///////////////////////////////////////////////////////////////////////////////////////////
         console.log("Show me the money")
+        let workingStringArr = JSON.parse(e.target.id);
+        console.log(workingStringArr.cohort_id);
+        handleCohortSet(workingStringArr.cohort_id);
+        setActiveStudent(workingStringArr);
+        handleActiveCohortTabOverView(workingStringArr);
+        
+    }
+    const handleCohortSet = (e) => {
+        //handleActiveCohortTab(e.currentTarget)
+
+        allCohortsData.forEach(element => {
+            if (element.cohort_id == e) {
+                return setViewClickedCohort(element)
+            }
+        });
+        setShowClickedCohort(true)
     }
 
     const setNewCohortModalIsOpenToTrue = (e) => {
@@ -67,13 +85,11 @@ function AdminHomePage({ socket, isOnArchivePage }) {
 
         setShowClickedCohort(true)
     }
-    const horizontalScroll = () => {
-        const scrollContainer = document.getElementById('#cohort-view')
-
-        scrollContainer.addEventListener(("wheel"), (e) => {
-            e.preventDefault();
-            scrollContainer.scrollLeft += e.deltaY
-        });
+    const handleActiveCohortTabOverView = (element) => {//======================================================
+        document.querySelectorAll('.listOfCohorts').forEach(elem => elem.classList.remove('activeCohortTab'))
+        //let active = document.getElementById(`#${parseInt(element.cohort_id)}`);
+        console.log(element);
+        //active.classList.add('activeCohortTab');
     }
 
     const handleActiveCohortTab = (element) => {
@@ -117,7 +133,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                 {showClickedCohort ?
 
                     <>
-                        <StudentPage viewClickedCohort={viewClickedCohort} socket={socket} />
+                        <StudentPage viewClickedCohort={viewClickedCohort} socket={socket} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} activeStudent={activeStudent} setActiveStudent={setActiveStudent}/>
                     </>
 
                     :
@@ -141,10 +157,10 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                                             </div>
                                             <div className="listOfNames">
                                                 {
-                                                    allUsersData.map(user => {
+                                                    allUsersData.map(user => {//==================================================================================
                                                         if (user.cohort_id == cohort.cohort_id) {
                                                             return <div className='nameInRow'>
-                                                                <div className='name-div' onClick={handleStudentNameClick} > {user.first} {user.last} </div> <div className='color-code'></div>
+                                                                <div id={`${JSON.stringify(user)}`}className='name-div' onClick={handleStudentNameClick} > {user.first} {user.last} </div> <div className='color-code'></div>
                                                             </div>
                                                         }
                                                     })
