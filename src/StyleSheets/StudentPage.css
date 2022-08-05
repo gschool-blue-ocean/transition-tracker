@@ -86,15 +86,19 @@
 #ETS-120 {
    background-color: var(--clr-ets-blue);
 }
+
 #ETS-90 {
    background-color: var(--clr-ets-yellow);
 }
+
 #ETS-60 {
    background-color: var(--clr-ets-orange);
 }
+
 #ETS-30 {
    background-color: var(--clr-ets-red);
 }
+
 #ETS-d {
    background-color: var(--clr-ets-green);
 }
@@ -105,7 +109,7 @@
    grid-area: StuInfo;
 }
 
-.SDash--Info-card > ul,
+.SDash--Info-card>ul,
 li,
 span {
    list-style: none;
@@ -121,8 +125,8 @@ span {
    border-radius: 10px;
 }
 
-ul > h4,
-li > h4 {
+ul>h4,
+li>h4 {
    margin-top: 1em;
 }
 
@@ -183,7 +187,7 @@ li > h4 {
 }
 
 #StuNotes--TextArea {
-   width: fill;
+   width: stretch;
    height: 100px;
    border-radius: 10px;
 }

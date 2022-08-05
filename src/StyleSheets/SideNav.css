@@ -6,6 +6,7 @@
    border-radius: 10px;
    font-family: var(--ff-primary);
    padding: calc(var(--spacer-container) * 1);
+   padding-top: 0;
    line-height: var(--spacer-line);
    color: var(--clr-primary-accent);
    max-height: 85vh;
@@ -19,10 +20,12 @@
 .sideNav--Wrapper::-webkit-scrollbar-track {
    background: none;
 }
+
 .sideNav--Wrapper::-webkit-scrollbar-thumb {
    background: var(--clr-bgprimary-dark);
    border-radius: 10px;
 }
+
 .sideNav--Wrapper::-webkit-scrollbar-track-piece:end {
    background: transparent;
    margin-bottom: 20px;
