@@ -8,6 +8,8 @@ import "../../StyleSheets/StudentPage.css";
 import SideNav from "../SideNav/SideNav";
 import LoginContext from "../../Context/LoginContext";
 import ChatModal from "../../Components/Chat/ChatModal";
+import { FiEdit } from "react-icons/fi";
+import EditStudentModal from "./components/EditStudentModal";
 
 const customStyles = {
    content: {
@@ -29,9 +31,11 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
    const [modalIsOpen, setIsOpen] = useState(false);
    const { userData } = useContext(LoginContext);
    const [activeStudent, setActiveStudent] = useState({});
+   const [showEditStudentModal, setShowEditStudentModal] = useState(false);
 
    useEffect(() => {
       if (!userData.admin) {
+         console.log(userData);
          document.querySelector(".test--grid").classList.add("studentView");
          setActiveStudent(userData);
       }
@@ -44,6 +48,9 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
    function closeModal() {
       setIsOpen(false);
    }
+   const handleEditBtnClicked = (e) => {
+      setShowEditStudentModal(!showEditStudentModal);
+   };
 
    return (
       <div className="test--grid">
@@ -67,7 +74,19 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
             <div className="SDash--Info-card">
                <div className="infoCard--container">
                   <ul>
-                     <h4 className="text-left">Personal Info</h4>
+                     <div>
+                        {showEditStudentModal && (
+                           <EditStudentModal
+                              setShowEditStudentModal={setShowEditStudentModal}
+                              activeStudent={activeStudent}
+                           />
+                        )}
+                        <div onClick={handleEditBtnClicked} className="editStudentBtnSpan">
+                           <FiEdit className="editStudentInfoBtn" />
+                           <span className="editStudentToolTip">Edit</span>
+                        </div>
+                        <h4 className="text-left">Personal Info</h4>
+                     </div>
 
                      <li>
                         <span className="title"> Email: </span>

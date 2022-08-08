@@ -125,6 +125,32 @@ span {
    border-radius: 10px;
 }
 
+.editStudentBtnSpan {
+   display: grid;
+   justify-items: center;
+   position: relative;
+   float: right;
+   opacity: 0.8;
+}
+
+.editStudentBtnSpan:hover {
+   cursor: pointer;
+   opacity: 1;
+   transform: scale(1.2);
+}
+
+.editStudentToolTip {
+   display: none;
+   font-size: 0.75rem;
+}
+
+.editStudentBtnSpan:hover .editStudentToolTip {
+   display: block !important;
+}
+
+.editStudentInfoBtn:hover {
+}
+
 ul > h4,
 li > h4 {
    margin-top: 1em;
