@@ -187,6 +187,7 @@ li > h4 {
    border: solid var(--clr-nuetral-brown);
    border-radius: 10px;
    margin-bottom: 8px;
+   width: 85%;
    text-align: center;
    color: var(--clr-accent-white);
    background-color: var(--clr-bgsecondary-contrast);
