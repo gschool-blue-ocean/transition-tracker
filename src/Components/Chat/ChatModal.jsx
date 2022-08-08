@@ -28,7 +28,7 @@ function ChatModal({ socket, activeStudent }) {
 
     useEffect(() => {
         joinRoom()
-        userData.admin ? setStudentId(activeStudent.user_id) : setStudentId(userData.user_id)
+        userData.admin && activeStudent.user_id ? setStudentId(activeStudent.user_id) : setStudentId(userData.user_id)
 
     }, [activeStudent])
 

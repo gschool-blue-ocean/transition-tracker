@@ -34,9 +34,7 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
    const [showEditStudentModal, setShowEditStudentModal] = useState(false)
 
    useEffect(() => {
-      console.log(userData.admin)
       if (!userData.admin || userData.admin == null) {
-         console.log(userData);
          document.querySelector(".test--grid").classList.add("studentView");
          setActiveStudent(userData);
       }
@@ -56,7 +54,6 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
    }
    const handleEditBtnClicked = (e) => {
       setShowEditStudentModal(!showEditStudentModal)
-      console.log(activeStudent)
    }
 
    return (
@@ -84,7 +81,7 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
 
                   <ul>
                      <div >
-                        {showEditStudentModal && <EditStudentModal activeStudent={activeStudent} />}
+                        {showEditStudentModal && <EditStudentModal setShowEditStudentModal={setShowEditStudentModal} activeStudent={activeStudent} />}
                         <div onClick={handleEditBtnClicked} className="editStudentBtnSpan"><FiEdit className="editStudentInfoBtn" /><span className="editStudentToolTip">Edit</span></div>
                         <h4 className="text-left">Personal Info</h4>
                      </div>
