@@ -133,6 +133,19 @@ const createNewAdmin = async (req, res) => {
     }
 }
 
+const archiveOneStudentByID = async (req, res) => {
+    try {
+        let client = await pool.connect()
+        let data = await client.query('UPDATE users set cohort_id = $1, cohort_name = $2 WHERE user_id = $3 RETURNING *', [1, 'MCSP-00', req.params.id])
+        res.json(data)
+        client.release()
+
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
+}
+
 const updateOneUserByID = async (req, res) => {
 
     const { first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user, mos, interests } = req.body
@@ -587,6 +600,7 @@ module.exports = {
     deleteAllCommentsByStudentID,
     deleteAllTasksByStudentID,
     deleteAllDependentsBySponsorID,
-    getAllUsersByCohortID
+    getAllUsersByCohortID,
+    archiveOneStudentByID
 }
 

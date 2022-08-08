@@ -83,6 +83,8 @@ app.patch('/api/update/user/:id', controller.updateOneUserByID)
 
 app.patch('/api/update/admin/:id', controller.updateAdminByID)
 
+app.patch('/api/archive/student/:id', controller.archiveOneStudentByID)
+
 app.delete('/api/delete/user/:id', controller.deleteOneUserByID)
 
 app.patch('/api/hash', controller.hashAllPasswords)
