@@ -109,7 +109,7 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
                         <h4 id="depends" className="text-left">
                            Dependents
                         </h4>
-                        <SPDependents />  {/* // Pass in dependent info */}
+                        <SPDependents /> {/* // Pass in dependent info */}
                      </li>
 
                      <li>
@@ -131,7 +131,7 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
                   </ul>
                </div>
             </div>
-            <SPTasks openModal={openModal} />
+            <SPTasks activeStudent={activeStudent} openModal={openModal} />
             <Modal isOpen={modalIsOpen} onAfterOpen={afterOpenModal} onRequestClose={closeModal} style={customStyles}>
                <SPTaskModal />
             </Modal>
