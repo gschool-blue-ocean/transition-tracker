@@ -109,7 +109,7 @@
    grid-area: StuInfo;
 }
 
-.SDash--Info-card>ul,
+.SDash--Info-card > ul,
 li,
 span {
    list-style: none;
@@ -125,35 +125,8 @@ span {
    border-radius: 10px;
 }
 
-.editStudentBtnSpan {
-   display: grid;
-   justify-items: center;
-   position: relative;
-   float: right;
-   opacity: .8;
-
-}
-
-.editStudentBtnSpan:hover {
-   cursor: pointer;
-   opacity: 1;
-   transform: scale(1.2);
-
-}
-
-.editStudentToolTip {
-   display: none;
-   font-size: .75rem;
-}
-
-.editStudentBtnSpan:hover .editStudentToolTip {
-   display: block !important;
-}
-
-.editStudentInfoBtn:hover {}
-
-ul>h4,
-li>h4 {
+ul > h4,
+li > h4 {
    margin-top: 1em;
 }
 
@@ -188,7 +161,6 @@ li>h4 {
    border: solid var(--clr-nuetral-brown);
    border-radius: 10px;
    margin-bottom: 8px;
-   width: 80%;
    text-align: center;
    color: var(--clr-accent-white);
    background-color: var(--clr-bgsecondary-contrast);
