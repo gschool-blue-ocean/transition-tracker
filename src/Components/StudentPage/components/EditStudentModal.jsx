@@ -1,4 +1,3 @@
-import e from 'cors'
 import react, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
@@ -43,9 +42,10 @@ const EditStudentModal = ({ activeStudent, setShowEditStudentModal }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        fetch(`https://hacking-transition.herokuapp.com/api/admin/edit/student/:${activeStudent.user_id}`, {
+        console.log(formData)
+        fetch(`https://hacking-transition.herokuapp.com/api/admin/edit/student/${activeStudent.user_id}`, {
             method: "patch",
-            headers: { 'content-type': 'application/json' },
+            headers: { "content-type": "application/json" },
             body: JSON.stringify(formData)
         })
             .then(res => res.json())
