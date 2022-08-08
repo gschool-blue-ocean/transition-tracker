@@ -4,18 +4,12 @@ import { CgEnter } from 'react-icons/cg'
 import AppContext from '../../Context/AppContext';
 import LoginContext from '../../Context/LoginContext';
 import { useNavigate } from 'react-router-dom'
-// import { auth, signInWithEmailAndPassword } from '../Firebase'
-// import { app } from '../Firebase'
-// import { CookiesProvider, withCookies, Cookies, useCookies } from 'react-cookie';
-// import Cookies from 'js-cookie'
 
 function LoginModal({ invokeSetLogin, setShowLoginModal }) {
     let navigate = useNavigate()
 
     const { allUsersData, allCohortsData, loading, setLoading } = useContext(AppContext)
     const { userData, setUserData } = useContext(LoginContext)
-
-    console.log(userData)
 
     const [loginData, setLoginData] = useState({
         username: '',
