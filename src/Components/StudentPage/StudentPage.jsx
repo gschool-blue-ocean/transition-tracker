@@ -29,7 +29,9 @@ const customStyles = {
 
 export default function StudentPage({ modalIsOpen, setModalIsOpen, activeStudent, setActiveStudent, allUsersData, socket, viewClickedCohort }) {
    const { userData } = useContext(LoginContext);
-   const [showEditStudentModal, setShowEditStudentModal] = useState(false)
+   const [activeStudent, setActiveStudent] = useState({});
+   const [showEditStudentModal, setShowEditStudentModal] = useState(false);
+   const [selectedTask, setSelectedTask] = useState(null);
 
    useEffect(() => {
       console.log(userData)
