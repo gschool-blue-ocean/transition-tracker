@@ -32,7 +32,6 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
 
    useEffect(() => {
       if (!userData.admin) {
-         console.log(userData);
          document.querySelector(".test--grid").classList.add("studentView");
          setActiveStudent(userData);
       }
@@ -40,11 +39,6 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
 
    function openModal() {
       setIsOpen(true);
-   }
-
-   function afterOpenModal() {
-      // references are now sync'd and can be accessed.
-      // subtitle.style.color = "#f00";
    }
 
    function closeModal() {
@@ -132,7 +126,7 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
                </div>
             </div>
             <SPTasks activeStudent={activeStudent} openModal={openModal} />
-            <Modal isOpen={modalIsOpen} onAfterOpen={afterOpenModal} onRequestClose={closeModal} style={customStyles}>
+            <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={customStyles}>
                <SPTaskModal />
             </Modal>
 

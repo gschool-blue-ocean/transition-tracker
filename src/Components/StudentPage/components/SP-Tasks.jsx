@@ -1,24 +1,34 @@
 import React, { useEffect, useState } from "react";
+import Loading from "../../LoadingDisplay/Loading";
 
 export default function SPTasks({ openModal, activeStudent }) {
-   const [userTasks, setUserTasks] = useState(null);
+   const [selectedStudent, setSelectedStudent] = useState(activeStudent.user_id);
+   const [studentTasks, setStudentTasks] = useState(null);
 
    useEffect(() => {
+      setSelectedStudent(activeStudent.user_id);
       fetch(`https://hacking-transition.herokuapp.com/api/tasks/student/${activeStudent.user_id}`)
          .then((res) => res.json())
          .then((tasks) => {
-            setUserTasks(tasks);
+            console.log(tasks);
+            setStudentTasks(tasks);
          });
-   });
-   // Pull All Tasks from DB for Selected User
-   return (
-      <div className="SDash--Tasks">
-         <h4 id="StuTasks--Header">Tasks</h4>
-         <>
-            {userTasks.map((task) => {
-               return; //this will return the task div to click on and set an activeTask state for modal data
-            })}
-         </>
-      </div>
-   );
+   }, [activeStudent]);
+
+   if (!activeStudent) {
+      return <Loading />;
+   } else if (!studentTasks) {
+      return <Loading />;
+   } else {
+      return (
+         <div className="SDash--Tasks">
+            <h4 id="StuTasks--Header">Tasks</h4>
+            <>
+               {studentTasks.map((task) => {
+                  return <div>{task.title}</div>;
+               })}
+            </>
+         </div>
+      );
+   }
 }
