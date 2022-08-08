@@ -28,7 +28,6 @@
   gap: 5px;
   grid-template-rows: 1;
   border: 3ch;
-  /* background-color: white; */
   margin-bottom: 2px;
 }
 
@@ -53,32 +52,21 @@
 #cohort-nav {
   display: grid;
   align-items: center;
-  /* grid-template-columns: repeat(1, 1fr); */
-  /* grid-template-rows: 200px repeat(5, 1fr); */
   width: 300px;
   color: var(--clr-bgsecondary-contrast);
   text-shadow: 2px 2px 2px #0000004c;
-  /* background-color: ; */
-  /* height: auto; */
-  /* overflow: auto; */
   padding: 1em;
 }
 
 .list {
   display: grid;
   gap: 1rem;
-  /* grid-template-columns: 100%; */
-  
   height: 50%;
   justify-items: center;
- 
   font-size: 2.5ch;
   background-color: var(--clr-bgsecondary-contrast);
   box-shadow: 5px 5px 10px #888888;
   border-radius: 10px;
-
-  /* overflow: scroll; */
-
 }
 
 .cohort-list-title {
@@ -93,9 +81,6 @@
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   font-size: 2.5ch;
-  /* align-self: flex-end; */
-  /* font-weight: bolder; */
-
 }
 
 #all-cohorts-btn {
@@ -105,13 +90,9 @@
   color: white;
   text-shadow: 2px 2px 6px #000000;
   font-size: 1.7ch;
-  /* grid-row: 2 / 5; */
-  /* padding-bottom: 2rem; */
-  /* margin-top: 10%; */
 }
 
 #add-cohort-btn {
-  /* grid-row: 5/6; */
   margin-bottom: 10%;
   border-radius: 50px;
   width: 40px;
@@ -148,16 +129,12 @@
 
 #cohort-container {
   font-family: var(--ff-primary);
-  /* height: calc(90vh - 2rem); */
-  /* max-height: calc(90vh - 2rem); */
-  /* width: calc(100vw - 2rem); */
   max-width: calc(100vw - 2rem);
   min-width: 300px;
   display: grid;
   grid-template-columns: 1fr 4fr;
   gap: 1rem;
   margin: 1rem;
-  /* max-height: 85vh */
 }
 
 .mainContainer {
@@ -178,9 +155,7 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   min-width: 350px;
-
   gap: 1rem;
-  
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-inline: contain;
@@ -196,23 +171,19 @@ scroll-snap-align: start;
 
 #cohorts-list {
   display: grid;
-  /* grid-template-rows: auto 3rem; */
   height: 85vh;
 }
 
 .test-cohort {
   display: flex;
   flex-direction: column;
-
-  min-width: 300px;
-  height: 95%;
+  min-width: 400px;
+  /* height: 95%; */
+  height: fit-content;
   margin: 1rem;
   padding: 1rem;
-  
-  
   text-align: center;
   border-radius: 10px;
-
   background-color: var(--clr-bgsecondary-contrast);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   box-shadow: 5px 5px 10px #888888;
@@ -223,7 +194,6 @@ scroll-snap-align: start;
   grid-template-columns: repeat(5, 1fr);
   gap: 5px;
   grid-auto-rows: minmax(50px, auto);
-  /* font-size: xx-large; */
   min-height: 50px;
 }
 
@@ -241,7 +211,6 @@ scroll-snap-align: start;
   grid-row: 1 / 2;
   font-size: 2.5ch;
   text-shadow: 2px 2px 2px #000000;
-  /* align-self:center; */
   padding-top: 8%;
   padding-left: 40%;
 
@@ -256,13 +225,13 @@ scroll-snap-align: start;
 }
 
 .listOfNames {
-  height: 78%;
+  height: fit-content;
   overflow: scroll;
   background-color: whitesmoke;
   border-radius: 10px;
   margin-top: 3%;
   padding-top: 5px;
-  font-size:1.25ch;
+  font-size:17px
 }
 
 #numberOfStudents {
@@ -282,7 +251,6 @@ scroll-snap-align: start;
   text-align: center;
   align-content: center;
   font-size: 1.5ch;
-  margin-bottom: 10px;
 }
 
 #ETS {
@@ -290,7 +258,6 @@ scroll-snap-align: start;
   grid-column: 2 / 3;
   border-radius: 10px;
   min-width: 50px;
-
 }
 
 #thirty {

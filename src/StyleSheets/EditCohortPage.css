@@ -3,13 +3,23 @@
 
 .modal-page {
     text-align: center;
-}
+    /* width: fit-content; */
+    margin: auto;
+    display: grid;
+    max-width: 80%;
+    justify-content: center;
+    justify-self: center;
+    border-radius: 30px;
+    padding: 2%;
+    border: solid;
+    border-width: 3px;
+    border-color: black;
+};
 
 .cohort-info {
-    font-size: 2.5ch;
     padding-bottom: 1%;
-
 }
+
 
 svg {
     background: none;
@@ -24,28 +34,75 @@ svg {
     display: grid;
     grid-template-columns: auto auto;
     justify-items: center;
+    background-color: white;
+    border-radius: 20px;
+    padding: 2%;
+    
 }
 
-.student-btn {
-    padding: 1ch;
-    border: none;
-    background-color: none;
-    background: none;
-    font-size: 1.5ch;
+.edit-btn {
+    background:none;
+    border: black;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+    text-align: center;
+    padding: 2px;
+    margin: 2px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.814);
+    width:fit-content;
+    background-color: white;
+}
+.delete-btn {
+    background:none;
+    border: black;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+    text-align: center;
+    padding: 2px;
+    margin: 2px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.814);
+    width:fit-content;
+    background-color: white;
 }
 
 .student-div {
-    /* display: grid; */
-    background-color: var(--clr-bgsecondary-contrast);
+    display: grid;
+    grid-template-columns: 50%;
+    grid-template-rows: 1;
+    background-color: white;
     border-radius: 10px;
-    margin: 5px;
-    text-align: center;
-    width: 65%;
-    height: auto;
-
+    margin: 10px;
+    text-align:center;
+    min-width: 400px;
+    width: 60%;
+    padding: 5px;
+    border: solid;
+    border-color: black;
+    border-width: 1px;
+    background-color: var(--clr-bgsecondary-contrast);
+    color: white;
+    text-shadow: 1px 1px  #000000;
+    font-size: 2ch;
 }
-
 
 .cohort-info button {
     font-size: 1.25ch;
+}
+
+.archive-btn{
+    background:none;
+    border: black;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+    text-align: center;
+    padding: 2px;
+    margin: 2px;
+    grid-column:4;
+    width: fit-content;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.814);
+    background-color:white;
+
 }
