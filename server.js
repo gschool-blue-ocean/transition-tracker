@@ -85,7 +85,7 @@ app.patch('/api/update/admin/:id', controller.updateAdminByID)
 
 app.patch('/api/archive/student/:id', controller.archiveOneStudentByID)
 
-app.patch('api/admin/edit/student/:id', controller.adminEditStudentByID)
+app.patch('/api/admin/edit/student/:id', controller.adminEditStudentByID)
 
 app.delete('/api/delete/user/:id', controller.deleteOneUserByID)
 

@@ -43,7 +43,14 @@ const EditStudentModal = ({ activeStudent, setShowEditStudentModal }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(formData)
+        fetch(`https://hacking-transition.herokuapp.com/api/admin/edit/student/:${activeStudent.user_id}`, {
+            method: "patch",
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(formData)
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(err => console.log(err))
     }
 
     const handleChange = (e) => {
