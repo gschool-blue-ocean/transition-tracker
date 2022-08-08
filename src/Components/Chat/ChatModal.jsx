@@ -27,7 +27,9 @@ function ChatModal({ socket, activeStudent }) {
     const [studentId, setStudentId] = useState(null)
 
     useEffect(() => {
-        joinRoom()
+        if (activeStudent.user_id) {
+            joinRoom()
+        }
         userData.admin && activeStudent.user_id ? setStudentId(activeStudent.user_id) : setStudentId(userData.user_id)
 
     }, [activeStudent])
@@ -43,7 +45,6 @@ function ChatModal({ socket, activeStudent }) {
 
     useEffect(() => {
         socket.on("receive_message", (data) => {
-            console.log(data)
             setAllMsgs((msgs) => { return [...msgs, data] })
         })
     }, [socket])
