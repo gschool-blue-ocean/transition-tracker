@@ -47,7 +47,9 @@ io.on("connection", (socket) => {
 
 app.use(express.json());
 app.use(express.static("build"));
+
 app.use(cors());
+
 // app.listen(PORT, (err) => {
 //     if (err) return console.log(err);
 //     console.log(`Listening on port: ${PORT}`);
@@ -80,6 +82,8 @@ app.post('/api/login', controller.login)
 app.patch('/api/update/user/:id', controller.updateOneUserByID)
 
 app.patch('/api/update/admin/:id', controller.updateAdminByID)
+
+app.patch('/api/archive/student/:id', controller.archiveOneStudentByID)
 
 app.delete('/api/delete/user/:id', controller.deleteOneUserByID)
 

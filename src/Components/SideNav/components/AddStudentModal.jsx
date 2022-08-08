@@ -9,7 +9,7 @@ const AddStudentModal = ({ setShowAddStudentModal, viewClickedCohort, getStudent
         first: '',
         last: '',
         email: '',
-        generateEmail: false
+        generateEmail: true
     })
 
     const handleChange = (e) => {
@@ -50,7 +50,6 @@ const AddStudentModal = ({ setShowAddStudentModal, viewClickedCohort, getStudent
             body: JSON.stringify(newUserData)
         })
             .then((res) => res.json())
-            .then((data) => console.log(data))
             .then(() => getStudentList(viewClickedCohort.cohort_id))
             .then(() => setShowAddStudentModal(false))
             .catch((err) => console.log(err));
@@ -74,6 +73,7 @@ const AddStudentModal = ({ setShowAddStudentModal, viewClickedCohort, getStudent
 
             <div className='addStudentModal'>
                 <form className="addStudentForm" onSubmit={handleSubmit}>
+                    <h4 className='newStudentFormTitle'>Add new student information</h4>
 
                     <input
                         required
@@ -92,6 +92,7 @@ const AddStudentModal = ({ setShowAddStudentModal, viewClickedCohort, getStudent
                         onChange={handleChange}
                         name='last'
                         value={formData.last} />
+
                     <input
                         required
                         className='addStudentFormInput'
@@ -103,13 +104,14 @@ const AddStudentModal = ({ setShowAddStudentModal, viewClickedCohort, getStudent
 
 
                     <label
+                        className='labelGenerateEmailCheckBox'
                         for='generateEmail'>
                         <input
+                            id='generateEmail'
                             type='checkbox'
                             name='generateEmail'
                             onChange={handleChange}
-                            value={formData.generateEmail}
-
+                            checked={formData.generateEmail}
                         /> Auto generate email</label>
 
 

@@ -23,6 +23,16 @@
     gap: 1.5vw;
 }
 
+.newStudentFormTitle,
+.labelGenerateEmailCheckBox {
+    justify-self: center;
+}
+
+.labelGenerateEmailCheckBox {
+    display: flex;
+    gap: 1vw;
+}
+
 .addStudentFormButton,
 .addStudentFormInput {
     outline: none;
@@ -36,7 +46,12 @@
     opacity: .8;
 }
 
-.addStudentFormButton:hover {
+.labelGenerateEmailCheckBox:hover {
+    cursor: pointer;
+}
+
+.addStudentFormButton:hover,
+#generateEmail:hover {
     cursor: pointer;
     transform: scale(1.1);
     opacity: 1;
