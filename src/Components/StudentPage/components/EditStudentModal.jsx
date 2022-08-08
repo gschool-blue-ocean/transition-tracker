@@ -1,3 +1,4 @@
+import e from 'cors'
 import react, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
@@ -7,8 +8,6 @@ const EditStudentModal = ({ activeStudent, setShowEditStudentModal }) => {
         first: activeStudent.first,
         last: activeStudent.last,
         email: activeStudent.email,
-        username: activeStudent.username,
-        password: activeStudent.password,
         rank: activeStudent.rank,
         branch: activeStudent.branch,
         duty_station: activeStudent.duty_station,
@@ -21,10 +20,6 @@ const EditStudentModal = ({ activeStudent, setShowEditStudentModal }) => {
         has_dependents: activeStudent.has_dependents,
         highest_education: activeStudent.highest_education,
         seeking_further_education: activeStudent.seeking_further_education,
-        admin: activeStudent.admin,
-        cohort_name: activeStudent.cohort_name,
-        cohort_id: activeStudent.cohort_id,
-        new_user: activeStudent.new_user,
         mos: activeStudent.mos,
         interests: activeStudent.interests
     })
@@ -32,19 +27,41 @@ const EditStudentModal = ({ activeStudent, setShowEditStudentModal }) => {
     function convertDateToIso(date) {
         let newDate = new Date(date)
         let dateArray = newDate.toLocaleDateString().split('/')
-        let year = dateArray[2]
-        let day = dateArray[1].length > 1 ? dateArray[1] : `0${dateArray[1]}`
-        let month = dateArray[0].length > 1 ? dateArray[0] : `0${dateArray[0]}`
 
-        return `${year}-${month}-${day}`
+        if (dateArray[0].length === 4) {
+            return date
+        }
+        else {
+            let year = dateArray[2]
+            let day = dateArray[1].length > 1 ? dateArray[1] : `0${dateArray[1]}`
+            let month = dateArray[0].length > 1 ? dateArray[0] : `0${dateArray[0]}`
+
+            return `${year}-${month}-${day}`
+        }
+
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log(formData)
     }
 
-    const handleChange = () => {
+    const handleChange = (e) => {
+        if (e.target.type === "checkbox") {
+            return setFormData((prevData) => {
+                return {
+                    ...prevData,
+                    [e.target.name]: e.target.checked
+                }
+            })
+        }
 
+        setFormData((prevData) => {
+            return {
+                ...prevData,
+                [e.target.name]: e.target.value
+            }
+        })
     }
 
     const handleCancel = () => {
@@ -54,138 +71,183 @@ const EditStudentModal = ({ activeStudent, setShowEditStudentModal }) => {
     return ReactDOM.createPortal(
         <div className='portalContainer'>
             <div className='addStudentModal'>
+                <h4 className='editStudentFormTitle'>Edit student information</h4>
 
                 <form className="addStudentForm" onSubmit={handleSubmit}>
-                    <h4 className='newStudentFormTitle'>Edit student information</h4>
+                    <div className='editStudentFormInputs'>
+                        <label>First
+                            <input
+                                id='editStudentFirstName'
+                                required
+                                className='addStudentFormInput'
+                                type='text'
+                                placeholder="Student First name"
+                                onChange={handleChange}
+                                name='first'
+                                value={formData.first} /></label>
 
-                    <label>First
-                        <input
-                            id='editStudentFirstName'
-                            required
-                            className='addStudentFormInput'
+
+                        <label>Last
+                            <input
+                                required
+                                className='addStudentFormInput'
+                                type='text'
+                                placeholder="Student Last name"
+                                onChange={handleChange}
+                                name='last'
+                                value={formData.last} />
+                        </label>
+
+                        <label>Email
+                            <input
+                                required
+                                className='addStudentFormInput'
+                                type='email'
+                                placeholder="Student Email Address"
+                                onChange={handleChange}
+                                name='email'
+                                value={formData.email} />
+                        </label>
+
+                        <label>Rank
+                            <input
+                                required
+                                className='addStudentFormInput'
+                                type='text'
+                                placeholder="Student Rank"
+                                onChange={handleChange}
+                                name='rank'
+                                value={formData.rank} />
+                        </label>
+
+                        <label>Branch
+                            <input
+                                required
+                                className='addStudentFormInput'
+                                type='text'
+                                placeholder="Student Branch of Service"
+                                onChange={handleChange}
+                                name='branch'
+                                value={formData.branch} />
+                        </label>
+
+                        <label>Duty Station
+                            <input
+                                required
+                                className='addStudentFormInput'
+                                type='text'
+                                placeholder="Student Duty Station"
+                                onChange={handleChange}
+                                name='duty_station'
+                                value={formData.duty_station} />
+                        </label>
+
+                        <label>Leave start date
+                            <input
+                                required
+                                className='addStudentFormInput'
+                                type='date'
+                                onChange={handleChange}
+                                name='leave_start_date'
+                                value={formData.leave_start_date} />
+                        </label>
+
+                        <label>ETS date
+                            <input
+                                required
+                                className='addStudentFormInput'
+                                type='date'
+                                onChange={handleChange}
+                                name='ets_date'
+                                value={formData.ets_date} />
+                        </label>
+
+                        <label>City
+                            <input
+                                required
+                                className='addStudentFormInput'
+                                type='text'
+                                placeholder="Student City"
+                                onChange={handleChange}
+                                name='city'
+                                value={formData.city} />
+                        </label>
+
+                        <label>State
+                            <input
+                                required
+                                className='addStudentFormInput'
+                                type='text'
+                                placeholder="Student State"
+                                onChange={handleChange}
+                                name='state'
+                                value={formData.state} />
+                        </label>
+
+                        <label>Highest education
+                            <input
+                                required
+                                className='addStudentFormInput'
+                                type='text'
+                                placeholder="Student highest education"
+                                onChange={handleChange}
+                                name='highest_education'
+                                value={formData.highest_education} />
+                        </label>
+
+                        <label>Military Occupation
+                            <input
+                                required
+                                className='addStudentFormInput'
+                                type='text'
+                                placeholder="Student Military occupation"
+                                onChange={handleChange}
+                                name='mos'
+                                value={formData.mos} /></label>
+
+                        <label >
+                            <input
+                                type='checkbox'
+                                name='seeking_further_education'
+                                onChange={handleChange}
+                                checked={formData.seeking_further_education}
+                            /> Seeking further education?</label>
+
+                        <label >
+                            <input
+                                type='checkbox'
+                                name='planning_to_relocate'
+                                onChange={handleChange}
+                                checked={formData.planning_to_relocate}
+                            /> Planning to relocate?</label>
+
+
+                        <label>
+                            <input
+                                type='checkbox'
+                                name='taps_complete'
+                                onChange={handleChange}
+                                checked={formData.taps_complete}
+                            /> Taps complete?</label>
+
+                        <label >
+                            <input
+                                type='checkbox'
+                                name='has_dependents'
+                                onChange={handleChange}
+                                checked={formData.has_dependents}
+                            /> Have dependents?</label>
+                    </div>
+
+                    <div className='myInterestsDiv'>
+                        <label>My interests:</label>
+                        <textarea
+                            className='editInterestsTextarea'
                             type='text'
-                            placeholder="Student First name"
                             onChange={handleChange}
-                            name='first'
-                            value={formData.first} /></label>
-
-
-                    <label>Last
-                        <input
-                            required
-                            className='addStudentFormInput'
-                            type='text'
-                            placeholder="Student Last name"
-                            onChange={handleChange}
-                            name='last'
-                            value={formData.last} />
-                    </label>
-
-                    <label>Email
-                        <input
-                            required
-                            className='addStudentFormInput'
-                            type='email'
-                            placeholder="Student Email Address"
-                            onChange={handleChange}
-                            name='email'
-                            value={formData.email} />
-                    </label>
-
-                    <label>Rank
-                        <input
-                            required
-                            className='addStudentFormInput'
-                            type='text'
-                            placeholder="Student Rank"
-                            onChange={handleChange}
-                            name='rank'
-                            value={formData.rank} />
-                    </label>
-
-                    <label>Branch
-                        <input
-                            required
-                            className='addStudentFormInput'
-                            type='text'
-                            placeholder="Student Branch of Service"
-                            onChange={handleChange}
-                            name='branch'
-                            value={formData.branch} />
-                    </label>
-
-                    <label>Duty Station
-                        <input
-                            required
-                            className='addStudentFormInput'
-                            type='text'
-                            placeholder="Student Duty Station"
-                            onChange={handleChange}
-                            name='duty_station'
-                            value={formData.duty_station} />
-                    </label>
-
-                    <label>Leave start date
-                        <input
-                            required
-                            className='addStudentFormInput'
-                            type='date'
-                            onChange={handleChange}
-                            name='leave_start_date'
-                            value={formData.leave_start_date} />
-                    </label>
-
-                    <label>ETS date
-                        <input
-                            required
-                            className='addStudentFormInput'
-                            type='date'
-                            onChange={handleChange}
-                            name='ets_date'
-                            value={formData.ets_date} />
-                    </label>
-
-                    <label>City
-                        <input
-                            required
-                            className='addStudentFormInput'
-                            type='text'
-                            placeholder="Student City"
-                            onChange={handleChange}
-                            name='city'
-                            value={formData.city} />
-                    </label>
-
-                    <label>State
-                        <input
-                            required
-                            className='addStudentFormInput'
-                            type='text'
-                            placeholder="Student State"
-                            onChange={handleChange}
-                            name='state'
-                            value={formData.state} />
-                    </label>
-
-
-                    <label>
-                        <input
-                            type='checkbox'
-                            name='taps_complete'
-                            onChange={handleChange}
-                            checked={formData.taps_complete}
-                        /> Taps complete ?</label>
-
-                    <label
-                    // className='labelGenerateEmailCheckBox'
-                    >
-                        <input
-                            type='checkbox'
-                            name='planning_to_relocate'
-                            onChange={handleChange}
-                            checked={formData.planning_to_relocate}
-                        /> Planning to relocate ?</label>
-
+                            name='interests'
+                            value={formData.interests} />
+                    </div>
 
                     <input
                         className='addStudentFormButton createStudent'
