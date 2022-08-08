@@ -7,6 +7,7 @@ export default function EditableStudent({ firstName, lastName, id, cohort }) {
   const [ userData ] = useState(allUsersData.find(x => x.user_id === id))
   const [ editing, setEditing ] = useState(false)
   const [ deleted, setDeleted ] = useState(false)
+  const [ archived, setArchived ] = useState(false)
   const [ value, setValue ] = useState(`${firstName} ${lastName}`)
   const toggleEditing = () => setEditing(!editing)
   const checkChange = e => setValue(e.currentTarget.value)
@@ -46,6 +47,20 @@ export default function EditableStudent({ firstName, lastName, id, cohort }) {
       mode: 'cors'
     })
   }
+
+  const archiveStudent = () => {
+    setArchived(true)
+    userData.cohort_id = 1
+        console.log(JSON.stringify(userData))
+    fetch(`http://hacking-transition.herokuapp.com/api/update/user/${id}`, {
+          method: 'PATCH',
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(userData),
+        })
+        .then(alert("Student Archived"))
+  }
+
+
   const restore = () => setDeleted(false)
 
   if (editing) return <>
@@ -61,11 +76,15 @@ export default function EditableStudent({ firstName, lastName, id, cohort }) {
   </>
   else if (!deleted) return <>
     {value}
-    <button className="student-btn" onClick={toggleEditing}>
-      <FiEdit/>
+    <button className="edit-btn" onClick={toggleEditing}>
+      Edit
     </button>
-    <button className="student-btn" onClick={deleteStudent}>
-      <FiDelete/>
+    <button className="delete-btn" onClick={deleteStudent}>
+      {/* <FiDelete/> */}
+      Delete 
+    </button>
+    <button className="archive-btn" onClick={archiveStudent}>
+      Archive 
     </button>
   </>
   else return <>

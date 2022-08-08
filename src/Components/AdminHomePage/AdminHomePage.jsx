@@ -146,7 +146,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                                                         }
                                                     })
                                                 }
-                                                <div id="numberOfStudents">{allUsersData.filter(user => user.cohort_id == cohort.cohort_id).length}</div>
+                                                <div id="numberOfStudents">{allUsersData.filter(user => user.cohort_id == cohort.cohort_id).length} Students</div>
                                             </div>
                                             {/* <div id="numberOfStudents">{ allUsersData.filter(user => user.cohort_id == id).length }</div> */}
                                         </div>
