@@ -30,7 +30,8 @@ export default function EditableCohort({ name, start, end, id }) {
     if (e.keyCode === 13) submitFxn()
   }
 
-  if (editing) return <>
+  if (editing) return <div className='editCohortFields'>
+  Cohort Name:
     <input
       type="text"
       placeholder="Cohort name can't be blank"
@@ -39,6 +40,7 @@ export default function EditableCohort({ name, start, end, id }) {
       onKeyDown={checkKey}
     />
     <br />
+    Start Date:
     <input
       type="text"
       placeholder="Start date can't be blank"
@@ -47,6 +49,7 @@ export default function EditableCohort({ name, start, end, id }) {
       onKeyDown={checkKey}
     />
     <br />
+    End Date:
     <input
       type="text"
       placeholder="End date can't be blank"
@@ -57,7 +60,7 @@ export default function EditableCohort({ name, start, end, id }) {
     <br />
     <button onClick={toggleEditing}>Back</button> {' '}
     <button onClick={submitFxn}>Submit</button>
-  </>
+  </div>
 
   else return <>
     {currentName}<br />

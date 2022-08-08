@@ -6,7 +6,7 @@
 }
 
 .cohort-info {
-    font-size: 5ch;
+    font-size: 2.5ch;
     padding-bottom: 1%;
 
 }
@@ -16,11 +16,11 @@ svg {
 }
 
 .num-of-stu {
-    font-size: 6ch;
+    font-size: 3ch;
 }
 
 .modal-page ul {
-    font-size: 5ch;
+    font-size: 2ch;
     display: grid;
     grid-template-columns: auto auto;
     justify-items: center;
@@ -38,9 +38,9 @@ svg {
     /* display: grid; */
     background-color: var(--clr-bgsecondary-contrast);
     border-radius: 10px;
-    margin: 10px;
+    margin: 5px;
     text-align: center;
-    width: 70%;
+    width: 65%;
     height: auto;
 
 }
