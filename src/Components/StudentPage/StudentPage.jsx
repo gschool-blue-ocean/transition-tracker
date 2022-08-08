@@ -81,7 +81,7 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
 
                   <ul>
                      <div >
-                        {showEditStudentModal && <EditStudentModal setShowEditStudentModal={setShowEditStudentModal} activeStudent={activeStudent} />}
+                        {showEditStudentModal && <EditStudentModal setShowEditStudentModal={setShowEditStudentModal} activeStudent={activeStudent} setActiveStudent={setActiveStudent} />}
                         <div onClick={handleEditBtnClicked} className="editStudentBtnSpan"><FiEdit className="editStudentInfoBtn" /><span className="editStudentToolTip">Edit</span></div>
                         <h4 className="text-left">Personal Info</h4>
                      </div>

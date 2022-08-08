@@ -1,7 +1,7 @@
 import react, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-const EditStudentModal = ({ activeStudent, setShowEditStudentModal }) => {
+const EditStudentModal = ({ activeStudent, setActiveStudent, setShowEditStudentModal }) => {
 
     const [formData, setFormData] = useState({
         first: activeStudent.first,
@@ -42,14 +42,22 @@ const EditStudentModal = ({ activeStudent, setShowEditStudentModal }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(formData)
         fetch(`https://hacking-transition.herokuapp.com/api/admin/edit/student/${activeStudent.user_id}`, {
-            method: "patch",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify(formData)
+            method: 'PATCH',
+            body: JSON.stringify(formData),
+            headers: { 'Content-Type': 'application/json' }
         })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(() => {
+                setActiveStudent((prevData) => {
+                    return {
+                        ...prevData,
+                        ...formData
+                    }
+                })
+            })
+
+            .then(() => setShowEditStudentModal(false))
             .catch(err => console.log(err))
     }
 
