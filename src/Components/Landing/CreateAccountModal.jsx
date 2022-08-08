@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import LoginContext from "../../Context/LoginContext";
 import { BsEyeFill } from "react-icons/bs";
 import { MdOutlineAddCircle } from "react-icons/md";
@@ -21,6 +22,22 @@ function CreateAccountModal() {
   const [showPassword, setShowPassword] = useState(false);
   const [allFormsFilled, setAllFormsFilled] = useState(null);
   const [submitClick, setSubmit] = useState(false);
+  const [usernameFilled, setUsernameFilled] = useState(false);
+  const [passwordFilled, setPasswordFilled] = useState(false);
+  const [emailFilled, setEmailFilled] = useState(false);
+  const [etsDateFilled, setETSDateFilled] = useState(false);
+  const [branchFilled, setBranchFilled] = useState(false);
+  const [mosFilled, setMOSFilled] = useState(false);
+  const [rankFilled, setRankFilled] = useState(false);
+  const [dutyStationFilled, setDutyStationFilled] = useState(false);
+  const [cityFilled, setCityFilled] = useState(false);
+  const [stateFilled, setStateFilled] = useState(false);
+  const [leaveStartFilled, setLeaveStartFilled] = useState(false);
+  const [dependentsFilled, setDependentsFilled] = useState(false);
+  const [educationFilled, setEducationFilled] = useState(false);
+  const [interestsFilled, setInterestsFilled] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [formSubmit, setFormSubmit] = useState(false);
 
   let navigate = useNavigate();
 
@@ -62,27 +79,116 @@ function CreateAccountModal() {
     admin: userData ? userData.admin : '',
     cohort_name: userData ? userData.cohort_name : '',
     cohort_id: userData ? userData.cohort_id : '',
-    new_user: true,
+    new_user: false,
   });
 
   useEffect(()=>{
-     if(createAccData.email.length < 3 ||
-      createAccData.username.length < 8 ||
-      createAccData.password.length < 8 ||
-      createAccData.rank.length < 2 ||
-      createAccData.mos.length < 1 ||
-      createAccData.interests.length < 10 ||
-      createAccData.branch.length < 2 ||
-      createAccData.duty_station.length < 2 ||
-      createAccData.ets_date.length < 4 ||
-      createAccData.city.length < 1 ||
-      createAccData.state.length < 1 ||
+     if((createAccData.email.replace(/ /g,"").length < 3 || !createAccData.email.toLowerCase().match(
+       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+     ))||
+      createAccData.username.replace(/ /g,"").length < 8 ||
+      createAccData.password.replace(/ /g,"").length < 8 ||
+      createAccData.rank.replace(/ /g,"").length < 2 ||
+      createAccData.mos.replace(/ /g,"").length < 1 ||
+      createAccData.interests.replace(/ /g,"").length < 10 ||
+      createAccData.branch.replace(/ /g,"").length < 2 ||
+      createAccData.duty_station.replace(/ /g,"").length < 2 ||
+      createAccData.ets_date.replace(/ /g,"").length < 4 ||
+      createAccData.city.replace(/ /g,"").length < 1 ||
+      createAccData.state.replace(/ /g,"").length < 1 ||
+      createAccData.highest_education.replace(/ /g,"").length < 2 ||
       (createAccData.has_dependents === true && dependents.length === 0) ||
       (takingLeave === true && createAccData.leave_start_date.length === 0)){
         setAllFormsFilled(false)
       }else{
         setAllFormsFilled(true)
       }
+
+    if(createAccData.email.replace(/ /g,"").length < 3 || !createAccData.email.toLowerCase().match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    )){
+      setEmailFilled(false);
+    } else{
+      setEmailFilled(true);
+    }
+
+    if(createAccData.username.replace(/ /g,"").length < 8){
+      setUsernameFilled(false);
+    } else {
+      setUsernameFilled(true);
+    }
+
+    if(createAccData.password.replace(/ /g,"").length < 8){
+      setPasswordFilled(false);
+    } else {
+      setPasswordFilled(true);
+    }
+
+    if(createAccData.rank.replace(/ /g,"").length < 2){
+      setRankFilled(false);
+    } else{
+      setRankFilled(true)
+    }
+
+    if(createAccData.mos.replace(/ /g,"").length < 1){
+      setMOSFilled(false);
+    } else{
+      setMOSFilled(true)
+    }
+
+    if(createAccData.branch.replace(/ /g,"").length < 2){
+      setBranchFilled(false);
+    } else{
+      setBranchFilled(true);
+    }
+
+    if(createAccData.duty_station.replace(/ /g,"").length < 2){
+      setDutyStationFilled(false);
+    } else{
+      setDutyStationFilled(true)
+    }
+
+    if(createAccData.ets_date.replace(/ /g,"").length < 4){
+      setETSDateFilled(false)
+    } else{
+      setETSDateFilled(true)
+    }
+
+    if(createAccData.city.replace(/ /g,"").length < 1){
+      setCityFilled(false);
+    } else{
+      setCityFilled(true);
+    }
+
+    if(createAccData.state.replace(/ /g,"").length < 1){
+      setStateFilled(false);
+    } else{
+      setStateFilled(true);
+    }
+
+    if(createAccData.has_dependents === true && dependents.length === 0){
+      setDependentsFilled(false);
+    } else{
+      setDependentsFilled(true);
+    }
+
+    if(takingLeave === true && createAccData.leave_start_date.length === 0){
+      setLeaveStartFilled(false);
+    } else{
+      setLeaveStartFilled(true);
+    }
+
+    if(createAccData.highest_education.replace(/ /g,"").length < 2){
+      setEducationFilled(false);
+    } else{
+      setEducationFilled(true);
+    }
+
+    if(createAccData.interests.replace(/ /g,"").length < 10){
+      setInterestsFilled(false);
+    } else{
+      setInterestsFilled(true);
+    }
   })
 
   const updateUser = () => {
@@ -118,13 +224,13 @@ function CreateAccountModal() {
 
 
   const handleSubmit = (e) => {
+    setFormSubmit(true)
     e.preventDefault();
     updateUser();
     updateDependentInfo();
     invokeSetUserData({});
     localStorage.clear();
-    alert("Account successfully created! Please log in");
-    navigate("/");
+    window.setTimeout(()=>{window.location.reload()}, 2500);
   };
 
   //======================= handle dependents functions ===============================
@@ -175,11 +281,20 @@ function CreateAccountModal() {
     handleDependents();
   }, [haveDependents]);
 
+  //========================form display================================================================
+
+  const hideForm = {
+    "display": 'none'
+}
+const showForm = {
+    "display": 'block'
+}
+
   //========================== what's being rendered ================================
 
   return ReactDOM.createPortal(
     <div className="createModalContainer">
-      <div className="createContainer">
+      <div style={formSubmit ? hideForm : showForm} className="createContainer">
         <div className="header-div">
         <h1 className='welcome-header'>Welcome</h1>
         </div>
@@ -191,7 +306,8 @@ function CreateAccountModal() {
               <div className="account-info">
                 <div className="username-with-required">
                 <div className="username-div">
-                <FaAsterisk className="required-fields"/>
+                  {!usernameFilled &&
+                <FaAsterisk className="required-fields"/>}
                 <p>Username:</p>
                 <input
                   className="createInputBox"
@@ -200,33 +316,39 @@ function CreateAccountModal() {
                   name="username"
                   value={createAccData.username}
                   onChange={(e)=>{setCreateAccData({...createAccData, username: e.target.value})}}
+                  required
                 />
                 
               </div>
               <div className="credentials-require">
-              <span className="required-fields">Minimum of 8 characters</span>
+                {!usernameFilled &&
+              <span className="required-fields">Minimum of 8 characters</span>}
               </div>
               </div>
               <div className="email-with-require">
               <div className="email-div">
-              <FaAsterisk className="required-fields"/>
+                {!emailFilled &&
+              <FaAsterisk className="required-fields"/>}
               <p>Email:</p>
               <input
                 className="createInputBox"
-                type="text"
+                type="email"
                 placeholder="Email"
                 name="email"
                 value={createAccData.email}
                 onChange={(e)=>{setCreateAccData({...createAccData, email: e.target.value})}}
+                required
               />
               </div>
               <div className="credentials-require">
-              <span className="required-fields">Minimum of 3 characters</span>
+                {!emailFilled && 
+              <span className="required-fields">Minimum of 3 characters & must be an email</span>}
               </div>
               </div>
               <div className="password-require">
               <div className="password-div">
-              <FaAsterisk className="required-fields"/>
+                {!passwordFilled &&
+              <FaAsterisk className="required-fields"/>}
               <p>New password:</p>
               <input
                 className="password"
@@ -235,11 +357,13 @@ function CreateAccountModal() {
                 name="password"
                 value={createAccData.password}
                 onChange={(e)=>{setCreateAccData({...createAccData, password: e.target.value})}}
+                required
               />
               <BsEyeFill className="show-password" onClick={()=>{showPassword ? setShowPassword(false) : setShowPassword(true)}}/>
               </div>
               <div className="credentials-require">
-              <span className="required-fields">Minimum of 8 characters</span>
+                {!passwordFilled &&
+              <span className="required-fields">Minimum of 8 characters</span>}
               </div>
               </div>
             </div>
@@ -249,7 +373,8 @@ function CreateAccountModal() {
           <div className="createInnerCredentials">
             <div className="service-info-1">
               <div className="ets-div">
-              <FaAsterisk className="required-fields"/>
+                {!etsDateFilled &&
+              <FaAsterisk className="required-fields"/>}
               <p>ETS Date:</p>
               <input
                 className="createInputBox"
@@ -262,10 +387,11 @@ function CreateAccountModal() {
                     ets_date: e.target.value,
                   });
                 }}
+                required
               />
               </div>
               <div className="branch-div">
-              <FaAsterisk className="required-fields"/>
+              {!branchFilled && <FaAsterisk className="required-fields"/>}
               <p>Branch of service:</p>
               <input
                 className="createInputBox"
@@ -274,10 +400,11 @@ function CreateAccountModal() {
                 name="branch"
                 value={createAccData.branch}
                 onChange={(e)=>{setCreateAccData({...createAccData, branch: e.target.value})}}
+                required
               />
               </div>
               <div className='mos-div'>
-              <FaAsterisk className="required-fields"/>
+              {!mosFilled && <FaAsterisk className="required-fields"/>}
               <p>MOS/Rate:</p>
               <input
                 className="createInputBox"
@@ -286,10 +413,12 @@ function CreateAccountModal() {
                 name="mos"
                 value={createAccData.mos}
                 onChange={(e)=>{setCreateAccData({...createAccData, mos: e.target.value})}}
+                required
               />
               </div>
               <div className="rank-div">
-              <FaAsterisk className="required-fields"/>
+                {!rankFilled &&
+              <FaAsterisk className="required-fields"/>}
               <p>Rank:</p>
               <input
                 className="createInputBox"
@@ -298,6 +427,7 @@ function CreateAccountModal() {
                 name="rank"
                 value={createAccData.rank}
                 onChange={(e)=>{setCreateAccData({...createAccData, rank: e.target.value})}}
+                required
               />
               </div>
             </div>
@@ -310,7 +440,8 @@ function CreateAccountModal() {
               />
               </div>
               <div className="duty-station-div">
-              <FaAsterisk className="required-fields"/>
+                {!dutyStationFilled &&
+              <FaAsterisk className="required-fields"/>}
               <p>Duty Station:</p>
               <input
                 className="createInputBox"
@@ -319,10 +450,12 @@ function CreateAccountModal() {
                 name="duty_station"
                 value={createAccData.duty_station}
                 onChange={(e)=>{setCreateAccData({...createAccData, duty_station: e.target.value})}}
+                required
               />
               </div>
               <div className='city-div'>
-              <FaAsterisk className="required-fields"/>
+                {!cityFilled &&
+              <FaAsterisk className="required-fields"/>}
               <p>City:</p>
               <input
                 className="createInputBox"
@@ -331,10 +464,12 @@ function CreateAccountModal() {
                 name="city"
                 value={createAccData.city}
                 onChange={(e)=>{setCreateAccData({...createAccData, city: e.target.value})}}
+                required
               />
               </div>
               <div className="state-div">
-              <FaAsterisk className="required-fields"/>
+                {!stateFilled &&
+              <FaAsterisk className="required-fields"/>}
               <p>State:</p>
               <input
                 className="createInputBox"
@@ -343,6 +478,7 @@ function CreateAccountModal() {
                 name="state"
                 value={createAccData.state}
                 onChange={(e)=>{setCreateAccData({...createAccData, state: e.target.value})}}
+                required
               />
               </div>
             </div>
@@ -369,7 +505,8 @@ function CreateAccountModal() {
           </div>
           {takingLeave && (
             <div className="leave-calender">
-              <FaAsterisk className="required-fields"/>
+              {!leaveStartFilled &&
+              <FaAsterisk className="required-fields"/>}
               <div>When will your terminal leave start?</div>
               <input
                 className="terminal-leave-selector"
@@ -381,6 +518,7 @@ function CreateAccountModal() {
                     leave_start_date: e.target.value,
                   });
                 }}
+                required
               />
             </div>
             
@@ -407,7 +545,7 @@ function CreateAccountModal() {
           {haveDependents && (
             <div className="dependent-div">
               <div className="dependent-remove-div">
-              <div><FaAsterisk className="required-fields"/> Click the plus button to add as many dependents as needed:</div>
+              <div>{!dependentsFilled && <FaAsterisk className="required-fields"/>} Click the plus button to add as many dependents as needed:</div>
               <MdOutlineAddCircle className="add-dependent" onClick={handleDepClick}/>
               </div>
               {dependents.map((input, index) => {
@@ -460,7 +598,8 @@ function CreateAccountModal() {
           <h3 className="sub-headers">Education</h3>
           <div className="education-div">
             <div className="highest-edu-question">
-          <FaAsterisk className="required-fields"/>
+              {!educationFilled &&
+          <FaAsterisk className="required-fields"/>}
           <p>What's your highest level of education?</p>
           <input
             className="education-input"
@@ -469,6 +608,7 @@ function CreateAccountModal() {
             name="highest_education"
             value={createAccData.highest_education}
             onChange={(e)=>{setCreateAccData({...createAccData, highest_education: e.target.value})}}
+            required
           />
           </div>
           <div className="seeking-higher-edu">
@@ -484,16 +624,18 @@ function CreateAccountModal() {
           </div>
           </div>
           <div className="interests-div">
-            <div className="interests-with-as"><FaAsterisk className="required-fields"/><h3 className="sub-headers">Interests</h3></div>
+            <div className="interests-with-as">{!interestsFilled && <FaAsterisk className="required-fields"/>}<h3 className="sub-headers">Interests</h3></div>
             <div className="interests-with-require">
           <p className="interests-sub-header">Tell us about some of your interests:</p>
-          <span className="required-fields">Minimum of 10 characters</span>
+          {!interestsFilled &&
+          <span className="required-fields">Minimum of 10 characters</span>}
           </div>
           <textarea 
           onChange={(e)=>{setCreateAccData({...createAccData, interests: e.target.value})}}
           placeholder="Tell us about yourself..." 
           cols="40" 
           rows="8"
+          required
           />
           </div>
           {allFormsFilled &&
@@ -515,6 +657,7 @@ function CreateAccountModal() {
                         onClick={handleShowLoginModal}> Return to Log in <RiArrowGoBackFill /></button> */}
         </form>
       </div>
+      <div className="success-message-div" style={formSubmit ? showForm : hideForm}><h1 className="success-message">You're account has been successfully created! <br/> Please login.</h1></div>
     </div>,
     document.getElementById("portal")
   );
