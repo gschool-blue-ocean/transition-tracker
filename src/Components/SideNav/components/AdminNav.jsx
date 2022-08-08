@@ -16,7 +16,7 @@ export default function AdminNav({ viewClickedCohort, setActiveStudent, activeSt
          getStudentList(viewClickedCohort.cohort_id);
       }
 
-      if (userData.admin === false) {
+      if (JSON.parse(localStorage.currentUser).admin === false || userData.admin === false) {
          getStudentList(userData.cohort_id)
       }
    }, [viewClickedCohort]);

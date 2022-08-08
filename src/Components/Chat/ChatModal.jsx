@@ -50,7 +50,7 @@ function ChatModal({ socket, activeStudent }) {
 
 
     const joinRoom = () => {
-        userData.admin ? socket.emit("join_room", activeStudent.user_id) : socket.emit("join_room", userData.user_id)
+        JSON.parse(localStorage.currentUser).admin || userData.admin ? socket.emit("join_room", activeStudent.user_id) : socket.emit("join_room", userData.user_id)
     }
 
     const handleChange = (e) => {
