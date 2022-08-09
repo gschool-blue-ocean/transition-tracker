@@ -32,6 +32,10 @@
     grid-template-columns: repeat(2, 1fr);
 }
 
+.checkboxLabel:hover {
+    cursor: pointer;
+}
+
 .newStudentFormTitle,
 .labelGenerateEmailCheckBox {
     justify-self: center;
@@ -59,7 +63,7 @@
 
 /* .addStudentFormInput:hover, */
 .addStudentFormInput:focus {
-    background-color: #9995;
+    /* background-color: #9995; */
     transform: scale(1.05);
 }
 

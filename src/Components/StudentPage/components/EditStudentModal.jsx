@@ -1,7 +1,7 @@
 import react, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-const EditStudentModal = ({ activeStudent, setActiveStudent, setShowEditStudentModal }) => {
+const EditStudentModal = ({ userData, activeStudent, setActiveStudent, setShowEditStudentModal }) => {
 
     const [formData, setFormData] = useState({
         first: activeStudent.first,
@@ -24,20 +24,19 @@ const EditStudentModal = ({ activeStudent, setActiveStudent, setShowEditStudentM
     })
 
     function convertDateToIso(date) {
-        let newDate = new Date(date)
-        let dateArray = newDate.toLocaleDateString().split('/')
-
-        if (dateArray[0].length === 4) {
+        if (date.split('-')[0].length === 4) {
             return date
         }
+
         else {
+            let newDate = new Date(date)
+            let dateArray = newDate.toLocaleDateString().split('/')
             let year = dateArray[2]
-            let day = dateArray[1].length > 1 ? dateArray[1] : `0${dateArray[1]}`
-            let month = dateArray[0].length > 1 ? dateArray[0] : `0${dateArray[0]}`
+            let day = dateArray[1].length === 2 ? dateArray[1] : `0${dateArray[1]}`
+            let month = dateArray[0].length === 2 ? dateArray[0] : `0${dateArray[0]}`
 
             return `${year}-${month}-${day}`
         }
-
     }
 
     const handleSubmit = (e) => {
@@ -160,7 +159,7 @@ const EditStudentModal = ({ activeStudent, setActiveStudent, setShowEditStudentM
                         <label>Leave start date
                             <input
                                 required
-                                className='addStudentFormInput'
+                                className='addStudentFormInput editStudentDate'
                                 type='date'
                                 onChange={handleChange}
                                 name='leave_start_date'
@@ -170,7 +169,7 @@ const EditStudentModal = ({ activeStudent, setActiveStudent, setShowEditStudentM
                         <label>ETS date
                             <input
                                 required
-                                className='addStudentFormInput'
+                                className='addStudentFormInput editStudentDate'
                                 type='date'
                                 onChange={handleChange}
                                 name='ets_date'
@@ -220,7 +219,7 @@ const EditStudentModal = ({ activeStudent, setActiveStudent, setShowEditStudentM
                                 name='mos'
                                 value={formData.mos} /></label>
 
-                        <label >
+                        <label className='checkboxLabel'>
                             <input
                                 type='checkbox'
                                 name='seeking_further_education'
@@ -228,7 +227,7 @@ const EditStudentModal = ({ activeStudent, setActiveStudent, setShowEditStudentM
                                 checked={formData.seeking_further_education}
                             /> Seeking further education?</label>
 
-                        <label >
+                        <label className='checkboxLabel'>
                             <input
                                 type='checkbox'
                                 name='planning_to_relocate'
@@ -237,7 +236,7 @@ const EditStudentModal = ({ activeStudent, setActiveStudent, setShowEditStudentM
                             /> Planning to relocate?</label>
 
 
-                        <label>
+                        <label className='checkboxLabel'>
                             <input
                                 type='checkbox'
                                 name='taps_complete'
@@ -245,7 +244,7 @@ const EditStudentModal = ({ activeStudent, setActiveStudent, setShowEditStudentM
                                 checked={formData.taps_complete}
                             /> Taps complete?</label>
 
-                        <label >
+                        <label className='checkboxLabel'>
                             <input
                                 type='checkbox'
                                 name='has_dependents'
@@ -254,7 +253,7 @@ const EditStudentModal = ({ activeStudent, setActiveStudent, setShowEditStudentM
                             /> Have dependents?</label>
                     </div>
 
-                    <div className='myInterestsDiv'>
+                    {userData.admin ? null : <div className='myInterestsDiv'>
                         <label>My interests:</label>
                         <textarea
                             className='editInterestsTextarea'
@@ -262,7 +261,8 @@ const EditStudentModal = ({ activeStudent, setActiveStudent, setShowEditStudentM
                             onChange={handleChange}
                             name='interests'
                             value={formData.interests} />
-                    </div>
+                    </div>}
+
 
                     <input
                         className='addStudentFormButton createStudent'
