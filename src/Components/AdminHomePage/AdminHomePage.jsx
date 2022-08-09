@@ -19,7 +19,9 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     const [showClickedCohort, setShowClickedCohort] = useState(false)
 
     const [cohortsToMap, setCohortsToMap] = useState([])
+    const [activeStudent, setActiveStudent] = useState({});
     
+
 
     useEffect(() => {
         if (isOnArchivePage) {
@@ -44,6 +46,31 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     const setModalIsOpenToFalse = () => {
         setModalIsOpen(false)
     }
+    //This is the function to handle clicking a student name on the cohort card to view the student
+    const handleStudentNameClick = (e) => {///////////////////////////////////////////////////////////////////////////////////////////
+        let workingStringArr = JSON.parse(e.target.id);
+        //console.log(workingStringArr.cohort_id);
+        // console.log(e.target.key);
+        handleCohortSet(workingStringArr.cohort_id);
+        setActiveStudent(workingStringArr);
+        handleActiveCohortTabOverView(workingStringArr);
+        
+    }
+    //this function handles seting the cohort
+    const handleCohortSet = (e) => {
+        //handleActiveCohortTab(e.currentTarget)
+
+        allCohortsData.forEach(element => {
+            if (element.cohort_id == e) {
+                console.log(e);
+                console.log(element);
+                let grabbedElement = document.getElementById(`${e}`);
+                grabbedElement.classList.add("activeCohortTab")
+                setViewClickedCohort(element)
+            }
+        });
+        setShowClickedCohort(true)
+    }
 
     const setNewCohortModalIsOpenToTrue = (e) => {
         setCurrentCohort(e.currentTarget.id)
@@ -51,6 +78,14 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     }
     const setNewCohortModalIsOpenToFalse = () => {
         setNewCohortModalIsOpen(false)
+    }
+    const horizontalScroll = () => {
+        const scrollContainer = document.getElementById('#cohort-view')
+
+        scrollContainer.addEventListener(("wheel"), (e) => {
+            e.preventDefault();
+            scrollContainer.scrollLeft += e.deltaY
+        });
     }
 
     const handleCohortClicked = (e) => {
@@ -64,13 +99,17 @@ function AdminHomePage({ socket, isOnArchivePage }) {
 
         setShowClickedCohort(true)
     }
-    const horizontalScroll = () => {
-        const scrollContainer = document.getElementById('#cohort-view')
-
-        scrollContainer.addEventListener(("wheel"), (e) => {
-            e.preventDefault();
-            scrollContainer.scrollLeft += e.deltaY
-        });
+    //this is to set the cohort highlighting on the cohort nav: Dosnt work
+    const handleActiveCohortTabOverView = (element) => {//======================================================
+        document.querySelectorAll('.listOfCohorts').forEach(elem => elem.classList.remove('activeCohortTab'))
+        let active = document.getElementById(`#${parseInt(element)}`);
+        console.log(element);
+        //active.classList.add('activeCohortTab');
+    }
+    //==========================================================
+    //this is to allow clicking of the cohort name to show cohort information just like cohort nav
+    const handleCohortNameClick = (e) => {
+        //handleCohortNameClick(e)
     }
 
     const handleActiveCohortTab = (element) => {
@@ -114,7 +153,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                 {showClickedCohort ?
 
                     <>
-                        <StudentPage viewClickedCohort={viewClickedCohort} socket={socket} />
+                        <StudentPage viewClickedCohort={viewClickedCohort} socket={socket} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} activeStudent={activeStudent} setActiveStudent={setActiveStudent}/>
                     </>
 
                     :
@@ -125,7 +164,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                                     return (
                                         <div className='test-cohort' key={cohort.cohort_id}>
                                             <div className='cardHeader'>
-                                                <div className='cardName'>{cohort.cohort_name}</div>
+                                                <div className='cardName' onClick={handleCohortNameClick}>{cohort.cohort_name}</div>
                                                 <div className='cardSettingsIcon'>
                                                     <>
                                                         <FiSettings onClick={setModalIsOpenToTrue} id={cohort.cohort_id}>{EditCohortPage} </FiSettings>
@@ -138,10 +177,12 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                                             </div>
                                             <div className="listOfNames">
                                                 {
-                                                    allUsersData.map(user => {
+                                                    allUsersData.map(user => {//==================================================================================
                                                         if (user.cohort_id == cohort.cohort_id) {
                                                             return <div className='nameInRow'>
-                                                                <div className='name-div'> {user.first} {user.last}</div> <div className='color-code'></div>
+                                                         {/* This right here !!!!!!!!!!!!!!!!!!! is not how its supposed to be done. Should use some kind of state but not sure how to get the onClick to work while sending the data from inside here.*/}
+                                                                <div id={`${JSON.stringify(user)}`}className='name-div' onClick={handleStudentNameClick} > {user.first} {user.last} </div> <div className='color-code'></div>
+                                                                        {/*^^^^^^^^^^^^^^^^^^^^^^^ */}
                                                             </div>
                                                         }
                                                     })
