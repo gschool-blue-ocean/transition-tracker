@@ -30,6 +30,17 @@ const customStyles = {
 export default function StudentPage({ modalIsOpen, setModalIsOpen, activeStudent, setActiveStudent, allUsersData, socket, viewClickedCohort }) {
    const { userData } = useContext(LoginContext);
    const [showEditStudentModal, setShowEditStudentModal] = useState(false)
+
+   useEffect(() => {
+      document.querySelectorAll(".listOfCohorts").forEach(elem => {
+         elem.classList.remove('activeCohortTab')
+
+         if (viewClickedCohort.cohort_id === +elem.id) {
+            elem.classList.add('activeCohortTab')
+         }
+      })
+   }, [])
+
    useEffect(() => {
       if (!userData.admin) {
          console.log(userData)

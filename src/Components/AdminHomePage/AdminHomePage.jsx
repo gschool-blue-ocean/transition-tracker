@@ -20,7 +20,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
 
     const [cohortsToMap, setCohortsToMap] = useState([])
     const [activeStudent, setActiveStudent] = useState({});
-    
+
 
 
     useEffect(() => {
@@ -53,19 +53,19 @@ function AdminHomePage({ socket, isOnArchivePage }) {
         // console.log(e.target.key);
         handleCohortSet(workingStringArr.cohort_id);
         setActiveStudent(workingStringArr);
-        handleActiveCohortTabOverView(workingStringArr);
-        
+        // handleActiveCohortTabOverView(workingStringArr);
+
     }
     //this function handles seting the cohort
-    const handleCohortSet = (e) => {
+    const handleCohortSet = (id) => {
         //handleActiveCohortTab(e.currentTarget)
 
+
         allCohortsData.forEach(element => {
-            if (element.cohort_id == e) {
-                console.log(e);
-                console.log(element);
-                let grabbedElement = document.getElementById(`${e}`);
-                grabbedElement.classList.add("activeCohortTab")
+            if (element.cohort_id == id) {
+                // let grabbedElement = document.getElementById(`${e}`)
+
+                // grabbedElement.classList.add("activeCohortTab")
                 setViewClickedCohort(element)
             }
         });
@@ -100,12 +100,12 @@ function AdminHomePage({ socket, isOnArchivePage }) {
         setShowClickedCohort(true)
     }
     //this is to set the cohort highlighting on the cohort nav: Dosnt work
-    const handleActiveCohortTabOverView = (element) => {//======================================================
-        document.querySelectorAll('.listOfCohorts').forEach(elem => elem.classList.remove('activeCohortTab'))
-        let active = document.getElementById(`#${parseInt(element)}`);
-        console.log(element);
-        //active.classList.add('activeCohortTab');
-    }
+    // const handleActiveCohortTabOverView = (element) => {//======================================================
+    //     document.querySelectorAll('.listOfCohorts').forEach(elem => elem.classList.remove('activeCohortTab'))
+    //     let active = document.getElementById(`#${parseInt(element)}`);
+    //     console.log(element);
+    //     //active.classList.add('activeCohortTab');
+    // }
     //==========================================================
     //this is to allow clicking of the cohort name to show cohort information just like cohort nav
     const handleCohortNameClick = (e) => {
@@ -153,7 +153,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                 {showClickedCohort ?
 
                     <>
-                        <StudentPage viewClickedCohort={viewClickedCohort} socket={socket} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} activeStudent={activeStudent} setActiveStudent={setActiveStudent}/>
+                        <StudentPage viewClickedCohort={viewClickedCohort} socket={socket} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} activeStudent={activeStudent} setActiveStudent={setActiveStudent} />
                     </>
 
                     :
@@ -180,9 +180,9 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                                                     allUsersData.map(user => {//==================================================================================
                                                         if (user.cohort_id == cohort.cohort_id) {
                                                             return <div className='nameInRow'>
-                                                         {/* This right here !!!!!!!!!!!!!!!!!!! is not how its supposed to be done. Should use some kind of state but not sure how to get the onClick to work while sending the data from inside here.*/}
-                                                                <div id={`${JSON.stringify(user)}`}className='name-div' onClick={handleStudentNameClick} > {user.first} {user.last} </div> <div className='color-code'></div>
-                                                                        {/*^^^^^^^^^^^^^^^^^^^^^^^ */}
+                                                                {/* This right here !!!!!!!!!!!!!!!!!!! is not how its supposed to be done. Should use some kind of state but not sure how to get the onClick to work while sending the data from inside here.*/}
+                                                                <div id={`${JSON.stringify(user)}`} className='name-div' onClick={handleStudentNameClick} > {user.first} {user.last} </div> <div className='color-code'></div>
+                                                                {/*^^^^^^^^^^^^^^^^^^^^^^^ */}
                                                             </div>
                                                         }
                                                     })
@@ -210,7 +210,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
             </Modal>
             <Modal isOpen={newCohortModalIsOpen} portalClassName="newCohortModal">
                 <button className="x" onClick={setNewCohortModalIsOpenToFalse}>X</button>
-                <NewCohortModal/>
+                <NewCohortModal />
             </Modal>
         </div>
     )

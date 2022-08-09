@@ -38,6 +38,10 @@
   justify-self: start;
 }
 
+.name-div:hover {
+  cursor: pointer;
+}
+
 .color-code {
   grid-column: 1/2;
   grid-row: 1/2;
@@ -162,11 +166,11 @@
   scroll-snap-type: inline mandatory;
   scroll-behavior: smooth;
   scroll-padding: 1em;
- 
+
 }
 
-#cohort-view > *{
-scroll-snap-align: start;
+#cohort-view>* {
+  scroll-snap-align: start;
 }
 
 #cohorts-list {
@@ -231,7 +235,7 @@ scroll-snap-align: start;
   border-radius: 10px;
   margin-top: 3%;
   padding-top: 5px;
-  font-size:17px
+  font-size: 17px
 }
 
 #numberOfStudents {
