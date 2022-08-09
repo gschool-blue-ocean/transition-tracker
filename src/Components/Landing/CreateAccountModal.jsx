@@ -83,7 +83,7 @@ function CreateAccountModal() {
     admin: userData ? userData.admin : '',
     cohort_name: userData ? userData.cohort_name : '',
     cohort_id: userData ? userData.cohort_id : '',
-    new_user: true,
+    new_user: false,
   });
 
   //===================== field validation ========================
