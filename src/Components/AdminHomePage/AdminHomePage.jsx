@@ -21,7 +21,9 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     const [cohortsToMap, setCohortsToMap] = useState([])
     const [activeStudent, setActiveStudent] = useState({});
 
-
+    useEffect(() => {
+        horizontalScroll()
+    }, [])
 
     useEffect(() => {
         if (isOnArchivePage) {
@@ -80,7 +82,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
         setNewCohortModalIsOpen(false)
     }
     const horizontalScroll = () => {
-        const scrollContainer = document.getElementById('#cohort-view')
+        const scrollContainer = document.querySelector('#cohort-view')
 
         scrollContainer.addEventListener(("wheel"), (e) => {
             e.preventDefault();
@@ -212,7 +214,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                 <button className="x" onClick={setNewCohortModalIsOpenToFalse}>X</button>
                 <NewCohortModal />
             </Modal>
-        </div>
+        </div >
     )
 }
 
