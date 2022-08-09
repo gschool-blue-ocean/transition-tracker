@@ -28,15 +28,10 @@ const customStyles = {
 // Modal.setAppElement(".AppContainer");
 
 export default function StudentPage({ modalIsOpen, setModalIsOpen, activeStudent, setActiveStudent, allUsersData, socket, viewClickedCohort }) {
-   const { userData } = useContext(LoginContext);
+   const { userData, setUserData } = useContext(LoginContext);
    const [showEditStudentModal, setShowEditStudentModal] = useState(false)
 
-   useEffect(() => {
-      console.log(userData)
-      if (!userData.admin) {
-         setActiveStudent(userData)
-      }
-   }, [])
+
    useEffect(() => {
       document.querySelectorAll(".listOfCohorts").forEach(elem => {
          elem.classList.remove('activeCohortTab')
@@ -96,7 +91,7 @@ export default function StudentPage({ modalIsOpen, setModalIsOpen, activeStudent
 
                   <ul>
                      <div >
-                        {showEditStudentModal && <EditStudentModal userData={userData} setShowEditStudentModal={setShowEditStudentModal} activeStudent={activeStudent} setActiveStudent={setActiveStudent} />}
+                        {showEditStudentModal && <EditStudentModal setUserData={setUserData} userData={userData} setShowEditStudentModal={setShowEditStudentModal} activeStudent={activeStudent} setActiveStudent={setActiveStudent} />}
                         <div onClick={handleEditBtnClicked} className="editStudentBtnSpan"><FiEdit className="editStudentInfoBtn" /><span className="editStudentToolTip">Edit</span></div>
                         <h4 className="text-left">Personal Info</h4>
                      </div>

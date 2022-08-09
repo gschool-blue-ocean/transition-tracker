@@ -298,6 +298,10 @@
 
 /* @media (orientation: portrait) */
 @media (max-width: 600px) {
+  .logoutDivNav {
+    position: relative;
+    right: 10vw;
+  }
 
   #cohort-container {
     margin-left: 2rem;
