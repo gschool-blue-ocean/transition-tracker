@@ -10,6 +10,20 @@ export const AddAdmin = () => {
     password: ""
   })
 
+  //here is the request to create and admin ======================================================
+  const createAdminRequest = () => {
+    fetch(
+      `http://hacking-transition.herokuapp.com/api/create/admin`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newAdmin),
+      }
+    ).catch(console.error());
+  }
+
   const inputs = [
     {
       id: 1,
@@ -52,6 +66,7 @@ export const AddAdmin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(JSON.stringify(newAdmin))
+    createAdminRequest();
   }
 
 
