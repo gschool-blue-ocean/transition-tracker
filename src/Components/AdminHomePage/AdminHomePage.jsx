@@ -160,7 +160,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
 
                     :
                     <>
-                        <div id='cohort-view' onFocus={horizontalScroll}>
+                        <div id='cohort-view' >
                             {
                                 cohortsToMap.map((cohort) => {
                                     return (

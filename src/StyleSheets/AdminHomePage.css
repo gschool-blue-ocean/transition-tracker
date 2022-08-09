@@ -296,7 +296,18 @@
   border: 3ch;
 }
 
-@media (orientation: portrait) {
+/* @media (orientation: portrait) */
+@media (max-width: 600px) {
+
+  #cohort-container {
+    margin-left: 2rem;
+    display: flex !important;
+    flex-direction: column;
+
+    justify-self: center;
+    justify-content: center;
+    justify-items: center;
+  }
 
   .headerTitle {
     position: relative;
@@ -305,8 +316,8 @@
 
   #cohorts-list {
     display: grid;
-    height: 85vh;
-    width: 95vw;
+    /* height: 85vh; */
+    /* width: 95vw; */
   }
 
   .test--grid {
