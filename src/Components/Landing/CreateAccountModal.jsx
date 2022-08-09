@@ -226,7 +226,10 @@ function CreateAccountModal() {
         },
         body: JSON.stringify(createAccData),
       }
-    ).catch(console.error());
+    )
+      .then((res) => { res.json() })
+      .then(data => console.log(data))
+      .catch(console.error());
   };
   const updateDependentInfo = () => {
 
@@ -250,13 +253,13 @@ function CreateAccountModal() {
 
 
   const handleSubmit = (e) => {
-    setFormSubmit(true)
     e.preventDefault();
+    setFormSubmit(true)
     updateUser();
     updateDependentInfo();
     invokeSetUserData({});
     localStorage.clear();
-    window.setTimeout(() => { window.location.reload() }, 2500);
+    // window.setTimeout(() => { window.location.reload() }, 2500);
   };
 
   //======================= handle dependents functions ===============================

@@ -32,6 +32,12 @@ export default function StudentPage({ modalIsOpen, setModalIsOpen, activeStudent
    const [showEditStudentModal, setShowEditStudentModal] = useState(false)
 
    useEffect(() => {
+      console.log(userData)
+      if (!userData.admin) {
+         setActiveStudent(userData)
+      }
+   }, [])
+   useEffect(() => {
       document.querySelectorAll(".listOfCohorts").forEach(elem => {
          elem.classList.remove('activeCohortTab')
 
@@ -45,7 +51,7 @@ export default function StudentPage({ modalIsOpen, setModalIsOpen, activeStudent
       if (!userData.admin) {
          console.log(userData)
          document.querySelector('.test--grid').classList.add('studentView')
-         //setActiveStudent(userData)
+         // setActiveStudent(userData)
       }
    }, [userData]);
 
