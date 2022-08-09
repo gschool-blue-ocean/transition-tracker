@@ -27,6 +27,9 @@ const EditStudentModal = ({ userData, activeStudent, setActiveStudent, setShowEd
         if (date.split('-')[0].length === 4) {
             return date
         }
+        else if (date.split('/')[0].length === 4) {
+            return date
+        }
 
         else {
             let newDate = new Date(date)

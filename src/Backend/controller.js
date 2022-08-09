@@ -122,8 +122,11 @@ const createNewAdmin = async (req, res) => {
 
     try {
         const { first, last, email, username, password } = req.body
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         let client = await pool.connect()
-        let data = await client.query('INSERT INTO users (first, last, email, username, password, admin) VALUES($1, $2, $3, $4, $5, $6) RETURNING *;', [first, last, email, username, password, true])
+        let data = await client.query('INSERT INTO users (first, last, email, username, password, admin) VALUES($1, $2, $3, $4, $5, $6) RETURNING *;', [first, last, email, username, hashedPassword, true])
         res.json(data.rows)
         client.release()
 
