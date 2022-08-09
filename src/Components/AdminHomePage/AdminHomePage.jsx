@@ -79,6 +79,14 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     const setNewCohortModalIsOpenToFalse = () => {
         setNewCohortModalIsOpen(false)
     }
+    const horizontalScroll = () => {
+        const scrollContainer = document.getElementById('#cohort-view')
+
+        scrollContainer.addEventListener(("wheel"), (e) => {
+            e.preventDefault();
+            scrollContainer.scrollLeft += e.deltaY
+        });
+    }
 
     const handleCohortClicked = (e) => {
         handleActiveCohortTab(e.currentTarget)
