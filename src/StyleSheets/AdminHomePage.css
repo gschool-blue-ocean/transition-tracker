@@ -176,6 +176,7 @@
 #cohorts-list {
   display: grid;
   height: 85vh;
+  /* width: 95vw; */
 }
 
 .test-cohort {
@@ -293,4 +294,26 @@
   min-width: 70px;
   border-color: black;
   border: 3ch;
+}
+
+@media (orientation: portrait) {
+
+  .headerTitle {
+    position: relative;
+    left: 1rem;
+  }
+
+  #cohorts-list {
+    display: grid;
+    height: 85vh;
+    width: 95vw;
+  }
+
+  .test--grid {
+    grid-template-columns: 30% 70% !important;
+  }
+
+  .sideNav--Wrapper {
+    padding: 0;
+  }
 }
