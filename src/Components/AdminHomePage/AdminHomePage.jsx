@@ -46,6 +46,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     const setModalIsOpenToFalse = () => {
         setModalIsOpen(false)
     }
+    //This is the function to handle clicking a student name on the cohort card to view the student
     const handleStudentNameClick = (e) => {///////////////////////////////////////////////////////////////////////////////////////////
         let workingStringArr = JSON.parse(e.target.id);
         //console.log(workingStringArr.cohort_id);
@@ -55,6 +56,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
         handleActiveCohortTabOverView(workingStringArr);
         
     }
+    //this function handles seting the cohort
     const handleCohortSet = (e) => {
         //handleActiveCohortTab(e.currentTarget)
 
@@ -89,6 +91,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
 
         setShowClickedCohort(true)
     }
+    //this is to set the cohort highlighting on the cohort nav: Dosnt work
     const handleActiveCohortTabOverView = (element) => {//======================================================
         document.querySelectorAll('.listOfCohorts').forEach(elem => elem.classList.remove('activeCohortTab'))
         let active = document.getElementById(`#${parseInt(element)}`);
@@ -96,6 +99,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
         //active.classList.add('activeCohortTab');
     }
     //==========================================================
+    //this is to allow clicking of the cohort name to show cohort information just like cohort nav
     const handleCohortNameClick = (e) => {
         //handleCohortNameClick(e)
     }
@@ -168,7 +172,9 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                                                     allUsersData.map(user => {//==================================================================================
                                                         if (user.cohort_id == cohort.cohort_id) {
                                                             return <div className='nameInRow'>
+                                                         {/* This right here !!!!!!!!!!!!!!!!!!! is not how its supposed to be done. Should use some kind of state but not sure how to get the onClick to work while sending the data from inside here.*/}
                                                                 <div id={`${JSON.stringify(user)}`}className='name-div' onClick={handleStudentNameClick} > {user.first} {user.last} </div> <div className='color-code'></div>
+                                                                        {/*^^^^^^^^^^^^^^^^^^^^^^^ */}
                                                             </div>
                                                         }
                                                     })
