@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import AppContext from "../../Context/AppContext";
 import '../../StyleSheets/AdminHomePage.css';
 import { FiSettings } from 'react-icons/fi';
-import EditCohortPage from './EditCohortPage'
+import EditCohortPage from './EditCohortPage';
+import NewCohortModal from './NewCohortModal';
 import Modal from 'react-modal';
 import StudentPage from '../StudentPage/StudentPage';
 
@@ -10,6 +11,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
 
     const { allUsersData, allCohortsData } = useContext(AppContext)
     const [modalIsOpen, setModalIsOpen] = useState(false)
+    const [newCohortModalIsOpen, setNewCohortModalIsOpen] = useState(false)
     const [currentCohort, setCurrentCohort] = useState(null)
 
     const [viewClickedCohort, setViewClickedCohort] = useState(null)
@@ -17,6 +19,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     const [showClickedCohort, setShowClickedCohort] = useState(false)
 
     const [cohortsToMap, setCohortsToMap] = useState([])
+    
 
     useEffect(() => {
         if (isOnArchivePage) {
@@ -44,6 +47,15 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     const handleStudentNameClick = () => {
         console.log("Show me the money")
     }
+
+    const setNewCohortModalIsOpenToTrue = (e) => {
+        setCurrentCohort(e.currentTarget.id)
+        setNewCohortModalIsOpen(true)
+    }
+    const setNewCohortModalIsOpenToFalse = () => {
+        setNewCohortModalIsOpen(false)
+    }
+
     const handleCohortClicked = (e) => {
         handleActiveCohortTab(e.currentTarget)
 
@@ -54,6 +66,14 @@ function AdminHomePage({ socket, isOnArchivePage }) {
         });
 
         setShowClickedCohort(true)
+    }
+    const horizontalScroll = () => {
+        const scrollContainer = document.getElementById('#cohort-view')
+
+        scrollContainer.addEventListener(("wheel"), (e) => {
+            e.preventDefault();
+            scrollContainer.scrollLeft += e.deltaY
+        });
     }
 
     const handleActiveCohortTab = (element) => {
@@ -87,7 +107,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
 
                         })
                     }
-                    <button id="add-cohort-btn">
+                    <button onClick={setNewCohortModalIsOpenToTrue} id="add-cohort-btn">
                         +
                     </button>
                 </div>
@@ -102,7 +122,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
 
                     :
                     <>
-                        <div id='cohort-view'>
+                        <div id='cohort-view' onFocus={horizontalScroll}>
                             {
                                 cohortsToMap.map((cohort) => {
                                     return (
@@ -129,7 +149,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                                                         }
                                                     })
                                                 }
-                                                <div id="numberOfStudents">{allUsersData.filter(user => user.cohort_id == cohort.cohort_id).length}</div>
+                                                <div id="numberOfStudents">{allUsersData.filter(user => user.cohort_id == cohort.cohort_id).length} Students</div>
                                             </div>
                                             {/* <div id="numberOfStudents">{ allUsersData.filter(user => user.cohort_id == id).length }</div> */}
                                         </div>
@@ -149,6 +169,10 @@ function AdminHomePage({ socket, isOnArchivePage }) {
             <Modal isOpen={modalIsOpen} portalClassName="modal">
                 <button className="x" onClick={setModalIsOpenToFalse}>X</button>
                 <EditCohortPage selectedID={currentCohort} />
+            </Modal>
+            <Modal isOpen={newCohortModalIsOpen} portalClassName="newCohortModal">
+                <button className="x" onClick={setNewCohortModalIsOpenToFalse}>X</button>
+                <NewCohortModal/>
             </Modal>
         </div>
     )

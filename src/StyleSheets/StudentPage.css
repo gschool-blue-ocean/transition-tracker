@@ -1,6 +1,5 @@
 @import "./CustomProps.css";
 
-
 /* ================== TEST ==================== */
 .test--grid {
    display: grid;
@@ -14,8 +13,8 @@
 
 .studentView {
    grid-template-areas: "content content";
-   padding: 0 2% 0 2%
-      /* grid-template-columns: 100%; */
+   padding: 0 2% 0 2%;
+   /* grid-template-columns: 100%; */
 }
 
 .sideNav--Wrapper {
@@ -31,7 +30,7 @@
 /* =========== Student Container ============== */
 
 .StudentDash--Wrapper {
-   padding: .5rem;
+   padding: 0.5rem;
    /* margin: 3%; */
    display: grid;
    /* padding: calc(var(--spacer-container) * 1); */
@@ -57,22 +56,24 @@
    display: grid;
    grid-template-areas:
       "StuName . ETStag"
-      "StuCohort . .";
+      "StuBranch . .";
 }
 
 #StuHeader--Name {
    grid-area: StuName;
    color: var(--clr-primary-accent);
+   text-align: start;
+   align-self: center;
 }
 
-#StuHeader--Cohort {
-   grid-area: StuCohort;
+#StuHeader--Branch {
+   grid-area: StuBranch;
    color: var(--clr-bgsecondary-contrast);
+   padding: 5px;
 }
 
-#StuHeader--ETStag {
+.StuHeader--ETStag {
    grid-area: ETStag;
-   background-color: rgb(0, 207, 0);
    text-align: center;
    color: white;
    border-radius: 10px;
@@ -80,6 +81,26 @@
    width: fit-content;
    padding: 5px 20px;
    justify-self: end;
+}
+
+#ETS-120 {
+   background-color: var(--clr-ets-blue);
+}
+
+#ETS-90 {
+   background-color: var(--clr-ets-yellow);
+}
+
+#ETS-60 {
+   background-color: var(--clr-ets-orange);
+}
+
+#ETS-30 {
+   background-color: var(--clr-ets-red);
+}
+
+#ETS-d {
+   background-color: var(--clr-ets-green);
 }
 
 /* ============= Student Info =============== */
@@ -103,6 +124,33 @@ span {
 
    border-radius: 10px;
 }
+
+.editStudentBtnSpan {
+   display: grid;
+   justify-items: center;
+   position: relative;
+   float: right;
+   opacity: .8;
+
+}
+
+.editStudentBtnSpan:hover {
+   cursor: pointer;
+   opacity: 1;
+   transform: scale(1.2);
+
+}
+
+.editStudentToolTip {
+   display: none;
+   font-size: .75rem;
+}
+
+.editStudentBtnSpan:hover .editStudentToolTip {
+   display: block !important;
+}
+
+.editStudentInfoBtn:hover {}
 
 ul>h4,
 li>h4 {
@@ -166,7 +214,7 @@ li>h4 {
 }
 
 #StuNotes--TextArea {
-   width: fill;
+   width: stretch;
    height: 100px;
    border-radius: 10px;
 }

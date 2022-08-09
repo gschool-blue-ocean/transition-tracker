@@ -4,10 +4,6 @@ import { CgEnter } from 'react-icons/cg'
 import AppContext from '../../Context/AppContext';
 import LoginContext from '../../Context/LoginContext';
 import { useNavigate } from 'react-router-dom'
-// import { auth, signInWithEmailAndPassword } from '../Firebase'
-// import { app } from '../Firebase'
-// import { CookiesProvider, withCookies, Cookies, useCookies } from 'react-cookie';
-// import Cookies from 'js-cookie'
 
 function LoginModal({ invokeSetLogin, setShowLoginModal }) {
     let navigate = useNavigate()
@@ -24,6 +20,8 @@ function LoginModal({ invokeSetLogin, setShowLoginModal }) {
         const currentUser = localStorage.getItem("currentUser");
         if (currentUser !== null) {
             setUserData(JSON.parse(currentUser));
+            invokeSetLogin(true)
+
         }
     }, []);
 

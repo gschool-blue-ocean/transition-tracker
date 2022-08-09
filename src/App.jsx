@@ -54,9 +54,8 @@ function App() {
 
             <Route path='/' element={!login ? <LandingPage invokeSetLogin={invokeSetLogin} /> : <Welcome socket={socket} isOnArchivePage={false} />} />
             <Route path="/createAccount" element={<CreateAccountModal />} />
-            {/* <Route path="/archive" element={<Archive />} /> */}
-            <Route path="/archive" element={<Welcome isOnArchivePage={true} socket={socket} />} />
-            <Route path="/settings" element={<Settings />} />
+            <Route path="/archive" element={!login ? <LandingPage invokeSetLogin={invokeSetLogin} /> : <Welcome isOnArchivePage={true} socket={socket} />} />
+            <Route path="/settings" element={!login ? <LandingPage invokeSetLogin={invokeSetLogin} /> : <Settings />} />
             <Route path="*" element={<NotFound />} />
          </Routes>
 
@@ -65,3 +64,5 @@ function App() {
 }
 
 export default App;
+
+// JSON.parse(currentUser)

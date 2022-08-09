@@ -1,13 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
 import Modal from "react-modal";
 import SPTasks from "./components/SP-Tasks";
+import SPETStag from "./components/SP-ETStag";
 import SPDependents from "./components/SP-Dependents";
 import SPTaskModal from "./components/SP-TaskModal";
 import "../../StyleSheets/StudentPage.css";
 import SideNav from "../SideNav/SideNav";
 import LoginContext from "../../Context/LoginContext";
-import ChatModal from '../../Components/Chat/ChatModal';
-
+import ChatModal from "../../Components/Chat/ChatModal";
+import { FiEdit } from 'react-icons/fi'
+import EditStudentModal from "./components/EditStudentModal";
 
 const customStyles = {
    content: {
@@ -29,14 +31,14 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
    const [modalIsOpen, setIsOpen] = useState(false);
    const { userData } = useContext(LoginContext);
    const [activeStudent, setActiveStudent] = useState({});
+   const [showEditStudentModal, setShowEditStudentModal] = useState(false)
 
    useEffect(() => {
-      if (!userData.admin) {
-         console.log(userData)
-         document.querySelector('.test--grid').classList.add('studentView')
-         setActiveStudent(userData)
+      if (!userData.admin || userData.admin == null) {
+         document.querySelector(".test--grid").classList.add("studentView");
+         setActiveStudent(userData);
       }
-   }, [])
+   }, [userData]);
 
    function openModal() {
       setIsOpen(true);
@@ -50,35 +52,43 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
    function closeModal() {
       setIsOpen(false);
    }
-   /** Make a function to determine wether ETS Date is passed or not */
-   const etsBtn = () => {
-      let currentData = new Date();
-   };
+   const handleEditBtnClicked = (e) => {
+      setShowEditStudentModal(!showEditStudentModal)
+   }
 
    return (
       <div className="test--grid">
-         {userData.admin && <SideNav viewClickedCohort={viewClickedCohort} activeStudent={activeStudent} setActiveStudent={setActiveStudent} />}
+         {JSON.parse(localStorage.currentUser).admin || userData.admin ? (
+            <SideNav
+               viewClickedCohort={viewClickedCohort}
+               activeStudent={activeStudent}
+               setActiveStudent={setActiveStudent}
+            />
+         ) : null}
          <div className="StudentDash--Wrapper">
             <div className="SDash--Header">
-               <h3 id="StuHeader--Name">{userData.name}</h3>
-               <p id="StuHeader--Cohort">{userData.cohort_name}</p>
-               <p id="StuHeader--ETStag">ETS'd</p>
+               <h3 id="StuHeader--Name">
+                  {activeStudent.first} {activeStudent.last}
+               </h3>
+               <p id="StuHeader--Branch">{activeStudent.branch}</p>
+               <SPETStag userETS={activeStudent.ets_date} />
             </div>
 
             {/* User Data Card */}
             <div className="SDash--Info-card">
+
                <div className="infoCard--container">
+
                   <ul>
-                     <h4 className="text-left">Personal Info</h4>
+                     <div >
+                        {showEditStudentModal && <EditStudentModal setShowEditStudentModal={setShowEditStudentModal} activeStudent={activeStudent} />}
+                        <div onClick={handleEditBtnClicked} className="editStudentBtnSpan"><FiEdit className="editStudentInfoBtn" /><span className="editStudentToolTip">Edit</span></div>
+                        <h4 className="text-left">Personal Info</h4>
+                     </div>
 
                      <li>
                         <span className="title"> Email: </span>
                         <span className="answer">{activeStudent.email}</span>
-                     </li>
-
-                     <li>
-                        <span className="title"> Branch: </span>
-                        <span className="answer"> {activeStudent.branch}</span>
                      </li>
 
                      <li>
@@ -103,14 +113,14 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
 
                      <li>
                         <span className="title"> TAP Status: </span>
-                        <span className="answer"> {activeStudent.taps_complete ? 'Yes' : 'No'} </span>
+                        <span className="answer"> {activeStudent.taps_complete ? "Yes" : "No"} </span>
                      </li>
 
                      <li>
                         <h4 id="depends" className="text-left">
                            Dependents
                         </h4>
-                        <SPDependents />
+                        <SPDependents />  {/* // Pass in dependent info */}
                      </li>
 
                      <li>
@@ -127,7 +137,7 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
                      <li>
                         <h4 className="text-left"> Relocation </h4>
                         <span className="title"> Planning to Relocate?: </span>
-                        <span className="answer"> {activeStudent.planning_to_relocate ? 'Yes' : 'No'}</span>
+                        <span className="answer"> {activeStudent.planning_to_relocate ? "Yes" : "No"}</span>
                      </li>
                   </ul>
                </div>
@@ -138,9 +148,7 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
             </Modal>
 
             <ChatModal socket={socket} activeStudent={activeStudent} />
-
          </div>
       </div>
    );
-
 }

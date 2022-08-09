@@ -1,3 +1,4 @@
+insert into cohorts (cohort_name, start_date, end_date, active) values ('MCSP-00', 'All', 'Archived Students', false);
 insert into cohorts (cohort_name, start_date, end_date, active) values ('MCSP-12', '4/5/2022', '8/12/2022', false);
 insert into cohorts (cohort_name, start_date, end_date, active) values ('MCSP-16', '8/16/2022', '12/16/2022', true);
 insert into cohorts (cohort_name, start_date, end_date, active) values ('MCSP-17', '9/13/2022', '1/13/2023', true);

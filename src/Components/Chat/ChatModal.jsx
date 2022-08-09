@@ -27,8 +27,10 @@ function ChatModal({ socket, activeStudent }) {
     const [studentId, setStudentId] = useState(null)
 
     useEffect(() => {
-        joinRoom()
-        userData.admin ? setStudentId(activeStudent.user_id) : setStudentId(userData.user_id)
+        if (activeStudent.user_id) {
+            joinRoom()
+        }
+        userData.admin && activeStudent.user_id ? setStudentId(activeStudent.user_id) : setStudentId(userData.user_id)
 
     }, [activeStudent])
 
@@ -43,14 +45,13 @@ function ChatModal({ socket, activeStudent }) {
 
     useEffect(() => {
         socket.on("receive_message", (data) => {
-            console.log(data)
             setAllMsgs((msgs) => { return [...msgs, data] })
         })
     }, [socket])
 
 
     const joinRoom = () => {
-        userData.admin ? socket.emit("join_room", activeStudent.user_id) : socket.emit("join_room", userData.user_id)
+        JSON.parse(localStorage.currentUser).admin || userData.admin ? socket.emit("join_room", activeStudent.user_id) : socket.emit("join_room", userData.user_id)
     }
 
     const handleChange = (e) => {
