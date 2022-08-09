@@ -48,7 +48,8 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     }
     const handleStudentNameClick = (e) => {///////////////////////////////////////////////////////////////////////////////////////////
         let workingStringArr = JSON.parse(e.target.id);
-        console.log(workingStringArr.cohort_id);
+        //console.log(workingStringArr.cohort_id);
+        // console.log(e.target.key);
         handleCohortSet(workingStringArr.cohort_id);
         setActiveStudent(workingStringArr);
         handleActiveCohortTabOverView(workingStringArr);
@@ -59,7 +60,11 @@ function AdminHomePage({ socket, isOnArchivePage }) {
 
         allCohortsData.forEach(element => {
             if (element.cohort_id == e) {
-                return setViewClickedCohort(element)
+                console.log(e);
+                console.log(element);
+                let grabbedElement = document.getElementById(`${e}`);
+                grabbedElement.classList.add("activeCohortTab")
+                setViewClickedCohort(element)
             }
         });
         setShowClickedCohort(true)
@@ -89,6 +94,10 @@ function AdminHomePage({ socket, isOnArchivePage }) {
         let active = document.getElementById(`#${parseInt(element)}`);
         console.log(element);
         //active.classList.add('activeCohortTab');
+    }
+    //==========================================================
+    const handleCohortNameClick = (e) => {
+        //handleCohortNameClick(e)
     }
 
     const handleActiveCohortTab = (element) => {
@@ -143,7 +152,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                                     return (
                                         <div className='test-cohort' key={cohort.cohort_id}>
                                             <div className='cardHeader'>
-                                                <div className='cardName'>{cohort.cohort_name}</div>
+                                                <div className='cardName' onClick={handleCohortNameClick}>{cohort.cohort_name}</div>
                                                 <div className='cardSettingsIcon'>
                                                     <>
                                                         <FiSettings onClick={setModalIsOpenToTrue} id={cohort.cohort_id}>{EditCohortPage} </FiSettings>
