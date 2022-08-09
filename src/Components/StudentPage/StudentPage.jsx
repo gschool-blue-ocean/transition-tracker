@@ -1,9 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
-import Modal from "react-modal";
 import SPTasks from "./components/SP-Tasks";
 import SPETStag from "./components/SP-ETStag";
 import SPDependents from "./components/SP-Dependents";
-import SPTaskModal from "./components/SP-TaskModal";
 import "../../StyleSheets/StudentPage.css";
 import SideNav from "../SideNav/SideNav";
 import LoginContext from "../../Context/LoginContext";
@@ -11,28 +9,10 @@ import ChatModal from "../../Components/Chat/ChatModal";
 import { FiEdit } from "react-icons/fi";
 import EditStudentModal from "./components/EditStudentModal";
 
-const customStyles = {
-   content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      backgroundColor: "var(--clr-primary-accent)",
-      borderRadius: "10px",
-      width: "30%",
-   },
-};
-
-// Modal.setAppElement(".AppContainer");
-
 export default function StudentPage({ allUsersData, socket, viewClickedCohort }) {
-   const [modalIsOpen, setIsOpen] = useState(false);
    const { userData } = useContext(LoginContext);
    const [activeStudent, setActiveStudent] = useState({});
    const [showEditStudentModal, setShowEditStudentModal] = useState(false);
-   const [selectedTask, setSelectedTask] = useState(null);
 
    useEffect(() => {
       if (!userData.admin) {
@@ -42,13 +22,6 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
       }
    }, []);
 
-   function openModal() {
-      setIsOpen(true);
-   }
-
-   function closeModal() {
-      setIsOpen(false);
-   }
    const handleEditBtnClicked = (e) => {
       setShowEditStudentModal(!showEditStudentModal);
    };
@@ -145,11 +118,7 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
                   </ul>
                </div>
             </div>
-            <SPTasks activeStudent={activeStudent} openModal={openModal} />
-            <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={customStyles}>
-               <SPTaskModal />
-            </Modal>
-
+            <SPTasks activeStudent={activeStudent} />
             <ChatModal socket={socket} activeStudent={activeStudent} />
          </div>
       </div>
