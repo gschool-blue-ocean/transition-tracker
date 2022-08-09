@@ -389,6 +389,27 @@
     color: white;
 }
 
+.same-username{
+    color: rgb(201, 167, 0);
+    font-size: 11px;
+}
+
+.username-valid{
+    color: rgb(2, 81, 2);
+    font-size: 11px;
+}
+
+.username-invalid{
+    color: rgb(201, 0, 0);
+    font-size: 11px;
+}
+
+.username-validation-message{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 @media (orientation: portrait) {
     .createModalContainer{
         height: fit-content;
@@ -404,9 +425,14 @@
     .account-info{
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
         word-wrap: wrap;
     }
+
+    .credentials-require{
+        display: flex;
+        justify-content: flex-start;
+    }
+
     .service-info-1{
         display: flex;
         flex-direction: column;

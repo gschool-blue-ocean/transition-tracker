@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import LoginContext from "../../Context/LoginContext";
+import AppContext from "../../Context/AppContext"
 import { BsEyeFill } from "react-icons/bs";
 import { MdOutlineAddCircle } from "react-icons/md";
 import { AiFillMinusCircle, AiOutlineCheck } from "react-icons/ai";
@@ -15,6 +16,7 @@ function CreateAccountModal() {
   //===============================states========================
   
   const { userData, invokeSetUserData, loading } = useContext(LoginContext);
+  const { allUsersData } = useContext(AppContext);
   const [takingLeave, setTakingLeave] = useState(false);
   const [dependents, setDependents] = useState([]);
   const [haveDependents, setHaveDependents] = useState(false);
@@ -38,6 +40,8 @@ function CreateAccountModal() {
   const [interestsFilled, setInterestsFilled] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [formSubmit, setFormSubmit] = useState(false);
+  const [usernameValid, setUsernameValid] = useState(false);
+  const [useSameUsername, setUseSameUsername] = useState(false);
 
   let navigate = useNavigate();
 
@@ -79,14 +83,33 @@ function CreateAccountModal() {
     admin: userData ? userData.admin : '',
     cohort_name: userData ? userData.cohort_name : '',
     cohort_id: userData ? userData.cohort_id : '',
-    new_user: false,
+    new_user: true,
   });
 
+  //===================== field validation ========================
+
   useEffect(()=>{
+
+    for(const user of allUsersData){
+      if(user.username === createAccData.username && user.user_id === userData.user_id){
+        setUseSameUsername(true);
+        setUsernameValid(true);
+        break;
+      } else if((user.username === createAccData.username && user.user_id !== userData.user_id)){
+        setUseSameUsername(false);
+        setUsernameValid(false);
+        break;
+      } else if(user.username !== createAccData.username){
+        setUsernameValid(true);
+        setUseSameUsername(false);
+      }
+    }
+
      if((createAccData.email.replace(/ /g,"").length < 3 || !createAccData.email.toLowerCase().match(
        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
      ))||
       createAccData.username.replace(/ /g,"").length < 8 ||
+      !usernameValid ||
       createAccData.password.replace(/ /g,"").length < 8 ||
       createAccData.rank.replace(/ /g,"").length < 2 ||
       createAccData.mos.replace(/ /g,"").length < 1 ||
@@ -190,6 +213,8 @@ function CreateAccountModal() {
       setInterestsFilled(true);
     }
   })
+
+  //========================== update user profile ========================
 
   const updateUser = () => {
     fetch(
@@ -321,8 +346,16 @@ const showForm = {
                 
               </div>
               <div className="credentials-require">
+                <div className="username-validation-message">
                 {!usernameFilled &&
               <span className="required-fields">Minimum of 8 characters</span>}
+              {useSameUsername &&
+              <span className="same-username">It's recommended that you change your username.</span>}
+              {usernameValid && createAccData.username.length > 7 &&
+              <span className="username-valid">This username is available!</span>}
+              {!usernameValid && 
+              <span className="username-invalid">This username is already taken!</span>}
+              </div>
               </div>
               </div>
               <div className="email-with-require">
