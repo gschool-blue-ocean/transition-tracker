@@ -1,66 +1,30 @@
 import React, { useState, useContext, useEffect } from "react";
-import Modal from "react-modal";
 import SPTasks from "./components/SP-Tasks";
 import SPETStag from "./components/SP-ETStag";
 import SPDependents from "./components/SP-Dependents";
-import SPTaskModal from "./components/SP-TaskModal";
 import "../../StyleSheets/StudentPage.css";
 import SideNav from "../SideNav/SideNav";
 import LoginContext from "../../Context/LoginContext";
 import ChatModal from "../../Components/Chat/ChatModal";
-import { FiEdit } from 'react-icons/fi'
+import { FiEdit } from "react-icons/fi";
 import EditStudentModal from "./components/EditStudentModal";
 
-const customStyles = {
-   content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      backgroundColor: "var(--clr-primary-accent)",
-      borderRadius: "10px",
-      width: "30%",
-   },
-};
-
-// Modal.setAppElement(".AppContainer");
-
-export default function StudentPage({ modalIsOpen, setModalIsOpen, activeStudent, setActiveStudent, allUsersData, socket, viewClickedCohort }) {
+export default function StudentPage({ allUsersData, socket, viewClickedCohort }) {
    const { userData } = useContext(LoginContext);
    const [activeStudent, setActiveStudent] = useState({});
    const [showEditStudentModal, setShowEditStudentModal] = useState(false);
-   const [selectedTask, setSelectedTask] = useState(null);
 
    useEffect(() => {
-      console.log(userData)
+      console.log(userData);
       if (!userData.admin) {
          document.querySelector(".test--grid").classList.add("studentView");
          setActiveStudent(userData);
       }
    }, []);
 
-   function openModal() {
-      setIsOpen(true);
-   }
-      })
-   }, [])
-
-   useEffect(() => {
-      if (!userData.admin) {
-         console.log(userData)
-         document.querySelector('.test--grid').classList.add('studentView')
-         // setActiveStudent(userData)
-      }
-   }, [userData]);
-
-   function closeModal() {
-      setModalIsOpen(false);
-   }
    const handleEditBtnClicked = (e) => {
-      setShowEditStudentModal(!showEditStudentModal)
-   }
+      setShowEditStudentModal(!showEditStudentModal);
+   };
 
    return (
       <div className="test--grid">
@@ -82,13 +46,21 @@ export default function StudentPage({ modalIsOpen, setModalIsOpen, activeStudent
 
             {/* User Data Card */}
             <div className="SDash--Info-card">
-
                <div className="infoCard--container">
-
                   <ul>
-                     <div >
-                        {showEditStudentModal && <EditStudentModal userData={userData} setShowEditStudentModal={setShowEditStudentModal} activeStudent={activeStudent} setActiveStudent={setActiveStudent} />}
-                        <div onClick={handleEditBtnClicked} className="editStudentBtnSpan"><FiEdit className="editStudentInfoBtn" /><span className="editStudentToolTip">Edit</span></div>
+                     <div>
+                        {showEditStudentModal && (
+                           <EditStudentModal
+                              userData={userData}
+                              setShowEditStudentModal={setShowEditStudentModal}
+                              activeStudent={activeStudent}
+                              setActiveStudent={setActiveStudent}
+                           />
+                        )}
+                        <div onClick={handleEditBtnClicked} className="editStudentBtnSpan">
+                           <FiEdit className="editStudentInfoBtn" />
+                           <span className="editStudentToolTip">Edit</span>
+                        </div>
                         <h4 className="text-left">Personal Info</h4>
                      </div>
 
@@ -148,11 +120,7 @@ export default function StudentPage({ modalIsOpen, setModalIsOpen, activeStudent
                   </ul>
                </div>
             </div>
-            <SPTasks activeStudent={activeStudent} openModal={openModal} />
-            <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={customStyles}>
-               <SPTaskModal />
-            </Modal>
-
+            <SPTasks activeStudent={activeStudent} />
             <ChatModal socket={socket} activeStudent={activeStudent} />
          </div>
       </div>

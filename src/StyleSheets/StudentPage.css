@@ -197,8 +197,8 @@ li > h4 {
    grid-template-columns: 1fr;
    grid-template-areas:
       "TaskHeader"
+      "TaskStatus"
       "TaskDesc"
-      "TaskSubTask"
       "TaskRemarks"
       "AddRemark";
    font-family: var(--ff-primary);
@@ -213,17 +213,17 @@ li > h4 {
    background-color: var(--clr-accent-white);
 }
 
+.Modal--TaskStatus {
+   border-radius: 5px;
+   padding: 10px;
+   grid-area: TaskStatus;
+   background-color: var(--clr-accent-white);
+}
+
 .Modal--TaskDesc {
    border-radius: 5px;
    padding: 10px;
    grid-area: TaskDesc;
-   background-color: var(--clr-accent-white);
-}
-
-.Modal--SubTasks {
-   border-radius: 5px;
-   padding: 10px;
-   grid-area: TaskSubTask;
    background-color: var(--clr-accent-white);
 }
 
@@ -232,4 +232,21 @@ li > h4 {
    padding: 10px;
    grid-area: TaskRemarks;
    background-color: var(--clr-accent-white);
+}
+
+.Modal--AddRemark {
+   border-radius: 5px;
+   padding: 10px;
+   grid-area: AddRemark;
+   background-color: var(--clr-accent-white);
+}
+
+#Modal--InputRemark {
+   width: 100%;
+   height: auto;
+   border: none;
+   outline: none;
+   resize: none;
+   overflow: visible;
+   font-family: var(--ff-primary);
 }
