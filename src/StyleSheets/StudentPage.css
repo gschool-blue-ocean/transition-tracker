@@ -198,6 +198,7 @@ li > h4 {
    grid-template-areas:
       "TaskHeader"
       "TaskStatus"
+      "TaskStatus"
       "TaskDesc"
       "TaskRemarks"
       "AddRemark";
@@ -210,6 +211,13 @@ li > h4 {
    padding: 10px;
    grid-area: TaskHeader;
    text-align: center;
+   background-color: var(--clr-accent-white);
+}
+
+.Modal--TaskStatus {
+   border-radius: 5px;
+   padding: 10px;
+   grid-area: TaskStatus;
    background-color: var(--clr-accent-white);
 }
 
@@ -239,6 +247,16 @@ li > h4 {
    padding: 10px;
    grid-area: AddRemark;
    background-color: var(--clr-accent-white);
+}
+
+#Modal--InputRemark {
+   width: 100%;
+   height: auto;
+   border: none;
+   outline: none;
+   resize: none;
+   overflow: visible;
+   font-family: var(--ff-primary);
 }
 
 #Modal--InputRemark {

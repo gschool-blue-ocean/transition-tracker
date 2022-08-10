@@ -28,13 +28,13 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
 
    return (
       <div className="test--grid">
-         {JSON.parse(localStorage.currentUser).admin || userData.admin ? (
+         {userData.admin && (
             <SideNav
                viewClickedCohort={viewClickedCohort}
                activeStudent={activeStudent}
                setActiveStudent={setActiveStudent}
             />
-         ) : null}
+         )}
          <div className="StudentDash--Wrapper">
             <div className="SDash--Header">
                <h3 id="StuHeader--Name">
