@@ -6,6 +6,8 @@ import EditCohortPage from './EditCohortPage';
 import NewCohortModal from './NewCohortModal';
 import Modal from 'react-modal';
 import StudentPage from '../StudentPage/StudentPage';
+import SPETStag from "../StudentPage/components/SP-ETStag.jsx";
+import LoginContext from "../../Context/LoginContext";
 
 function AdminHomePage({ socket, isOnArchivePage }) {
 
@@ -19,7 +21,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     const [showClickedCohort, setShowClickedCohort] = useState(false)
 
     const [cohortsToMap, setCohortsToMap] = useState([])
-    
+
 
     useEffect(() => {
         if (isOnArchivePage) {
@@ -139,9 +141,11 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                                             <div className="listOfNames">
                                                 {
                                                     allUsersData.map(user => {
-                                                        if (user.cohort_id == cohort.cohort_id) {
+                                                        if (user.cohort_id == cohort.cohort_id && user.ets_date) {
                                                             return <div className='nameInRow'>
-                                                                <div className='name-div'> {user.first} {user.last}</div> <div className='color-code'></div>
+                                                                <SPETStag userETS={user.ets_date} className='ets-tag' />
+                                                                <div className='name-div'> {user.first} {user.last}</div> 
+                                                                {/* <div className='color-code'></div> */}
                                                             </div>
                                                         }
                                                     })
