@@ -13,6 +13,7 @@ export default function EditableCohort({ name, start, end, id }) {
   const checkName = e => updateName(e.currentTarget.value)
   const checkStartDate = e => updateStartDate(e.currentTarget.value)
   const checkEndDate = e => updateEndDate(e.currentTarget.value)
+  const [ archived, setArchived ] = useState(false)
   const submitFxn = () => {
     cohortData.cohort_name = currentName
     cohortData.start_date = currentStartDate
@@ -28,6 +29,38 @@ export default function EditableCohort({ name, start, end, id }) {
   }
   const checkKey = e => {
     if (e.keyCode === 13) submitFxn()
+  }
+
+  const archiveCohort = () => {
+    setArchived(true)
+    console.log(cohortData)
+    console.log(id)
+    fetch(`http://hacking-transition.herokuapp.com/api/archive/cohort/${id}`, {
+          method: 'PATCH',
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({'active':false}),
+        })
+        .then(alert("Cohort Archived"))
+  }
+
+  const unArchiveCohort = () => {
+    setArchived(true)
+    console.log(cohortData)
+    console.log(id)
+    fetch(`http://hacking-transition.herokuapp.com/api/archive/cohort/${id}`, {
+          method: 'PATCH',
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({'active':true}),
+        })
+        .then(alert("Cohort Activated"))
+  }
+
+  const deleteCohort = () => {
+    fetch(`http://hacking-transition.herokuapp.com/api/delete/cohort/${id}`, {
+      method: 'DELETE',
+      mode: 'cors'
+    })
+    .then(alert("Cohort Deleted"))
   }
 
   if (editing) return <div className='editCohortFields'>
@@ -59,7 +92,10 @@ export default function EditableCohort({ name, start, end, id }) {
     />
     <br />
     <button onClick={toggleEditing}>Back</button> {' '}
-    <button onClick={submitFxn}>Submit</button>
+    <button onClick={submitFxn}>Submit</button> {' '}
+    <button onClick={archiveCohort}>Archive</button> {' '}
+    <button onClick={unArchiveCohort}>Activate</button> {' '}
+    <button onClick={deleteCohort}>Delete</button> {' '}
   </div>
 
   else return <>
