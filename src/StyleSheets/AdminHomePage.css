@@ -40,6 +40,12 @@
 }
 
 
+.name-div:hover {
+  cursor: pointer;
+}
+
+
+
 #cohort-nav {
   display: grid;
   align-items: center;
@@ -51,6 +57,7 @@
 .list {
   display: grid;
   gap: 1rem;
+
   height: 100%;
   align-items: center;
   justify-items: center;
@@ -169,6 +176,7 @@
 .test-cohort {
   display: flex;
   flex-direction: column;
+
   overflow: auto;
   min-width: 300px;
   max-height: 95%;
@@ -224,6 +232,7 @@
   border-radius: 10px;
   margin-top: 3%;
   padding-top: 5px;
+
   font-size: 17px
 }
 
@@ -285,6 +294,10 @@
 
 /* @media (orientation: portrait) */
 @media (max-width: 600px) {
+  .logoutDivNav {
+    position: relative;
+    right: 10vw;
+  }
 
   #cohort-container {
     margin-left: 2rem;

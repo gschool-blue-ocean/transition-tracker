@@ -1,7 +1,7 @@
 import react, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-const EditStudentModal = ({ userData, activeStudent, setActiveStudent, setShowEditStudentModal }) => {
+const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStudent, setShowEditStudentModal }) => {
 
     const [formData, setFormData] = useState({
         first: activeStudent.first,
@@ -24,9 +24,14 @@ const EditStudentModal = ({ userData, activeStudent, setActiveStudent, setShowEd
     })
 
     function convertDateToIso(date) {
-        if (date.split('-')[0].length === 4) {
+        if (date == null) {
+            return ''
+        }
+
+        else if (date.split('-')[0].length === 4) {
             return date
         }
+
         else if (date.split('/')[0].length === 4) {
             return date
         }
@@ -52,6 +57,14 @@ const EditStudentModal = ({ userData, activeStudent, setActiveStudent, setShowEd
             .then(res => res.json())
             .then(() => {
                 setActiveStudent((prevData) => {
+                    return {
+                        ...prevData,
+                        ...formData
+                    }
+                })
+            })
+            .then(() => {
+                setUserData((prevData) => {
                     return {
                         ...prevData,
                         ...formData
