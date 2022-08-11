@@ -33,7 +33,11 @@ CREATE TABLE users (
     cohort_name VARCHAR(20),
     cohort_id INTEGER,
     foreign key(cohort_id) references cohorts(cohort_id),
-    new_user BOOLEAN
+    new_user BOOLEAN,
+    relocate_to_country: boolean,
+    relocate_city: VARCHAR(50),
+    relocate_state: VARCHAR(50),
+    relocate_country: VARCHAR(50)
 );
 
 CREATE TABLE dependents (
