@@ -24,6 +24,9 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
     })
 
     function convertDateToIso(date) {
+        if (date == '') {
+            return ''
+        }
         if (date == null) {
             return ''
         }
