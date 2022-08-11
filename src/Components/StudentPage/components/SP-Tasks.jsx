@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import SPTaskModal from "./SP-TaskModal";
 import Loading from "../../LoadingDisplay/Loading";
+import SPEditTask from "./SP-EditTask";
+import SPCreateTask from "./SP-CreateTask";
 
 const customStyles = {
    content: {
@@ -22,6 +24,8 @@ export default function SPTasks({ activeStudent }) {
    const [loading, setLoading] = useState(true);
    const [modalIsOpen, setIsOpen] = useState(false);
    const [selectedTask, setSelectedTask] = useState(null);
+   const [editTask, setEditTask] = useState(false);
+   const [createTask, setCreateTask] = useState(false);
 
    function openModal() {
       setIsOpen(true);
@@ -29,12 +33,23 @@ export default function SPTasks({ activeStudent }) {
 
    function closeModal() {
       setIsOpen(false);
+      setEditTask(false);
+      setCreateTask(false);
    }
 
-   function handleClick(task) {
+   function viewTask(task) {
       setSelectedTask(task);
       openModal();
-      console.log(selectedTask);
+   }
+
+   function modalRendering() {
+      if (editTask) {
+         return <SPEditTask task={selectedTask} closeModal={setIsOpen} cancelEdit={setEditTask} />;
+      } else if (createTask) {
+         return <SPCreateTask closeModal={setIsOpen} cancelCreate={setCreateTask} />;
+      } else {
+         return <SPTaskModal task={selectedTask} />;
+      }
    }
 
    useEffect(() => {
@@ -54,28 +69,51 @@ export default function SPTasks({ activeStudent }) {
       return (
          <div className="SDash--Tasks">
             <h4 id="StuTasks--Header">Tasks</h4>
+            <button
+               onClick={() => {
+                  setCreateTask(true);
+                  openModal();
+               }}
+            >
+               Create Task
+            </button>
             <>
                {studentTasks.length === 0 ? (
                   <div>{activeStudent.first} has not started a task</div>
                ) : (
                   studentTasks.map((task) => {
                      return (
-                        <div
-                           className="StuTasks--Card"
-                           id={task.task_id}
-                           key={task.task_id}
-                           onClick={() => {
-                              handleClick(task);
-                           }}
-                        >
-                           {task.title}
+                        <div className="StuTasks--Card">
+                           <div
+                              id={task.task_id}
+                              key={task.task_id}
+                              onClick={() => {
+                                 viewTask(task);
+                              }}
+                           >
+                              {task.title}
+                           </div>
+                           <button
+                              onClick={() => {
+                                 setEditTask(true);
+                                 openModal();
+                                 setSelectedTask(task);
+                              }}
+                           >
+                              Edit
+                           </button>
                         </div>
                      );
                   })
                )}
             </>
             <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={customStyles}>
-               <SPTaskModal task={selectedTask} />
+               {/* {editTask ? (
+                  <SPEditTask task={selectedTask} closeModal={setIsOpen} cancelEdit={setEditTask} />
+               ) : (
+                  <SPTaskModal task={selectedTask} />
+               )} */}
+               {modalRendering()}
             </Modal>
          </div>
       );

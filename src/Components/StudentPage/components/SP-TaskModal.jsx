@@ -26,22 +26,8 @@ export default function SPTaskModal({ task }) {
             <p>{task.description}</p>
          </div>
 
-         <div className="Modal--Remarks">
-            <h4>Remarks</h4>
-            <p>{task.remarks}</p>
-         </div>
-
-         <form className="Modal--AddRemark">
-            <textarea
-               className="Modal--AddRemark"
-               id="Modal--InputRemark"
-               rows="10"
-               placeholder="Add Remarks"
-            ></textarea>
-            <input type="submit" />
-         </form>
-         <button>Edit</button>
          <button
+            className="Modal--TaskBtns"
             onClick={() => {
                deleteTask(task.task_id);
             }}

@@ -180,17 +180,7 @@ li > h4 {
    transform: scale(0.98);
 }
 
-/* ============= Student Notes =============== */
-
-.SDash--Notes {
-   grid-area: StuNotes;
-}
-
-#StuNotes--TextArea {
-   width: stretch;
-   height: 100px;
-   border-radius: 10px;
-}
+/* ============= Student Modal =============== */
 
 .SPTask--Modal {
    display: grid;
@@ -212,13 +202,7 @@ li > h4 {
    grid-area: TaskHeader;
    text-align: center;
    background-color: var(--clr-accent-white);
-}
-
-.Modal--TaskStatus {
-   border-radius: 5px;
-   padding: 10px;
-   grid-area: TaskStatus;
-   background-color: var(--clr-accent-white);
+   font-family: var(--ff-primary);
 }
 
 .Modal--TaskStatus {
@@ -235,36 +219,34 @@ li > h4 {
    background-color: var(--clr-accent-white);
 }
 
-.Modal--Remarks {
-   border-radius: 5px;
-   padding: 10px;
-   grid-area: TaskRemarks;
-   background-color: var(--clr-accent-white);
+.Modal--EditTask {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
 }
 
-.Modal--AddRemark {
-   border-radius: 5px;
-   padding: 10px;
-   grid-area: AddRemark;
-   background-color: var(--clr-accent-white);
+.Modal--CreateTask {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
 }
 
-#Modal--InputRemark {
-   width: 100%;
-   height: auto;
-   border: none;
-   outline: none;
-   resize: none;
-   overflow: visible;
+.Modal--TaskFormFlex {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+}
+
+.Modal--TaskInputs {
+   display: flex;
+   flex-direction: column;
+   border-radius: 5px;
+   padding: 10px;
+   background-color: var(--clr-accent-white);
    font-family: var(--ff-primary);
 }
 
-#Modal--InputRemark {
-   width: 100%;
-   height: auto;
-   border: none;
-   outline: none;
-   resize: none;
-   overflow: visible;
+.Modal--TaskInputs > input {
    font-family: var(--ff-primary);
+   border: none;
 }
