@@ -39,21 +39,10 @@
   justify-self: start;
 }
 
-/* .color-code {
-  grid-column: 1/2;
-  grid-row: 1/2;
-  background-color: green;
-  border-radius: 10px;
-  width: 10px;
-  height: 10px;
-  align-self: center;
-  justify-self: center;
-} */
 
 #cohort-nav {
   display: grid;
   align-items: center;
-  width: 300px;
   color: var(--clr-bgsecondary-contrast);
   text-shadow: 2px 2px 2px #0000004c;
   padding: 1em;
@@ -62,7 +51,8 @@
 .list {
   display: grid;
   gap: 1rem;
-  height: 50%;
+  height: 100%;
+  align-items: center;
   justify-items: center;
   font-size: 2.5ch;
   background-color: var(--clr-bgsecondary-contrast);
@@ -163,23 +153,25 @@
   scroll-snap-type: inline mandatory;
   scroll-behavior: smooth;
   scroll-padding: 1em;
- 
+
 }
 
-#cohort-view > *{
-scroll-snap-align: start;
+#cohort-view>* {
+  scroll-snap-align: start;
 }
 
 #cohorts-list {
   display: grid;
   height: 85vh;
+  /* width: 95vw; */
 }
 
 .test-cohort {
   display: flex;
   flex-direction: column;
-  min-width: 400px;
-  /* height: 95%; */
+  overflow: auto;
+  min-width: 300px;
+  max-height: 95%;
   height: fit-content;
   margin: 1rem;
   padding: 1rem;
@@ -232,7 +224,7 @@ scroll-snap-align: start;
   border-radius: 10px;
   margin-top: 3%;
   padding-top: 5px;
-  font-size:17px
+  font-size: 17px
 }
 
 #numberOfStudents {
@@ -289,4 +281,37 @@ scroll-snap-align: start;
   min-width: 70px;
   border-color: black;
   border: 3ch;
+}
+
+/* @media (orientation: portrait) */
+@media (max-width: 600px) {
+
+  #cohort-container {
+    margin-left: 2rem;
+    display: flex !important;
+    flex-direction: column;
+
+    justify-self: center;
+    justify-content: center;
+    justify-items: center;
+  }
+
+  .headerTitle {
+    position: relative;
+    left: 1rem;
+  }
+
+  #cohorts-list {
+    display: grid;
+    /* height: 85vh; */
+    /* width: 95vw; */
+  }
+
+  .test--grid {
+    grid-template-columns: 30% 70% !important;
+  }
+
+  .sideNav--Wrapper {
+    padding: 0;
+  }
 }

@@ -27,21 +27,36 @@ const customStyles = {
 
 // Modal.setAppElement(".AppContainer");
 
-export default function StudentPage({ allUsersData, socket, viewClickedCohort }) {
-   const [modalIsOpen, setIsOpen] = useState(false);
+export default function StudentPage({ modalIsOpen, setModalIsOpen, activeStudent, setActiveStudent, allUsersData, socket, viewClickedCohort }) {
    const { userData } = useContext(LoginContext);
-   const [activeStudent, setActiveStudent] = useState({});
    const [showEditStudentModal, setShowEditStudentModal] = useState(false)
 
    useEffect(() => {
-      if (!userData.admin || userData.admin == null) {
-         document.querySelector(".test--grid").classList.add("studentView");
-         setActiveStudent(userData);
+      console.log(userData)
+      if (!userData.admin) {
+         setActiveStudent(userData)
+      }
+   }, [])
+   useEffect(() => {
+      document.querySelectorAll(".listOfCohorts").forEach(elem => {
+         elem.classList.remove('activeCohortTab')
+
+         if (viewClickedCohort.cohort_id === +elem.id) {
+            elem.classList.add('activeCohortTab')
+         }
+      })
+   }, [])
+
+   useEffect(() => {
+      if (!userData.admin) {
+         console.log(userData)
+         document.querySelector('.test--grid').classList.add('studentView')
+         // setActiveStudent(userData)
       }
    }, [userData]);
 
    function openModal() {
-      setIsOpen(true);
+      setModalIsOpen(true);
    }
 
    function afterOpenModal() {
@@ -50,7 +65,7 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
    }
 
    function closeModal() {
-      setIsOpen(false);
+      setModalIsOpen(false);
    }
    const handleEditBtnClicked = (e) => {
       setShowEditStudentModal(!showEditStudentModal)
@@ -81,7 +96,7 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
 
                   <ul>
                      <div >
-                        {showEditStudentModal && <EditStudentModal setShowEditStudentModal={setShowEditStudentModal} activeStudent={activeStudent} />}
+                        {showEditStudentModal && <EditStudentModal userData={userData} setShowEditStudentModal={setShowEditStudentModal} activeStudent={activeStudent} setActiveStudent={setActiveStudent} />}
                         <div onClick={handleEditBtnClicked} className="editStudentBtnSpan"><FiEdit className="editStudentInfoBtn" /><span className="editStudentToolTip">Edit</span></div>
                         <h4 className="text-left">Personal Info</h4>
                      </div>
