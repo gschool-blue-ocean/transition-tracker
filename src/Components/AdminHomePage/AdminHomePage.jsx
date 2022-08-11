@@ -28,6 +28,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
         horizontalScroll()
     }, [])
 
+
     useEffect(() => {
         if (isOnArchivePage) {
             let filteredCohort = allCohortsData.filter(cohort => { return cohort.active === false })
@@ -178,13 +179,13 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                                             </div>
                                             <div className="listOfNames">
                                                 {
-
-                                                    allUsersData.map(user => {//==================================================================================
-                                                        if (user.cohort_id == cohort.cohort_id) {
+                                                  allUsersData.map(user => {
+                                                  //==================================================================================
+                                                      if (user.cohort_id == cohort.cohort_id && user.ets_date) {
                                                             return <div className='nameInRow'>
-                                                                {/* This right here !!!!!!!!!!!!!!!!!!! is not how its supposed to be done. Should use some kind of state but not sure how to get the onClick to work while sending the data from inside here.*/}
-                                                                <div id={`${JSON.stringify(user)}`} className='name-div' onClick={handleStudentNameClick} > {user.first} {user.last} </div> <div className='color-code'></div>
-                                                                {/*^^^^^^^^^^^^^^^^^^^^^^^ */}
+                                                                <SPETStag userETS={user.ets_date} className='ets-tag' />
+                                                                <div className='name-div'> {user.first} {user.last}</div> 
+                                                                {/* <div className='color-code'></div> */}
                                                             </div>
                                                         }
                                                     })
@@ -214,7 +215,8 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                 <button className="x" onClick={setNewCohortModalIsOpenToFalse}>X</button>
                 <NewCohortModal />
             </Modal>
-        </div >
+        </div>
+        
     )
 }
 
