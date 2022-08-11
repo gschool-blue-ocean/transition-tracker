@@ -89,7 +89,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
         const scrollContainer = document.querySelector('#cohort-view')
 
         scrollContainer.addEventListener(("wheel"), (e) => {
-            e.preventDefault();
+            // e.preventDefault();
             scrollContainer.scrollLeft += e.deltaY
         });
     }
@@ -179,12 +179,12 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                                             </div>
                                             <div className="listOfNames">
                                                 {
-                                                  allUsersData.map(user => {
-                                                  //==================================================================================
-                                                      if (user.cohort_id == cohort.cohort_id && user.ets_date) {
+                                                    allUsersData.map(user => {
+                                                        //==================================================================================
+                                                        if (user.cohort_id == cohort.cohort_id) {
                                                             return <div className='nameInRow'>
                                                                 <SPETStag userETS={user.ets_date} className='ets-tag' />
-                                                                <div className='name-div'> {user.first} {user.last}</div> 
+                                                                <div className='name-div'> {user.first} {user.last}</div>
                                                                 {/* <div className='color-code'></div> */}
                                                             </div>
                                                         }
@@ -216,7 +216,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                 <NewCohortModal />
             </Modal>
         </div>
-        
+
     )
 }
 
