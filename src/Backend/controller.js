@@ -269,9 +269,10 @@ const updateOneCohortByID = async (req, res) => {
 }
 
 const archiveOneCohortByID = async (req, res) => {
+    const { active } = req.body
     try {
         let client = await pool.connect()
-        let data = await client.query('UPDATE cohorts SET active = $1 WHERE cohort_id = $2 RETURNING *', [false, req.params.id])
+        let data = await client.query('UPDATE cohorts SET active = $1 WHERE cohort_id = $2 RETURNING *', [active, req.params.id])
         res.json(data.rows)
         client.release()
 
