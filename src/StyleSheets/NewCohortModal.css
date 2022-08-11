@@ -1,5 +1,5 @@
 .createCohortHeader{
-    font-size: 4ch;
+    font-size: 3ch;
     color: white;
     text-shadow: 2px 2px 6px #000000;
     padding-top: 10px;
@@ -15,15 +15,15 @@
     grid-template-rows: 10;
     align-self: auto;
     background-color:var(--clr-bgsecondary-contrast);
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 5%;
+    margin-right: 5%;
     height: 300px;
     border-radius: 25px;
     border-color: black;
     border-width: 5px;
     border-style: solid;
     font-size: larger;
-
+    min-width: 500px;
 }
 
 .create-new-cohort-btn{
