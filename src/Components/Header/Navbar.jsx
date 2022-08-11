@@ -17,10 +17,10 @@ const Navbar = () => {
         <>
             <div className='navbarContainer'>
                 <ul className='navbarUL'>
-                    <li><NavLink id='/' className='navLink' to="/" >Home</NavLink></li>
+                    {userData && userData.admin ?<li><NavLink id='/' className='navLink' to="/" >Home</NavLink></li> : null}
                     {/* {JSON.parse(localStorage.currentUser).admin || userData.admin ? <li><NavLink id='/archive' className='navLink' to="/archive" >Archive</NavLink></li> : null} */}
                     {userData && userData.admin ? <li><NavLink id='/archive' className='navLink' to="/archive" >Archive</NavLink></li> : null}
-                    <li><NavLink id='/settings' className='navLink' to="/settings" >Settings</NavLink></li>
+                    {userData && userData.admin ? <li><NavLink id='/settings' className='navLink' to="/settings" >Admin</NavLink></li> : null}
 
                 </ul>
             </div>
