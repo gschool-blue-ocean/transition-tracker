@@ -59,8 +59,8 @@ const AddStudentModal = ({ setShowAddStudentModal, viewClickedCohort, getStudent
             let emailSubject = `Welcome to Galvanize ${newUserData.first}!`
 
             let emailBody = `Hello ${newUserData.first}, %0D%0A %0D%0A You have been added to Cohort ${newUserData.cohort_name}! To log in for the first time, please navigate to https://hacking-transition.herokuapp.com/ %0D%0A %0D%0A Your temporary Username: ${newUserData.first + newUserData.last} (your first and last name without spaces) %0D%0A %0D%0A Your temporary Password: ${newUserData.cohort_name} (your cohort name)  %0D%0A %0D%0A %0D%0A Sincerely, %0D%0A %0D%0A Galvanize Admissions`
-
-            window.open(`mailto:${formData.email}?subject=${emailSubject}&body=${emailBody}`)
+            window.location.href = `mailto:${formData.email}?subject=${emailSubject}&body=${emailBody}`
+            // window.open(`mailto:${formData.email}?subject=${emailSubject}&body=${emailBody}`)
         }
     }
 

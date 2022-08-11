@@ -88,10 +88,10 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     const horizontalScroll = () => {
         const scrollContainer = document.querySelector('#cohort-view')
 
-        scrollContainer.addEventListener(("wheel"), (e) => {
-            // e.preventDefault();
-            scrollContainer.scrollLeft += e.deltaY
-        });
+        // scrollContainer.addEventListener(("wheel"), (e) => {
+        //     // e.preventDefault();
+        //     scrollContainer.scrollLeft += e.deltaY
+        // });
     }
 
     const handleCohortClicked = (e) => {
