@@ -112,10 +112,6 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     //     //active.classList.add('activeCohortTab');
     // }
     //==========================================================
-    //this is to allow clicking of the cohort name to show cohort information just like cohort nav
-    const handleCohortNameClick = (e) => {
-        //handleCohortNameClick(e)
-    }
 
     const handleActiveCohortTab = (element) => {
         document.querySelectorAll('.listOfCohorts').forEach(elem => elem.classList.remove('activeCohortTab'))
@@ -169,7 +165,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                                     return (
                                         <div className='test-cohort' key={cohort.cohort_id}>
                                             <div className='cardHeader'>
-                                                <div className='cardName' onClick={handleCohortNameClick}>{cohort.cohort_name}</div>
+                                                <div className='cardName' id={cohort.cohort_id} onClick={handleCohortClicked}>{cohort.cohort_name}</div>
                                                 <div className='cardSettingsIcon'>
                                                     <>
                                                         <FiSettings onClick={setModalIsOpenToTrue} id={cohort.cohort_id}>{EditCohortPage} </FiSettings>

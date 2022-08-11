@@ -1,0 +1,16 @@
+.admin--container{
+  position: absolute;
+  top: 25%;
+  bottom: 25%;
+  left: 50%;
+  right: 0;
+
+
+  display: grid;
+  color: white;
+
+}
+
+.admin--listItems{
+  color: white;
+}
