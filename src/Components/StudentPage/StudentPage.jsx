@@ -1,14 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
-import Modal from "react-modal";
 import SPTasks from "./components/SP-Tasks";
 import SPETStag from "./components/SP-ETStag";
 import SPDependents from "./components/SP-Dependents";
-import SPTaskModal from "./components/SP-TaskModal";
 import "../../StyleSheets/StudentPage.css";
 import SideNav from "../SideNav/SideNav";
 import LoginContext from "../../Context/LoginContext";
 import ChatModal from "../../Components/Chat/ChatModal";
-import { FiEdit } from 'react-icons/fi'
+import { FiEdit } from "react-icons/fi";
 import EditStudentModal from "./components/EditStudentModal";
 
 const customStyles = {
@@ -42,39 +40,19 @@ export default function StudentPage({ modalIsOpen, setModalIsOpen, activeStudent
       })
    }, [])
 
-   useEffect(() => {
-      if (!userData.admin) {
-         console.log(userData)
-         document.querySelector('.test--grid').classList.add('studentView')
-         // setActiveStudent(userData)
-      }
-   }, [userData]);
-
-   function openModal() {
-      setModalIsOpen(true);
-   }
-
-   function afterOpenModal() {
-      // references are now sync'd and can be accessed.
-      // subtitle.style.color = "#f00";
-   }
-
-   function closeModal() {
-      setModalIsOpen(false);
-   }
    const handleEditBtnClicked = (e) => {
-      setShowEditStudentModal(!showEditStudentModal)
-   }
+      setShowEditStudentModal(!showEditStudentModal);
+   };
 
    return (
       <div className="test--grid">
-         {JSON.parse(localStorage.currentUser).admin || userData.admin ? (
+         {userData.admin && (
             <SideNav
                viewClickedCohort={viewClickedCohort}
                activeStudent={activeStudent}
                setActiveStudent={setActiveStudent}
             />
-         ) : null}
+         )}
          <div className="StudentDash--Wrapper">
             <div className="SDash--Header">
                <h3 id="StuHeader--Name">
@@ -86,13 +64,12 @@ export default function StudentPage({ modalIsOpen, setModalIsOpen, activeStudent
 
             {/* User Data Card */}
             <div className="SDash--Info-card">
-
                <div className="infoCard--container">
-
                   <ul>
                      <div >
                         {showEditStudentModal && <EditStudentModal setUserData={setUserData} userData={userData} setShowEditStudentModal={setShowEditStudentModal} activeStudent={activeStudent} setActiveStudent={setActiveStudent} />}
                         <div onClick={handleEditBtnClicked} className="editStudentBtnSpan"><FiEdit className="editStudentInfoBtn" /><span className="editStudentToolTip">Edit</span></div>
+
                         <h4 className="text-left">Personal Info</h4>
                      </div>
 
@@ -130,7 +107,7 @@ export default function StudentPage({ modalIsOpen, setModalIsOpen, activeStudent
                         <h4 id="depends" className="text-left">
                            Dependents
                         </h4>
-                        <SPDependents />  {/* // Pass in dependent info */}
+                        <SPDependents /> {/* // Pass in dependent info */}
                      </li>
 
                      <li>
@@ -150,15 +127,11 @@ export default function StudentPage({ modalIsOpen, setModalIsOpen, activeStudent
                         <span className="answer"> {activeStudent.planning_to_relocate ? "Yes" : "No"}</span>
                      </li>
                   </ul>
-               </div>
-            </div>
-            <SPTasks openModal={openModal} />
-            <Modal isOpen={modalIsOpen} onAfterOpen={afterOpenModal} onRequestClose={closeModal} style={customStyles}>
-               <SPTaskModal />
-            </Modal>
-
+               </div >
+            </div >
+            <SPTasks activeStudent={activeStudent} />
             <ChatModal socket={socket} activeStudent={activeStudent} />
-         </div>
-      </div>
+         </div >
+      </div >
    );
 }

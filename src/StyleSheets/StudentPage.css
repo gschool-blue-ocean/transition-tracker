@@ -109,7 +109,7 @@
    grid-area: StuInfo;
 }
 
-.SDash--Info-card>ul,
+.SDash--Info-card > ul,
 li,
 span {
    list-style: none;
@@ -125,35 +125,8 @@ span {
    border-radius: 10px;
 }
 
-.editStudentBtnSpan {
-   display: grid;
-   justify-items: center;
-   position: relative;
-   float: right;
-   opacity: .8;
-
-}
-
-.editStudentBtnSpan:hover {
-   cursor: pointer;
-   opacity: 1;
-   transform: scale(1.2);
-
-}
-
-.editStudentToolTip {
-   display: none;
-   font-size: .75rem;
-}
-
-.editStudentBtnSpan:hover .editStudentToolTip {
-   display: block !important;
-}
-
-.editStudentInfoBtn:hover {}
-
-ul>h4,
-li>h4 {
+ul > h4,
+li > h4 {
    margin-top: 1em;
 }
 
@@ -188,7 +161,7 @@ li>h4 {
    border: solid var(--clr-nuetral-brown);
    border-radius: 10px;
    margin-bottom: 8px;
-   width: 80%;
+   width: 85%;
    text-align: center;
    color: var(--clr-accent-white);
    background-color: var(--clr-bgsecondary-contrast);
@@ -207,25 +180,16 @@ li>h4 {
    transform: scale(0.98);
 }
 
-/* ============= Student Notes =============== */
-
-.SDash--Notes {
-   grid-area: StuNotes;
-}
-
-#StuNotes--TextArea {
-   width: stretch;
-   height: 100px;
-   border-radius: 10px;
-}
+/* ============= Student Modal =============== */
 
 .SPTask--Modal {
    display: grid;
    grid-template-columns: 1fr;
    grid-template-areas:
       "TaskHeader"
+      "TaskStatus"
+      "TaskStatus"
       "TaskDesc"
-      "TaskSubTask"
       "TaskRemarks"
       "AddRemark";
    font-family: var(--ff-primary);
@@ -238,6 +202,14 @@ li>h4 {
    grid-area: TaskHeader;
    text-align: center;
    background-color: var(--clr-accent-white);
+   font-family: var(--ff-primary);
+}
+
+.Modal--TaskStatus {
+   border-radius: 5px;
+   padding: 10px;
+   grid-area: TaskStatus;
+   background-color: var(--clr-accent-white);
 }
 
 .Modal--TaskDesc {
@@ -247,16 +219,34 @@ li>h4 {
    background-color: var(--clr-accent-white);
 }
 
-.Modal--SubTasks {
-   border-radius: 5px;
-   padding: 10px;
-   grid-area: TaskSubTask;
-   background-color: var(--clr-accent-white);
+.Modal--EditTask {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
 }
 
-.Modal--Remarks {
+.Modal--CreateTask {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+}
+
+.Modal--TaskFormFlex {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+}
+
+.Modal--TaskInputs {
+   display: flex;
+   flex-direction: column;
    border-radius: 5px;
    padding: 10px;
-   grid-area: TaskRemarks;
    background-color: var(--clr-accent-white);
+   font-family: var(--ff-primary);
+}
+
+.Modal--TaskInputs > input {
+   font-family: var(--ff-primary);
+   border: none;
 }

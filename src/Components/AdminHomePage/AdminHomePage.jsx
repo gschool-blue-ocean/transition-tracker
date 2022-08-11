@@ -6,6 +6,8 @@ import EditCohortPage from './EditCohortPage';
 import NewCohortModal from './NewCohortModal';
 import Modal from 'react-modal';
 import StudentPage from '../StudentPage/StudentPage';
+import SPETStag from "../StudentPage/components/SP-ETStag.jsx";
+import LoginContext from "../../Context/LoginContext";
 
 function AdminHomePage({ socket, isOnArchivePage }) {
 
@@ -19,6 +21,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     const [showClickedCohort, setShowClickedCohort] = useState(false)
 
     const [cohortsToMap, setCohortsToMap] = useState([])
+
     const [activeStudent, setActiveStudent] = useState({});
 
     useEffect(() => {
@@ -179,6 +182,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                                             </div>
                                             <div className="listOfNames">
                                                 {
+
                                                     allUsersData.map(user => {//==================================================================================
                                                         if (user.cohort_id == cohort.cohort_id) {
                                                             return <div className='nameInRow'>
