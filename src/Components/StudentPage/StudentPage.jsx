@@ -68,7 +68,7 @@ export default function StudentPage({ modalIsOpen, setModalIsOpen, activeStudent
                   <ul>
                      <div >
                         {showEditStudentModal && <EditStudentModal setUserData={setUserData} userData={userData} setShowEditStudentModal={setShowEditStudentModal} activeStudent={activeStudent} setActiveStudent={setActiveStudent} />}
-                        <div onClick={handleEditBtnClicked} className="editStudentBtnSpan"><FiEdit className="editStudentInfoBtn" /><span className="editStudentToolTip">Edit</span></div>
+                        <div onClick={handleEditBtnClicked} className="editStudentBtnSpan"><FiEdit className="editStudentInfoBtn" /><div className="editStudentToolTip">Edit</div></div>
 
                         <h4 className="text-left">Personal Info</h4>
                      </div>

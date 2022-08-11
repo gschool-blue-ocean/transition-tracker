@@ -105,11 +105,31 @@
 
 /* ============= Student Info =============== */
 
+.editStudentBtnSpan {
+   /* position: relative; */
+   float: right;
+   display: grid;
+   justify-items: center;
+}
+
+.editStudentInfoBtn:hover {
+   cursor: pointer;
+   transform: scale(1.2);
+}
+
+.editStudentInfoBtn:hover+.editStudentToolTip {
+   visibility: visible !important;
+}
+
+.editStudentToolTip {
+   visibility: hidden;
+}
+
 .SDash--Info-card {
    grid-area: StuInfo;
 }
 
-.SDash--Info-card > ul,
+.SDash--Info-card>ul,
 li,
 span {
    list-style: none;
@@ -125,8 +145,8 @@ span {
    border-radius: 10px;
 }
 
-ul > h4,
-li > h4 {
+ul>h4,
+li>h4 {
    margin-top: 1em;
 }
 
@@ -246,7 +266,7 @@ li > h4 {
    font-family: var(--ff-primary);
 }
 
-.Modal--TaskInputs > input {
+.Modal--TaskInputs>input {
    font-family: var(--ff-primary);
    border: none;
 }
