@@ -1,15 +1,19 @@
-import {React, useState} from 'react';
-import FormInputs from './AddAdminFormInputs'
+import {React, useState, useContext} from 'react';
+import FormInputs from './AddAdminFormInputs';
+import LoginContext from "../../Context/LoginContext";
+import AppContext from "../../Context/AppContext";
 
 
 export const AddAdmin = () => {
   const [newAdmin, setNewAdmin] = useState({
     first: "",
     last: "",
+    email: "",
     username: "",
     password: ""
   })
-
+  const { setLoading, changeSetLoading } = useContext(LoginContext);
+  const { invokeSetAllUsersData } = useContext(AppContext);
   //here is the request to create and admin ======================================================
   const createAdminRequest = () => {
     fetch(
@@ -21,9 +25,17 @@ export const AddAdmin = () => {
         },
         body: JSON.stringify(newAdmin),
       }
-    ).catch(console.error());
+    ).then(fetchAllUserData)
+    .catch(console.error());
   }
 
+  const fetchAllUserData = () => {
+      //changeSetLoading(true);
+      fetch("https://hacking-transition.herokuapp.com/api/users")
+         .then((res) => res.json())
+         .then((data) => invokeSetAllUsersData(data))
+         .catch((err) => console.log(err));
+   };
   const inputs = [
     {
       id: 1,
@@ -56,6 +68,14 @@ export const AddAdmin = () => {
       type: "text",
       placeholder: "Password",
       required: true
+    },
+    {
+      id: 5,
+      name: "email",
+      label: "Email",
+      type:"email",
+      placeholder:"Email",
+      required: true
     }
   ];
 
@@ -67,9 +87,17 @@ export const AddAdmin = () => {
     e.preventDefault();
     console.log(JSON.stringify(newAdmin))
     createAdminRequest();
+    setNewAdmin({
+      first: "",
+      last: "",
+      email: "",
+      username: "",
+      password: ""
+    })
+    fetchAllUserData();
+    
   }
-
-
+ 
 
   return (
     <div>
