@@ -48,7 +48,9 @@ io.on("connection", (socket) => {
 app.use(express.json());
 app.use(express.static("build"));
 
-app.use(cors());
+app.use(cors({
+    origin: '*'
+}));
 
 // app.listen(PORT, (err) => {
 //     if (err) return console.log(err);
@@ -84,6 +86,8 @@ app.patch('/api/update/user/:id', controller.updateOneUserByID)
 app.patch('/api/update/admin/:id', controller.updateAdminByID)
 
 app.patch('/api/archive/student/:id', controller.archiveOneStudentByID)
+
+app.patch('/api/admin/edit/student/:id', controller.adminEditStudentByID)
 
 app.delete('/api/delete/user/:id', controller.deleteOneUserByID)
 

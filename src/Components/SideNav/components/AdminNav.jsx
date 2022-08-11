@@ -7,7 +7,7 @@ import AddStudentModal from "./AddStudentModal";
 
 export default function AdminNav({ viewClickedCohort, setActiveStudent, activeStudent }) {
    const { allUsersData, setLoading } = useContext(AppContext);
-   const { userData } = useContext(LoginContext)
+   const { userData } = useContext(LoginContext);
    const [cohortStudents, setCohortStudents] = useState(null);
    const [showAddStudentModal, setShowAddStudentModal] = useState(false)
 
@@ -24,9 +24,20 @@ export default function AdminNav({ viewClickedCohort, setActiveStudent, activeSt
 
    useEffect(() => {
 
-      if (cohortStudents && cohortStudents.length > 0) {
-         setActiveStudent(cohortStudents[0])
-         document.getElementById(cohortStudents[0].user_id).classList.add('activeStudent')
+      if (cohortStudents) {
+          let index = 0;
+         if(activeStudent){
+            cohortStudents.forEach((stuData,i) => {
+               let check = JSON.stringify(stuData);
+               if(check == JSON.stringify(activeStudent)){
+                  index = i;
+               }
+            })
+            
+            //index = cohortStudents.indexof(activeStudent);
+         }
+         setActiveStudent(cohortStudents[index])
+         document.getElementById(cohortStudents[index].user_id).classList.add('activeStudent')
 
       }
    }, [cohortStudents])

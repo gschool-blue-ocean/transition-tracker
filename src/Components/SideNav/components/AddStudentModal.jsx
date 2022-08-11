@@ -105,7 +105,7 @@ const AddStudentModal = ({ setShowAddStudentModal, viewClickedCohort, getStudent
 
                     <label
                         className='labelGenerateEmailCheckBox'
-                        for='generateEmail'>
+                        htmlFor='generateEmail'>
                         <input
                             id='generateEmail'
                             type='checkbox'
@@ -126,7 +126,7 @@ const AddStudentModal = ({ setShowAddStudentModal, viewClickedCohort, getStudent
                         value='Cancel' />
                 </form>
             </div>
-        </div>,
+        </div >,
         document.getElementById('portal')
     )
     // return (<div>test portal</div>)

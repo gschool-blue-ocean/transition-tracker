@@ -27,7 +27,7 @@ function App() {
    useEffect(() => {
       fetchAllCohortData();
       fetchAllUserData();
-   }, []);
+   }, [invokeSetLogin]);
 
    const fetchAllUserData = () => {
       fetch("https://hacking-transition.herokuapp.com/api/users")

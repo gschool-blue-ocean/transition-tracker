@@ -373,3 +373,107 @@
     display: flex;
     justify-content: space-around;
 }
+
+.success-message-div{
+    margin: auto;
+    width: fit-content;
+    margin-top: 25vh;
+    height: 50%;
+    background-color: #C16733;
+    padding: 20px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.success-message{
+    color: white;
+}
+
+.same-username{
+    color: rgb(201, 167, 0);
+    font-size: 11px;
+}
+
+.username-valid{
+    color: rgb(2, 81, 2);
+    font-size: 11px;
+}
+
+.username-invalid{
+    color: rgb(201, 0, 0);
+    font-size: 11px;
+}
+
+.username-validation-message{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+@media (orientation: portrait) {
+    .createModalContainer{
+        height: fit-content;
+        max-width: 100vw;
+    }
+    .createContainer{
+        height: fit-content;
+        flex-direction: column;
+        display: flex;
+        max-width: 100vw;
+    }
+
+    .account-info{
+        display: flex;
+        flex-direction: column;
+        word-wrap: wrap;
+    }
+
+    .credentials-require{
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .service-info-1{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        white-space: pre-line;
+        gap: 20px;
+    }
+
+    .service-info-2{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .education-div{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        white-space: normal;
+        wrap: break-word;
+    }
+
+    .dependent-div{
+        white-space: normal;
+        wrap: break-word;
+    }
+
+    .leave-div{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .success-message-div{
+        max-width: 100vw;
+        min-width: 70vw;
+        white-space: normal;
+        margin-top: 20vh;
+    }
+
+    .success-message{
+        font-size: 1.5rem;
+    }
+}

@@ -1,70 +1,40 @@
 import React, { useState, useContext, useEffect } from "react";
-import Modal from "react-modal";
 import SPTasks from "./components/SP-Tasks";
 import SPETStag from "./components/SP-ETStag";
 import SPDependents from "./components/SP-Dependents";
-import SPTaskModal from "./components/SP-TaskModal";
 import "../../StyleSheets/StudentPage.css";
 import SideNav from "../SideNav/SideNav";
 import LoginContext from "../../Context/LoginContext";
 import ChatModal from "../../Components/Chat/ChatModal";
-import { FiEdit } from 'react-icons/fi'
+import { FiEdit } from "react-icons/fi";
 import EditStudentModal from "./components/EditStudentModal";
 
-const customStyles = {
-   content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      backgroundColor: "var(--clr-primary-accent)",
-      borderRadius: "10px",
-      width: "30%",
-   },
-};
-
-// Modal.setAppElement(".AppContainer");
-
 export default function StudentPage({ allUsersData, socket, viewClickedCohort }) {
-   const [modalIsOpen, setIsOpen] = useState(false);
    const { userData } = useContext(LoginContext);
    const [activeStudent, setActiveStudent] = useState({});
-   const [showEditStudentModal, setShowEditStudentModal] = useState(false)
+   const [showEditStudentModal, setShowEditStudentModal] = useState(false);
 
    useEffect(() => {
-      if (!userData.admin || userData.admin == null) {
+      console.log(userData);
+      if (!userData.admin) {
          document.querySelector(".test--grid").classList.add("studentView");
          setActiveStudent(userData);
       }
-   }, [userData]);
+   }, []);
 
-   function openModal() {
-      setIsOpen(true);
-   }
-
-   function afterOpenModal() {
-      // references are now sync'd and can be accessed.
-      // subtitle.style.color = "#f00";
-   }
-
-   function closeModal() {
-      setIsOpen(false);
-   }
    const handleEditBtnClicked = (e) => {
-      setShowEditStudentModal(!showEditStudentModal)
-   }
+      setShowEditStudentModal(!showEditStudentModal);
+   };
 
    return (
       <div className="test--grid">
-         {JSON.parse(localStorage.currentUser).admin || userData.admin ? (
+         {userData.admin && (
             <SideNav
                viewClickedCohort={viewClickedCohort}
                activeStudent={activeStudent}
                setActiveStudent={setActiveStudent}
             />
-         ) : null}
+         )}
          <div className="StudentDash--Wrapper">
             <div className="SDash--Header">
                <h3 id="StuHeader--Name">
@@ -76,13 +46,21 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
 
             {/* User Data Card */}
             <div className="SDash--Info-card">
-
                <div className="infoCard--container">
-
                   <ul>
-                     <div >
-                        {showEditStudentModal && <EditStudentModal setShowEditStudentModal={setShowEditStudentModal} activeStudent={activeStudent} />}
-                        <div onClick={handleEditBtnClicked} className="editStudentBtnSpan"><FiEdit className="editStudentInfoBtn" /><span className="editStudentToolTip">Edit</span></div>
+                     <div>
+                        {showEditStudentModal && (
+                           <EditStudentModal
+                              userData={userData}
+                              setShowEditStudentModal={setShowEditStudentModal}
+                              activeStudent={activeStudent}
+                              setActiveStudent={setActiveStudent}
+                           />
+                        )}
+                        <div onClick={handleEditBtnClicked} className="editStudentBtnSpan">
+                           <FiEdit className="editStudentInfoBtn" />
+                           <span className="editStudentToolTip">Edit</span>
+                        </div>
                         <h4 className="text-left">Personal Info</h4>
                      </div>
 
@@ -120,7 +98,7 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
                         <h4 id="depends" className="text-left">
                            Dependents
                         </h4>
-                        <SPDependents />  {/* // Pass in dependent info */}
+                        <SPDependents /> {/* // Pass in dependent info */}
                      </li>
 
                      <li>
@@ -142,11 +120,7 @@ export default function StudentPage({ allUsersData, socket, viewClickedCohort })
                   </ul>
                </div>
             </div>
-            <SPTasks openModal={openModal} />
-            <Modal isOpen={modalIsOpen} onAfterOpen={afterOpenModal} onRequestClose={closeModal} style={customStyles}>
-               <SPTaskModal />
-            </Modal>
-
+            <SPTasks activeStudent={activeStudent} />
             <ChatModal socket={socket} activeStudent={activeStudent} />
          </div>
       </div>
