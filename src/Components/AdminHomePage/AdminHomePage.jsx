@@ -183,9 +183,11 @@ function AdminHomePage({ socket, isOnArchivePage }) {
                                                         //==================================================================================
                                                         if (user.cohort_id == cohort.cohort_id) {
                                                             return <div className='nameInRow'>
+
                                                                 <SPETStag userETS={user.ets_date} className='ets-tag' />
-                                                                <div className='name-div'> {user.first} {user.last}</div>
-                                                                {/* <div className='color-code'></div> */}
+                                                                {/* This right here !!!!!!!!!!!!!!!!!!! is not how its supposed to be done. Should use some kind of state but not sure how to get the onClick to work while sending the data from inside here.*/}
+                                                                <div id={`${JSON.stringify(user)}`} className='name-div' onClick={handleStudentNameClick} > {user.first} {user.last} </div> <div className='color-code'></div>
+                                                                {/*^^^^^^^^^^^^^^^^^^^^^^^ */}
                                                             </div>
                                                         }
                                                     })
