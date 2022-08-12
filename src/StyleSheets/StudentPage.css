@@ -28,6 +28,11 @@
 }
 
 /* =========== Student Container ============== */
+.container{
+   display: block;
+   margin: auto;
+   width: 100vw;
+}
 
 .StudentDash--Wrapper {
    padding: 0.5rem;
@@ -46,7 +51,7 @@
    background-color: var(--clr-secondary-accent);
    font-family: var(--ff-primary);
    max-height: 85vh;
-
+   width: 100%;
    overflow: auto !important;
 }
 

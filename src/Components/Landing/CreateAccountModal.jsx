@@ -266,7 +266,7 @@ function CreateAccountModal() {
 
   const updateUser = () => {
     fetch(
-      `http://hacking-transition.herokuapp.com/api/update/user/${userData.user_id}`,
+      `https://hacking-transition.herokuapp.com/api/update/user/${userData.user_id}`,
       {
         method: "PATCH",
         headers: {
@@ -286,7 +286,7 @@ function CreateAccountModal() {
       dependents.forEach((dependent) => {
         dependent.sponsor_id = userData.user_id;
 
-        fetch(`http://hacking-transition.herokuapp.com/api/create/dependent`, {
+        fetch(`https://hacking-transition.herokuapp.com/api/create/dependent`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

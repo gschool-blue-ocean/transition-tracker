@@ -53,6 +53,7 @@ export default function StudentPage({ modalIsOpen, setModalIsOpen, activeStudent
                setActiveStudent={setActiveStudent}
             />
          )}
+         <div className="container">
          <div className="StudentDash--Wrapper">
             <div className="SDash--Header">
                <h3 id="StuHeader--Name">
@@ -133,5 +134,6 @@ export default function StudentPage({ modalIsOpen, setModalIsOpen, activeStudent
             <ChatModal socket={socket} activeStudent={activeStudent} />
          </div >
       </div >
+      </div>
    );
 }
