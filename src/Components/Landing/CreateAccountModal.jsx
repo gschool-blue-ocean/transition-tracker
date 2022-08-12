@@ -301,7 +301,7 @@ function CreateAccountModal() {
     e.preventDefault();
     setFormSubmit(true);
     if(typeof(createAccData.relocate_to_country) === 'string'){
-      setCreateAccData({...createAccData, relocate_to_country: false})
+      createAccData.relocate_to_country = false;
     }
     updateUser();
     updateDependentInfo();
