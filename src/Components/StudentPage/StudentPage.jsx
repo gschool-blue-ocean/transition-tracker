@@ -89,8 +89,6 @@ export default function StudentPage({
                            <FiEdit className="editStudentInfoBtn" />
                            <div className="editStudentToolTip">Edit</div>
                         </div>
-
-                        <h4 className="text-left">Personal Info</h4>
                      </div>
 
                      <li>
