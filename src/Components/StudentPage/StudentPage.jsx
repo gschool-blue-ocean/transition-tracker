@@ -62,6 +62,7 @@ export default function StudentPage({
                setActiveStudent={setActiveStudent}
             />
          )}
+         <div className="container">
          <div className="StudentDash--Wrapper">
             <div className="SDash--Header">
                <h3 id="StuHeader--Name">
@@ -149,7 +150,9 @@ export default function StudentPage({
             </div>
             <SPTasks activeStudent={activeStudent} />
             <ChatModal socket={socket} activeStudent={activeStudent} />
-         </div>
+         </div >
+      </div >
+
       </div>
    );
 }
