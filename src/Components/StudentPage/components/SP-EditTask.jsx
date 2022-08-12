@@ -8,7 +8,7 @@ export default function SPEditTask({ task, cancelEdit, closeModal }) {
       const taskID = task.task_id;
       const editData = {
          title: edit.title,
-         date: task.date,
+         date: convertDateToIso(edit.date),
          description: edit.description,
          completed: JSON.parse(edit.completed),
          remarks: null, // Remarks have been deleted
@@ -23,6 +23,22 @@ export default function SPEditTask({ task, cancelEdit, closeModal }) {
       closeModal(false);
    };
 
+   function convertDateToIso(date) {
+      if (date.split("-")[0].length === 4) {
+         return date;
+      } else if (date.split("/")[0].length === 4) {
+         return date;
+      } else {
+         let newDate = new Date(date);
+         let dateArray = newDate.toLocaleDateString().split("/");
+         let year = dateArray[2];
+         let day = dateArray[1].length === 2 ? dateArray[1] : `0${dateArray[1]}`;
+         let month = dateArray[0].length === 2 ? dateArray[0] : `0${dateArray[0]}`;
+
+         return `${year}-${month}-${day}`;
+      }
+   }
+
    // data is the inputted information
    const onSubmit = (data) => {
       editTask(data, task);
@@ -31,6 +47,7 @@ export default function SPEditTask({ task, cancelEdit, closeModal }) {
    return (
       <div className="Modal--EditTask">
          <button
+            className="Modal--TaskBtns"
             onClick={() => {
                cancelEdit(false);
                closeModal(false);
@@ -51,10 +68,19 @@ export default function SPEditTask({ task, cancelEdit, closeModal }) {
             </div>
 
             <div className="Modal--TaskInputs">
+               <label>Date</label>
+               <input
+                  type="date"
+                  defaultValue={convertDateToIso(task.date)}
+                  {...register("date", { required: true })}
+               />
+            </div>
+
+            <div className="Modal--TaskInputs">
                <label>Task Completed?</label>
                <select defaultValue={task.completed} {...register("completed", { required: true })}>
-                  <option value="true">true</option>
-                  <option value="false">false</option>
+                  <option value="true">Completed</option>
+                  <option value="false">In Progress</option>
                </select>
             </div>
 
@@ -67,7 +93,7 @@ export default function SPEditTask({ task, cancelEdit, closeModal }) {
                   {...register("description", { required: true })}
                />
             </div>
-            <input type="submit" value="Submit Edit" />
+            <input className="Modal--TaskBtns" type="submit" value="Submit Edit" />
          </form>
       </div>
    );

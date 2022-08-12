@@ -2,6 +2,7 @@ import {React, useState, useContext} from 'react';
 import FormInputs from './AddAdminFormInputs';
 import LoginContext from "../../Context/LoginContext";
 import AppContext from "../../Context/AppContext";
+import '../../StyleSheets/Settings.css'
 
 
 export const AddAdmin = () => {
@@ -100,9 +101,9 @@ export const AddAdmin = () => {
  
 
   return (
-    <div>
-      <h3>Add an Admin</h3>
-      <form>
+    <div className='addAdminForm--container'>
+      <form className='addAdmin--form'>
+      <h1 id='addAdmin--title'>Add an Admin</h1>
         {inputs.map((input)=>{
           return(
             <FormInputs
@@ -112,8 +113,11 @@ export const AddAdmin = () => {
             onChange={handleChange}
              />          )
         })}
-        <button onClick={handleSubmit}> Submit </button>
+        <div className='adminFormBtn--container'>
+          <button onClick={handleSubmit}> Add </button>
+        </div>
       </form>
+
     </div>
   )
 }
