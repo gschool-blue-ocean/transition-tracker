@@ -4,6 +4,8 @@ import SPTaskModal from "./SP-TaskModal";
 import Loading from "../../LoadingDisplay/Loading";
 import SPEditTask from "./SP-EditTask";
 import SPCreateTask from "./SP-CreateTask";
+import { AiOutlineEdit } from "react-icons/ai";
+import { BiMessageAltAdd } from "react-icons/bi";
 
 const customStyles = {
    content: {
@@ -42,17 +44,21 @@ export default function SPTasks({ activeStudent }) {
       openModal();
    }
 
+   useEffect(() => {
+      getTasks();
+   }, [activeStudent, selectedTask, createTask, editTask, studentTasks, modalIsOpen]);
+
    function modalRendering() {
       if (editTask) {
          return <SPEditTask task={selectedTask} closeModal={setIsOpen} cancelEdit={setEditTask} />;
       } else if (createTask) {
-         return <SPCreateTask closeModal={setIsOpen} cancelCreate={setCreateTask} />;
+         return <SPCreateTask student={activeStudent} closeModal={setIsOpen} cancelCreate={setCreateTask} />;
       } else {
-         return <SPTaskModal task={selectedTask} />;
+         return <SPTaskModal task={selectedTask} closeModal={setIsOpen} />;
       }
    }
 
-   useEffect(() => {
+   const getTasks = () => {
       if (activeStudent.user_id) {
          fetch(`https://hacking-transition.herokuapp.com/api/tasks/student/${activeStudent.user_id}`)
             .then((res) => res.json())
@@ -61,7 +67,7 @@ export default function SPTasks({ activeStudent }) {
                setStudentTasks(tasks);
             });
       }
-   }, [activeStudent]);
+   };
 
    if (loading) {
       return <Loading />;
@@ -70,12 +76,13 @@ export default function SPTasks({ activeStudent }) {
          <div className="SDash--Tasks">
             <h4 id="StuTasks--Header">Tasks</h4>
             <button
+               className="StuTasks--CreateBtn"
                onClick={() => {
                   setCreateTask(true);
                   openModal();
                }}
             >
-               Create Task
+               <BiMessageAltAdd />
             </button>
             <>
                {studentTasks.length === 0 ? (
@@ -85,6 +92,7 @@ export default function SPTasks({ activeStudent }) {
                      return (
                         <div className="StuTasks--Card">
                            <div
+                              className="StuTasks--Title"
                               id={task.task_id}
                               key={task.task_id}
                               onClick={() => {
@@ -94,13 +102,14 @@ export default function SPTasks({ activeStudent }) {
                               {task.title}
                            </div>
                            <button
+                              className="StuTasks--Buttons"
                               onClick={() => {
                                  setEditTask(true);
                                  openModal();
                                  setSelectedTask(task);
                               }}
                            >
-                              Edit
+                              <AiOutlineEdit />
                            </button>
                         </div>
                      );
@@ -108,11 +117,6 @@ export default function SPTasks({ activeStudent }) {
                )}
             </>
             <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={customStyles}>
-               {/* {editTask ? (
-                  <SPEditTask task={selectedTask} closeModal={setIsOpen} cancelEdit={setEditTask} />
-               ) : (
-                  <SPTaskModal task={selectedTask} />
-               )} */}
                {modalRendering()}
             </Modal>
          </div>
