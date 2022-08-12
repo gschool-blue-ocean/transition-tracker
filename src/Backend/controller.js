@@ -164,7 +164,7 @@ const adminEditStudentByID = async (req, res) => {
 }
 
 const updateOneUserByID = async (req, res) => {
-    const { first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user, mos, interests } = req.body
+    const { first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, relocate_to_country, relocate_city, relocate_state, relocate_country, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user, mos, interests } = req.body
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
