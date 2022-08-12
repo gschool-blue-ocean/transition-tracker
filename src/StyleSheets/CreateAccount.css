@@ -194,8 +194,8 @@
 .relocate-div{
     display: flex;
     align-items: center;
-    gap: 10px;
     flex-direction: row;
+    justify-content: space-between;
     padding: 10px;
 }
 
@@ -410,6 +410,81 @@
     gap: 5px;
 }
 
+.country-with-as{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}
+
+.country-question-radio{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}
+
+.relocate-input-and-label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.radio{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.country-input-with-as{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.city-state-relocate-div-with-label{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.city-state-relocate-div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.city-relocate-input-div{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}
+
+.state-relocate-input-div{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}
+
+.country-question-with-as{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.country-input-with-as{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
 @media (orientation: portrait) {
     .createModalContainer{
         height: fit-content;
@@ -420,6 +495,29 @@
         flex-direction: column;
         display: flex;
         max-width: 100vw;
+    }
+
+    .country-input-with-as{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        align-items: flex-start;
+    }
+
+    .city-state-relocate-div-with-label{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .city-state-relocate-div{
+        flex-direction: column;
+    }
+
+    .relocate-div{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
     }
 
     .account-info{
