@@ -150,5 +150,5 @@
 }
 
 .admin--listItems:hover{
-  color: var(--clr-secondary-accent);
+  color: rgb(255, 0, 0);
 }
