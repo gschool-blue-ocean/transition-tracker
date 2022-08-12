@@ -106,12 +106,16 @@
    justify-items: center;
 }
 
+.studentview {
+   margin-right: 20vw;
+}
+
 .editStudentInfoBtn:hover {
    cursor: pointer;
    transform: scale(1.2);
 }
 
-.editStudentInfoBtn:hover + .editStudentToolTip {
+.editStudentInfoBtn:hover+.editStudentToolTip {
    visibility: visible !important;
 }
 
@@ -123,7 +127,7 @@
    grid-area: StuInfo;
 }
 
-.SDash--Info-card > ul,
+.SDash--Info-card>ul,
 li,
 span {
    list-style: none;
@@ -139,8 +143,8 @@ span {
    border-radius: 10px;
 }
 
-ul > h4,
-li > h4 {
+ul>h4,
+li>h4 {
    margin-top: 1em;
 }
 
@@ -297,7 +301,7 @@ li > h4 {
    font-family: var(--ff-primary);
 }
 
-.Modal--TaskInputs > input {
+.Modal--TaskInputs>input {
    font-family: var(--ff-primary);
    background-color: rgb(232, 232, 232);
    border-radius: 5px;
@@ -306,7 +310,7 @@ li > h4 {
    padding: 2px;
 }
 
-.Modal--TaskInputs > select {
+.Modal--TaskInputs>select {
    font-family: var(--ff-primary);
    background-color: rgb(232, 232, 232);
    border-radius: 5px;
