@@ -134,10 +134,10 @@ function CreateAccountModal() {
       createAccData.state.replace(/ /g, "").length < 1 ||
       createAccData.highest_education.replace(/ /g, "").length < 2 ||
       (createAccData.has_dependents === true && dependents.length === 0) ||
-      (takingLeave === true && createAccData.leave_start_date.length === 0)||
-      (createAccData.planning_to_relocate === true && createAccData.relocate_to_country === true && createAccData.relocate_country.replace(/ /g, "").length < 2) || (createAccData.planning_to_relocate === true && createAccData.relocate_to_country === false && (createAccData.relocate_city.replace(/ /g, "").length < 2 || createAccData.relocate_state.replace(/ /g, "").length < 2))||
-      (createAccData.planning_to_relocate === true && typeof(createAccData.relocate_to_country) !== 'boolean')
-      ) {
+      (takingLeave === true && createAccData.leave_start_date.length === 0) ||
+      (createAccData.planning_to_relocate === true && createAccData.relocate_to_country === true && createAccData.relocate_country.replace(/ /g, "").length < 2) || (createAccData.planning_to_relocate === true && createAccData.relocate_to_country === false && (createAccData.relocate_city.replace(/ /g, "").length < 2 || createAccData.relocate_state.replace(/ /g, "").length < 2)) ||
+      (createAccData.planning_to_relocate === true && typeof (createAccData.relocate_to_country) !== 'boolean')
+    ) {
       setAllFormsFilled(false);
     } else {
       setAllFormsFilled(true);
@@ -249,13 +249,13 @@ function CreateAccountModal() {
     }
   }, [createAccData.planning_to_relocate]);
 
-  useEffect(()=> {
-    if(!createAccData.relocate_to_country){
+  useEffect(() => {
+    if (!createAccData.relocate_to_country) {
       setCreateAccData({
         ...createAccData,
         relocate_country: '',
       })
-    } else if(createAccData.relocate_to_country){
+    } else if (createAccData.relocate_to_country) {
       setCreateAccData({
         ...createAccData,
         relocate_city: '',
@@ -300,7 +300,7 @@ function CreateAccountModal() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormSubmit(true);
-    if(typeof(createAccData.relocate_to_country) === 'string'){
+    if (typeof (createAccData.relocate_to_country) === 'string') {
       createAccData.relocate_to_country = false;
     }
     updateUser();
@@ -577,13 +577,13 @@ function CreateAccountModal() {
                     onChange={() => {
                       !createAccData.taps_complete
                         ? setCreateAccData({
-                            ...createAccData,
-                            taps_complete: true,
-                          })
+                          ...createAccData,
+                          taps_complete: true,
+                        })
                         : setCreateAccData({
-                            ...createAccData,
-                            taps_complete: false,
-                          });
+                          ...createAccData,
+                          taps_complete: false,
+                        });
                     }}
                   />
                 </div>
@@ -764,7 +764,7 @@ function CreateAccountModal() {
             <h3 className="sub-headers">Relocation</h3>
             <div className="relocate-div">
               <div className="relocate-input-and-label">
-              <p>Planning to relocate?</p>
+                <p>Planning to relocate?</p>
                 <input
                   className="createInputBox"
                   type="checkbox"
@@ -773,59 +773,59 @@ function CreateAccountModal() {
                   onChange={() => {
                     !createAccData.planning_to_relocate
                       ? setCreateAccData({
-                          ...createAccData,
-                          planning_to_relocate: true,
-                        })
+                        ...createAccData,
+                        planning_to_relocate: true,
+                      })
                       : setCreateAccData({
-                          ...createAccData,
-                          planning_to_relocate: false,
-                        });
+                        ...createAccData,
+                        planning_to_relocate: false,
+                      });
                   }}
                 />
-                </div>
-                <div className="country-with-as">
-                  {createAccData.planning_to_relocate && createAccData.relocate_to_country === '' && <FaAsterisk className="required-fields" />}
-                {createAccData.planning_to_relocate && 
+              </div>
+              <div className="country-with-as">
+                {createAccData.planning_to_relocate && createAccData.relocate_to_country === '' && <FaAsterisk className="required-fields" />}
+                {createAccData.planning_to_relocate &&
                   <div className="country-question">
                     <p>Are you moving out of country?</p>
                     <div className="country-question-radio">
-                    <input type="radio" name="country_move" onChange={()=>{setCreateAccData({...createAccData, relocate_to_country: true})}}/>
-                    <div className="radio">
-                  <label htmlFor="yes">Yes</label>
-                    <input type="radio" name="country_move" onChange={()=>{setCreateAccData({...createAccData, relocate_to_country: false})}}/>
-                    <label htmlFor="no">No</label>
-                    </div>
+                      <input type="radio" name="country_move" onChange={() => { setCreateAccData({ ...createAccData, relocate_to_country: true }) }} />
+                      <div className="radio">
+                        <label htmlFor="yes">Yes</label>
+                        <input type="radio" name="country_move" onChange={() => { setCreateAccData({ ...createAccData, relocate_to_country: false }) }} />
+                        <label htmlFor="no">No</label>
+                      </div>
                     </div>
                   </div>
                 }</div>
-                {
+              {
                 createAccData.relocate_to_country && createAccData.planning_to_relocate &&
-                  <div className="country-input-with-as">
-                    <div className="country-question-with-as">
+                <div className="country-input-with-as">
+                  <div className="country-question-with-as">
                     {createAccData.relocate_to_country === true && createAccData.relocate_country.length < 2 &&
-                    <FaAsterisk className="required-fields" />}
+                      <FaAsterisk className="required-fields" />}
                     <p>What country are you planning to move to:</p>
-                    </div>
-                    <input type="text" placeholder="Country" onChange={(e)=>{setCreateAccData({...createAccData, relocate_country: e.target.value})}}/>
                   </div>
-                  }
-                  {createAccData.relocate_to_country === false && createAccData.planning_to_relocate &&
-                    <div className="city-state-relocate-div-with-label">
-                      
-                    <p>Where are you planning to move:</p>
-                    <div className="city-state-relocate-div">
+                  <input type="text" placeholder="Country" onChange={(e) => { setCreateAccData({ ...createAccData, relocate_country: e.target.value }) }} />
+                </div>
+              }
+              {createAccData.relocate_to_country === false && createAccData.planning_to_relocate &&
+                <div className="city-state-relocate-div-with-label">
+
+                  <p>Where are you planning to move:</p>
+                  <div className="city-state-relocate-div">
                     <div className="city-relocate-input-div">
-                    {!createAccData.relocate_to_country && createAccData.relocate_city.length < 2 && <FaAsterisk className="required-fields" />}
-                    <p>City:</p>
-                    <input type="text" placeholder="City" value={createAccData.relocate_city} onChange={(e)=>{setCreateAccData({...createAccData, relocate_city: e.target.value})}}/>
+                      {!createAccData.relocate_to_country && createAccData.relocate_city.length < 2 && <FaAsterisk className="required-fields" />}
+                      <p>City:</p>
+                      <input type="text" placeholder="City" value={createAccData.relocate_city} onChange={(e) => { setCreateAccData({ ...createAccData, relocate_city: e.target.value }) }} />
                     </div>
                     <div className="state-relocate-input-div">
-                    {!createAccData.relocate_to_country && createAccData.relocate_state.length < 2 && <FaAsterisk className="required-fields" />}
-                    <p>State:</p>
-                    <input type="text" placeholder="State" value={createAccData.relocate_state} onChange={(e)=>{setCreateAccData({...createAccData, relocate_state: e.target.value})}} />
+                      {!createAccData.relocate_to_country && createAccData.relocate_state.length < 2 && <FaAsterisk className="required-fields" />}
+                      <p>State:</p>
+                      <input type="text" placeholder="State" value={createAccData.relocate_state} onChange={(e) => { setCreateAccData({ ...createAccData, relocate_state: e.target.value }) }} />
                     </div>
                   </div>
-                  </div>}
+                </div>}
             </div>
           </div>
           <div className="wholeEducationDiv">
@@ -859,13 +859,13 @@ function CreateAccountModal() {
                   onChange={() => {
                     createAccData.seeking_further_education
                       ? setCreateAccData({
-                          ...createAccData,
-                          seeking_further_education: false,
-                        })
+                        ...createAccData,
+                        seeking_further_education: false,
+                      })
                       : setCreateAccData({
-                          ...createAccData,
-                          seeking_further_education: true,
-                        });
+                        ...createAccData,
+                        seeking_further_education: true,
+                      });
                   }}
                 />
               </div>

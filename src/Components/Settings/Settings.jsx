@@ -27,12 +27,15 @@ function Settings() {
             <div className='addAdmin--container'>
                 <AddAdmin />
             </div>
+            <div className='adminList--container'>
+                <h1 id='adminList--title'>Current Admins</h1>
             {allUsersData.map((user) => {
                 if(user.admin){
                     console.log(user)
                     return <AdminListItems user={user} key={user.user_id}/>
                 }
             })}
+            </div>
         </div>
         </>
     )

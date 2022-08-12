@@ -2,6 +2,7 @@ import {React, useContext, useState} from 'react'
 import AppContext from '../../Context/AppContext';
 import LoginContext from "../../Context/LoginContext";
 import {BsTrashFill} from 'react-icons/bs';
+import '../../StyleSheets/Settings.css'
 
 export const DeleteAdminButton = ({id}) => {
   const {allUsersData , invokeSetAllUsersData} = useContext(AppContext);
@@ -43,7 +44,7 @@ const removeAdminFromState = (id) => {
   
 }
   return(
-        <span onClick={deleteAdmin}>
+        <span onClick={deleteAdmin} className='deleteAdmin--btn'>
           <BsTrashFill/>
         </span>
 
