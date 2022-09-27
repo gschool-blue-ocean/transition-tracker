@@ -18,8 +18,8 @@ You may also see any lint errors in the console.
 ### **Migration order for seed files**
 
  - ### `psql -f src/Backend/migration.sql [dbname] `
- - ### `psql -f src/Backend/usersSeed.sql [dbname] ` 
  - ### `psql -f src/Backend/seed.sql [dbname] ` 
+ - ### `psql -f src/Backend/usersSeed.sql [dbname] ` 
  - ### `psql -f src/Backend/dependentsSeed.sql [dbname] ` 
  - ### `psql -f src/Backend/tasksSeed.sql [dbname] ` 
  - ### `psql -f src/Backend/commentsSeed.sql [dbname] ` 
