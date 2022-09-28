@@ -1,72 +1,70 @@
-import {React, useContext} from 'react'
-import AppContext from '../../context/AppContext';
+/*
+AdminListItems
+	function that lists all admins that also has a delete functionality
+	1. Uses 2 functions from 2 other components (context folder)
+	2. Uses ‘BsTrashFill’ 
+*/
+import { React, useContext } from "react";
+import AppContext from "../../context/AppContext";
 import LoginContext from "../../context/LoginContext";
-import {BsTrashFill} from 'react-icons/bs';
-import style from '../../styles/Settings.module.css'
+import { BsTrashFill } from "react-icons/bs";
+import style from "../../styles/Settings.module.css";
 
-export const AdminListItems = ({user, key}) => {
-  console.log(user.user_id)
+export const AdminListItems = ({ user, key }) => {
+  console.log(user.user_id);
   return (
-    <div className={style.admin-listItems} id={user.user_id}>
-
-      <span className={style.adminList-name}>
-      {user.first} {user.last} 
+    <div className={style.admin - listItems} id={user.user_id}>
+      <span className={style.adminList - name}>
+        {user.first} {user.last}
       </span>
 
-      <span className={style.adminList-deleteBtn}>
-      <DeleteAdminButton id={user.user_id} key={user.user_id} />
+      <span className={style.adminList - deleteBtn}>
+        <DeleteAdminButton id={user.user_id} key={user.user_id} />
       </span>
-
     </div>
-  )
-}
+  );
+};
 
 export default AdminListItems;
 
-const DeleteAdminButton = ({id}) => {
-    const {allUsersData , invokeSetAllUsersData} = useContext(AppContext);
-    const { setLoading, changeSetLoading } = useContext(LoginContext);
-    
-    let userToDelete = -1;
-  
-  
-    const deleteAdmin = (e) => {
-      console.log(id);
-      fetch(`https://hacking-transition.herokuapp.com/api/delete/user/${id}`, {
-                  method: 'DELETE',
-                  headers: { 'Content-Type': 'application/json' },
-              }).then(fetchAllUserData)
-      
-      //removeAdminFromState(id);
-  }
+const DeleteAdminButton = ({ id }) => {
+  const { allUsersData, invokeSetAllUsersData } = useContext(AppContext);
+  const { setLoading, changeSetLoading } = useContext(LoginContext);
+
+  let userToDelete = -1;
+
+  const deleteAdmin = (e) => {
+    console.log(id);
+    fetch(`https://hacking-transition.herokuapp.com/api/delete/user/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    }).then(fetchAllUserData);
+
+    //removeAdminFromState(id);
+  };
   const fetchAllUserData = () => {
     //changeSetLoading(true);
     fetch("https://hacking-transition.herokuapp.com/api/users")
-       .then((res) => res.json())
-       .then((data) => invokeSetAllUsersData(data))
-       .catch((err) => console.log(err));
+      .then((res) => res.json())
+      .then((data) => invokeSetAllUsersData(data))
+      .catch((err) => console.log(err));
   };
   const removeAdminFromState = (id) => {
-    allUsersData.forEach((user,index) => {
-      if(user.user_id == id){
+    allUsersData.forEach((user, index) => {
+      if (user.user_id == id) {
         userToDelete = index;
-        console.log(userToDelete)
-        let firstHalf = allUsersData.splice(0,userToDelete);
-        let secondHalf = allUsersData.splice(userToDelete,allUsersData.length);
+        console.log(userToDelete);
+        let firstHalf = allUsersData.splice(0, userToDelete);
+        let secondHalf = allUsersData.splice(userToDelete, allUsersData.length);
         console.log(firstHalf);
         console.log(secondHalf);
         invokeSetAllUsersData(firstHalf.concat(secondHalf));
-        
       }
-    })
-    
-    
-  }
-    return(
-          <span onClick={deleteAdmin} className={style.deleteAdmin-btn}>
-            <BsTrashFill/>
-          </span>
-  
-    )
-  }
-  
+    });
+  };
+  return (
+    <span onClick={deleteAdmin} className={style.deleteAdmin - btn}>
+      <BsTrashFill />
+    </span>
+  );
+};
