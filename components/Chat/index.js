@@ -2,7 +2,6 @@ import style from '../../styles/ChatModal.module.css'
 import React, { useState, useContext, useEffect } from 'react'
 import ScrollToBottom from 'react-scroll-to-bottom'
 import LoginContext from '../../context/LoginContext'
-import Picker from 'emoji-picker-react'
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { MdAddReaction } from 'react-icons/md'
 
@@ -137,7 +136,6 @@ function ChatModal({ socket, activeStudent }) {
 
                 <MdAddReaction className={style.emojiBtn} onClick={() => setShowEmojiPicker(!showEmojiPicker)} />
             </div>
-            {showEmojiPicker && <Picker onEmojiClick={onEmojiClick} className={style.emojiPicker} />}
         </div>
 
 
