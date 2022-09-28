@@ -1,0 +1,154 @@
+@import './CustomProps.css';
+
+*{
+  font-family: var(--ff-primary);
+}
+
+.admin-container{
+  width: calc(100vw * 0.987);
+  height: 100vh;
+
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+
+  padding: 1rem;
+
+  border: solid 4px white;
+  
+  background-color: var(--clr-bgsecondary-contrast);
+}
+
+/* wraps div that wraps the form */
+.addAdmin-container{
+  height: 100%;
+  width: 100%;
+
+  display: grid;
+  grid-auto-flow: row;
+  align-items: center;
+  justify-content: center;
+
+}
+
+/* Form container */
+.addAdminForm-container{
+  height: 90%;
+  width: 480px;
+}
+
+
+/* Add addmin form and all form elements*/
+.addAdmin-form{
+  height: 550px;
+  width: 100%;
+  
+  display: grid;
+  grid-auto-flow: row;
+  align-items: center;
+  
+  border-radius: 10px;
+  background-color: var(--clr-accent-white);
+}
+
+#addAdmin-title{
+  align-self: flex-start;
+  margin-top: 1rem;
+  text-align: center;
+  color: var(--clr-accent-white);
+  background-color: var(--clr-bgprimary-dark);
+}
+
+.adminFormBtn-container{
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.5rem;
+}
+
+.adminFormBtn-container > button{
+  width: 30%;
+  height: 40px;
+  font-size: 1.15em;
+  cursor: pointer;
+}
+
+.adminFormInputs-container{
+  width: 100%;
+
+  display: flex;
+  place-content: center;
+  place-items: center;
+
+  border: solid 4px white;
+}
+
+.adminFormInputs-container > label{
+  padding: 1rem;
+  margin: 0 auto auto 0;
+  color: black;
+  font-size: 1.05em;
+}
+
+.adminFormInputs-container > input{
+  padding: 1rem;
+  margin-right: 1rem;
+  height: 30px;
+  width: 55%;
+}
+
+.adminFormInputs-container > input:hover{
+
+}
+
+.adminList-container{
+  width: 480px;
+  height: 550px;
+
+  display: grid;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 4rem;
+
+  background-color: var(--clr-accent-white);
+  border-radius: 10px;
+}
+
+.admin-listItems{
+  width: 480px;
+
+  display: flex;
+
+  /* margin: 1rem 0.5rem 1rem 0.5rem; */
+  padding: 0.255rem;
+}
+
+#adminList-title{
+  width: 100%;
+  margin-top: 1rem;
+  align-self: flex-start;
+  text-align: center;
+  color: var(--clr-accent-white);
+  background-color: var(--clr-bgprimary-dark)
+}
+
+.adminList-name{
+  margin-left: 2rem;
+  margin-right: auto;
+}
+
+.adminList-deleteBtn{
+  margin-right: 2rem;
+  cursor: pointer;
+}
+
+.admin-listItems:hover{
+  color: rgb(255, 0, 0);
+}

@@ -1,0 +1,107 @@
+.portalContainer {
+    height: 100vh;
+    background-color: #1115;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addStudentModal {
+    max-height: 95%;
+    padding: 1vw 2.5vw;
+    background-color: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(5px);
+    border-radius: 5%;
+    overflow: auto;
+
+}
+
+.addStudentForm,
+.editStudentFormInputs {
+    display: grid;
+    gap: 1.5vw;
+
+}
+
+.editStudentFormInputs {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.checkboxLabel:hover {
+    cursor: pointer;
+}
+
+.newStudentFormTitle,
+.labelGenerateEmailCheckBox {
+    justify-self: center;
+}
+
+.editStudentFormTitle {
+    text-align: center;
+    margin-bottom: 1vw;
+}
+
+.labelGenerateEmailCheckBox {
+    display: flex;
+    gap: 1vw;
+}
+
+.addStudentFormButton,
+.addStudentFormInput {
+    outline: none;
+    padding: .5vw;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 5px 5px 5px #333;
+    width: 100%;
+}
+
+/* .addStudentFormInput:hover, */
+.addStudentFormInput:focus {
+    /* background-color: #9995; */
+    transform: scale(1.05);
+}
+
+.addStudentFormButton {
+    opacity: .8;
+}
+
+.labelGenerateEmailCheckBox:hover {
+    cursor: pointer;
+}
+
+.addStudentFormButton:hover,
+#generateEmail:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+.myInterestsDiv {
+    display: grid;
+}
+
+.editInterestsTextarea {
+    font-family: inherit;
+    outline: none;
+    border: none;
+    min-height: 7vw;
+    /* border-radius: 5px; */
+    padding: .25vw;
+
+}
+
+.addStudentFormButton.createStudent {
+    /* margin-top: 1vw; */
+    background-color: lightskyblue;
+}
+
+.addStudentFormButton.cancel {
+    background-color: #333;
+    color: lightskyblue
+}

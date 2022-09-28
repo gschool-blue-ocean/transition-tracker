@@ -1,0 +1,330 @@
+/* --clr-primary-accent for links and btns bg */
+/* --clr-accent-white text color for btns */
+/* --clr-bgsecondary-contrast for cohort cards */
+
+
+@import './CustomProps.css';
+
+/* * {
+  overflow: hidden
+} */
+
+/* h1 {
+  overflow: visible
+} */
+
+.x {
+  background: none;
+  border-color: black;
+  border-radius: 12px;
+  width: 60px;
+
+  font-size: 4ch;
+}
+
+.nameInRow {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 5%;
+  gap: 5px;
+  grid-template-rows: 1;
+  border: 3ch;
+  margin-bottom: 2px;
+}
+
+.name-div {
+  grid-column: 2/6;
+  grid-row: 1/2;
+  align-self: center;
+  justify-self: start;
+}
+
+
+.name-div:hover {
+  cursor: pointer;
+}
+
+
+
+#cohort-nav {
+  display: grid;
+  align-items: center;
+  color: var(--clr-bgsecondary-contrast);
+  text-shadow: 2px 2px 2px #0000004c;
+  padding: 1em;
+}
+
+.list {
+  display: grid;
+  gap: 1rem;
+
+  height: 100%;
+  align-items: center;
+  justify-items: center;
+  font-size: 2.5ch;
+  background-color: var(--clr-bgsecondary-contrast);
+  box-shadow: 5px 5px 10px #888888;
+  border-radius: 10px;
+}
+
+.cohort-list-title {
+  align-self: center;
+  justify-self: center;
+  height: 100%;
+  height: fit-content;
+  text-align: center;
+  vertical-align: center;
+  width: 100%;
+  background-color: white;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  font-size: 2.5ch;
+}
+
+#all-cohorts-btn {
+  background: none;
+  border: none;
+  font-family: var(--ff-primary);
+  color: white;
+  text-shadow: 2px 2px 6px #000000;
+  font-size: 1.7ch;
+}
+
+#add-cohort-btn {
+  margin-bottom: 10%;
+  border-radius: 50px;
+  width: 40px;
+  border: none;
+  background-color: black;
+  color: white;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.432)
+}
+
+.listOfCohorts {
+  width: 70%;
+  text-align: center;
+}
+
+.listOfCohorts>p {
+  /* color: var(--clr-primary-accent); */
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+  text-decoration: none;
+}
+
+
+.activeCohortTab {
+  background-color: #5555;
+  border-radius: 9999px;
+}
+
+.listOfCohorts:hover,
+#all-cohorts-btn:hover,
+#add-cohort-btn:hover {
+  cursor: pointer;
+  transform: scale(1.3);
+}
+
+#cohort-container {
+  font-family: var(--ff-primary);
+  max-width: calc(100vw - 2rem);
+  min-width: 300px;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.mainContainer {
+  border-radius: 10px;
+  background-color: var(--clr-accent-white);
+}
+
+
+#cohort-nav>button {
+  color: var(--clr-primary-accent);
+}
+
+#cohort-nav>button:nth-child(0) {
+  width: 4rem;
+}
+
+#cohort-view {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  min-width: 350px;
+  gap: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline mandatory;
+  scroll-behavior: smooth;
+  scroll-padding: 1em;
+
+}
+
+#cohort-view>* {
+  scroll-snap-align: start;
+}
+
+#cohorts-list {
+  display: grid;
+  height: 85vh;
+  /* width: 95vw; */
+}
+
+.test-cohort {
+  display: flex;
+  flex-direction: column;
+
+  overflow: auto;
+  min-width: 300px;
+  max-height: 95%;
+  height: fit-content;
+  margin: 1rem;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 10px;
+  background-color: var(--clr-bgsecondary-contrast);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 5px 5px 10px #888888;
+}
+
+.cardHeader {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  grid-auto-rows: minmax(50px, auto);
+  min-height: 50px;
+}
+
+.cardName {
+  grid-column: 2 / 5;
+  grid-row: 1 / 2;
+  font-size: 3ch;
+  font-weight: 900;
+  color: white;
+  text-shadow: 2px 2px 6px #000000;
+}
+
+.cardSettingsIcon {
+  grid-column: 5 / 6;
+  grid-row: 1 / 2;
+  font-size: 2.5ch;
+  text-shadow: 2px 2px 2px #000000;
+  padding-top: 8%;
+  padding-left: 40%;
+
+}
+
+#settings {
+  position: fixed;
+}
+
+.cohort-dates {
+  font-size: 1.8ch;
+}
+
+.listOfNames {
+  height: fit-content;
+  overflow: scroll;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  margin-top: 3%;
+  padding-top: 5px;
+
+  font-size: 17px
+}
+
+#numberOfStudents {
+  padding-top: 1%;
+  font-size: 1.5ch;
+  min-height: 20px;
+  background-color: black;
+  color: white;
+}
+
+#legend {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  /* margin: 1rem; */
+  min-height: 20px;
+  min-width: 100px;
+  text-align: center;
+  align-content: center;
+  font-size: 1.5ch;
+}
+
+#ETS {
+  background-color: lawngreen;
+  grid-column: 2 / 3;
+  border-radius: 10px;
+  min-width: 50px;
+}
+
+#thirty {
+  background-color: orangered;
+  grid-column: 3 / 4;
+  border-radius: 10px;
+  min-width: 70px;
+}
+
+#sixty {
+  background-color: orange;
+  grid-column: 4 / 5;
+  border-radius: 10px;
+  min-width: 70px;
+}
+
+#ninety {
+  background-color: yellow;
+  grid-column: 5 / 6;
+  border-radius: 10px;
+  min-width: 70px;
+}
+
+#onetwenty {
+  background-color: aqua;
+  grid-column: 6 / 7;
+  border-radius: 10px;
+  min-width: 70px;
+  border-color: black;
+  border: 3ch;
+}
+
+/* @media (orientation: portrait) */
+@media (max-width: 600px) {
+  .logoutDivNav {
+    position: relative;
+    right: 10vw;
+  }
+
+  #cohort-container {
+    margin-left: 2rem;
+    display: flex !important;
+    flex-direction: column;
+
+    justify-self: center;
+    justify-content: center;
+    justify-items: center;
+  }
+
+  .headerTitle {
+    position: relative;
+    left: 1rem;
+  }
+
+  #cohorts-list {
+    display: grid;
+    /* height: 85vh; */
+    /* width: 95vw; */
+  }
+
+  .test--grid {
+    grid-template-columns: 30% 70% !important;
+  }
+
+  .sideNav--Wrapper {
+    padding: 0;
+  }
+}

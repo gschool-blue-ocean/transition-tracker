@@ -24,3 +24,42 @@ a {
     background: black;
   }
 }
+*,
+*::before,
+*::after {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+@import "./CustomProps.css";
+
+body {
+   /* height: 100vh; */
+   background-color: var(--clr-bgprimary-dark);
+}
+
+*::-webkit-scrollbar {
+   width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+   background: none;
+}
+
+*::-webkit-scrollbar-thumb {
+   background: var(--clr-primary-accent);
+   border-radius: 10px;
+}
+
+*::-webkit-scrollbar-track-piece:end {
+   background: transparent;
+   margin-bottom: 20px;
+}
+
+*::-webkit-scrollbar-track-piece:start {
+   background: transparent;
+   margin-top: 20px;
+}
+

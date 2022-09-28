@@ -1,0 +1,39 @@
+@import "./CustomProps.css";
+
+.sideNav-Wrapper {
+   display: grid;
+   background-color: var(--clr-secondary-accent);
+   border-radius: 10px;
+   font-family: var(--ff-primary);
+   padding: calc(var(--spacer-container) * 1);
+   padding-top: 0;
+   line-height: var(--spacer-line);
+   color: var(--clr-primary-accent);
+   max-height: 85vh;
+   overflow: auto;
+}
+
+.sideNav {
+   border-radius: 10px;
+   width: 100%;
+   text-align: center;
+}
+
+.sideNav-StudentBtn {
+   cursor: pointer;
+   background: none;
+   border: none;
+   font-family: var(--ff-primary);
+   border-bottom: 1px solid #2225;
+}
+
+.sideNav-StudentBtn:hover:not(.activeStudent) {
+   color: white;
+}
+
+.activeStudent {
+   background-color: var(--clr-bgprimary-dark);
+   color: white;
+   border-radius: 5px;
+   padding: 5px;
+}

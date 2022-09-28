@@ -1,0 +1,98 @@
+.HeaderContainer {
+    background-color: #012361;
+    color: white;
+    max-width: 100vw;
+    min-width: 615px;
+
+}
+
+.HeaderLogo {
+    position: absolute;
+    top: .25rem;
+    left: .25rem;
+    height: 2.5rem;
+}
+
+.headerTitleNavContainer {
+    /* width: 100vw; */
+    display: grid;
+    grid-template-columns: 15% 70% 15%;
+    justify-content: center;
+    justify-items: center;
+    padding-bottom: .5rem;
+    gap: .5rem;
+    grid-template-areas:
+        ". title logout"
+        ". navbar logout";
+}
+
+.headerTitle {
+    grid-area: title;
+}
+
+.logoutDivNav {
+    grid-area: logout;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.logoutDivNav:hover {
+    transform: scale(1.1);
+}
+
+.navbarContainer {
+    grid-area: navbar;
+}
+
+.navbarUL {
+    display: flex;
+    list-style: none;
+    gap: 3rem;
+    font-size: 1.5rem;
+}
+
+.navLink,
+.logoutBtn,
+#loginInfoDisplay {
+    text-decoration: none;
+    color: inherit;
+    opacity: .5;
+}
+
+.navLink {
+    padding: .5rem
+}
+
+.navLink:hover,
+.logoutBtn:hover {
+    opacity: 1;
+}
+
+#logoutBtn:hover {
+    color: red;
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.logoutBtn {
+    height: fit-content;
+}
+
+#loginInfoDisplay {
+    font-size: 1rem;
+    text-align: center;
+    height: fit-content;
+}
+
+#logoutBtn:hover+#loginInfoDisplay {
+    opacity: 1;
+
+}
+
+.navLink.active {
+    opacity: 1;
+    background-color: #7775;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+}

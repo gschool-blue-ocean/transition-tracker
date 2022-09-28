@@ -1,0 +1,25 @@
+.modalContainer.loadingContainer {
+    /* position: relative; */
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
+
+}
+
+.loadingDiv {
+    /* background-color: #3335;
+    border-radius: 50%;
+    padding: 2rem; */
+}
+
+.notFoundContainer {
+    display: grid;
+    height: 100vh;
+    justify-items: center;
+    background-color: #011845;
+}
+
+.notFoundTitle {
+    align-self: center;
+    color: #eee;
+    font-size: 3rem;
+}

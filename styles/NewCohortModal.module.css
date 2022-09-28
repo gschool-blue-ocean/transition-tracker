@@ -1,0 +1,43 @@
+.createCohortHeader{
+    font-size: 3ch;
+    color: white;
+    text-shadow: 2px 2px 6px #000000;
+    padding-top: 10px;
+}
+
+#cohort-name-field{
+    padding-right: 60px;
+}
+
+.cohort-card{
+    display: grid;
+    grid-template-columns: 2;
+    grid-template-rows: 10;
+    align-self: auto;
+    background-color:var(--clr-bgsecondary-contrast);
+    height: 300px;
+    border-radius: 25px;
+    border-color: black;
+    border-width: 5px;
+    border-style: solid;
+    font-size: larger;
+    min-width: 600px;
+}
+
+.create-cohort-btn{
+    width: 90px;
+    align-self: center ;
+    justify-self: center;
+    box-shadow: 2px 2px 6px #000000;;
+}
+
+.cohort-input{
+    background-color: white;
+    align-self: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 6px #000000;
+}
