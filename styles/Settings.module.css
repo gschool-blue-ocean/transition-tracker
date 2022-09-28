@@ -1,8 +1,6 @@
 @import './CustomProps.css';
 
-*{
-  font-family: var(--ff-primary);
-}
+
 
 .admin-container{
   width: calc(100vw * 0.987);

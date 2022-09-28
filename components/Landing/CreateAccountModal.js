@@ -7,7 +7,7 @@ import { BsEyeFill } from "react-icons/bs";
 import { MdOutlineAddCircle } from "react-icons/md";
 import { AiFillMinusCircle, AiOutlineCheck } from "react-icons/ai";
 import { FaAsterisk } from "react-icons/fa";
-import style from "../../style/CreateAccount.module.css";
+import style from "../../styles/CreateAccount.module.css";
 
 //=============================imports================================
 

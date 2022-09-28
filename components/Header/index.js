@@ -1,5 +1,5 @@
-import Navbar from "./Navbar";
-import Logo from "./galvanizeLogo.svg";
+
+import Logo from "../../public/galvanizeLogo.svg";
 import style from "../../styles/Header.module.css";
 import { useContext } from "react";
 import LoginContext from "../../context/LoginContext";

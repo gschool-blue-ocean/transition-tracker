@@ -4,7 +4,7 @@ import { CgEnter } from 'react-icons/cg'
 import AppContext from '../../context/AppContext';
 import LoginContext from '../../context/LoginContext';
 import { useNavigate } from 'react-router-dom'
-import style from '../../styles/LoginStyles.css'
+import style from '../../styles/LoginStyles.module.css'
 
 function LoginModal({ invokeSetLogin }) {
     let navigate = useNavigate()

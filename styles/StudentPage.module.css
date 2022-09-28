@@ -132,11 +132,7 @@
    grid-area: StuInfo;
 }
 
-.SDash--Info-card>ul,
-li,
-span {
-   list-style: none;
-}
+
 
 .infoCard-container {
    width: 100%;
@@ -148,10 +144,7 @@ span {
    border-radius: 10px;
 }
 
-ul>h4,
-li>h4 {
-   margin-top: 1em;
-}
+
 
 .title {
    margin-left: 0.8em;
