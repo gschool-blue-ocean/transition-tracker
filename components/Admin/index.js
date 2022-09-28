@@ -8,6 +8,9 @@ import Modal from "react-modal";
 import StudentPage from "../Student";
 import SPETStag from "../Student/SP-ETStag.js";
 
+// This is an entire page
+// Make an admin state and use nexxt router to push to a certain page depending on login status
+
 function AdminHomePage({ socket, isOnArchivePage }) {
   const { allUsersData, allCohortsData } = useContext(AppContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -139,9 +142,9 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     setShowClickedCohort(false);
   };
   return (
-    <div id={style.cohort - container}>
-      <div id={style.cohort - nav} className={style.mainContainer}>
-        <div className={style.list}>
+    <div id={style.cohort - container}> {/* parent div for the entire body of the page */}
+      <div id={style.cohort - nav} className={style.mainContainer}> {/* sidebar on the left of the cohort list, and main container */}
+        <div className={style.list}> {/* actual sidebar contents on the left ie. Cohorts -> ALL -> MCSP-16 */}
           <div className={style.cohort - list - title}>Cohorts</div>
 
           <div
@@ -150,7 +153,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
             className={`${style.listOfCohorts} ${style.activeCohortTab}`}
           >
             <button id={style.all - cohorts - btn}>All</button>
-          </div>
+          </div>   {/* Show ALL cohorts button*/}
 
           {cohortsToMap.map((cohort) => {
             return (
@@ -169,7 +172,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
           >
             +
           </button>
-        </div>
+        </div> {/* END actual sidebar contents on the left ie. Cohorts -> ALL -> MCSP-16 */}
       </div>
       <div id={style.cohorts - list} className={style.mainContainer}>
         {showClickedCohort ? (
