@@ -1,10 +1,7 @@
-# Getting Started with Create React App
+### ERD 
+![image](https://user-images.githubusercontent.com/101295974/192801532-8bd67c0f-ec9f-4e3c-ad62-6111194e9d58.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
-
-In the project directory, you can run:
 
 ### `npm i`
 Installs all npm packages
