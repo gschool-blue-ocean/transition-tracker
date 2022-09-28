@@ -299,7 +299,7 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
             </div>
 
         </div >,
-        document.getElementById('portal')
+    typeof document !== "undefined" && document.getElementById("portal")
     )
 }
 

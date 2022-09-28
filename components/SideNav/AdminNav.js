@@ -37,7 +37,7 @@ export default function AdminNav({ viewClickedCohort, setActiveStudent, activeSt
             //index = cohortStudents.indexof(activeStudent);
          }
          setActiveStudent(cohortStudents[index])
-         document.getElementById(cohortStudents[index].user_id).classList.add('activeStudent')
+    typeof document !== "undefined" && document.getElementById(cohortStudents[index].user_id).classList.add('activeStudent')
 
       }
    }, [cohortStudents])
@@ -45,7 +45,10 @@ export default function AdminNav({ viewClickedCohort, setActiveStudent, activeSt
 
    const handleClick = (e) => {
 
-      document.querySelectorAll('.sideNav--StudentBtn').forEach(elem => elem.classList.remove('activeStudent'))
+    const studentBtn =
+    typeof document !== "undefined" && document.querySelectorAll('.sideNav-StudentBtn')
+
+    studentBtn.forEach(elem => elem.classList.remove('activeStudent'))
 
       setActiveStudent(cohortStudents[e.currentTarget.getAttribute('data-index')]);
       e.target.classList.toggle("activeStudent");
@@ -223,7 +226,7 @@ const AddStudentModal = ({ setShowAddStudentModal, viewClickedCohort, getStudent
                 </form>
             </div>
         </div >,
-        document.getElementById('portal')
+    typeof document !== "undefined" && document.getElementById("portal")
     )
     // return (<div>test portal</div>)
 }

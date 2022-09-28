@@ -35,7 +35,7 @@ export default function StudentPage({
    const [showEditStudentModal, setShowEditStudentModal] = useState(false);
 
    useEffect(() => {
-      document.querySelectorAll(".listOfCohorts").forEach((elem) => {
+    typeof document !== "undefined" && document.querySelectorAll(".listOfCohorts").forEach((elem) => {
          elem.classList.remove("activeCohortTab");
 
          if (viewClickedCohort.cohort_id === +elem.id) {

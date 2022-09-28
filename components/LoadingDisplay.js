@@ -21,7 +21,7 @@ export const Loading = () => {
             </div>
 
         </div>,
-        document.getElementById('portal')
+    typeof document !== "undefined" && document.getElementById("portal")
     )
 }
 

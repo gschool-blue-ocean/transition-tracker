@@ -11,7 +11,10 @@ function Welcome({ socket, isOnArchivePage }) {
     useEffect(() => {
         if (!userData.admin) {
             setActiveStudent(userData)
-            document.querySelector('.test--grid').classList.add('studentview')
+            const testGrid =
+    typeof document !== "undefined" && document.querySelector('.test-grid')
+            
+    testGrid.classList.add('studentview')
         }
     }, [userData])
 

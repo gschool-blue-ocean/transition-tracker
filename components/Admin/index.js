@@ -40,7 +40,8 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     }, [allUsersData, window.location.pathname])
 
     useEffect(() => {
-        handleActiveCohortTab(document.getElementById('all-cohort-btn-div'))
+        const cohortBtn = typeof document !== 'undefined' && document.getElementById('all-cohort-btn-div')
+        handleActiveCohortTab( cohortBtn)
         setShowClickedCohort(false)
     }, [window.location.pathname])
 
@@ -85,8 +86,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
         setNewCohortModalIsOpen(false)
     }
     const horizontalScroll = () => {
-        const scrollContainer = document.querySelector('#cohort-view')
-
+        const scrollContainer = typeof document !== 'undefined' && document.querySelector('#cohort-view')
         // scrollContainer.addEventListener(("wheel"), (e) => {
         //     // e.preventDefault();
         //     scrollContainer.scrollLeft += e.deltaY
@@ -114,7 +114,9 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     //==========================================================
 
     const handleActiveCohortTab = (element) => {
-        document.querySelectorAll('.listOfCohorts').forEach(elem => elem.classList.remove('activeCohortTab'))
+        const cohortList = typeof document !== 'undefined' && document.querySelector('.listOfCohorts')
+
+        cohortList.forEach(elem => elem.classList.remove('activeCohortTab'))
         element.classList.add('activeCohortTab')
     }
 
