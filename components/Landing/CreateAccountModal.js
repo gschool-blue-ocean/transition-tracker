@@ -10,6 +10,7 @@ import { FaAsterisk } from "react-icons/fa";
 import style from "../../styles/CreateAccount.module.css";
 
 //=============================imports================================
+//This has the document.getElement at the very bottom- may be negligible
 
 function CreateAccountModal() {
   //===============================states======================== I do think a lot of these states could be managed in Redux
@@ -374,6 +375,7 @@ function CreateAccountModal() {
   };
 
   //========================== what's being rendered ================================
+  //This is the entire questionnaire and how they store the answers to the questionnaire to the user
 
   return ReactDOM.createPortal(
     <div className={style.createModalContainer}>

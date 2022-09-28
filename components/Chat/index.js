@@ -14,13 +14,6 @@ function ChatModal({ socket, activeStudent }) {
     content: "",
   });
 
-  //   const [chosenEmoji, setChosenEmoji] = useState(null);
-
-  //   const onEmojiClick = (event, emojiObject) => {
-  //     setChosenEmoji(emojiObject);
-  //     setInputValue({ content: inputValue.content + emojiObject.emoji });
-  //   };
-
   const [allMsgs, setAllMsgs] = useState([]);
   const [studentId, setStudentId] = useState(null);
 
