@@ -1,6 +1,7 @@
 import react, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import style from '../../styles/StudentPage.module.css'
+import server from "../../config";
 const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStudent, setShowEditStudentModal }) => {
 
     const [formData, setFormData] = useState({
@@ -52,7 +53,7 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        fetch(`https://hacking-transition.herokuapp.com/api/admin/edit/student/${activeStudent.user_id}`, {
+        fetch(`${server}/api/admin/edit/student/${activeStudent.user_id}`, {
             method: 'PATCH',
             body: JSON.stringify(formData),
             headers: { 'Content-Type': 'application/json' }

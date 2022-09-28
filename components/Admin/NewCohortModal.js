@@ -1,5 +1,7 @@
 import {useState, React } from 'react'
 import style from '../../styles/NewCohortModal.module.css';
+import server from "../../config";
+
 //This modal will pop up when you press the bottom + button below the Cohorts div on the main page, it should be all the way at the bottom of the list of cohorts. This will allow you to create a new cohort and set the cohort name, start date, and end date.
 function NewCohortModal() {
   const [cohortData] = useState({
@@ -21,7 +23,7 @@ function NewCohortModal() {
     cohortData.start_date = newStartDate
     cohortData.end_date = newEndDate
     console.log(JSON.stringify(cohortData))
-    fetch(`http://hacking-transition.herokuapp.com/api/create/cohort`, {
+    fetch(`${server}/api/create/cohort`, {
       method: 'POST',
       headers: { "content-type": "application/json" },
       body: JSON.stringify(cohortData)

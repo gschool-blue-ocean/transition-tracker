@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import AppContext from "../../context/AppContext";
 import LoginContext from "../../context/LoginContext";
 import { Loading } from "../LoadingDisplay";
+import server from "../../config";
 import style from '../../styles/SideNav.module.css'
 
 export default function AdminNav({ viewClickedCohort, setActiveStudent, activeStudent }) {
@@ -55,7 +56,7 @@ export default function AdminNav({ viewClickedCohort, setActiveStudent, activeSt
    };
 
    const getStudentList = (id) => {
-      fetch(`https://hacking-transition.herokuapp.com/api/users/cohort/${id}`)
+      fetch(`${server}/api/users/cohort/${id}`)
          .then((res) => res.json())
          .then((list) => setCohortStudents(list))
    };
@@ -143,7 +144,7 @@ const AddStudentModal = ({ setShowAddStudentModal, viewClickedCohort, getStudent
             new_user: true
         }
 
-        fetch("https://hacking-transition.herokuapp.com/api/create/user", {
+        fetch(`${server}/api/create/user`, {
             method: 'POST',
             headers: { "content-type": "application/json" },
             body: JSON.stringify(newUserData)
@@ -157,7 +158,7 @@ const AddStudentModal = ({ setShowAddStudentModal, viewClickedCohort, getStudent
         if (formData.generateEmail) {
             let emailSubject = `Welcome to Galvanize ${newUserData.first}!`
 
-            let emailBody = `Hello ${newUserData.first}, %0D%0A %0D%0A You have been added to Cohort ${newUserData.cohort_name}! To log in for the first time, please navigate to https://hacking-transition.herokuapp.com/ %0D%0A %0D%0A Your temporary Username: ${newUserData.first + newUserData.last} (your first and last name without spaces) %0D%0A %0D%0A Your temporary Password: ${newUserData.cohort_name} (your cohort name)  %0D%0A %0D%0A %0D%0A Sincerely, %0D%0A %0D%0A Galvanize Admissions`
+            let emailBody = `Hello ${newUserData.first}, %0D%0A %0D%0A You have been added to Cohort ${newUserData.cohort_name}! To log in for the first time, please navigate to ${server}/ %0D%0A %0D%0A Your temporary Username: ${newUserData.first + newUserData.last} (your first and last name without spaces) %0D%0A %0D%0A Your temporary Password: ${newUserData.cohort_name} (your cohort name)  %0D%0A %0D%0A %0D%0A Sincerely, %0D%0A %0D%0A Galvanize Admissions`
             window.location.href = `mailto:${formData.email}?subject=${emailSubject}&body=${emailBody}`
             // window.open(`mailto:${formData.email}?subject=${emailSubject}&body=${emailBody}`)
         }

@@ -4,6 +4,7 @@ import ScrollToBottom from "react-scroll-to-bottom";
 import LoginContext from "../../context/LoginContext";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { MdAddReaction } from "react-icons/md";
+import server from "../../config";
 
 function ChatModal({ socket, activeStudent }) {
   const { userData } = useContext(LoginContext);
@@ -36,7 +37,7 @@ function ChatModal({ socket, activeStudent }) {
   useEffect(() => {
     if (studentId) {
       fetch(
-        `https://hacking-transition.herokuapp.com/api/comments/student/${studentId}`
+        `${server}/api/comments/student/${studentId}`
       )
         .then((res) => res.json())
         .then((data) => setAllMsgs(data))

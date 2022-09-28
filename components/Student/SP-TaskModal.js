@@ -1,10 +1,11 @@
 import style from "../../styles/StudentPage.module.css";
+import server from "../../config";
 import React from "react";
 
 // Pull  Selected Task Info from DB
 export default function SPTaskModal({ task, closeModal }) {
    const deleteTask = (taskID) => {
-      fetch(`https://hacking-transition.herokuapp.com/api/delete/task/${taskID}`, {
+      fetch(`${server}/api/delete/task/${taskID}`, {
          method: "DELETE",
          headers: { "Content-Type": "application/json" },
       });

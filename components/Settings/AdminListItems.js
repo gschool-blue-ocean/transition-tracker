@@ -2,6 +2,7 @@ import {React, useContext} from 'react'
 import AppContext from '../../context/AppContext';
 import LoginContext from "../../context/LoginContext";
 import {BsTrashFill} from 'react-icons/bs';
+import server from "../../config";
 import style from '../../styles/Settings.module.css'
 
 export const AdminListItems = ({user, key}) => {
@@ -32,7 +33,7 @@ const DeleteAdminButton = ({id}) => {
   
     const deleteAdmin = (e) => {
       console.log(id);
-      fetch(`https://hacking-transition.herokuapp.com/api/delete/user/${id}`, {
+      fetch(`${server}/api/delete/user/${id}`, {
                   method: 'DELETE',
                   headers: { 'Content-Type': 'application/json' },
               }).then(fetchAllUserData)
@@ -41,7 +42,7 @@ const DeleteAdminButton = ({id}) => {
   }
   const fetchAllUserData = () => {
     //changeSetLoading(true);
-    fetch("https://hacking-transition.herokuapp.com/api/users")
+    fetch(`${server}/api/users`)
        .then((res) => res.json())
        .then((data) => invokeSetAllUsersData(data))
        .catch((err) => console.log(err));

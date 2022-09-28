@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import style from "../../styles/StudentPage.module.css";
+import server from "../../config";
 
 export default function SPCreateTask({ student, closeModal, cancelCreate }) {
    const { register, handleSubmit } = useForm();
@@ -20,7 +21,7 @@ export default function SPCreateTask({ student, closeModal, cancelCreate }) {
          completed: JSON.parse(data.completed),
       };
 
-      fetch(`https://hacking-transition.herokuapp.com/api/create/task`, {
+      fetch(`${server}/api/create/task`, {
          method: "POST",
          headers: { "Content-Type": "application/json" },
          body: JSON.stringify(newTask),

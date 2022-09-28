@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { CgEnter } from "react-icons/cg";
 import AppContext from "../../context/AppContext";
 import LoginContext from "../../context/LoginContext";
+import server from "../../config";
 import { useNavigate } from "react-router-dom";
 import style from "../../styles/LoginStyles.module.css";
 
@@ -72,7 +73,7 @@ function LoginModal({ invokeSetLogin }) {
       return userError.classList.add("show");
     }
 
-    fetch("https://hacking-transition.herokuapp.com/api/login", {
+    fetch(`${server}/api/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(inputData),
@@ -124,7 +125,7 @@ function LoginModal({ invokeSetLogin }) {
   //             password: elem.password
   //         }
 
-  //         fetch('https://hacking-transition.herokuapp.com/api/hash', {
+  //         fetch(`${server}/api/hash`, {
   //             method: 'PATCH',
   //             headers: { 'Content-Type': 'application/json' },
   //             body: JSON.stringify(data)

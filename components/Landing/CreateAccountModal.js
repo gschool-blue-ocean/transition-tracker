@@ -8,6 +8,7 @@ import { MdOutlineAddCircle } from "react-icons/md";
 import { AiFillMinusCircle, AiOutlineCheck } from "react-icons/ai";
 import { FaAsterisk } from "react-icons/fa";
 import style from "../../styles/CreateAccount.module.css";
+import server from "../../config";
 
 //=============================imports================================
 
@@ -273,7 +274,7 @@ function CreateAccountModal() {
 
   const updateUser = () => {
     fetch(
-      `https://hacking-transition.herokuapp.com/api/update/user/${userData.user_id}`,
+      `${server}/api/update/user/${userData.user_id}`,
       {
         method: "PATCH",
         headers: {
@@ -293,7 +294,7 @@ function CreateAccountModal() {
       dependents.forEach((dependent) => {
         dependent.sponsor_id = userData.user_id;
 
-        fetch(`https://hacking-transition.herokuapp.com/api/create/dependent`, {
+        fetch(`${server}/api/create/dependent`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

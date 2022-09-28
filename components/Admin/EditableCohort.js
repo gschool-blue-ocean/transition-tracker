@@ -1,6 +1,7 @@
 import { useContext, useState, React } from "react";
 import AppContext from "../../context/AppContext";
 import { FiEdit } from "react-icons/fi";
+import server from "../../config";
 
 export default function EditableCohort({ name, start, end, id }) {
   const { allCohortsData } = useContext(AppContext); // imports allCohortsData from the AppContext

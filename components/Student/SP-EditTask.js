@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import server from "../../config";
 import style from "../../styles/StudentPage.module.css";
 
 export default function SPEditTask({ task, cancelEdit, closeModal }) {
@@ -15,7 +16,7 @@ export default function SPEditTask({ task, cancelEdit, closeModal }) {
          remarks: null, // Remarks have been deleted
       };
 
-      fetch(`https://hacking-transition.herokuapp.com/api/update/task/${taskID}`, {
+      fetch(`${server}/api/update/task/${taskID}`, {
          method: "PATCH",
          headers: { "Content-Type": "application/json" },
          body: JSON.stringify(editData),

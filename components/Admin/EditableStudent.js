@@ -2,6 +2,7 @@ import { useState, useContext, React } from 'react'
 import { FiDelete } from 'react-icons/fi'
 import AppContext from '../../context/AppContext'
 import style from '../../styles/EditCohortPage.module.css'
+import server from "../../config";
 //NOTES: 
 /* When you click on the gear icon on a cohort on the Home page, this is the individual divs for each students editable values, and will allow you to edit, delete, and save students. The only editable values here are names. */
 export default function EditableStudent({ firstName, lastName, id, cohort }) {

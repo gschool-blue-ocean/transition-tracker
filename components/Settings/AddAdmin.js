@@ -2,6 +2,7 @@ import {React, useState, useContext} from 'react';
 import LoginContext from "../../context/LoginContext";
 import AppContext from "../../context/AppContext";
 import style from '../../styles/Settings.module.css'
+import server from "../../config";
 
 
 export const AddAdmin = () => {
@@ -17,7 +18,7 @@ export const AddAdmin = () => {
   //here is the request to create and admin ======================================================
   const createAdminRequest = () => {
     fetch(
-      `http://hacking-transition.herokuapp.com/api/create/admin`,
+      `${server}/api/create/admin`,
       {
         method: "POST",
         headers: {
@@ -31,7 +32,7 @@ export const AddAdmin = () => {
 
   const fetchAllUserData = () => {
       //changeSetLoading(true);
-      fetch("https://hacking-transition.herokuapp.com/api/users")
+      fetch(`https://hacking-transition.herokuapp.com/api/users`)
          .then((res) => res.json())
          .then((data) => invokeSetAllUsersData(data))
          .catch((err) => console.log(err));
