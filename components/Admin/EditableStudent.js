@@ -2,16 +2,20 @@ import { useState, useContext, React } from 'react'
 import { FiDelete } from 'react-icons/fi'
 import AppContext from '../../context/AppContext'
 import style from '../../styles/EditCohortPage.module.css'
-
+//NOTES: 
+/* When you click on the gear icon on a cohort on the Home page, this is the individual divs for each students editable values, and will allow you to edit, delete, and save students. The only editable values here are names. */
 export default function EditableStudent({ firstName, lastName, id, cohort }) {
   const { allUsersData } = useContext(AppContext)
   const [ userData ] = useState(allUsersData.find(x => x.user_id === id))
+  //user data is brought down through useContext with allUsersData
   const [ editing, setEditing ] = useState(false)
   const [ deleted, setDeleted ] = useState(false)
   const [ archived, setArchived ] = useState(false)
   const [ value, setValue ] = useState(`${firstName} ${lastName}`)
   const toggleEditing = () => setEditing(!editing)
+  //helper function that sets the 'editing' state
   const checkChange = e => setValue(e.currentTarget.value)
+  //===================== checkKey function will allow the edit function to be submitted on enter key down. =========================
   const checkKey = e => {
     if (e.keyCode === 13) {
       if (e.currentTarget.value.length) {
@@ -28,7 +32,7 @@ export default function EditableStudent({ firstName, lastName, id, cohort }) {
       }
     }
   }
-
+/// ========================  Delete student requests ============================
   const deleteStudent = () => {
     setDeleted(true)
     fetch(`http://hacking-transition.herokuapp.com/api/delete/allcomments/${id}`, {
@@ -48,7 +52,7 @@ export default function EditableStudent({ firstName, lastName, id, cohort }) {
       mode: 'cors'
     })
   }
-
+//===================== Save/Archive Student ======================================
   const archiveStudent = () => {
     setArchived(true)
     userData.cohort_id = 1
@@ -63,7 +67,7 @@ export default function EditableStudent({ firstName, lastName, id, cohort }) {
 
 
   const restore = () => setDeleted(false)
-
+ // ============================= If Editing student values =========================
   if (editing) return <>
     <input
       type="text"
@@ -75,6 +79,7 @@ export default function EditableStudent({ firstName, lastName, id, cohort }) {
       <FiDelete/>
     </button>
   </>
+//============================= if not editing student name ========================
   else if (!deleted) return <>
     {value}
     <button className={style.edit-btn} onClick={toggleEditing}>

@@ -1,6 +1,6 @@
 import {useState, React } from 'react'
 import style from '../../styles/NewCohortModal.module.css';
-
+//This modal will pop up when you press the bottom + button below the Cohorts div on the main page, it should be all the way at the bottom of the list of cohorts. This will allow you to create a new cohort and set the cohort name, start date, and end date.
 function NewCohortModal() {
   const [cohortData] = useState({
     cohort_name: "", 
@@ -11,10 +11,11 @@ function NewCohortModal() {
   const [newName, updateName] = useState('')
   const [newStartDate, updateStartDate] = useState('')
   const [newEndDate, updateEndDate] = useState('')
+  //following functions will update the above states as they are being filled in 
   const checkName = e => updateName(e.currentTarget.value)
   const checkStartDate = e => updateStartDate(e.currentTarget.value)
   const checkEndDate = e => updateEndDate(e.currentTarget.value)
-
+  //when the enter key is pressed, the checkKey function (line 31) will activate, and call the submit Fxn which wil set the state and then send a post request to the server to create and save the new cohort
   const submitFxn = () => {
     cohortData.cohort_name = newName
     cohortData.start_date = newStartDate
