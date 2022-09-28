@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import ReactDOM from 'react-dom'
-import AppContext from "../../../context/AppContext";
-import LoginContext from "../../../context/LoginContext";
+import AppContext from "../../context/AppContext";
+import LoginContext from "../../context/LoginContext";
 import { Loading } from "../LoadingDisplay";
 import style from '../../styles/SideNav.module.css'
 

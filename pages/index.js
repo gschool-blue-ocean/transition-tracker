@@ -1,5 +1,5 @@
 
-import "./StyleSheets/App.css";
+
 import { useState, useContext, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Loading } from "../components/LoadingDisplay";
@@ -7,7 +7,6 @@ import LandingPage from "../components/Landing/LandingPage";
 import CreateAccountModal from "../components/Landing/CreateAccountModal";
 import LoginContext from "../context/LoginContext";
 import AppContext from "../context/AppContext";
-import "../StyleSheets/Header.css";
 import { NotFound } from "../components/LoadingDisplay";
 import Settings from "../components/Settings";
 import Header from "../components/Header";

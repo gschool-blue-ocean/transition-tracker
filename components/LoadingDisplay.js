@@ -1,8 +1,8 @@
 import React from 'react'
 import { Triangle } from 'react-loader-spinner'
 import ReactDOM from 'react-dom'
-import style from '../../styles/Loading.module.css'
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import style from '../styles/Loading.module.css'
+// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 
 export const Loading = () => {

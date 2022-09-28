@@ -3,7 +3,7 @@ import SPTasks from "./SP-Tasks";
 import SPETStag from "./SP-ETStag";
 import SPDependents from "./SP-Dependents";
 import SideNav from "../SideNav";
-import LoginContext from "../context/LoginContext";
+import LoginContext from "../../context/LoginContext";
 import ChatModal from "../Chat";
 import { FiEdit } from "react-icons/fi";
 import EditStudentModal from "./EditStudentModal";

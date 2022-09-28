@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import AdminHomePage from '../Admin'
-import StudentPage from '../StudentPage'
+import StudentPage from '../Student'
 import LoginContext from '../../context/LoginContext'
 
 function Welcome({ socket, isOnArchivePage }) {

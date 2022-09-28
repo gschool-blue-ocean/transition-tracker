@@ -1,5 +1,6 @@
 import React from "react";
-import style from "../../style/SideNav.module.css";
+import style from '../../styles/SideNav.module.css'
+
 
 export default function StudentNav({ userData }) {
    return (
