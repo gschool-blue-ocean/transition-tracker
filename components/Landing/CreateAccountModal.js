@@ -12,7 +12,7 @@ import style from "../../styles/CreateAccount.module.css";
 //=============================imports================================
 
 function CreateAccountModal() {
-  //===============================states========================
+  //===============================states======================== I do think a lot of these states could be managed in Redux
 
   const { userData, invokeSetUserData, loading } = useContext(LoginContext);
   const { allUsersData } = useContext(AppContext);
@@ -90,6 +90,7 @@ function CreateAccountModal() {
   });
 
   //===================== field validation ========================
+  //Here --> line 243 is just validating inputs by comparing states and using a Regex to validate password (consider implementing a library to condense)
 
   useEffect(() => {
     for (const user of allUsersData) {
@@ -242,7 +243,7 @@ function CreateAccountModal() {
   });
 
   //========================== update user profile ========================
-
+  //here through 272 is potentially redundant but more investigation is needed
   useEffect(() => {
     if (!createAccData.planning_to_relocate) {
       setCreateAccData({
