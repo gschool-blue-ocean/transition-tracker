@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { FiEdit } from "react-icons/fi";
 import { useRouter } from "next/router";
-import SPTasks from "../../components/Student";
+import SPTasks from "../../components/Student/SP-Tasks";
 import SPETStag from "../../components/Student/SP-ETStag";
 import SPDependents from "../../components/Student/SP-Dependents";
 import EditStudentModal from "../../components/Student/EditStudentModal";
