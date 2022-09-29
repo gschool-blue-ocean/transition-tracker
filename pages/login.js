@@ -19,7 +19,7 @@ export default function Login({ invokeSetLogin }) {
   });
 
   useEffect(() => {
-    console.log(allUsersData);
+    console.log(allUsersData,'allUserData');
     
     const currentUser = localStorage.getItem("currentUser");
     if (currentUser !== null) {

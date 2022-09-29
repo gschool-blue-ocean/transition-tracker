@@ -6,6 +6,8 @@ export default async function handler(req, res) {
         try {
             let client = await pool.connect()
             let data = await client.query('SELECT * FROM users ORDER BY user_id ASC;')
+            console.log('hi');
+            
             res.json(data.rows)
             client.release()
     

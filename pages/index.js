@@ -25,7 +25,14 @@ export default function Login() {
       await fetchAllCohortData();
       await fetchAllUserData();
 
-      !userData && (!login && router.push("/login"));
+      if (!login) {
+        router.push("/login");
+        return
+      }else if(userData){
+        console.log(userData);
+        
+      }
+
       // login && userData.admin
       //   ? console.log('adminPage')
       //    //router.push("/admin")
@@ -36,7 +43,7 @@ export default function Login() {
   const fetchAllUserData = async () => {
     await fetch(`${server}/api/users`)
       .then((res) => res.json())
-      .then((data) => (console.log(data), invokeSetAllUsersData(data)))
+      .then((data) => (console.log(data, 'getAllUsers'), invokeSetAllUsersData(data)))
       .then(() => setLoading(false))
       .catch((err) => console.log(err));
   };
@@ -44,7 +51,7 @@ export default function Login() {
   const fetchAllCohortData = async () => {
     await fetch(`${server}/api/cohorts`)
       .then((res) => res.json())
-      .then((data) => (console.log(data), invokeSetAllCohortsData(data)))
+      .then((data) => (console.log(data,'getAllCohorts'), invokeSetAllCohortsData(data)))
       .catch((err) => console.log(err));
   };
 
