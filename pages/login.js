@@ -105,14 +105,10 @@ export default function Login({ invokeSetLogin }) {
   };
 
   const checkUsernames = (username) => {
-    let result = false;
-    console.log(allUsersData, "inlogin all user data");
-    allUsersData.forEach((elem) => {
-      if (elem.username === username) {
-        result = true;
-      }
-    });
-    return result;
+    for (user of allUsersData) {
+      return user.username === username
+    }
+
   };
 
   const handleChange = (e) => {
