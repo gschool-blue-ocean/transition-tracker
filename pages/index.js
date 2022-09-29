@@ -4,7 +4,7 @@ import AppContext from "../context/AppContext";
 import io from "socket.io-client";
 import server from "../config";
 import { useRouter } from "next/router";
-
+import {fetchAllCohortData,fetchAllUserData } from '../utility'
 const socket = io.connect(`${server}`);
 
 export default function Login() {
@@ -22,8 +22,8 @@ export default function Login() {
 
   useEffect(() => {
     (async () => {
-      await fetchAllCohortData();
-      await fetchAllUserData();
+      await fetchAllCohortData(invokeSetAllUsersData,setLoading);
+      await fetchAllUserData(invokeSetAllCohortsData);
 
       if (!login) {
         router.push("/login");
@@ -40,20 +40,7 @@ export default function Login() {
     })();
   }, [invokeSetLogin, login]);
 
-  const fetchAllUserData = async () => {
-    await fetch(`${server}/api/users`)
-      .then((res) => res.json())
-      .then((data) => (console.log(data, 'getAllUsers'), invokeSetAllUsersData(data)))
-      .then(() => setLoading(false))
-      .catch((err) => console.log(err));
-  };
-
-  const fetchAllCohortData = async () => {
-    await fetch(`${server}/api/cohorts`)
-      .then((res) => res.json())
-      .then((data) => (console.log(data,'getAllCohorts'), invokeSetAllCohortsData(data)))
-      .catch((err) => console.log(err));
-  };
+ 
 
   return <div></div>;
 }

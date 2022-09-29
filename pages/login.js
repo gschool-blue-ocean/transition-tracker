@@ -7,10 +7,16 @@ import server from "../config";
 
 import style from "../styles/LoginStyles.module.css";
 import { useRouter } from "next/router";
+import { fetchAllCohortData, fetchAllUserData } from "../utility";
 
 export default function Login({ invokeSetLogin }) {
   const router = useRouter();
-  const { allUsersData, setLoading } = useContext(AppContext);
+  const {
+    allUsersData,
+    invokeSetAllUsersData,
+    invokeSetAllCohortsData,
+    setLoading,
+  } = useContext(AppContext);
   const { userData, setUserData } = useContext(LoginContext);
 
   const [loginData, setLoginData] = useState({
@@ -24,13 +30,15 @@ export default function Login({ invokeSetLogin }) {
   });
 
   useEffect(() => {
-    console.log(allUsersData, "allUserData");
-
-    const currentUser = localStorage.getItem("currentUser");
-    if (currentUser !== null) {
-      setUserData(JSON.parse(currentUser));
-      invokeSetLogin(true);
-    }
+    (async () => {
+      await fetchAllCohortData(invokeSetAllCohortsData);
+      await fetchAllUserData(invokeSetAllUsersData, setLoading);
+      const currentUser = localStorage.getItem("currentUser");
+      if (currentUser !== null) {
+        setUserData(JSON.parse(currentUser));
+        invokeSetLogin(true);
+      }
+    })();
   }, []);
 
   useEffect(() => {
@@ -63,15 +71,14 @@ export default function Login({ invokeSetLogin }) {
 
     if (inputData.username.length === 0 || inputData.password.length === 0) {
       setLoading(false);
-      setErrors((oldErrors) => ({...oldErrors,blank:true}))
+      setErrors((oldErrors) => ({ ...oldErrors, blank: true }));
     }
 
     let foundUsername = checkUsernames(inputData.username);
 
     if (!foundUsername) {
       setLoading(false);
-      setErrors((oldErrors) => ({...oldErrors,userName:true}))
-
+      setErrors((oldErrors) => ({ ...oldErrors, userName: true }));
     }
 
     fetch(`${server}/api/login`, {
@@ -99,6 +106,7 @@ export default function Login({ invokeSetLogin }) {
 
   const checkUsernames = (username) => {
     let result = false;
+    console.log(allUsersData, "inlogin all user data");
     allUsersData.forEach((elem) => {
       if (elem.username === username) {
         result = true;
