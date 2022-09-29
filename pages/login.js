@@ -17,10 +17,15 @@ export default function Login({ invokeSetLogin }) {
     username: "",
     password: "",
   });
+  const [errors, setErrors] = useState({
+    password: false,
+    userName: false,
+    blank: false,
+  });
 
   useEffect(() => {
-    console.log(allUsersData,'allUserData');
-    
+    console.log(allUsersData, "allUserData");
+
     const currentUser = localStorage.getItem("currentUser");
     if (currentUser !== null) {
       setUserData(JSON.parse(currentUser));
@@ -51,7 +56,6 @@ export default function Login({ invokeSetLogin }) {
   const handleLogin = () => {
     setLoading(true);
 
-
     let inputData = {
       username: loginData.username,
       password: loginData.password,
@@ -59,22 +63,15 @@ export default function Login({ invokeSetLogin }) {
 
     if (inputData.username.length === 0 || inputData.password.length === 0) {
       setLoading(false);
-      const loginError =
-        typeof document !== "undefined" &&
-        document.getElementById("blankLoginErrMsg");
-
-      return loginError.classList.add("show");
+      setErrors((oldErrors) => ({...oldErrors,blank:true}))
     }
 
     let foundUsername = checkUsernames(inputData.username);
 
     if (!foundUsername) {
       setLoading(false);
-      const userError =
-        typeof document !== "undefined" &&
-        document.getElementById("usernameLoginErrMsg");
+      setErrors((oldErrors) => ({...oldErrors,userName:true}))
 
-      return userError.classList.add("show");
     }
 
     fetch(`${server}/api/login`, {
@@ -86,13 +83,9 @@ export default function Login({ invokeSetLogin }) {
       .then((data) => {
         setLoading(false);
         console.log(data);
-        
-        if (!data.username) {
-          const passworedError =
-            typeof document !== "undefined" &&
-            document.getElementById("passwordLoginErrMsg");
 
-          return passworedError.classList.add("show");
+        if (!data.username) {
+          setErrors((oldErrors) => ({ ...oldErrors, password: true }));
         } else if (data.new_user) {
           setUserData(data);
           router.push("/create-account");
@@ -147,9 +140,11 @@ export default function Login({ invokeSetLogin }) {
 
       <div className={style.loginContainer}>
         <h1 className={style.loginTitle}>Hacking Transition</h1>
-        <span id="blankLoginErrMsg" className={style.errorMsg}>
-          Fields can not be blank!
-        </span>
+        {errors.blank && (
+          <span id="blankLoginErrMsg" className={style.errorMsg}>
+            Fields can not be blank!
+          </span>
+        )}
 
         <form className={style.loginForm} onSubmit={handleSubmit}>
           <input
@@ -160,9 +155,11 @@ export default function Login({ invokeSetLogin }) {
             value={loginData.username}
             onChange={handleChange}
           />
-          <span id="usernameLoginErrMsg" className={style.errorMsg}>
-            Username Not Found!
-          </span>
+          {errors.userName && (
+            <span id="usernameLoginErrMsg" className={style.errorMsg}>
+              Username Not Found!
+            </span>
+          )}
 
           <input
             className={style.loginInputBox}
@@ -172,9 +169,11 @@ export default function Login({ invokeSetLogin }) {
             value={loginData.password}
             onChange={handleChange}
           />
-          <span id="passwordLoginErrMsg" className={style.errorMsg}>
-            Incorrect Password!
-          </span>
+          {errors.password && (
+            <span id="passwordLoginErrMsg" className={style.errorMsg}>
+              Incorrect Password!
+            </span>
+          )}
 
           <button type="submit" className={style.loginBtn}>
             LOG IN <CgEnter />{" "}
