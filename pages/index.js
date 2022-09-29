@@ -21,28 +21,32 @@ export default function Login() {
   const router = useRouter();
 
   useEffect(() => {
-    !login && router.push("/login");
-    userData && userData.admin ? router.push("/admin") : router.push("/student");
-    fetchAllCohortData();
-    fetchAllUserData();
+    (async () => {
+      await fetchAllCohortData();
+      await fetchAllUserData();
+
+      !userData && (!login && router.push("/login"));
+      // login && userData.admin
+      //   ? console.log('adminPage')
+      //    //router.push("/admin")
+      //   : console.log('studentPage')//router.push("/student");
+    })();
   }, [invokeSetLogin, login]);
 
-  const fetchAllUserData = () => {
-    fetch(`${server}/api/users`)
+  const fetchAllUserData = async () => {
+    await fetch(`${server}/api/users`)
       .then((res) => res.json())
-      .then((data) => invokeSetAllUsersData(data))
+      .then((data) => (console.log(data), invokeSetAllUsersData(data)))
       .then(() => setLoading(false))
       .catch((err) => console.log(err));
   };
 
-  const fetchAllCohortData = () => {
-    fetch(`${server}/api/cohorts`)
+  const fetchAllCohortData = async () => {
+    await fetch(`${server}/api/cohorts`)
       .then((res) => res.json())
-      .then((data) => invokeSetAllCohortsData(data))
+      .then((data) => (console.log(data), invokeSetAllCohortsData(data)))
       .catch((err) => console.log(err));
   };
 
-  return (
-   <div></div>
-  );
+  return <div></div>;
 }

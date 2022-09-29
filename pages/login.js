@@ -10,18 +10,17 @@ import { useRouter } from "next/router";
 
 export default function Login({ invokeSetLogin }) {
   const router = useRouter();
-  const {pathname} = router
   const { allUsersData, setLoading } = useContext(AppContext);
   const { userData, setUserData } = useContext(LoginContext);
 
-  const [portal, setPortal] = useState(null);
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
   });
 
   useEffect(() => {
-    setPortal(document.getElementById("portal"));
+    console.log(allUsersData);
+    
     const currentUser = localStorage.getItem("currentUser");
     if (currentUser !== null) {
       setUserData(JSON.parse(currentUser));
@@ -30,7 +29,6 @@ export default function Login({ invokeSetLogin }) {
   }, []);
 
   useEffect(() => {
-    
     if (userData) {
       invokeSetLogin(true);
       userData.admin ? router.push("/admin") : router.push("/student");
@@ -52,6 +50,7 @@ export default function Login({ invokeSetLogin }) {
 
   const handleLogin = () => {
     setLoading(true);
+
 
     let inputData = {
       username: loginData.username,
@@ -86,7 +85,8 @@ export default function Login({ invokeSetLogin }) {
       .then((res) => res.json())
       .then((data) => {
         setLoading(false);
-
+        console.log(data);
+        
         if (!data.username) {
           const passworedError =
             typeof document !== "undefined" &&
@@ -142,54 +142,50 @@ export default function Login({ invokeSetLogin }) {
   // }
 
   return (
-    portal &&
-    ReactDOM.createPortal(
-      <div className={style.modalContainer}>
-        {/* <button onClick={handleHash}>CLICK TO HASH</button> */}
+    <div className={style.modalContainer}>
+      {/* <button onClick={handleHash}>CLICK TO HASH</button> */}
 
-        <div className={style.loginContainer}>
-          <h1 className={style.loginTitle}>Hacking Transition</h1>
-          <span id="blankLoginErrMsg" className={style.errorMsg}>
-            Fields can not be blank!
+      <div className={style.loginContainer}>
+        <h1 className={style.loginTitle}>Hacking Transition</h1>
+        <span id="blankLoginErrMsg" className={style.errorMsg}>
+          Fields can not be blank!
+        </span>
+
+        <form className={style.loginForm} onSubmit={handleSubmit}>
+          <input
+            className={`${style.loginInputBox} ${style.username}`}
+            type="text"
+            placeholder="Username"
+            name="username"
+            value={loginData.username}
+            onChange={handleChange}
+          />
+          <span id="usernameLoginErrMsg" className={style.errorMsg}>
+            Username Not Found!
           </span>
 
-          <form className={style.loginForm} onSubmit={handleSubmit}>
-            <input
-              className={`${style.loginInputBox} ${style.username}`}
-              type="text"
-              placeholder="Username"
-              name="username"
-              value={loginData.username}
-              onChange={handleChange}
-            />
-            <span id="usernameLoginErrMsg" className={style.errorMsg}>
-              Username Not Found!
-            </span>
+          <input
+            className={style.loginInputBox}
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={loginData.password}
+            onChange={handleChange}
+          />
+          <span id="passwordLoginErrMsg" className={style.errorMsg}>
+            Incorrect Password!
+          </span>
 
-            <input
-              className={style.loginInputBox}
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={loginData.password}
-              onChange={handleChange}
-            />
-            <span id="passwordLoginErrMsg" className={style.errorMsg}>
-              Incorrect Password!
-            </span>
+          <button type="submit" className={style.loginBtn}>
+            LOG IN <CgEnter />{" "}
+          </button>
 
-            <button type="submit" className={style.loginBtn}>
-              LOG IN <CgEnter />{" "}
-            </button>
-
-            {/* <button
+          {/* <button
                         type='button'
                         className={`${style.loginBtn} ${style.createAccBtn}`}
                         onClick={handleShowCreateAccModal}>Create an Account</button> */}
-          </form>
-        </div>
-      </div>,
-      portal
-    )
+        </form>
+      </div>
+    </div>
   );
 }
