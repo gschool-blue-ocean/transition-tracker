@@ -25,7 +25,7 @@ export default function EditableStudent({ firstName, lastName, id, cohort }) {
         userData.last = last
         console.log(JSON.stringify(userData))
         toggleEditing()
-        fetch(`http://hacking-transition.herokuapp.com/api/update/user/${id}`, {
+        fetch(`${server}/api/update/user/${id}`, {
           method: 'PATCH',
           headers: { "content-type": "application/json" },
           body: JSON.stringify(userData),
@@ -36,19 +36,19 @@ export default function EditableStudent({ firstName, lastName, id, cohort }) {
 /// ========================  Delete student requests ============================
   const deleteStudent = () => {
     setDeleted(true)
-    fetch(`http://hacking-transition.herokuapp.com/api/delete/allcomments/${id}`, {
+    fetch(`${server}/api/delete/allcomments/${id}`, {
       method: 'DELETE',
       mode: 'cors'
     })
-    fetch(`http://hacking-transition.herokuapp.com/api/delete/alltasks/${id}`, {
+    fetch(`${server}/api/delete/alltasks/${id}`, {
       method: 'DELETE',
       mode: 'cors'
     })
-    fetch(`http://hacking-transition.herokuapp.com/api/delete/alldependents/${id}`, {
+    fetch(`${server}/api/delete/alldependents/${id}`, {
       method: 'DELETE',
       mode: 'cors'
     })
-    fetch(`http://hacking-transition.herokuapp.com/api/delete/user/${id}`, {
+    fetch(`${server}/api/delete/user/${id}`, {
       method: 'DELETE',
       mode: 'cors'
     })
@@ -58,7 +58,7 @@ export default function EditableStudent({ firstName, lastName, id, cohort }) {
     setArchived(true)
     userData.cohort_id = 1
         console.log(JSON.stringify(userData))
-    fetch(`http://hacking-transition.herokuapp.com/api/update/user/${id}`, {
+    fetch(`${server}/api/update/user/${id}`, {
           method: 'PATCH',
           headers: { "content-type": "application/json" },
           body: JSON.stringify(userData),

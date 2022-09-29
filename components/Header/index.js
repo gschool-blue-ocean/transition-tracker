@@ -3,7 +3,7 @@ import Logo from "../../public/galvanizeLogo.svg";
 import style from "../../styles/Header.module.css";
 import { useContext } from "react";
 import LoginContext from "../../context/LoginContext";
-import { NavLink } from "react-router-dom";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -34,39 +34,40 @@ const Navbar = () => {
       <div className={style.navbarContainer}>
         <ul className={style.navbarUL}>
           {userData && userData.admin ? (
-            <li>
-              <NavLink id="/" className={style.navLink} to="/">
+            <Link as='/' href='/'>
+              <a id="/" className={style.navLink} >
                 Home
-              </NavLink>
-            </li>
+              </a>
+            </Link>
           ) : null}
           {/* {JSON.parse(localStorage.currentUser).admin || userData.admin ? <li><NavLink id='/archive' className={style.navLink} to="/archive" >Archive</NavLink></li> : null} */}
           {userData && userData.admin ? (
-            <li>
-              <NavLink id="/archive" className={style.navLink} to="/archive">
+            <Link as='/archive' href={'/admin/archive'}>
+              <a id="/archive" className={style.navLink}>
                 Archive
-              </NavLink>
-            </li>
+              </a>
+            </Link >
           ) : null}
           {userData && userData.admin ? (
-            <li>
-              <NavLink id="/settings" className={style.navLink} to="/settings">
+            <Link as={'/'} href={'/settings'}>
+              <a id="/settings" className={style.navLink}>
                 Admin
-              </NavLink>
-            </li>
+              </a>
+            </Link >
           ) : null}
         </ul>
       </div>
 
       <div className={style.logoutDivNav}>
-        <NavLink
+        <Link href={'/login'}>
+        <a
           id="logoutBtn"
           onClick={handleLogout}
           className={style.logoutBtn}
-          to="/"
         >
           Log Out
-        </NavLink>
+        </a>
+        </Link>
         {userData !== null && (
           <span id="loginInfoDisplay">
             {userData.first} {userData.last[0]}. @

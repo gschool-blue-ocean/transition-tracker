@@ -1,14 +1,14 @@
 import React, { useState, useContext, useEffect } from "react";
-import ReactDOM from "react-dom";
-import { useNavigate } from "react-router-dom";
-import LoginContext from "../../context/LoginContext";
-import AppContext from "../../context/AppContext";
 import { BsEyeFill } from "react-icons/bs";
 import { MdOutlineAddCircle } from "react-icons/md";
 import { AiFillMinusCircle, AiOutlineCheck } from "react-icons/ai";
 import { FaAsterisk } from "react-icons/fa";
-import style from "../../styles/CreateAccount.module.css";
-import server from "../../config";
+import ReactDOM from "react-dom";
+import { useRouter } from "next/router";
+import server from "../config";
+import LoginContext from "../context/LoginContext";
+import AppContext from "../context/AppContext";
+import style from "../styles/CreateAccount.module.css";
 
 //=============================imports================================
 
@@ -43,8 +43,7 @@ function CreateAccountModal() {
   const [usernameValid, setUsernameValid] = useState(false);
   const [useSameUsername, setUseSameUsername] = useState(false);
 
-  let navigate = useNavigate();
-
+    const router = useRouter()
   //=================== loop for age in dependents drop down ==========================
 
   let numbers = [];
@@ -54,7 +53,7 @@ function CreateAccountModal() {
 
   useEffect(() => {
     if (!userData) {
-      navigate("/");
+        router.push("/");
     }
   }, []);
 

@@ -1,24 +1,27 @@
 import React, { useState, useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { CgEnter } from "react-icons/cg";
-import AppContext from "../../context/AppContext";
-import LoginContext from "../../context/LoginContext";
-import server from "../../config";
-import { useNavigate } from "react-router-dom";
-import style from "../../styles/LoginStyles.module.css";
+import AppContext from "../context/AppContext";
+import LoginContext from "../context/LoginContext";
+import server from "../config";
 
-function LoginModal({ invokeSetLogin }) {
-  let navigate = useNavigate();
+import style from "../styles/LoginStyles.module.css";
+import { useRouter } from "next/router";
+
+export default function Login({ invokeSetLogin }) {
+  const router = useRouter();
 
   const { allUsersData, setLoading } = useContext(AppContext);
   const { userData, setUserData } = useContext(LoginContext);
 
+  const [domReady, setDomReady] = useState(false);
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
   });
 
   useEffect(() => {
+    setDomReady(true);
     const currentUser = localStorage.getItem("currentUser");
     if (currentUser !== null) {
       setUserData(JSON.parse(currentUser));
@@ -29,6 +32,7 @@ function LoginModal({ invokeSetLogin }) {
   useEffect(() => {
     if (userData) {
       invokeSetLogin(true);
+      userData.admin ? router.push("/admin") : router.push("/student");
     }
   }, [userData]);
 
@@ -90,7 +94,7 @@ function LoginModal({ invokeSetLogin }) {
           return passworedError.classList.add("show");
         } else if (data.new_user) {
           setUserData(data);
-          navigate("/createAccount");
+          router.push("/create-account");
         } else {
           setUserData(data);
           invokeSetLogin(true);
@@ -136,7 +140,7 @@ function LoginModal({ invokeSetLogin }) {
   //     })
   // }
 
-  return ReactDOM.createPortal(
+  return (
     <div className={style.modalContainer}>
       {/* <button onClick={handleHash}>CLICK TO HASH</button> */}
 
@@ -181,8 +185,6 @@ function LoginModal({ invokeSetLogin }) {
                         onClick={handleShowCreateAccModal}>Create an Account</button> */}
         </form>
       </div>
-    </div>,
-    typeof document !== "undefined" && document.getElementById("portal")
+    </div>
   );
 }
-export default LoginModal;

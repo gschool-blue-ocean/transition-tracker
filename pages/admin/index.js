@@ -1,18 +1,25 @@
 import React, { useContext, useEffect, useState } from "react";
-import AppContext from "../../context/AppContext";
-import style from "../../styles/AdminHomePage.module.css";
+import { useRouter } from "next/router";
 import { FiSettings } from "react-icons/fi";
-import EditCohortPage from "./EditCohortPage";
-import NewCohortModal from "./NewCohortModal";
 import Modal from "react-modal";
-import StudentPage from "../Student";
-import SPETStag from "../Student/SP-ETStag.js";
+import AppContext from "../../context/AppContext";
+import LoginContext from "../../context/LoginContext";
+import EditCohortPage from "../../components/Admin/EditCohortPage";
+import NewCohortModal from "../../components/Admin/NewCohortModal";
+import StudentPage from "../../components/Student";
+import SPETStag from "../../components/Student/SP-ETStag.js";
+import style from "../../styles/AdminHomePage.module.css";
+
 
 // This is an entire page
 // Make an admin state and use nexxt router to push to a certain page depending on login status
 
-function AdminHomePage({ socket, isOnArchivePage }) {
+function AdminHomePage({ socket }) {
+  const router = useRouter();
+  const { pathname } = router;
   const { allUsersData, allCohortsData } = useContext(AppContext);
+  const { userData } = useContext(LoginContext);
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [newCohortModalIsOpen, setNewCohortModalIsOpen] = useState(false);
   const [currentCohort, setCurrentCohort] = useState(null);
@@ -26,25 +33,16 @@ function AdminHomePage({ socket, isOnArchivePage }) {
   const [activeStudent, setActiveStudent] = useState({});
 
   useEffect(() => {
-    horizontalScroll(); //Unused Function
-  }, []);
+    if (!userData && !userData.admin) router.push("/");
+  }, [userData]);
 
-  /*************** Determines if on Archive Page ***************/
-  //// If on archived page return non active cohorts, others wise return active cohorts and set them as our mappable cohorts
+  ////  set  our mappable cohorts
   useEffect(() => {
-    if (isOnArchivePage) {
-      let filteredCohort = allCohortsData.filter((cohort) => {
-        return cohort.active === false;
-      });
-      setCohortsToMap(filteredCohort);
-    } else {
-      let filteredCohort = allCohortsData.filter((cohort) => {
-        return cohort.active === true;
-      });
-      setCohortsToMap(filteredCohort);
-    }
-  }, [allUsersData, window.location.pathname]);
-  /*************** END Determines if on Archive Page ***************/
+    let filteredCohort = allCohortsData.filter((cohort) => {
+      return cohort.active === true;
+    });
+    setCohortsToMap(filteredCohort);
+  }, [allUsersData, pathname]);
 
   //   whenever we switch between pages, set all active cohort tabs to inactive and reset clicked cohorts
   useEffect(() => {
@@ -53,7 +51,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
       document.getElementById("all-cohort-btn-div");
     handleActiveCohortTab(cohortBtn); //
     setShowClickedCohort(false);
-  }, [window.location.pathname]);
+  }, [pathname]);
 
   const setModalIsOpenToTrue = (e) => {
     setCurrentCohort(e.currentTarget.id);
@@ -95,17 +93,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     setNewCohortModalIsOpen(false);
   };
 
-/**** Possibly doesnt work, does not do anything ****/
-  const horizontalScroll = () => {
-    const scrollContainer =
-      typeof document !== "undefined" && document.querySelector("#cohort-view");
-    // scrollContainer.addEventListener(("wheel"), (e) => {
-    //     // e.preventDefault();
-    //     scrollContainer.scrollLeft += e.deltaY
-    // });
-  };
-
-/**** Set the active cohort to the one clicked, loop through all cohorts and find one with a mathcing id ****/
+  /**** Set the active cohort to the one clicked, loop through all cohorts and find one with a mathcing id ****/
   const handleCohortClicked = (e) => {
     handleActiveCohortTab(e.currentTarget);
 
@@ -126,7 +114,7 @@ function AdminHomePage({ socket, isOnArchivePage }) {
   // }
   //==========================================================
 
-/**** Set the active cohort to the one clicked, loop through all cohorts and find one with a matching id and set it as active ****/
+  /**** Set the active cohort to the one clicked, loop through all cohorts and find one with a matching id and set it as active ****/
   const handleActiveCohortTab = (element) => {
     const cohortList =
       typeof document !== "undefined" &&
@@ -136,25 +124,30 @@ function AdminHomePage({ socket, isOnArchivePage }) {
     element.classList.add("activeCohortTab"); //
   };
 
-//   Shows all cohorts and sets none to main view
+  //   Shows all cohorts and sets none to main view
   const handleClickedAllBtn = (e) => {
     handleActiveCohortTab(e.currentTarget);
     setShowClickedCohort(false);
   };
   return (
-    <div id={style.cohort - container}> {/* parent div for the entire body of the page */}
-      <div id={style.cohort - nav} className={style.mainContainer}> {/* sidebar on the left of the cohort list, and main container */}
-        <div className={style.list}> {/* actual sidebar contents on the left ie. Cohorts -> ALL -> MCSP-16 */}
+    <div id={style.cohort - container}>
+      {" "}
+      {/* parent div for the entire body of the page */}
+      <div id={style.cohort - nav} className={style.mainContainer}>
+        {" "}
+        {/* sidebar on the left of the cohort list, and main container */}
+        <div className={style.list}>
+          {" "}
+          {/* actual sidebar contents on the left ie. Cohorts -> ALL -> MCSP-16 */}
           <div className={style.cohort - list - title}>Cohorts</div>
-
           <div
             onClick={handleClickedAllBtn}
             id={style.all - cohort - btn - div}
             className={`${style.listOfCohorts} ${style.activeCohortTab}`}
           >
             <button id={style.all - cohorts - btn}>All</button>
-          </div>   {/* Show ALL cohorts button*/}
-
+          </div>{" "}
+          {/* Show ALL cohorts button*/}
           {cohortsToMap.map((cohort) => {
             return (
               <div
@@ -172,7 +165,8 @@ function AdminHomePage({ socket, isOnArchivePage }) {
           >
             +
           </button>
-        </div> {/* END actual sidebar contents on the left ie. Cohorts -> ALL -> MCSP-16 */}
+        </div>{" "}
+        {/* END actual sidebar contents on the left ie. Cohorts -> ALL -> MCSP-16 */}
       </div>
       <div id={style.cohorts - list} className={style.mainContainer}>
         {showClickedCohort ? (

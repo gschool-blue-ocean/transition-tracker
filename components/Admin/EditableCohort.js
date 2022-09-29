@@ -24,7 +24,7 @@ export default function EditableCohort({ name, start, end, id }) {
     cohortData.end_date = currentEndDate;
     console.log(JSON.stringify(cohortData));
     toggleEditing();
-    fetch(`http://hacking-transition.herokuapp.com/api/update/cohort/${id}`, {
+    fetch(`${server}/api/update/cohort/${id}`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(cohortData),
@@ -43,7 +43,7 @@ export default function EditableCohort({ name, start, end, id }) {
     setArchived(true);
     console.log(cohortData);
     console.log(id);
-    fetch(`http://hacking-transition.herokuapp.com/api/archive/cohort/${id}`, {
+    fetch(`${server}/api/archive/cohort/${id}`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ active: false }),
@@ -54,7 +54,7 @@ export default function EditableCohort({ name, start, end, id }) {
     setArchived(false);
     console.log(cohortData);
     console.log(id);
-    fetch(`http://hacking-transition.herokuapp.com/api/archive/cohort/${id}`, {
+    fetch(`${server}/api/archive/cohort/${id}`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ active: true }),
@@ -63,7 +63,7 @@ export default function EditableCohort({ name, start, end, id }) {
   /*************** END Archive Cohort Functions ***************/
 
   const deleteCohort = () => {
-    fetch(`http://hacking-transition.herokuapp.com/api/delete/cohort/${id}`, {
+    fetch(`${server}/api/delete/cohort/${id}`, {
       method: "DELETE",
       mode: "cors",
     }).then(alert("Cohort Deleted"));

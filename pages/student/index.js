@@ -1,27 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
-import SPTasks from "./SP-Tasks";
-import SPETStag from "./SP-ETStag";
-import SPDependents from "./SP-Dependents";
-import SideNav from "../SideNav";
-import LoginContext from "../../context/LoginContext";
-import ChatModal from "../Chat";
 import { FiEdit } from "react-icons/fi";
-import EditStudentModal from "./EditStudentModal";
-import style from "../../styles/StudentPage.module.css";
+import { useRouter } from "next/router";
+import SPTasks from "../../components/Student";
+import SPETStag from "../../components/Student/SP-ETStag";
+import SPDependents from "../../components/Student/SP-Dependents";
+import EditStudentModal from "../../components/Student/EditStudentModal";
+import SideNav from "../../components/SideNav";
+import LoginContext from "../../context/LoginContext";
+import ChatModal from "..../components/Chat";
+import style from "../styles/StudentPage.module.css";
 
-const customStyles = {
-   content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      backgroundColor: "var(-clr-primary-accent)",
-      borderRadius: "10px",
-      width: "30%",
-   },
-};
 
 // Modal.setAppElement(".AppContainer");
 
@@ -31,8 +19,13 @@ export default function StudentPage({
    socket,
    viewClickedCohort,
 }) {
+    const router = useRouter()
    const { userData, setUserData } = useContext(LoginContext);
    const [showEditStudentModal, setShowEditStudentModal] = useState(false);
+
+   useEffect(() => {
+    !userData && router.push('/')
+   }, [userData]);
 
    useEffect(() => {
     typeof document !== "undefined" && document.querySelectorAll(".listOfCohorts").forEach((elem) => {

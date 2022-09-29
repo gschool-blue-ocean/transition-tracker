@@ -32,7 +32,7 @@ export const AddAdmin = () => {
 
   const fetchAllUserData = () => {
       //changeSetLoading(true);
-      fetch(`https://hacking-transition.herokuapp.com/api/users`)
+      fetch(`${server}/api/users`)
          .then((res) => res.json())
          .then((data) => invokeSetAllUsersData(data))
          .catch((err) => console.log(err));
